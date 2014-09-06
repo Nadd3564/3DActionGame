@@ -6,6 +6,6 @@ ACTIONGAME
 ・開発環境　Unity ver 4.5.2f1
 
 ・使用アセット（フリー）
-TinyMedievalPack
-Warrior 2 Swords
-TinyKai
+<br>TinyMedievalPack
+<br>Warrior 2 Swords
+<br>TinyKai
