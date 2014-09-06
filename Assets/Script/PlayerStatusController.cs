@@ -111,7 +111,7 @@ public class PlayerStatusController : MonoBehaviour {
 		status.died = true;
 	}
 
-	void Damage(AttackArea.AttackInfo attackInfo){
+void Damage(AttackArea.AttackInfo attackInfo){
 		status.HP -= attackInfo.attackPower;
 		if(status.HP <= 0){
 			status.HP = 0;

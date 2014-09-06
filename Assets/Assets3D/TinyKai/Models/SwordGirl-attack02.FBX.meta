@@ -145,11 +145,18 @@ ModelImporter:
       curves: []
       events:
       - time: .594936728
-        functionName: OnDeal
+        functionName: StartAttackHit
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
-        intParameter: 2
+        intParameter: 0
+        messageOptions: 0
+      - time: .967365563
+        functionName: EndAttackHit
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
         messageOptions: 0
       transformMask:
       - path: 
