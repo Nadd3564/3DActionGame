@@ -14,7 +14,8 @@ public class CharaStatus : MonoBehaviour {
 		HP -= attackInfo.attackPower;
 		if(HP <= 0){
 			HP = 0;
-			//体力0でダウ
+			//体力0でダウン
+			died = true;
 		}
 	}
 }

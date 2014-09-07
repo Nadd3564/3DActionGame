@@ -4,8 +4,7 @@ using System.Collections;
 public class AttackAreaActivation : MonoBehaviour {
 
 	Collider[] attackAreaColliders; //攻撃判定コライダーの配列
-	
-	// Use this for initialization
+
 	void Start () {
 		AttackArea[] attackAreas = GetComponentsInChildren<AttackArea> ();
 		attackAreaColliders = new Collider[attackAreas.Length];
