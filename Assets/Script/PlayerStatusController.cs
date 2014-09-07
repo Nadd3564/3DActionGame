@@ -104,6 +104,7 @@ public class PlayerStatusController : MonoBehaviour {
 	//攻撃中の処理
 	void Attacking(){
 		if (charaAnimation.isAttacked ())
+						StateStartCommon ();
 						ChangeState (State.Walking);
 	}
 
@@ -124,6 +125,7 @@ void Damage(AttackArea.AttackInfo attackInfo){
 	void StateStartCommon(){
 		status.attacking = false;
 		status.died = false;
+		status.attacking = false;
 	}
 }
 
