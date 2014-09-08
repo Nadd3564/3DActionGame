@@ -125,7 +125,6 @@ void Damage(AttackArea.AttackInfo attackInfo){
 	void StateStartCommon(){
 		status.attacking = false;
 		status.died = false;
-		status.attacking = false;
 	}
 }
 

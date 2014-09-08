@@ -55,7 +55,7 @@ public class EnemyStatusController : MonoBehaviour {
 				ChaseStart();
 				break;
 			case State.Attacking:
-				Attacking();
+				AttackStart();
 				break;
 			case State.Died:
 				Died();
