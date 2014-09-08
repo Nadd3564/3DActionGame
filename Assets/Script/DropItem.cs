@@ -10,15 +10,18 @@ public class DropItem : MonoBehaviour {
 	public ItemKind kind;
 
 	void OnTriggerEnter(Collider other){
-			//Playerか判定
-		if(other.tag == "Player"){
-			//アイテム取得
-			CharaStatus iStatus = other.GetComponent<CharaStatus>();
-			iStatus.GetItem(kind);
-			//取得したらアイテムを消す
-			Destroy(gameObject);
+		//ドロップするエネミーにぶつからないようにisTriggerをTrueに
+		this.collider.isTrigger = true;
+				//Playerか地面か判定
+				if (other.tag == "Player" || other.tag == "Ground"){
+			this.collider.isTrigger = false;
+						//アイテム取得
+						CharaStatus iStatus = other.GetComponent<CharaStatus> ();
+						iStatus.GetItem (kind);
+						//取得したらアイテムを消す
+						Destroy (gameObject);
+				}
 		}
-	}
 
 
 	void Start () {

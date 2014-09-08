@@ -16,7 +16,7 @@ public class CharaStatus : MonoBehaviour {
 	public void GetItem(DropItem.ItemKind itemKind){
 		switch(itemKind){
 		case DropItem.ItemKind.Attack:
-			powerBoostTime = 20.0f;
+			powerBoostTime = 10.0f;
 			break;
 		case DropItem.ItemKind.Heal:
 			HP = Mathf.Min (HP + MaxHP / 2, MaxHP);

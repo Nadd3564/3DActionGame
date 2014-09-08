@@ -3,7 +3,7 @@
 --- !u!78 &1
 TagManager:
   tags:
-  - 
+  - Ground
   - Interact
   - Weapon
   - Wood
@@ -27,7 +27,7 @@ TagManager:
   User Layer 10: PlayerHit
   User Layer 11: EnemyAttack
   User Layer 12: PlayerAttack
-  User Layer 13: 
+  User Layer 13: DropItem
   User Layer 14: 
   User Layer 15: 
   User Layer 16: 
