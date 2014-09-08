@@ -7,7 +7,7 @@ public class PlayerStatusController : MonoBehaviour {
 	CharaAnimation charaAnimation;
 	Transform attackTarget;
 	InputManager inputManager;
-	public float attackRange = 1.5f;
+	public float attackRange = 100.0f;
 
 	//状態
 	enum State{

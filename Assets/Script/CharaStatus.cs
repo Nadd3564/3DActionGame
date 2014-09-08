@@ -9,13 +9,4 @@ public class CharaStatus : MonoBehaviour {
 	public string charactername = "Player";
 	public bool attacking = false;
 	public bool died = false;
-
-	void Damage(AttackArea.AttackInfo attackInfo){
-		HP -= attackInfo.attackPower;
-		if(HP <= 0){
-			HP = 0;
-			//体力0でダウン
-			died = true;
-		}
-	}
 }
