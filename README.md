@@ -10,3 +10,6 @@ ACTIONGAME
 <br>Two-Swords Warrior
 <br>Tiny Archer Man
 <br>Monster
+
+チュートリアル
+<br>マウス左クリックで移動、エネミーをクリックするとアタック
