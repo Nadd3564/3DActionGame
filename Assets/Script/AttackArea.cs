@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class AttackArea : MonoBehaviour {
@@ -19,6 +19,10 @@ public class AttackArea : MonoBehaviour {
 	AttackInfo GetAttackInfo(){
 		AttackInfo attackInfo = new AttackInfo ();
 		attackInfo.attackPower = status.Power;
+		//攻撃強化中
+		if (status.powerBoost)
+						attackInfo.attackPower += attackInfo.attackPower;
+
 		attackInfo.attacker = transform.root;
 		return attackInfo;
 	}
