@@ -144,8 +144,9 @@ public class EnemyStatusController : MonoBehaviour {
 	void Died(){
 		status.died = true;
 		dropItem ();
-		Destroy (gameObject);
+		Destroy (gameObject, 5);
 	}
+	
 
 	void Damage(AttackArea.AttackInfo attackInfo){
 		status.HP -= attackInfo.attackPower;
