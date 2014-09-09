@@ -3,6 +3,7 @@ ACTIONGAME
 制作中のゲーム
 
 開発中の画面
+![image](title.jpg)
 ![image](3DACTIONGAME.jpg)
 <br>
 開発環境　Unity ver 4.5.2f1
