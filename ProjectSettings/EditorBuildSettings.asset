@@ -6,4 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/OtherImports/FPSControlAssets/Scenes/ShellShock.unity
+    path: Assets/TitleScene.unity
+  - enabled: 1
+    path: Assets/Scenes/PlayScene.unity

@@ -8,6 +8,7 @@ public class PlayerStatusController : MonoBehaviour {
 	Transform attackTarget;
 	InputManager inputManager;
 	public float attackRange = 100.0f;
+	GameRuleSettings gameRuleSettings;
 
 	//状態
 	enum State{
@@ -23,6 +24,7 @@ public class PlayerStatusController : MonoBehaviour {
 		status = GetComponent<CharaStatus> ();
 		charaAnimation = GetComponent<CharaAnimation> ();
 		inputManager = FindObjectOfType<InputManager>();
+		gameRuleSettings = FindObjectOfType<GameRuleSettings>();
 	}
 
 	void Update () {
@@ -110,6 +112,7 @@ public class PlayerStatusController : MonoBehaviour {
 
 	void Died(){
 		status.died = true;
+		gameRuleSettings.GameOver ();
 	}
 
 void Damage(AttackArea.AttackInfo attackInfo){

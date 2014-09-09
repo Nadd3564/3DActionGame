@@ -11,6 +11,7 @@ public class EnemyStatusController : MonoBehaviour {
 	public float walkRange = 5.0f; //移動範囲
 	public Vector3 basePositon; //初期位置を保存
 	public GameObject[] dropItemPrefab; //複数のアイテムを入れる配列
+	GameRuleSettings gameRuleSettings;
 
 
 	enum State {
@@ -30,6 +31,7 @@ public class EnemyStatusController : MonoBehaviour {
 		characterMove = GetComponent<CharaMove> ();
 		basePositon = transform.position;
 		waitTime = waitBaseTime;
+		gameRuleSettings = FindObjectOfType<GameRuleSettings> ();
 	}
 
 	void Update () {
@@ -145,6 +147,9 @@ public class EnemyStatusController : MonoBehaviour {
 		status.died = true;
 		dropItem ();
 		Destroy (gameObject, 5);
+		if(gameObject.tag == "Boss"){
+			gameRuleSettings.GameClear();
+		}
 	}
 	
 
