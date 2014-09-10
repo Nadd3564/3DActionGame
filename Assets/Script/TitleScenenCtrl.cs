@@ -18,10 +18,10 @@ public class TitleScenenCtrl : MonoBehaviour {
         // タイトル画面テクスチャ表示
         GUI.DrawTexture(new Rect(0.0f, 0.0f, 854.0f, 480.0f), bgTexture);
 
-        // スタートボタンを作成します。
+        // スタートボタンを作成
         if (GUI.Button(new Rect(327, 290, 200, 54), "Start", buttonStyle))
         {
-            // シーンの切り替えはApplication.LoadLevelを使用します。
+            // シーンの切り替え
             Application.LoadLevel("PlayScene");
         }
     }
