@@ -1355,7 +1355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84582043c11b024880da88e1f8d88f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 150
+  HP: 10
   MaxHP: 150
   Power: 20
   lastAttackTarget: {fileID: 0}
