@@ -4,9 +4,16 @@ using System.Collections;
 public class AttackArea : MonoBehaviour {
 	CharaStatus status;
 	
-	// Use this for initialization
+	public AudioClip hitSeClip;
+	AudioSource hitSeAudio;
+
 	void Start () {
 		status = transform.root.GetComponent<CharaStatus>();
+
+		//オーディオの初期化
+		hitSeAudio = gameObject.AddComponent<AudioSource>();
+		hitSeAudio.clip = hitSeClip;
+		hitSeAudio.loop = false;
 	}
 	
 	//攻撃力や攻撃者の情報を入れるクラス
@@ -31,6 +38,7 @@ public class AttackArea : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		other.SendMessage ("Damage", GetAttackInfo());
 		status.lastAttackTarget = other.transform.root.gameObject;
+		hitSeAudio.Play ();
 	}
 	
 	//攻撃判定の有効、無効

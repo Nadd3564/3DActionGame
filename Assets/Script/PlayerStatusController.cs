@@ -22,6 +22,9 @@ public class PlayerStatusController : MonoBehaviour {
 	State state = State.Walking;
 	State nextState = State.Walking;
 
+	public AudioClip deathSeClip;
+	AudioSource deathSeAudio;
+
 	void Start () {
 		status = GetComponent<CharaStatus> ();
 		charaAnimation = GetComponent<CharaAnimation> ();
@@ -29,6 +32,11 @@ public class PlayerStatusController : MonoBehaviour {
 		gameRuleSettings = FindObjectOfType<GameRuleSettings>();
 		targetCursor = FindObjectOfType<TargetCursor>();
 		targetCursor.SetPosition (transform.position);
+
+		//オーディオの初期化
+		deathSeAudio = gameObject.AddComponent<AudioSource>();
+		deathSeAudio.loop = false;
+		deathSeAudio.clip = deathSeClip;
 	}
 
 	void Update () {
@@ -120,6 +128,7 @@ public class PlayerStatusController : MonoBehaviour {
 	void Died(){
 		status.died = true;
 		gameRuleSettings.GameOver ();
+		deathSeAudio.Play ();
 	}
 
 void Damage(AttackArea.AttackInfo attackInfo){

@@ -1588,6 +1588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 1.5
   hitEffect: {fileID: 100000, guid: 5277b4077b5df634aa70c4bf149df554, type: 2}
+  deathSeClip: {fileID: 8300000, guid: d651c9e429264854eb5ae9e834635002, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1644,6 +1645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e65e90e566f97d42a5acc4686f7039e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSeClip: {fileID: 8300000, guid: b910f06cfef6a10448d4cfa7f0ea51d2, type: 3}
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1681,6 +1683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9486c7baaf0bc34185b838c883a67ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSeClip: {fileID: 8300000, guid: 988ad850f99996c4a8bfb7b7bb6b60b6, type: 3}
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -27,6 +27,9 @@ public class EnemyStatusController : MonoBehaviour {
 	State state = State.Walking; //現在の状態
 	State nextState = State.Walking; //次の状態
 
+	public AudioClip deathSeClip;
+	AudioSource deathSeAudio;
+
 
 	void Start () {
 		status = GetComponent<CharaStatus>();
@@ -150,6 +153,7 @@ public class EnemyStatusController : MonoBehaviour {
 		status.died = true;
 		dropItem ();
 		Destroy (gameObject, 5);
+		AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
 		if(gameObject.tag == "Boss"){
 			gameRuleSettings.GameClear();
 		}

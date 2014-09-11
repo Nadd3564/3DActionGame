@@ -1322,6 +1322,7 @@ MonoBehaviour:
   dropItemPrefab:
   - {fileID: 100000, guid: 7fc73f4893030814989ca6772e29a0a9, type: 2}
   - {fileID: 100002, guid: c9e08aa43f5b9fa4f97137e036231644, type: 2}
+  deathSeClip: {fileID: 8300000, guid: 4482e81215e545446b247a68ba0ae6ad, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1333,6 +1334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e65e90e566f97d42a5acc4686f7039e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSeClip: {fileID: 8300000, guid: 2e16dc82a66650b49af2f0a8a7215982, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1355,7 +1357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84582043c11b024880da88e1f8d88f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 10
+  HP: 150
   MaxHP: 150
   Power: 20
   lastAttackTarget: {fileID: 0}
@@ -1411,6 +1413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9486c7baaf0bc34185b838c883a67ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSeClip: {fileID: 8300000, guid: 5831e4427ecfaef4c8b3261ede72f5e3, type: 3}
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

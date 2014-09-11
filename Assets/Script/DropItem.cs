@@ -8,7 +8,8 @@ public class DropItem : MonoBehaviour {
 	};
 
 	public ItemKind kind;
-
+	public AudioClip itemSeClip;
+	
 	void OnTriggerEnter(Collider other){
 		//ドロップするエネミーにぶつからないようにisTriggerをTrueに
 		this.collider.isTrigger = true;
@@ -20,10 +21,11 @@ public class DropItem : MonoBehaviour {
 						iStatus.GetItem (kind);
 						//取得したらアイテムを消す
 						Destroy (gameObject);
+
+			AudioSource.PlayClipAtPoint(itemSeClip, transform.position);
 				}
 		}
-
-
+	
 	void Start () {
 		Vector3 velocity = Random.insideUnitSphere * 2.0f + Vector3.up * 8.0f;
 		rigidbody.velocity = velocity;
