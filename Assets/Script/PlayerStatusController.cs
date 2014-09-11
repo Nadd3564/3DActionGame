@@ -9,6 +9,8 @@ public class PlayerStatusController : MonoBehaviour {
 	InputManager inputManager;
 	public float attackRange = 100.0f;
 	GameRuleSettings gameRuleSettings;
+	public GameObject hitEffect;
+	TargetCursor targetCursor;
 
 	//状態
 	enum State{
@@ -25,6 +27,8 @@ public class PlayerStatusController : MonoBehaviour {
 		charaAnimation = GetComponent<CharaAnimation> ();
 		inputManager = FindObjectOfType<InputManager>();
 		gameRuleSettings = FindObjectOfType<GameRuleSettings>();
+		targetCursor = FindObjectOfType<TargetCursor>();
+		targetCursor.SetPosition (transform.position);
 	}
 
 	void Update () {
@@ -73,6 +77,7 @@ public class PlayerStatusController : MonoBehaviour {
 				//地面がクリックされた
 				if(hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
 					SendMessage("SetDestination", hitInfo.point);
+					targetCursor.SetPosition(hitInfo.point);
 				//敵がクリックされた
 				if(hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("EnemyHit")){
 					//距離をチェックして攻撃するか決める
@@ -82,9 +87,11 @@ public class PlayerStatusController : MonoBehaviour {
 					if(distance < attackRange){
 				//攻撃
 						attackTarget = hitInfo.collider.transform;
+						targetCursor.SetPosition(attackTarget.position);
 						ChangeState(State.Attacking);
 					} else 
 						SendMessage("SetDestination", hitInfo.point);
+						targetCursor.SetPosition(hitInfo.point);
 				}
 			}
 		}
@@ -116,6 +123,9 @@ public class PlayerStatusController : MonoBehaviour {
 	}
 
 void Damage(AttackArea.AttackInfo attackInfo){
+		GameObject effect = Instantiate (hitEffect, transform.position, Quaternion.identity) as GameObject;
+		effect.transform.localPosition = transform.position + new Vector3 (0.0f, 0.5f, 0.0f);
+		Destroy (effect, 0.3f);
 		status.HP -= attackInfo.attackPower;
 		if(status.HP <= 0){
 			status.HP = 0;

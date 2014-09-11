@@ -1594,6 +1594,10 @@ Prefab:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c0da5ed5b9f0cb24f8c326dc48b5366d, type: 2}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 100000, guid: 5277b4077b5df634aa70c4bf149df554, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0da5ed5b9f0cb24f8c326dc48b5366d, type: 2}
   m_RootGameObject: {fileID: 669342544}
@@ -2090,6 +2094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 1.5
+  hitEffect: {fileID: 100000, guid: 5277b4077b5df634aa70c4bf149df554, type: 2}
 --- !u!114 &669342547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2940,6 +2945,7 @@ GameObject:
   - 4: {fileID: 873931800}
   - 198: {fileID: 873931799}
   - 199: {fileID: 873931798}
+  - 114: {fileID: 873931801}
   m_Layer: 0
   m_Name: TargetCursorEffect
   m_TagString: Untagged
@@ -4043,6 +4049,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 22
+--- !u!114 &873931801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 873931797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d87a09103f56eb4296b456ac19828d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 1
+  angularVelocity: 480
+  destination: {x: 0, y: .5, z: 0}
 --- !u!1 &894217934
 GameObject:
   m_ObjectHideFlags: 0
