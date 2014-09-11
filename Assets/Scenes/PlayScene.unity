@@ -276,7 +276,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400084, guid: e5e03f02fdf8d2c4ca116c540068bda2, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: e5e03f02fdf8d2c4ca116c540068bda2, type: 2}
       propertyPath: m_Controller
@@ -2481,6 +2481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dae9d8fae6e329438386344b608bd9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitEffect: {fileID: 100000, guid: 5277b4077b5df634aa70c4bf149df554, type: 2}
   waitBaseTime: 2
   walkRange: 5
   basePositon: {x: 0, y: 0, z: 0}
@@ -3828,6 +3829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dae9d8fae6e329438386344b608bd9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitEffect: {fileID: 100000, guid: 5277b4077b5df634aa70c4bf149df554, type: 2}
   waitBaseTime: 2
   walkRange: 5
   basePositon: {x: 0, y: 0, z: 0}
@@ -6404,7 +6406,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400084, guid: bbc80d7109588944a8569f79a96e9967, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: bbc80d7109588944a8569f79a96e9967, type: 2}
       propertyPath: MaxHP

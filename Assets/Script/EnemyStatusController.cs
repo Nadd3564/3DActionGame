@@ -6,12 +6,14 @@ public class EnemyStatusController : MonoBehaviour {
 	CharaAnimation charaAnimation;
 	CharaMove characterMove;
 	Transform attackTarget;
+	GameRuleSettings gameRuleSettings;
+	public GameObject hitEffect;
 	public float waitBaseTime = 2.0f; //待機時間
 	float waitTime; //残り待機時間
 	public float walkRange = 5.0f; //移動範囲
 	public Vector3 basePositon; //初期位置を保存
 	public GameObject[] dropItemPrefab; //複数のアイテムを入れる配列
-	GameRuleSettings gameRuleSettings;
+
 
 
 	enum State {
@@ -154,6 +156,11 @@ public class EnemyStatusController : MonoBehaviour {
 	
 
 	void Damage(AttackArea.AttackInfo attackInfo){
+		//ヒットエフェクト
+		GameObject effect = Instantiate (hitEffect, transform.position, Quaternion.identity) as GameObject;
+		effect.transform.localPosition = transform.position + new Vector3 (0.0f, 0.5f, 0.0f);
+		Destroy (effect, 0.3f);
+
 		status.HP -= attackInfo.attackPower;
 		if(status.HP <= 0){
 			status.HP = 0;
