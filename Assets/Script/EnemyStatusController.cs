@@ -17,6 +17,7 @@ public class EnemyStatusController : MonoBehaviour {
 	GUILayer layer;
 
 
+
 	enum State {
 		Walking,
 		Chasing,
@@ -154,10 +155,15 @@ public class EnemyStatusController : MonoBehaviour {
 	void Died(){
 		status.died = true;
 		dropItem ();
-		Destroy (gameObject, 5);
 		AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
 		if(gameObject.tag == "Boss"){
 			gameRuleSettings.GameClear();
+		}
+
+		float destroyWait = 5.0f;
+		if(destroyWait > 0.0f){
+		Network.Destroy (gameObject);
+		Network.RemoveRPCs (networkView.viewID);
 		}
 	}
 	

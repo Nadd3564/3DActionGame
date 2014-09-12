@@ -141,10 +141,19 @@ public class PlayerStatusController : MonoBehaviour {
 	}
 
 void Damage(AttackArea.AttackInfo attackInfo){
-		GameObject effect = Instantiate (hitEffect, transform.position, Quaternion.identity) as GameObject;
-		effect.transform.localPosition = transform.position + new Vector3 (0.0f, 0.5f, 0.0f);
-		Destroy (effect, 0.3f);
-		status.HP -= attackInfo.attackPower;
+				GameObject effect = Instantiate (hitEffect, transform.position, Quaternion.identity) as GameObject;
+				effect.transform.localPosition = transform.position + new Vector3 (0.0f, 0.5f, 0.0f);
+				Destroy (effect, 0.3f);
+
+				if (networkView.isMine)
+						DamageMine (attackInfo.attackPower);
+				else 
+						networkView.RPC ("DamageMine", networkView.owner, attackInfo.attackPower);
+		}
+
+	[RPC]
+	void DamageMine(int damage){
+		status.HP -= damage;
 		if(status.HP <= 0){
 			status.HP = 0;
 			//体力0でダウン
