@@ -13,7 +13,14 @@ public class CharaStatus : MonoBehaviour {
 	float powerBoostTime = 0.0f;
 	ParticleSystem powerUpEffect;
 
+	void Start(){
+		if(gameObject.tag == "Player"){
+			powerUpEffect = transform.Find("PowerUpEffect").GetComponent<ParticleSystem>();
+		}
+	}
+
 	//アイテム取得
+	[RPC]
 	public void GetItem(DropItem.ItemKind itemKind){
 		switch(itemKind){
 		case DropItem.ItemKind.Attack:
@@ -26,11 +33,7 @@ public class CharaStatus : MonoBehaviour {
 		}
 	}
 
-	void Start(){
-		if(gameObject.tag == "Player"){
-			powerUpEffect = transform.Find("PowerUpEffect").GetComponent<ParticleSystem>();
-		}
-	}
+
 
 	void Update(){
 		if(gameObject.tag != "Player"){

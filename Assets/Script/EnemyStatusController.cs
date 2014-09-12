@@ -149,24 +149,19 @@ public class EnemyStatusController : MonoBehaviour {
 	void dropItem(){
 		if(dropItemPrefab.Length == 0){ return; }
 		GameObject dropItem = dropItemPrefab[Random.Range(0, dropItemPrefab.Length)];
-		Instantiate (dropItem, transform.position, Quaternion.identity);
+		Network.Instantiate (dropItem, transform.position, transform.rotation, 0);
 	}
 
 	void Died(){
 		status.died = true;
 		dropItem ();
 		AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
-		if(gameObject.tag == "Boss"){
-			gameRuleSettings.GameClear();
+		if (gameObject.tag == "Boss") {
+			gameRuleSettings.GameClear ();
 		}
-
-		float destroyWait = 5.0f;
-		if(destroyWait > 0.0f){
 		Network.Destroy (gameObject);
 		Network.RemoveRPCs (networkView.viewID);
 		}
-	}
-	
 
 	void Damage(AttackArea.AttackInfo attackInfo){
 				//ヒットエフェクト
