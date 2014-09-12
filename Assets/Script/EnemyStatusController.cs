@@ -41,6 +41,8 @@ public class EnemyStatusController : MonoBehaviour {
 	}
 
 	void Update () {
+		if (!networkView.isMine)
+						return;
 		switch (state) {
 		case State.Walking:
 			Walking();
@@ -189,5 +191,20 @@ public class EnemyStatusController : MonoBehaviour {
 	//攻撃対象を設定する
 	public void SetAttackTarget(Transform target){
 		attackTarget = target;
+	}
+
+	void OnNetworkInstantiate(NetworkMessageInfo info){
+		if(!networkView.isMine){
+			CharaMove move = GetComponent<CharaMove>();
+			Destroy(move);
+
+			AttackArea[] attackAreas = GetComponentsInChildren<AttackArea>();
+			foreach(AttackArea attackArea in attackAreas){
+				Destroy(attackArea);
+			}
+
+			AttackAreaActivation attackAreaActivation = GetComponent<AttackAreaActivation>();
+			Destroy(attackAreaActivation);
+		}
 	}
 }
