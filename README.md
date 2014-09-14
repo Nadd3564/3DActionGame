@@ -1,7 +1,7 @@
 ACTIONGAME
 ==========
 制作中のゲーム
-
+*ネットワークマルチプレイ化実験ブランチ
 開発中の画面
 ![image](title.jpg)
 ![image](3DACTIONGAME.jpg)
