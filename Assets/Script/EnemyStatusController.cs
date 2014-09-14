@@ -17,7 +17,6 @@ public class EnemyStatusController : MonoBehaviour {
 	GUILayer layer;
 
 
-
 	enum State {
 		Walking,
 		Chasing,
@@ -42,8 +41,6 @@ public class EnemyStatusController : MonoBehaviour {
 	}
 
 	void Update () {
-		if (!networkView.isMine)
-						return;
 		switch (state) {
 		case State.Walking:
 			Walking();
@@ -149,36 +146,29 @@ public class EnemyStatusController : MonoBehaviour {
 	void dropItem(){
 		if(dropItemPrefab.Length == 0){ return; }
 		GameObject dropItem = dropItemPrefab[Random.Range(0, dropItemPrefab.Length)];
-		Network.Instantiate (dropItem, transform.position, transform.rotation, 0);
+		Vector3 vec = dropItem.transform.up;
+		vec.y += 1.0f;
+		Instantiate (dropItem, transform.position + vec, Quaternion.identity);
 	}
 
 	void Died(){
 		status.died = true;
 		dropItem ();
+		Destroy (gameObject, 5);
 		AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
-		if (gameObject.tag == "Boss") {
-			gameRuleSettings.GameClear ();
+		if(gameObject.tag == "Boss"){
+			gameRuleSettings.GameClear();
 		}
-		Network.Destroy (gameObject);
-		Network.RemoveRPCs (networkView.viewID);
-		}
+	}
+	
 
 	void Damage(AttackArea.AttackInfo attackInfo){
-				//ヒットエフェクト
-				GameObject effect = Instantiate (hitEffect, transform.position, Quaternion.identity) as GameObject;
-				effect.transform.localPosition = transform.position + new Vector3 (0.0f, 0.5f, 0.0f);
-				Destroy (effect, 0.3f);
-
-				if (networkView.isMine)
-						DamageMine (attackInfo.attackPower);
-				else
-						networkView.RPC ("DamageMine", networkView.owner, 
-			                 attackInfo.attackPower);
-		}
-
-		[RPC]
-		void DamageMine(int damage){
-			status.HP -= damage;
+		//ヒットエフェクト
+		GameObject effect = Instantiate (hitEffect, transform.position, Quaternion.identity) as GameObject;
+		effect.transform.localPosition = transform.position + new Vector3 (0.0f, 0.5f, 0.0f);
+		Destroy (effect, 0.3f);
+		
+		status.HP -= attackInfo.attackPower;
 		if(status.HP <= 0){
 			status.HP = 0;
 			//死体を攻撃できないようにする
@@ -201,20 +191,5 @@ public class EnemyStatusController : MonoBehaviour {
 	//攻撃対象を設定する
 	public void SetAttackTarget(Transform target){
 		attackTarget = target;
-	}
-
-	void OnNetworkInstantiate(NetworkMessageInfo info){
-		if(!networkView.isMine){
-			CharaMove move = GetComponent<CharaMove>();
-			Destroy(move);
-
-			AttackArea[] attackAreas = GetComponentsInChildren<AttackArea>();
-			foreach(AttackArea attackArea in attackAreas){
-				Destroy(attackArea);
-			}
-
-			AttackAreaActivation attackAreaActivation = GetComponent<AttackAreaActivation>();
-			Destroy(attackAreaActivation);
-		}
 	}
 }
