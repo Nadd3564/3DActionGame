@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:component-scan base-package="jp.com.inotaku.controller" />
-	
+
 
 
 	<mvc:annotation-driven />
@@ -17,6 +17,18 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/view/" />
 		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name = "mediaTypes">
+			<map>
+				<entry key = "json" value="application/json" />
+				<entry key = "xml" value="text/xml" />
+				<entry key = "htm" value="text/html" />
+			</map>
+		</property>
+			<property name = "defaultContentType" value="text/html" />
 	</bean>
 
 </beans>
