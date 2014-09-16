@@ -200,6 +200,12 @@
             <version>4.1.2</version>
         </dependency> 
         
+        <dependency>
+        	<groupId>com.h2database</groupId>
+        	<artifactId>h2</artifactId>
+        	<version>1.4.178</version>
+        </dependency>
+        
         	<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>

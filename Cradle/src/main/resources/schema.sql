@@ -1,0 +1,12 @@
+CREATE TABLE ITEM (
+  ITEM_ID int(10) NOT NULL AUTO_INCREMENT,
+  ITEM_NAME varchar(20) DEFAULT NULL,
+  ITEM_TYPE varchar(10) DEFAULT NULL,
+  PRICE int(11) DEFAULT NULL,
+  Attack int(10) DEFAULT NULL,
+  Defense int(10) DEFAULT NULL,
+  Description varchar(300) DEFAULT NULL,
+  UPDATE_TIME timestamp,
+  PRIMARY KEY(ITEM_ID)
+);
+
