@@ -27,6 +27,7 @@ public class ItemController {
 	public String item(Model model){
 		List<Item> itemlist = itemService.getAllItem();
 		model.addAttribute("itemlist",itemlist);
+		System.out.println(itemlist);
 		return "item";
 	}
 	

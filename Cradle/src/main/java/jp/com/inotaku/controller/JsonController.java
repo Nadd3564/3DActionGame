@@ -26,11 +26,11 @@ public class JsonController {
 		return  itemService.getItemById(itemId);
 	}
 	
-	@RequestMapping( method = RequestMethod.POST)
+	@RequestMapping(value = "/",  method = RequestMethod.POST)
 	@ResponseBody
-	public String createIetm(@RequestBody Item item){
+	public Item createIetm(@RequestBody Item item){
 		itemService.addItem(item);
-		return "redirect:/itemlist";
+		return item;
 	}
 
 	@RequestMapping(value = "/itemlist", method = RequestMethod.GET)
