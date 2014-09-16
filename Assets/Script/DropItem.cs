@@ -12,10 +12,7 @@ public class DropItem : MonoBehaviour {
 	TerrainCollider tCollider;
 
 	void OnTriggerEnter(Collider other){
-		//ドロップするエネミーにぶつからないようにisTriggerをTrueに
-		//this.collider.isTrigger = true;
-				//Playerか地面か判定
-
+				//Playerか判定
 				if (other.tag == "Player"){
 						//アイテム取得
 						CharaStatus iStatus = other.GetComponent<CharaStatus> ();
@@ -24,6 +21,7 @@ public class DropItem : MonoBehaviour {
 						Destroy (gameObject);
 
 			AudioSource.PlayClipAtPoint(itemSeClip, transform.position);
+				//地面か判定
 		} else if(other.tag == "Terrain"){
 			this.collider.isTrigger = false;
 		}

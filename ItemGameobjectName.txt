@@ -1,0 +1,9 @@
+ItemID00_RuneSword
+ItemID01_Katana
+ItemID02_Axe
+ItemID03_Wooden Shield
+ItemID04_shieldJap
+ItemID05_Round Shield
+ItemID06_RedFlower
+ItemID07_YellowFlower
+ItemID08_BlueFlower

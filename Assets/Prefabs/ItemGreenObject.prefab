@@ -32,7 +32,7 @@ GameObject:
   - 135: {fileID: 13500000}
   m_Layer: 13
   m_Name: ItemGreenObject
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

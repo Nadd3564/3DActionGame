@@ -12,6 +12,7 @@ public class PlayerStatusController : MonoBehaviour {
 	public GameObject hitEffect;
 	TargetCursor targetCursor;
 
+
 	//状態
 	enum State{
 		Walking,
