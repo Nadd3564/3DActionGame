@@ -43,6 +43,42 @@
 			<version>${spring-framework.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>3.2.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>3.2.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>3.2.0.RELEASE</version>
+		</dependency>
+
+		<!-- <dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.6.4</version>
+		</dependency> -->
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-lgpl</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+
+
 		<!-- Other Web dependencies -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -193,20 +229,20 @@
 			<artifactId>castor-xml</artifactId>
 			<version>1.3.2</version>
 		</dependency>
-		
+
 		<dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.1.2</version>
-        </dependency> 
-        
-        <dependency>
-        	<groupId>com.h2database</groupId>
-        	<artifactId>h2</artifactId>
-        	<version>1.4.178</version>
-        </dependency>
-        
-        	<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.178</version>
+		</dependency>
+
+		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
@@ -223,7 +259,7 @@
 		</dependency>
 
 
-                
+
 	</dependencies>
 	<build>
 		<plugins>
@@ -267,5 +303,5 @@
 	</build>
 
 
-	
+
 </project>

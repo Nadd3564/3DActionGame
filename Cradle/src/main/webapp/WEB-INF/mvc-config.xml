@@ -11,7 +11,12 @@
 
 
 
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -19,16 +24,5 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<bean
-		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-		<property name = "mediaTypes">
-			<map>
-				<entry key = "json" value="application/json" />
-				<entry key = "xml" value="text/xml" />
-				<entry key = "htm" value="text/html" />
-			</map>
-		</property>
-			<property name = "defaultContentType" value="text/html" />
-	</bean>
 
 </beans>

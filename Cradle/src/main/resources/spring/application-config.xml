@@ -26,18 +26,18 @@
 		<property name="url" value="${database.url}"></property> <property name="username" 
 		value="${database.username}"></property> <property name="password" value="${database.password}"></property> 
 		</bean> -->
- 	<jdbc:embedded-database id="dataSource" type="H2">
+ 	<!-- <jdbc:embedded-database id="dataSource" type="H2">
      <jdbc:script location="classpath:schema.sql"/>
         <jdbc:script location="classpath:test-data.sql"/>   
-    </jdbc:embedded-database> 
+    </jdbc:embedded-database>  -->
 
-	<!-- <bean id="dataSource"
+	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${database.driverClassName}"></property>
 		<property name="url" value="${database.url}"></property>
 		<property name="username" value="${database.username}"></property>
 		<property name="password" value="${database.password}"></property>
-	</bean> -->
+	</bean>
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -47,7 +47,7 @@
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="generateDdl" value="true"></property>
-				<property name="database" value="H2"></property>
+				<property name="database" value="MYSQL"></property>
 			</bean>
 		</property>
 	</bean>
