@@ -4,12 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using LitJson;
 
-public class JsonWWW : MonoBehaviour {
-	
+public class GPWWW : MonoBehaviour {
+
 	void Start () {
-		// IEnumeratorインターフェースを継承したメソッドは、StartCoroutineでコールする
-		StartCoroutine(Get("http://www.google.co.jp"));
-		StartCoroutine(Post("http://www.google.co.jp"));  // 今回は失敗します
+		StartCoroutine(Get("http://localhost:8080/Cradle/json/3"));
+		StartCoroutine(Post("http://localhost:8080/Cradle/json"));  
 	}
 	
 	void Update () {
@@ -28,17 +27,18 @@ public class JsonWWW : MonoBehaviour {
 		// 成功
 		if (www.error == null) {
 			Debug.Log("Get Success");
-			
-			// 本来はサーバからのレスポンスとしてjsonを戻し、www.textを使用するが
-			// 今回は便宜上、下記のjsonを使用する
-			string txt = "{\"name\": \"okude\", \"level\": 99, \"friend_names\": [\"ichiro\", \"jiro\", \"saburo\"]}";
-			// 自作したTestResponseクラスにレスポンスを格納する
-			TestResponse response = JsonMapper.ToObject<TestResponse> (txt);
-			Debug.Log("name: " + response.name);
-			Debug.Log("level: " + response.level);
-			Debug.Log("friend_names[0]: " + response.friend_names[0]);
-			Debug.Log("friend_names[1]: " + response.friend_names[1]);
-			Debug.Log("friend_names[2]: " + response.friend_names[2]);
+
+			var json = www.text; 
+			// 自作したGetResponseクラスにレスポンスを格納する
+			GetResponse response = JsonMapper.ToObject<GetResponse> (json);
+			Debug.Log("itemid :" + response.itemId);
+			Debug.Log("itemname" + response.itemName);
+			Debug.Log("itemType" + response.itemType);
+			Debug.Log("price" + response.price);
+			Debug.Log("attack" + response.attack);
+			Debug.Log("defence" + response.defence);
+			Debug.Log("description" + response.description);
+			Debug.Log("updateTime" + response.updateTime);
 		}
 		// 失敗
 		else{
@@ -75,9 +75,28 @@ public class JsonWWW : MonoBehaviour {
 	
 }
 
+
 // レスポンスのJSONを格納するクラス
-class TestResponse {
-	public string name;
-	public int level;
-	public List<string> friend_names;
+class GetResponse {
+	public int itemId;
+	public string itemName;
+	public string itemType;
+	public int price;
+	public int attack;
+	public int defence;
+	public string description;
+	public long updateTime;
+	//public List<string> friend_names;
+}
+
+[System.Serializable]
+class Data{
+	public int itemId;
+	public string itemName;
+	public string itemType;
+	public int price;
+	public int attack;
+	public int defence;
+	public string description;
+	public long updateTime;
 }

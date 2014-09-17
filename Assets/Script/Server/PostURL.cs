@@ -5,7 +5,7 @@ public class PostURL : MonoBehaviour {
 	
 	void Start () {
 		
-		string url = "http://example.com/script.php";
+		string url = "http://localhost:8080/Cradle/json/";
 		
 		WWWForm form = new WWWForm();
 		form.AddField("var1", "value1");
