@@ -8,7 +8,7 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>jp.com.inotaku.domain.Item</class>
 		<properties>
-			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hib.hbm2ddl.auto" value="create" />
 	<!-- 		<property name="javax.persistence.jdbc.driver" value="${database.driverClassName}" />
 			<property name="javax.persistence.jdbc.url" value="${database.url}" />
