@@ -6,18 +6,19 @@ public class InputManager : MonoBehaviour {
 	Vector2 prevPosition;
 	Vector2 delta = Vector2.zero;
 	bool moved = false;
+
 	
 	void Update () {
-	if (Input.GetButtonDown ("Fire1"))
+	if (Input.GetButtonDown ("Fire2"))
 						slideStartPosition = GetCursorPosition ();
 
-		if(Input.GetButton("Fire1")){
+		if(Input.GetButton("Fire2")){
 			if(Vector2.Distance(slideStartPosition, GetCursorPosition())
 				 >= (Screen.width * 0.1f))
-				moved = true;
+			moved = true;
 		}
 
-		if (!Input.GetButtonUp ("Fire1") && !Input.GetButton ("Fire1"))
+		if (!Input.GetButtonUp ("Fire2") && !Input.GetButton ("Fire2"))
 						moved = false;
 
 		if (moved)
@@ -26,11 +27,11 @@ public class InputManager : MonoBehaviour {
 						delta = Vector2.zero;
 
 		prevPosition = GetCursorPosition();
-
+		
 	}
 	
 	public bool Clicked(){
-		if (!moved && Input.GetButtonUp ("Fire1"))
+		if (!moved && Input.GetButtonUp ("Fire1") || Input.GetButton("Fire1"))
 						return true;
 				else
 						return false;
