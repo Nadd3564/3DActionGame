@@ -24,7 +24,7 @@ public class EnemyCtrl : AdvancedFSM {
 
 	protected override void StateUpdate ()
 	{
-	
+
 	}
 
 	protected override void StateFixedUpdate()

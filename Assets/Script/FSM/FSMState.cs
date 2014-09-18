@@ -11,8 +11,9 @@ public abstract class FSMState
 	protected Dictionary<Transition, FSMStateID> map = new Dictionary<Transition, FSMStateID>();
 	protected FSMStateID stateID;
 	public FSMStateID ID { get { return stateID; }}
-	protected Vector3 destPos = new Vector3(100.0f, 100.0f, 100.0f);
+	protected Vector3 destPos;
 	protected Transform[] waypoints;
+	public AdvancedFSM adv;
 	//protected float curRotSpeed;
 	//protected float curSpeed;
 
@@ -89,6 +90,7 @@ public abstract class FSMState
 		Vector3 rndPosition = Vector3.zero;
 		destPos = waypoints [rndIndex].position + rndPosition;
 	}
+
 
 	//次のポジションが、現在の位置と同じかチェックする
 	protected bool IsInCurrentRange(Transform trans, Vector3 pos)

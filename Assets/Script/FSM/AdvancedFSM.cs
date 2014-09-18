@@ -24,6 +24,7 @@ public enum FSMStateID
 
 public class AdvancedFSM : FSM {
 	private List<FSMState> fsmStates;
+	CharacterController characterController; 
 
 	//fsmStates
 	private FSMStateID currentStateID;
