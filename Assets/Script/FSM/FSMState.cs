@@ -11,7 +11,7 @@ public abstract class FSMState
 	protected Dictionary<Transition, FSMStateID> map = new Dictionary<Transition, FSMStateID>();
 	protected FSMStateID stateID;
 	public FSMStateID ID { get { return stateID; }}
-	protected Vector3 destPos;
+	protected Vector3 destPos = new Vector3(100.0f, 100.0f, 100.0f);
 	protected Transform[] waypoints;
 	//protected float curRotSpeed;
 	//protected float curSpeed;
@@ -80,7 +80,7 @@ public abstract class FSMState
 
 	//NPC(敵キャラ)の処理、行動、動作を指定する
 	public abstract void Act(Transform player, Transform npc);
-
+	
 	//次の索敵ポイントを指定する。乱数で動作
 	public void FindNextPoint()
 	{

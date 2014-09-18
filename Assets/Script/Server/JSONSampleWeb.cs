@@ -1,18 +1,14 @@
 ﻿using UnityEngine;
 using System.Text;
-using System.IO;
-using System.Xml;
 using System.Collections;
 using System.Collections.Generic;
 using MiniJSON;
-using System.Linq;
-using UniRx;
 
 public class JSONSampleWeb : MonoBehaviour {
 
 	void Start () {
 		// コルーチン実行開始
-		StartCoroutine(GetJSON("http://localhost:8080/Cradle/json/3"));
+		StartCoroutine(GetJSON("http://localhost:8080/Cradle/json/4"));
 		StartCoroutine(PostJSON("http://localhost:8080/Cradle/json/"));
 	}
 	
@@ -27,7 +23,6 @@ public class JSONSampleWeb : MonoBehaviour {
 
 		// webサーバからの内容を文字列変数に格納
 		var json = Json.Deserialize(www.text) as IDictionary<string, object>;
-		// 以降JSONのパースは同じ    
 		Debug.Log (www.text);
 	}
 
@@ -37,23 +32,30 @@ public class JSONSampleWeb : MonoBehaviour {
 		Hashtable header = new Hashtable ();
 		header.Add ("Content-Type", "application/json; charset=UTF-8");
 
-		JSONObject data = new JSONObject();
-		data.AddField ("itemId", 1);
-		data.AddField ("itemName", "ルーンソード");
+		JSONObject obj = new JSONObject();
+		obj.AddField ("itemName", "カタナ");
+		obj.AddField("itemType", "武器");
+		obj.AddField("price", 100);
+		obj.AddField("attack", 10);
+		obj.AddField("defence", 10);
+		obj.AddField("description", "はやい");
 
-		string postJsonStr = MiniJSON.Json.Serialize(data);
+		string postJsonStr = MiniJSON.Json.Serialize(obj);
+		Debug.Log (postJsonStr);
 		byte[] postBytes = System.Text.Encoding.UTF8.GetBytes (postJsonStr);
+
 		// 送信開始
 		WWW www = new WWW (url, postBytes, header);
 		yield return www;
 
+
 		// 成功
 		if (www.error == null) {
-			Debug.Log("Post Success");
+			Debug.Log("WWW Ok!: " + www.data);
 		}
 		// 失敗
 		else{
-			Debug.Log("Post Failure");          
+			Debug.Log("WWW Error: "+ www.error);          
 		}
 
 	}

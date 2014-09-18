@@ -1,9 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class EnemyCtrl : AdvancedFSM {
 
-
+	public GameObject hitEffect;
+	public float waitBaseTime = 2.0f; //待機時間
+	public float walkRange = 5.0f; //移動範囲
+	public Vector3 basePositon; //初期位置を保存
+	public GameObject[] dropItemPrefab; //複数のアイテムを入れる配列
+	
 	protected override void StartUp ()
 	{
 		GameObject objPlayer = GameObject.FindGameObjectWithTag ("Player");
@@ -18,7 +24,7 @@ public class EnemyCtrl : AdvancedFSM {
 
 	protected override void StateUpdate ()
 	{
-
+	
 	}
 
 	protected override void StateFixedUpdate()

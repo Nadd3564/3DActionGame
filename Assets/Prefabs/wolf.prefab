@@ -1426,6 +1426,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c90e0d1b2a2b542b32ddb2cbc830a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitEffect: {fileID: 0}
+  waitBaseTime: 2
+  walkRange: 5
+  basePositon: {x: 0, y: 0, z: 0}
+  dropItemPrefab: []
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

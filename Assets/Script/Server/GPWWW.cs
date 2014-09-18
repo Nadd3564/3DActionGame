@@ -8,7 +8,7 @@ public class GPWWW : MonoBehaviour {
 
 	void Start () {
 		StartCoroutine(Get("http://localhost:8080/Cradle/json/3"));
-		StartCoroutine(Post("http://localhost:8080/Cradle/json"));  
+		StartCoroutine(Post("http://localhost:8080/Cradle/json/"));  
 	}
 	
 	void Update () {
@@ -53,10 +53,17 @@ public class GPWWW : MonoBehaviour {
 		header.Add ("Content-Type", "application/json; charset=UTF-8");
 		
 		// LitJsonを使いJSONデータを生成
-		JsonData data = new JsonData();
-		data["hogehoge"] = 1;
+		JsonData obj = new JsonData();
+		obj["itemName"] = "katana";
+		obj["itemType"] = "buki";
+		obj["price"] = 300;
+		obj["attack"] = 10;
+		obj["defence"] = 0;
+		obj["description"] = "atk+10 speed+10";
+
 		// シリアライズする(LitJson.JsonData→JSONテキスト)
-		string postJsonStr = data.ToJson();
+		string postJsonStr = obj.ToJson();
+		Debug.Log(postJsonStr);
 		byte[] postBytes = Encoding.Default.GetBytes (postJsonStr);
 		
 		// 送信開始
@@ -65,11 +72,11 @@ public class GPWWW : MonoBehaviour {
 		
 		// 成功
 		if (www.error == null) {
-			Debug.Log("Post Success");
+			Debug.Log("WWW Ok!: " + www.data);
 		}
 		// 失敗
 		else{
-			Debug.Log("Post Failure");          
+			Debug.Log("WWW Error: "+ www.error);          
 		}
 	}
 	
@@ -89,7 +96,7 @@ class GetResponse {
 	//public List<string> friend_names;
 }
 
-[System.Serializable]
+/*[System.Serializable]
 class Data{
 	public int itemId;
 	public string itemName;
@@ -99,4 +106,4 @@ class Data{
 	public int defence;
 	public string description;
 	public long updateTime;
-}
+}*/
