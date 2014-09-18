@@ -14,20 +14,20 @@ ACTIONGAME
 <br>・Two-Swords Warrior
 <br>・Tiny Archer Man
 <br>・Monster
-<br>Cartoony Medieval Weapon package
-<br>Ornamental Flower Set
-<br>Rune Sword
-<br>Pixel Map Terrain
-<br>Unirx
-<br>Minijson
-<br>LitJson
-<br>JSONObject
+<br>・Cartoony Medieval Weapon package
+<br>・Ornamental Flower Set
+<br>・Rune Sword
+<br>・Pixel Map Terrain
+<br>・Unirx
+<br>・Minijson
+<br>・LitJson
+<br>・JSONObject
 
 *注意
 「Player」ゲームオブジェクトの子オブジェクト「Object006」に
-Assets3D/TinyKai/Models/Materials/ にある
-Archerマテリアルをドラッグ＆ドロップして貼り付けて頂けるとプレイヤーにテクスチャーが付きます。
-お手数おかけしますが、ご利用される場合はご留意頂けるよう宜しくお願いいたします。
+<br>Assets3D/TinyKai/Models/Materials/ にある
+<br>Archerマテリアルをドラッグ＆ドロップして貼り付けて頂けるとプレイヤーにテクスチャーが付きます。
+<br>お手数おかけしますが、ご利用される場合はご留意頂けるよう宜しくお願いいたします。
 
 チュートリアル
 <br>・マウス左クリックで移動、エネミーをクリックするとアタック（押下し続けるとそのまま継続）
