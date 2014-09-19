@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using Cradle;
+namespace Cradle{
 public class EnemyGenerator : MonoBehaviour {
 	//生成される敵
 	public GameObject enemyPrefab;
@@ -30,4 +31,5 @@ public class EnemyGenerator : MonoBehaviour {
 			}
 		}
 	}
+}
 }

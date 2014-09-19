@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cradle;
+
+namespace Cradle{
 
 public class CharaMove : MonoBehaviour {
 	const float GravityPower = 9.8f; 
@@ -96,4 +99,5 @@ public class CharaMove : MonoBehaviour {
 	}
 	
 	
+}
 }

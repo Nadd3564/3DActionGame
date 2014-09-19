@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cradle;
 
+namespace Cradle{
 public class TitleSceneController : MonoBehaviour {
 	public Texture2D bgTexture;
 
@@ -18,4 +20,4 @@ public class TitleSceneController : MonoBehaviour {
 		}
 	}
 	}
-
+}

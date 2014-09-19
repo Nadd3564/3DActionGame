@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cradle;
 
+namespace Cradle{
 public class TargetCursor : MonoBehaviour {
 	
 	// 半径
@@ -35,4 +37,5 @@ public class TargetCursor : MonoBehaviour {
 		//エフェクトの位置
 		transform.localPosition = position + offset;
 	}
+}
 }

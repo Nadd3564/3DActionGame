@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cradle;
 
+namespace Cradle{
 public class InputManager : MonoBehaviour {
 	Vector2 slideStartPosition;
 	Vector2 prevPosition;
@@ -49,4 +51,5 @@ public class InputManager : MonoBehaviour {
 	{
 		return Input.mousePosition;
 	}
+}
 }

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cradle;
 
+namespace Cradle{
 public class CharaStatus : MonoBehaviour {
 	public int HP = 100;
 	public int MaxHP = 100;
@@ -45,4 +47,5 @@ public class CharaStatus : MonoBehaviour {
 			powerUpEffect.Stop();		
 		}
 	}
+}
 }

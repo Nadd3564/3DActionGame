@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cradle.FM;
 
+namespace Cradle.FM{
 public class ApproachState : FSMState {
 
 	public ApproachState(Transform[] wp)
@@ -8,8 +10,8 @@ public class ApproachState : FSMState {
 		waypoints = wp;
 		stateID = FSMStateID.Approaching;
 
-		//curRotSpeed = 1.0f;
-		//curSpeed = 100.0f;
+		curRotSpeed = 360.0f;
+		curSpeed = 3.0f;
 
 		FindNextPoint ();
 		}
@@ -19,12 +21,12 @@ public class ApproachState : FSMState {
 		destPos = player.position;
 
 		float dist = Vector3.Distance (npc.position, destPos);
-		if(dist <= 200.0f)
+		if(dist <= 2.0f)
 		{
 			Debug.Log("Switch to Attack state");
 			npc.GetComponent<EnemyCtrl>().SetTransition(Transition.ReachPlayer);
 		}
-		else if(dist >= 300.0f)
+		else if(dist >= 10.0f)
 		{
 			Debug.Log("Switch to Search state");
 			npc.GetComponent<EnemyCtrl>().SetTransition(Transition.LostPlayer);
@@ -36,8 +38,10 @@ public class ApproachState : FSMState {
 		destPos = player.position;
 
 		Quaternion targetRotation = Quaternion.LookRotation (destPos - npc.position);
-		npc.rotation = Quaternion.Slerp (npc.rotation, targetRotation, Time.deltaTime /* curRotSpeed*/);
+		npc.rotation = Quaternion.Slerp (npc.rotation, targetRotation, Time.deltaTime * curRotSpeed);
 
-		npc.Translate (Vector3.forward * Time.deltaTime /* curSpeed*/);
+	    GameObject.Find("wolf").SendMessage ("SetDestination", destPos);
+		//npc.Translate(Vector3.forward * Time.deltaTime * curSpeed);
 	}
+}
 }

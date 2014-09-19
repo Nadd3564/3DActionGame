@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+namespace Cradle.Server{
 public class PostURL : MonoBehaviour {
 	
 	void Start () {
@@ -40,4 +41,5 @@ public class PostURL : MonoBehaviour {
 			Debug.Log("WWW Error: "+ www.error);
 		}    
 	}    
+}
 }

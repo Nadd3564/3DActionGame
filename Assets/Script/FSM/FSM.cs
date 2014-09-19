@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+namespace Cradle.FM{
 public class FSM : MonoBehaviour {
 	protected Transform playerTransform;
 
@@ -28,4 +29,5 @@ public class FSM : MonoBehaviour {
 	void FixedUpdate(){
 		StateFixedUpdate ();
 	}
+}
 }

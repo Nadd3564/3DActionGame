@@ -651,7 +651,6 @@ GameObject:
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
-  - 114: {fileID: 11400000}
   - 114: {fileID: 11400016}
   m_Layer: 0
   m_Name: wolf
@@ -669,7 +668,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 400086}
   - 135: {fileID: 13500000}
-  - 114: {fileID: 11400012}
   m_Layer: 0
   m_Name: SearchAreaCollider
   m_TagString: Untagged
@@ -1228,7 +1226,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 116.080811, y: 0, z: 177.953003}
+  m_LocalPosition: {x: 118.380859, y: .0224965364, z: 185.828247}
   m_LocalScale: {x: 8, y: 8, z: 8}
   m_Children:
   - {fileID: 400082}
@@ -1305,25 +1303,6 @@ Animator:
   m_ApplyRootMotion: 0
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dae9d8fae6e329438386344b608bd9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitEffect: {fileID: 100000, guid: 5277b4077b5df634aa70c4bf149df554, type: 2}
-  waitBaseTime: 2
-  walkRange: 5
-  basePositon: {x: 0, y: 0, z: 0}
-  dropItemPrefab:
-  - {fileID: 100000, guid: 7fc73f4893030814989ca6772e29a0a9, type: 2}
-  - {fileID: 100002, guid: c9e08aa43f5b9fa4f97137e036231644, type: 2}
-  deathSeClip: {fileID: 8300000, guid: 4482e81215e545446b247a68ba0ae6ad, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1372,7 +1351,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100084}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc55453bb4a7959438784ba7eefd7c14, type: 3}
   m_Name: 
@@ -1390,17 +1369,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa20ac3021ec5d74fa4cf0197ee0554b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11400012
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1762cd780e7383468c22b87586e5eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11400014
@@ -1426,11 +1394,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c90e0d1b2a2b542b32ddb2cbc830a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEffect: {fileID: 0}
+  arrived: 0
+  destination: {x: 0, y: 0, z: 0}
+  walkSpeed: 6
+  rotationSpeed: 360
+  hitEffect: {fileID: 100000, guid: 5277b4077b5df634aa70c4bf149df554, type: 2}
   waitBaseTime: 2
   walkRange: 5
   basePositon: {x: 0, y: 0, z: 0}
   dropItemPrefab: []
+  deathSeClip: {fileID: 8300000, guid: 4482e81215e545446b247a68ba0ae6ad, type: 3}
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

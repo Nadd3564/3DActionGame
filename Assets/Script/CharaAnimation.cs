@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using Cradle;
 
+namespace Cradle{
 public class CharaAnimation : MonoBehaviour {
 	Animator animator;
 	CharaStatus status;
@@ -46,4 +48,5 @@ public class CharaAnimation : MonoBehaviour {
 
 		prePosition = transform.position;
 	}
+}
 }

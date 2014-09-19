@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cradle;
 
+namespace Cradle{
 public class PlayerStatusController : MonoBehaviour {
 	const float RayCastMaxDistance = 100.0f;
 	CharaStatus status;
@@ -150,4 +152,4 @@ void Damage(AttackArea.AttackInfo attackInfo){
 		status.died = false;
 	}
 }
-
+}

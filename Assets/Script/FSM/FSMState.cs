@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using Cradle.FM;
 
 /// @http://creativecommons.org/licenses/by-sa/3.0/
 
-
+namespace Cradle.FM{
 public abstract class FSMState
 {
 	protected Dictionary<Transition, FSMStateID> map = new Dictionary<Transition, FSMStateID>();
@@ -13,9 +13,10 @@ public abstract class FSMState
 	public FSMStateID ID { get { return stateID; }}
 	protected Vector3 destPos;
 	protected Transform[] waypoints;
-	public AdvancedFSM adv;
-	//protected float curRotSpeed;
-	//protected float curSpeed;
+	protected AdvancedFSM adv;
+	protected EnemyCtrl enemyCtrl;
+	protected float curRotSpeed;
+	protected float curSpeed;
 
 	public void AddTransition(Transition transition, FSMStateID id)
 	{
@@ -102,4 +103,5 @@ public abstract class FSMState
 						return true;
 				return false;
 	}
+}
 }

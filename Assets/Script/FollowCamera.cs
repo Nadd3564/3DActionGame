@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cradle;
 
+namespace Cradle{
 public class FollowCamera : MonoBehaviour {
 	public float distance = 5.0f;
 	public float horizontalAngle = 0.0f;
@@ -35,4 +37,5 @@ public class FollowCamera : MonoBehaviour {
 				transform.position = hitInfo.point;
 		}
 	}
+}
 }

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cradle;
 
+namespace Cradle{
 public class EnemyStatusController : MonoBehaviour {
 	CharaStatus status;
 	CharaAnimation charaAnimation;
@@ -192,4 +194,5 @@ public class EnemyStatusController : MonoBehaviour {
 	public void SetAttackTarget(Transform target){
 		attackTarget = target;
 	}
+}
 }

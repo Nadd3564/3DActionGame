@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cradle.FM;
 
+namespace Cradle.FM{
 public class AttackState : FSMState {
 
 	public AttackState(Transform[] wp)
@@ -16,7 +18,7 @@ public class AttackState : FSMState {
 	{
 		//プレイヤーとの距離を確認
 		float dist = Vector3.Distance (npc.position, player.position);
-		if(dist >= 200.0f && dist < 300.0f)
+		if(dist >= 0.0f && dist < 8.0f)
 		{
 
 			//ターゲット地点に回転
@@ -24,17 +26,16 @@ public class AttackState : FSMState {
 			npc.rotation = Quaternion.Slerp(npc.rotation, targetRotation, Time.deltaTime /* curRotSpeed*/);
 
 			//前進
-			npc.Translate(Vector3.forward * Time.deltaTime /* curSpeed*/);
+			//npc.GetComponent<AdvancedFSM> ().SetDestination (player.position);
 
-			Debug.Log("Switch to Chase State");
+			Debug.Log("Switch to Approach State");
 			npc.GetComponent<EnemyCtrl>().SetTransition(Transition.SawPlayer);
-
 		}
 
 		//距離が遠すぎる場合
-		else if(dist >= 300.0f)
+		else if(dist >= 6.0f)
 		{
-			Debug.Log("Switch to Patrol State");
+			Debug.Log("Switch to Search State");
 			npc.GetComponent<EnemyCtrl>().SetTransition(Transition.LostPlayer);
 		}
 	}
@@ -42,7 +43,14 @@ public class AttackState : FSMState {
 	public override void Act(Transform player, Transform npc)
 	{
 		//ターゲット地点をプレーヤーポジションに設定
-		destPos = player.position;
+		//destPos = player.position;
+
+		//前進
+		//npc.GetComponent<AdvancedFSM> ().SendMessage ("SetDestination", destPos);
+
+		//攻撃
+		npc.GetComponent<EnemyCtrl> ().AttackStart ();
+		npc.GetComponent<EnemyCtrl> ().Attacking ();
 
 		/*//砲台は常にプレーヤーに向きます。
 		Transform turret = npc.GetComponent<NPCTankController>().turret;
@@ -52,4 +60,5 @@ public class AttackState : FSMState {
 		//射撃
 		npc.GetComponent<NPCTankController>().ShootBullet();*/
 	}
+}
 }
