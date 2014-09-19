@@ -38,7 +38,11 @@ namespace Cradle
 		}
 
 		public void CalcBoostTime() {
-			this.powerBoostTime = Mathf.Max (this.powerBoostTime - Time.deltaTime, 0.0f);
+			this.powerBoostTime = CalcTime ();
+		}
+
+		public virtual float CalcTime() {
+			return Mathf.Max (this.powerBoostTime - Time.deltaTime, 0.0f);
 		}
 
 		public void CalcHP() {

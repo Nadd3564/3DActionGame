@@ -10,6 +10,10 @@ namespace Cradle {
 		public ParticleSystem powerUpEffect;
 		public CharaStatusController controller;
 
+		public void OnEnable() {
+			controller.SetEffectController (this);
+		}
+
 		//アイテム取得
 		public void GetItem(DropItem.ItemKind itemKind){
 			switch(itemKind){
@@ -40,7 +44,7 @@ namespace Cradle {
 				controller.EnablePowerBoost();
 				controller.CalcBoostTime();
 					} else {
-				//StopEffect (); ここをアクティブにするとエラーが出ます。
+				StopEffect ();
  			}
 		}
 
@@ -48,7 +52,7 @@ namespace Cradle {
 			this.powerUpEffect = transform.Find ("PowerUpEffect").GetComponent<ParticleSystem> ();
 		}
 
-		 public void PlayEffect() {
+		public void PlayEffect() {
 			this.powerUpEffect.Play ();
 		}
 

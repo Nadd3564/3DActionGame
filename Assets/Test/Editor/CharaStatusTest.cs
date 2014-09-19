@@ -9,17 +9,54 @@
 //------------------------------------------------------------------------------
 using NUnit.Framework;
 using System;
+using NSubstitute;
 
 namespace Cradle.Test
 {
-		[TestFixture()]
+		[TestFixture]
+		[Category ("CharaStatus Test")]
 		public class CharaStatusTest
 		{
-				[Test()]
-				public void TestCase ()
-				{
-					
-				}
+			public IEffectController effect;
+			public CharaStatusController status;
+
+			[SetUp] public void Init()
+			{ 
+				effect = GetEffectMock ();
+				status = GetControllerMock (effect);	
+			}
+		
+			[TearDown] public void Cleanup()
+			{
+
+			}
+
+			//正常値テスト
+			[Test]
+			[Category ("Calc Test")]
+			public void CalcTimeTest ()
+			{
+				Assert.That (status.CalcTime(), Is.EqualTo (0.0f));
+			}
+
+			[Test]
+			[Category ("Calc Test")]
+			public void CalcHPTest () {
+				status.CalcHP ();
+				Assert.That (status.HP, Is.EqualTo(100));		
+			}
+
+			private IEffectController GetEffectMock () {
+				return Substitute.For<IEffectController> ();
+			}
+
+			private CharaStatusController GetControllerMock(IEffectController effect) {
+				var status = Substitute.For<CharaStatusController> ();
+				status.SetEffectController (effect);
+				status.CalcTime ().Returns (0.0f);
+				return status;
+			}
+
 		}
 }
 
