@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Cradle.FM;
+
 
 /// @http://creativecommons.org/licenses/by-sa/3.0/
+namespace Cradle.FM{
 
 public enum Transition
 {
@@ -22,10 +25,10 @@ public enum FSMStateID
 	Dead,
 }
 
+
 public class AdvancedFSM : FSM {
 	private List<FSMState> fsmStates;
-	CharacterController characterController; 
-
+	
 	//fsmStates
 	private FSMStateID currentStateID;
 	public FSMStateID CurrentStateID{ get { return currentStateID; }}
@@ -36,7 +39,7 @@ public class AdvancedFSM : FSM {
 	public AdvancedFSM(){
 		fsmStates = new List<FSMState> ();
 	}
-
+	
 	//新たに状態を追加
 	public void AddFSMState(FSMState fsmState){
 	//引数の確認
@@ -117,5 +120,6 @@ public class AdvancedFSM : FSM {
 				break;
 			}
 		}
+	}
 	}
 }

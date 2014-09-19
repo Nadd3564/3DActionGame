@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cradle;
 
+namespace Cradle{
 public class GameRuleSettings : MonoBehaviour {
 	//残り時間
 	public float timeRemaining = 5.0f + 60.0f;
@@ -47,4 +49,5 @@ public class GameRuleSettings : MonoBehaviour {
 
 		clearSeAudio.Play ();
 	}
+}
 }

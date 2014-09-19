@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cradle;
 
+namespace Cradle{
 public class TitleScenenCtrl : MonoBehaviour {
     // タイトル画面テクスチャ
     public Texture2D bgTexture;
@@ -25,4 +27,5 @@ public class TitleScenenCtrl : MonoBehaviour {
             Application.LoadLevel("PlayScene");
         }
     }
+}
 }

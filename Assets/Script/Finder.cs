@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cradle;
 
+namespace Cradle{
 public class Finder : MonoBehaviour {
 	GameObject obj;
 
@@ -14,4 +16,5 @@ public class Finder : MonoBehaviour {
 	void Update () {
 	
 	}
+}
 }

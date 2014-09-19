@@ -626,7 +626,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 400080}
   - 135: {fileID: 13500002}
-  - 114: {fileID: 11400014}
   m_Layer: 0
   m_Name: SearchAreaCollider
   m_TagString: Untagged
@@ -1320,17 +1319,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSeClip: {fileID: 8300000, guid: 5831e4427ecfaef4c8b3261ede72f5e3, type: 3}
---- !u!114 &11400014
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1762cd780e7383468c22b87586e5eaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1342,6 +1330,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c90e0d1b2a2b542b32ddb2cbc830a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrived: 0
+  destination: {x: 0, y: 0, z: 0}
+  walkSpeed: 6
+  rotationSpeed: 360
+  hitEffect: {fileID: 0}
+  waitBaseTime: 2
+  walkRange: 5
+  basePositon: {x: 0, y: 0, z: 0}
+  dropItemPrefab: []
+  deathSeClip: {fileID: 0}
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

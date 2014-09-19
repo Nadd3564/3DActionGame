@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using MiniJSON;
 
+namespace Cradle.Server{
 public class JsonReadSample : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
@@ -46,4 +47,5 @@ public class JsonReadSample : MonoBehaviour {
 			}
 		}
 	}
+}
 }

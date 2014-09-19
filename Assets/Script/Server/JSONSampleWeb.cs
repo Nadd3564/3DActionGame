@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using MiniJSON;
 
+namespace Cradle.Server{
 public class JSONSampleWeb : MonoBehaviour {
 
 	void Start () {
@@ -85,3 +86,4 @@ public class JSONSampleWeb : MonoBehaviour {
 	public long updateTime;
 	//public List<string> friend_names;
 }*/
+}

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cradle;
 
+namespace Cradle{
 public class AttackAreaActivation : MonoBehaviour {
 	Collider[] attackAreaColliders; //攻撃判定コライダーの配列
 
@@ -36,4 +38,5 @@ public class AttackAreaActivation : MonoBehaviour {
 		foreach (Collider attackAreaCollider in attackAreaColliders)
 						attackAreaCollider.enabled = false;
 	}
+}
 }

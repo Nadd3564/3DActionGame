@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using LitJson;
 
+namespace Cradle.Server{
 public class GPWWW : MonoBehaviour {
 
 	void Start () {
@@ -107,3 +108,4 @@ class Data{
 	public string description;
 	public long updateTime;
 }*/
+}

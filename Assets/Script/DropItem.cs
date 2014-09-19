@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cradle;
 
+namespace Cradle{
 public class DropItem : MonoBehaviour {
 	public enum ItemKind{
 		Attack,
@@ -36,4 +38,5 @@ public class DropItem : MonoBehaviour {
 	void Update () {
 	
 	}
+}
 }

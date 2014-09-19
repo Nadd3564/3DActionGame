@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cradle;
 
+namespace Cradle{
 public class AttackArea : MonoBehaviour {
 	CharaStatus status;
 	
@@ -48,4 +50,5 @@ public class AttackArea : MonoBehaviour {
 	void OnAttackTermination(){
 		collider.enabled = false;
 	}
+}
 }
