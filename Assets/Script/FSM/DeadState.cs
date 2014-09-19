@@ -4,7 +4,7 @@ using Cradle.FM;
 
 namespace Cradle.FM{
 public class DeadState : FSMState {
-	protected EnemyCtrl enemyCtrl;
+
 	public DeadState()
 	{
 		stateID = FSMStateID.Dead;

@@ -13,7 +13,7 @@ public class PlayerStatusController : MonoBehaviour {
 	GameRuleSettings gameRuleSettings;
 	public GameObject hitEffect;
 	TargetCursor targetCursor;
-
+	public CharaStatusController controller;
 
 	//状態
 	enum State{
@@ -111,7 +111,7 @@ public class PlayerStatusController : MonoBehaviour {
 	//攻撃状態が始まる前に呼び出される
 	void AttackStart(){
 		StateStartCommon ();
-		status.attacking = true;
+			status.IsAttacking(); // = true;
 
 		//敵の方向に振り向かせる
 		Vector3 targetDirection = (attackTarget.position- transform.position).normalized;
@@ -129,7 +129,7 @@ public class PlayerStatusController : MonoBehaviour {
 	}
 
 	void Died(){
-		status.died = true;
+			status.IsDead (); // = true;
 		gameRuleSettings.GameOver ();
 		deathSeAudio.Play ();
 	}
@@ -138,9 +138,14 @@ void Damage(AttackArea.AttackInfo attackInfo){
 		GameObject effect = Instantiate (hitEffect, transform.position, Quaternion.identity) as GameObject;
 		effect.transform.localPosition = transform.position + new Vector3 (0.0f, 0.5f, 0.0f);
 		Destroy (effect, 0.3f);
-		status.HP -= attackInfo.attackPower;
+
+		/*リファクター前
+		 * status.HP -= attackInfo.attackPower;
 		if(status.HP <= 0){
-			status.HP = 0;
+			status.HP = 0;*/
+			controller.HP -= attackInfo.attackPower;
+			if(controller.HP <= 0){
+				controller.HP = 0;
 			//体力0でダウン
 			ChangeState(State.Died);
 		}
@@ -148,8 +153,8 @@ void Damage(AttackArea.AttackInfo attackInfo){
 
 	//ステータスを初期化
 	void StateStartCommon(){
-		status.attacking = false;
-		status.died = false;
+			status.IsAttacking (); // = false;
+			status.IsDead(); // = false;
 	}
 }
 }

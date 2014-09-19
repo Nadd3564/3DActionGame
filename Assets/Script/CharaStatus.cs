@@ -7,7 +7,7 @@ namespace Cradle {
 	public class CharaStatus : MonoBehaviour, IEffectController {
 
 		public GameObject lastAttackTarget = null;
-		ParticleSystem powerUpEffect;
+		public ParticleSystem powerUpEffect;
 		public CharaStatusController controller;
 
 		//アイテム取得
@@ -40,15 +40,15 @@ namespace Cradle {
 				controller.EnablePowerBoost();
 				controller.CalcBoostTime();
 					} else {
-				StopEffect ();		
-			}
+				//StopEffect (); ここをアクティブにするとエラーが出ます。
+ 			}
 		}
 
 		public void FindEffectComponent() {
 			this.powerUpEffect = transform.Find ("PowerUpEffect").GetComponent<ParticleSystem> ();
 		}
 
-		public void PlayEffect() {
+		 public void PlayEffect() {
 			this.powerUpEffect.Play ();
 		}
 

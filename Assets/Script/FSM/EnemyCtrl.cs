@@ -19,7 +19,8 @@ public class EnemyCtrl : AdvancedFSM {
 	GUILayer layer;
 	public AudioClip deathSeClip;
 	AudioSource deathSeAudio;
-	
+	public CharaStatusController controller;
+
 	protected override void StartUp ()
 	{
 		status = GetComponent<CharaStatus>();
@@ -124,8 +125,7 @@ public class EnemyCtrl : AdvancedFSM {
 
 	public void AttackStart(){
 		StateStartCommon ();
-		status.attacking = true;
-		
+			status.IsAttacking (); // = true;
 		//敵の方向に振り向かせる
 		//Vector3 targetDirection = (attackTarget.position - transform.position).normalized;
 		//SendMessage ("SetDirection", targetDirection);
@@ -150,9 +150,13 @@ public class EnemyCtrl : AdvancedFSM {
 		effect.transform.localPosition = transform.position + new Vector3 (0.0f, 0.5f, 0.0f);
 		Destroy (effect, 0.3f);
 		
-		status.HP -= attackInfo.attackPower;
+		/*リファクター前
+		 * status.HP -= attackInfo.attackPower;
 		if(status.HP <= 0){
-			status.HP = 0;
+			status.HP = 0;*/
+			controller.HP -= attackInfo.attackPower;
+			if(controller.HP <= 0){
+				controller.HP = 0;
 			//死体を攻撃できないようにする
 			foreach (Transform child in transform){
 				if(child.tag == "EnemyHit"){
@@ -176,7 +180,7 @@ public class EnemyCtrl : AdvancedFSM {
 	}
 	
 	public void Died(){
-		status.died = true;
+		status.IsDead(); // = true
 		dropItem ();
 		Destroy (gameObject, 5);
 		AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
@@ -188,8 +192,8 @@ public class EnemyCtrl : AdvancedFSM {
 
 	//ステータスを初期化
 	void StateStartCommon(){
-		status.attacking = false;
-		status.died = false;
+			status.IsAttacking ();
+			status.IsDead ();
 	}
 	
 
