@@ -180,8 +180,13 @@ public class EnemyCtrl : AdvancedFSM {
 		dropItem ();
 		Destroy (gameObject, 5);
 		AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
-		if(gameObject.tag == "Boss"){
-			gameRuleSettings.GameClear();
+		if(gameObject.tag == "Enemy"){
+				//ボスだった場合、ゲームクリア
+				foreach (Transform child in transform){
+					if(child.tag == "Boss"){
+						gameRuleSettings.GameClear();
+					}
+				}
 		}
 	}
 

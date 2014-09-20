@@ -40,7 +40,7 @@ public class ApproachState : FSMState {
 		Quaternion targetRotation = Quaternion.LookRotation (destPos - npc.position);
 		npc.rotation = Quaternion.Slerp (npc.rotation, targetRotation, Time.deltaTime * curRotSpeed);
 
-	    GameObject.Find("wolf").SendMessage ("SetDestination", destPos);
+			GameObject.FindGameObjectWithTag ("Enemy").SendMessage ("SetDestination", destPos);
 		//npc.Translate(Vector3.forward * Time.deltaTime * curSpeed);
 	}
 }

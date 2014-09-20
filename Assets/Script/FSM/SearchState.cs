@@ -36,7 +36,7 @@ public class SearchState : FSMState {
 		npc.rotation = Quaternion.Slerp (npc.rotation, targetRotation, Time.deltaTime * curRotSpeed);
 
 		//前進
-		GameObject.Find ("wolf").SendMessage ("SetDestination", destPos);
+		GameObject.FindGameObjectWithTag ("Enemy").SendMessage ("SetDestination", destPos);
 	}
 }
 }
