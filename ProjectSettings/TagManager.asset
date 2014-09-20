@@ -17,6 +17,7 @@ TagManager:
   - EnemyHit
   - WandarPoint
   - Item
+  - Dead
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

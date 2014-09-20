@@ -25,7 +25,7 @@ public class SearchState : FSMState {
 	public override void Act(Transform player, Transform npc)
 	{
 		//ターゲット地点に到着した場合に、パトロール地点を再度設定
-		if(Vector3.Distance(npc.position, destPos) <= 0.6f)
+		if(Vector3.Distance(npc.position, destPos) <= 0.2f)
 		{
 			Debug.Log("Reached to the destination point/ncalculating the next point");
 			FindNextPoint();
@@ -36,7 +36,10 @@ public class SearchState : FSMState {
 		npc.rotation = Quaternion.Slerp (npc.rotation, targetRotation, Time.deltaTime * curRotSpeed);
 
 		//前進
-		GameObject.FindGameObjectWithTag ("Enemy").SendMessage ("SetDestination", destPos);
+			//obj = GameObject.FindGameObjectsWithTag("Enemy");
+			//foreach(GameObject objs in obj){
+				//objs.SendMessage("SetDestination", destPos);
+			//}
 	}
 }
 }

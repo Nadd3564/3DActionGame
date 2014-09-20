@@ -17,7 +17,9 @@ public abstract class FSMState
 	protected EnemyCtrl enemyCtrl;
 	protected float curRotSpeed;
 	protected float curSpeed;
-
+	protected GameObject[] obj;
+	
+	
 	public void AddTransition(Transition transition, FSMStateID id)
 	{
 		//引数の確認
@@ -86,7 +88,7 @@ public abstract class FSMState
 	//次の索敵ポイントを指定する。乱数で動作
 	public void FindNextPoint()
 	{
-		//Debug.Log("Finding next point");
+		Debug.Log("Finding next point");
 		int rndIndex = Random.Range (0, waypoints.Length);
 		Vector3 rndPosition = Vector3.zero;
 		destPos = waypoints [rndIndex].position + rndPosition;

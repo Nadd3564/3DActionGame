@@ -614,7 +614,7 @@ GameObject:
   - 137: {fileID: 13700000}
   m_Layer: 0
   m_Name: objobjObject001
-  m_TagString: Boss
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1354,7 +1354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 150
   MaxHP: 150
-  Power: 20
+  Power: 10
   lastAttackTarget: {fileID: 0}
   charactername: Wolf
   attacking: 0

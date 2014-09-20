@@ -6,7 +6,7 @@ namespace Cradle.FM{
 public class EnemyCtrl : AdvancedFSM {
 	CharaStatus status;
 	CharaAnimation charaAnimation;
-	//CharaMove characterMove;
+	CharaMove characterMove;
 	Transform attackTarget;
 	GameRuleSettings gameRuleSettings;
 	public GameObject hitEffect;
@@ -24,7 +24,7 @@ public class EnemyCtrl : AdvancedFSM {
 	{
 		status = GetComponent<CharaStatus>();
 		charaAnimation = GetComponent<CharaAnimation>();
-		//characterMove = GetComponent<CharaMove> ();
+		characterMove = GetComponent<CharaMove> ();
 		basePositon = transform.position;
 		waitTime = waitBaseTime;
 		gameRuleSettings = FindObjectOfType<GameRuleSettings> ();
@@ -90,11 +90,11 @@ public class EnemyCtrl : AdvancedFSM {
 		AddFSMState (dead);
 	}
 
-	void WalkStart(){
+	public void WalkStart(){
 		StateStartCommon ();
 	}
 	
-	/*void Walking(){
+	public void Walking(){
 		//待機時間がまだあれば
 		if (waitTime > 0.0f) {
 			//待機時間を減らす
@@ -108,9 +108,9 @@ public class EnemyCtrl : AdvancedFSM {
 				//目的地の指定
 				SendMessage ("SetDestination", destinationPosition);
 			}
-		} else {
+		} /*else {
 			//目的地へ到着
-			if(Arrived()){
+			if(arv()){
 				//待機状態へ
 				waitTime = Random.Range(waitBaseTime, waitBaseTime * 2.0f);
 			}
@@ -118,8 +118,8 @@ public class EnemyCtrl : AdvancedFSM {
 			if(attackTarget){
 				SetTransition(Transition.LostPlayer);
 			}
-		}
-	}*/
+		}*/
+	}
 
 
 	public void AttackStart(){
@@ -137,9 +137,9 @@ public class EnemyCtrl : AdvancedFSM {
 	//攻撃中の処理
 	public void Attacking(){
 		if (charaAnimation.isAttacked ())
-						SetTransition (Transition.SawPlayer);
+						SetTransition (Transition.LostPlayer);
 		//待機時間を再設定
-		waitTime = Random.Range(waitBaseTime, waitBaseTime * 2.0f);
+		//waitTime = Random.Range(waitBaseTime, waitBaseTime * 2.0f);
 		//ターゲットをリセット
 		attackTarget = null;
 	}
@@ -188,11 +188,12 @@ public class EnemyCtrl : AdvancedFSM {
 					}
 				}
 		}
+			this.gameObject.tag = "Dead";
 	}
 
 
 	//ステータスを初期化
-	void StateStartCommon(){
+	public void StateStartCommon(){
 		status.attacking = false;
 		status.died = false;
 	}

@@ -35,12 +35,18 @@ public class ApproachState : FSMState {
 
 	public override void Act(Transform player, Transform npc)
 	{
+		npc.GetComponent<EnemyCtrl> ().WalkStart ();
+		npc.GetComponent<EnemyCtrl> ().Walking ();
+
 		destPos = player.position;
 
 		Quaternion targetRotation = Quaternion.LookRotation (destPos - npc.position);
 		npc.rotation = Quaternion.Slerp (npc.rotation, targetRotation, Time.deltaTime * curRotSpeed);
 
-			GameObject.FindGameObjectWithTag ("Enemy").SendMessage ("SetDestination", destPos);
+		obj = GameObject.FindGameObjectsWithTag("Enemy");
+		foreach(GameObject objs in obj){
+		objs.SendMessage("SetDestination", destPos);
+			}
 		//npc.Translate(Vector3.forward * Time.deltaTime * curSpeed);
 	}
 }

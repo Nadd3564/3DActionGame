@@ -5,6 +5,7 @@ using Cradle.FM;
 namespace Cradle.FM{
 public class AttackState : FSMState {
 
+
 	public AttackState(Transform[] wp)
 	{
 		waypoints = wp;
@@ -12,6 +13,7 @@ public class AttackState : FSMState {
 		//curRotSpeed = 1.0f;
 		//curSpeed = 100.0f;
 		FindNextPoint ();
+
 	}
 
 	public override void Reason(Transform player, Transform npc)
@@ -43,14 +45,15 @@ public class AttackState : FSMState {
 	public override void Act(Transform player, Transform npc)
 	{
 		//ターゲット地点をプレーヤーポジションに設定
-		//destPos = player.position;
+		destPos = player.position;
 
 		//前進
 		//npc.GetComponent<AdvancedFSM> ().SendMessage ("SetDestination", destPos);
-
+	
 		//攻撃
 		npc.GetComponent<EnemyCtrl> ().AttackStart ();
 		npc.GetComponent<EnemyCtrl> ().Attacking ();
+		
 
 		/*//砲台は常にプレーヤーに向きます。
 		Transform turret = npc.GetComponent<NPCTankController>().turret;

@@ -78,7 +78,7 @@ public class EnemyStatusController : MonoBehaviour {
 		this.nextState = nextState;
 	}
 
-	void WalkStart(){
+	 void WalkStart(){
 		StateStartCommon ();
 	}
 

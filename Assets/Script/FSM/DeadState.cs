@@ -4,7 +4,7 @@ using Cradle.FM;
 
 namespace Cradle.FM{
 public class DeadState : FSMState {
-	protected EnemyCtrl enemyCtrl;
+	
 	public DeadState()
 	{
 		stateID = FSMStateID.Dead;
@@ -17,7 +17,7 @@ public class DeadState : FSMState {
 
 	public override void Act(Transform player, Transform npc)
 	{
-
+			obj = GameObject.FindGameObjectsWithTag("Dead");
 	}
 }
 }
