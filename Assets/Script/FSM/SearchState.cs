@@ -9,8 +9,6 @@ public class SearchState : FSMState {
 	{
 		waypoints = wp;
 		stateID = FSMStateID.Searching;
-		curRotSpeed = 360.0f;
-		curSpeed = 2.0f;
 	}
 
 	public override void Reason(Transform player, Transform npc)

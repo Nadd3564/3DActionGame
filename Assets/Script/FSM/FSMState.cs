@@ -14,8 +14,7 @@ public abstract class FSMState
 	protected Vector3 destPos;
 	protected Transform[] waypoints;
 	protected EnemyCtrl enemyCtrl;
-	protected float curRotSpeed;
-	protected float curSpeed;
+	protected float RotSpeed;
 	protected GameObject[] arr;
 	
 	

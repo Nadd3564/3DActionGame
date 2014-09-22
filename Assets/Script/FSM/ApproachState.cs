@@ -9,10 +9,7 @@ public class ApproachState : FSMState {
 	{
 		waypoints = wp;
 		stateID = FSMStateID.Approaching;
-
-		curRotSpeed = 360.0f;
-		curSpeed = 3.0f;
-
+		RotSpeed = 360.0f;
 		FindNextPoint ();
 		}
 
@@ -39,12 +36,9 @@ public class ApproachState : FSMState {
 		destPos = player.position;
 
 		Quaternion targetRotation = Quaternion.LookRotation (destPos - npc.position);
-		npc.rotation = Quaternion.Slerp (npc.rotation, targetRotation, Time.deltaTime * curRotSpeed);
+		npc.rotation = Quaternion.Slerp (npc.rotation, targetRotation, Time.deltaTime * RotSpeed);
 
-		arr = GameObject.FindGameObjectsWithTag("Enemy");
-		foreach (GameObject objs in arr) {
-				objs.SendMessage ("SetDestination", destPos);
-		}
+		npc.GetComponent<CharaMove> ().SendMessage ("SetDestination", destPos);
 	}
 }
 }

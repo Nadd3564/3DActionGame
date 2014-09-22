@@ -30,7 +30,7 @@ public class GPWWW : MonoBehaviour {
 			Debug.Log("Get Success");
 
 			var json = www.text; 
-			// 自作したGetResponseクラスにレスポンスを格納する
+			// GetResponseクラスにレスポンスを格納する
 			GetResponse response = JsonMapper.ToObject<GetResponse> (json);
 			Debug.Log("itemid :" + response.itemId);
 			Debug.Log("itemname" + response.itemName);
@@ -50,7 +50,6 @@ public class GPWWW : MonoBehaviour {
 	IEnumerator Post (string url) {
 		// HEADERはHashtableで記述
 		Hashtable header = new Hashtable ();
-		// jsonでリクエストを送るのへッダ例
 		header.Add ("Content-Type", "application/json; charset=UTF-8");
 		
 		// LitJsonを使いJSONデータを生成
@@ -96,16 +95,4 @@ class GetResponse {
 	public long updateTime;
 	//public List<string> friend_names;
 }
-
-/*[System.Serializable]
-class Data{
-	public int itemId;
-	public string itemName;
-	public string itemType;
-	public int price;
-	public int attack;
-	public int defence;
-	public string description;
-	public long updateTime;
-}*/
 }

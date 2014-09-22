@@ -3902,7 +3902,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 669342544}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ccbeafaf1dadc944284147994877f500, type: 3}
   m_Name: 
@@ -5071,7 +5071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bfbab399c834fb4cb4100528597c388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 100078, guid: 410600c78d747bc47b64642c4116d4c8, type: 2}
+  enemyPrefab: {fileID: 100084, guid: bbc80d7109588944a8569f79a96e9967, type: 2}
   maxActive: 0
 --- !u!4 &1348134972
 Transform:

@@ -10,11 +10,8 @@ public class AttackState : FSMState {
 	{
 		waypoints = wp;
 		stateID = FSMStateID.Attacking;
-		//curRotSpeed = 1.0f;
-		//curSpeed = 100.0f;
+		RotSpeed = 360.0f;
 		FindNextPoint ();
-		
-		
 	}
 
 	public override void Reason(Transform player, Transform npc)
@@ -25,7 +22,7 @@ public class AttackState : FSMState {
 		{
 			//ターゲット地点に回転
 			Quaternion targetRotation = Quaternion.LookRotation(destPos - npc.position);
-			npc.rotation = Quaternion.Slerp(npc.rotation, targetRotation, Time.deltaTime /* curRotSpeed*/);
+			npc.rotation = Quaternion.Slerp(npc.rotation, targetRotation, Time.deltaTime * RotSpeed);
 
 			//前進
 			arr = GameObject.FindGameObjectsWithTag("Enemy");
