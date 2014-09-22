@@ -14,6 +14,7 @@
 	<input type="text" name="itemName" />
 	<input type="submit" value="検索">
 	<a href="create">アイテム登録</a>
+	<a href="<c:url value="/j_spring_security_logout" />">Logout</a>
 	<c:if test="${itemlist != null }">
 		<table border="1">
 			<tr>

@@ -35,7 +35,7 @@ public class JsonController {
 		return item;
 	}
 	
-	@RequestMapping(value = "/{itemId}", method = RequestMethod.PUT, headers = "Content-Type=application/json")
+	@RequestMapping(value = "/{itemId}", method = RequestMethod.PUT, consumes =  "application/json", produces = "application/json")/*headers = "Content-Type=application/json"*/
 	public @ResponseBody Item updateItem(@PathVariable long itemId,@RequestBody Item item){
 		item.setItemId(itemId);
 		itemService.updateItem(item);
