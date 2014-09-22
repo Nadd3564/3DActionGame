@@ -39,10 +39,6 @@ public class SearchState : FSMState {
 			Debug.Log("Reached to the destination point/ncalculating the next point");
 			FindNextPoint();
 		}
-		
-
-
-		
 	}
 }
 }

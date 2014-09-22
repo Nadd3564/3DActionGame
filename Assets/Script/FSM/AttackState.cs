@@ -21,7 +21,7 @@ public class AttackState : FSMState {
 	{
 		//プレイヤーとの距離を確認
 		float dist = Vector3.Distance (npc.position, player.position);
-		if(dist >= 0.0f && dist < 7.0f)
+		if(dist >= 0.0f && dist < 5.0f)
 		{
 			//ターゲット地点に回転
 			Quaternion targetRotation = Quaternion.LookRotation(destPos - npc.position);
