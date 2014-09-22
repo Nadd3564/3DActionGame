@@ -11,21 +11,23 @@ public class EnemyCtrl : AdvancedFSM {
 	GameRuleSettings gameRuleSettings;
 	public GameObject hitEffect;
 	public float waitBaseTime = 2.0f; //待機時間
-	float waitTime; //残り待機時間
+	public float waitTime; //残り待機時間
 	public float walkRange = 5.0f; //移動範囲
-	public Vector3 basePositon; //初期位置を保存
+	public float DestroyTime = 5.0f;	//死体消滅時間
+	public Vector3 basePosition; //初期位置を保存
 	public GameObject[] dropItemPrefab; //複数のアイテムを入れる配列
 	GameObject target;
 	GUILayer layer;
 	public AudioClip deathSeClip;
 	AudioSource deathSeAudio;
-	
+
+
 	protected override void StartUp ()
 	{
 		status = GetComponent<CharaStatus>();
 		charaAnimation = GetComponent<CharaAnimation>();
 		characterMove = GetComponent<CharaMove> ();
-		basePositon = transform.position;
+		basePosition = transform.position;
 		waitTime = waitBaseTime;
 		gameRuleSettings = FindObjectOfType<GameRuleSettings> ();
 		GameObject objPlayer = GameObject.FindGameObjectWithTag ("Player");
@@ -33,7 +35,6 @@ public class EnemyCtrl : AdvancedFSM {
 
 		if (!playerTransform)
 						print ("プレーヤーが存在しません。タグ'Player'を追加してください。");
-
 		//FSMを構築
 		BuildFSM ();
 	}
@@ -94,52 +95,48 @@ public class EnemyCtrl : AdvancedFSM {
 		StateStartCommon ();
 	}
 	
-	public void Walking(){
-		//待機時間がまだあれば
-		if (waitTime > 0.0f) {
-			//待機時間を減らす
-			waitTime -= Time.deltaTime;
-			//待機時間が無くなったら
-			if (waitTime <= 0.0f) {
-				//範囲内の何処か
-				Vector2 randomValue = Random.insideUnitCircle * walkRange;
-				//移動先の設定
-				Vector3 destinationPosition = basePositon + new Vector3 (randomValue.x, 0.0f, randomValue.y);
-				//目的地の指定
-				SendMessage ("SetDestination", destinationPosition);
+	public	void Walking(Vector3 destPos){
+			//待機時間がまだあれば
+			if (waitTime > 0.0f) {
+				//待機時間を減らす
+				waitTime -= Time.deltaTime;
+				//待機時間が無くなったら
+				if (waitTime <= 0.0f) {
+					//範囲内の何処か
+					Vector2 randomValue = Random.insideUnitCircle * walkRange;
+					//移動先の設定
+					Vector3 destinationPosition = destPos;
+					//目的地の指定
+					SendMessage ("SetDestination", destinationPosition);
+					SendMessage("SetDirection", destinationPosition);
+				}
+			} else {
+				//目的地へ到着
+				if(characterMove.Arrived()){
+					//待機状態へ
+					waitTime = Random.Range(waitBaseTime, waitBaseTime * 2.0f);
+				}
+				//ターゲットを発見したら追跡
+				if(attackTarget){
+					SetTransition(Transition.ReachPlayer);
+				}
 			}
-		} /*else {
-			//目的地へ到着
-			if(arv()){
-				//待機状態へ
-				waitTime = Random.Range(waitBaseTime, waitBaseTime * 2.0f);
-			}
-			//ターゲットを発見したら追跡
-			if(attackTarget){
-				SetTransition(Transition.LostPlayer);
-			}
-		}*/
-	}
-
+		}
 
 	public void AttackStart(){
 		StateStartCommon ();
 		status.attacking = true;
 		
-		//敵の方向に振り向かせる
-		//Vector3 targetDirection = (attackTarget.position - transform.position).normalized;
-		//SendMessage ("SetDirection", targetDirection);
-		
 		//移動を止める
 		SendMessage ("StopMove");
+
+		Attacking ();
 	}
 
 	//攻撃中の処理
 	public void Attacking(){
-		if (charaAnimation.isAttacked ())
-						SetTransition (Transition.LostPlayer);
 		//待機時間を再設定
-		//waitTime = Random.Range(waitBaseTime, waitBaseTime * 2.0f);
+		//waitTime = Random.Range(waitBaseTime, waitBaseTime * 20.0f);
 		//ターゲットをリセット
 		attackTarget = null;
 	}
@@ -178,7 +175,7 @@ public class EnemyCtrl : AdvancedFSM {
 	public void Died(){
 		status.died = true;
 		dropItem ();
-		Destroy (gameObject, 5);
+		Destroy (gameObject, DestroyTime);
 		AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
 		if(gameObject.tag == "Enemy"){
 				//ボスだった場合、ゲームクリア

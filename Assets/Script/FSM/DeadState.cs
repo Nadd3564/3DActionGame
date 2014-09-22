@@ -17,7 +17,7 @@ public class DeadState : FSMState {
 
 	public override void Act(Transform player, Transform npc)
 	{
-			obj = GameObject.FindGameObjectsWithTag("Dead");
+			arr = GameObject.FindGameObjectsWithTag("Dead");
 	}
 }
 }

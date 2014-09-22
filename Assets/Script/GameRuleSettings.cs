@@ -4,20 +4,22 @@ using Cradle;
 
 namespace Cradle{
 public class GameRuleSettings : MonoBehaviour {
-	//残り時間
-	public float timeRemaining = 5.0f + 60.0f;
-	public bool gameOver = false;
-	public bool gameClear = false;
-	public float sceneChangeTime = 20.0f;
+		//残り時間
+		public float gameSpeed = 1.0f;
+		public float timeRemaining = 5.0f + 60.0f;
+		public bool gameOver = false;
+		public bool gameClear = false;
+		public float sceneChangeTime = 20.0f;
 
-	public AudioClip clearSeClip;
-	AudioSource clearSeAudio;
+		public AudioClip clearSeClip;
+		AudioSource clearSeAudio;
 
 	void Start(){
-		//オーディオの初期化
-		clearSeAudio = gameObject.AddComponent<AudioSource>();
-		clearSeAudio.loop = false;
-		clearSeAudio.clip = clearSeClip;
+			Time.timeScale = gameSpeed;
+			//オーディオの初期化
+			clearSeAudio = gameObject.AddComponent<AudioSource>();
+			clearSeAudio.loop = false;
+			clearSeAudio.clip = clearSeClip;
 	}
 
 
@@ -31,11 +33,11 @@ public class GameRuleSettings : MonoBehaviour {
 			return;
 		}
 
-		timeRemaining -= Time.deltaTime;
+		//timeRemaining -= Time.deltaTime;
 		//残り時間が無くなったらゲームオーバー
-		if(timeRemaining <= 0.0f){
-			GameOver();
-		}
+		//if(timeRemaining <= 0.0f){
+		//	GameOver();
+		//}
 	}
 
 	public void GameOver(){

@@ -9,13 +9,13 @@ public class SearchState : FSMState {
 	{
 		waypoints = wp;
 		stateID = FSMStateID.Searching;
-		curRotSpeed = 1.0f;
+		curRotSpeed = 360.0f;
 		curSpeed = 2.0f;
 	}
 
 	public override void Reason(Transform player, Transform npc)
 	{
-		if(Vector3.Distance(npc.position, player.position) <= 8.0f)
+		if(Vector3.Distance(npc.position, player.position) <= 7.0f)
 		{
 			Debug.Log("Switch to Approach State");
 			npc.GetComponent<EnemyCtrl>().SetTransition(Transition.SawPlayer);
@@ -24,22 +24,25 @@ public class SearchState : FSMState {
 
 	public override void Act(Transform player, Transform npc)
 	{
+			//ターゲットを見失ったらパトロール
+		npc.GetComponent<EnemyCtrl>().Walking(destPos);
+
+			//ターゲット地点が遠すぎる場合、パトロール地点を再度設定
+			if(Vector3.Distance(npc.position, destPos) >= 50.0f){
+				Debug.Log("Reached to the destination point/ncalculating the next point");
+				FindNextPoint();
+			}
+
 		//ターゲット地点に到着した場合に、パトロール地点を再度設定
-		if(Vector3.Distance(npc.position, destPos) <= 0.2f)
+		if(Vector3.Distance(npc.position, destPos) <= 0.6f)
 		{
 			Debug.Log("Reached to the destination point/ncalculating the next point");
 			FindNextPoint();
 		}
+		
 
-		//ターゲットに回転
-		Quaternion targetRotation = Quaternion.LookRotation (destPos - npc.position);
-		npc.rotation = Quaternion.Slerp (npc.rotation, targetRotation, Time.deltaTime * curRotSpeed);
 
-		//前進
-			//obj = GameObject.FindGameObjectsWithTag("Enemy");
-			//foreach(GameObject objs in obj){
-				//objs.SendMessage("SetDestination", destPos);
-			//}
+		
 	}
 }
 }

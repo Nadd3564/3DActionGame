@@ -13,11 +13,10 @@ public abstract class FSMState
 	public FSMStateID ID { get { return stateID; }}
 	protected Vector3 destPos;
 	protected Transform[] waypoints;
-	protected AdvancedFSM adv;
 	protected EnemyCtrl enemyCtrl;
 	protected float curRotSpeed;
 	protected float curSpeed;
-	protected GameObject[] obj;
+	protected GameObject[] arr;
 	
 	
 	public void AddTransition(Transition transition, FSMStateID id)
@@ -89,11 +88,11 @@ public abstract class FSMState
 	public void FindNextPoint()
 	{
 		Debug.Log("Finding next point");
-		int rndIndex = Random.Range (0, waypoints.Length);
-		Vector3 rndPosition = Vector3.zero;
-		destPos = waypoints [rndIndex].position + rndPosition;
+			int rndIndex = Random.Range(0, waypoints.Length);
+			Vector3 rndPosition = Vector3.zero;
+			destPos = waypoints[rndIndex].position + rndPosition;
+		Debug.Log ("destPos :" + destPos);
 	}
-
 
 	//次のポジションが、現在の位置と同じかチェックする
 	protected bool IsInCurrentRange(Transform trans, Vector3 pos)
@@ -101,7 +100,7 @@ public abstract class FSMState
 				float xPos = Mathf.Abs (pos.x - trans.position.x);
 				float zPos = Mathf.Abs (pos.z - trans.position.z);
 
-				if (xPos <= 50 && zPos <= 50)
+				if (xPos <= 10 && zPos <= 10)
 						return true;
 				return false;
 	}

@@ -43,6 +43,7 @@ public class PlayerStatusController : MonoBehaviour {
 	}
 
 	void Update () {
+		Plane playerPlane = new Plane(Vector3.up, transform.position + new Vector3(0, 0, 0));
 		switch (state) {
 		case State.Walking:
 			Walking();

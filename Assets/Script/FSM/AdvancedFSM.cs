@@ -36,6 +36,7 @@ public class AdvancedFSM : FSM {
 	private FSMState currentState;
 	public FSMState CurrentState { get { return currentState; } }
 
+
 	public AdvancedFSM(){
 		fsmStates = new List<FSMState> ();
 	}
