@@ -24,13 +24,6 @@ public class AttackState : FSMState {
 			Quaternion targetRotation = Quaternion.LookRotation(destPos - npc.position);
 			npc.rotation = Quaternion.Slerp(npc.rotation, targetRotation, Time.deltaTime * RotSpeed);
 
-			//前進
-			arr = GameObject.FindGameObjectsWithTag("Enemy");
-			foreach (GameObject objs in arr) 
-			{
-				objs.SendMessage ("SetDestination", destPos);
-			}
-
 			Debug.Log("Switch to Approach State");
 			npc.GetComponent<EnemyCtrl>().SetTransition(Transition.SawPlayer);
 		}
@@ -50,8 +43,6 @@ public class AttackState : FSMState {
 		
 		//攻撃
 		npc.GetComponent<EnemyCtrl> ().AttackStart ();
-		//サーチ状態へ
-		npc.GetComponent<EnemyCtrl> ().SetTransition (Transition.LostPlayer);
 	}
 }
 }

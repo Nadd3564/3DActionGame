@@ -21,27 +21,32 @@ public class EnemyCtrl : AdvancedFSM {
 	public AudioClip deathSeClip;
 	AudioSource deathSeAudio;
 
-
 	protected override void StartUp ()
 	{
+		elapsedTime = 0.0f;
+		attackRate = 4.0f;
+
+		//コンポーネント取得
 		status = GetComponent<CharaStatus>();
 		charaAnimation = GetComponent<CharaAnimation>();
 		characterMove = GetComponent<CharaMove> ();
 		basePosition = transform.position;
 		waitTime = waitBaseTime;
 		gameRuleSettings = FindObjectOfType<GameRuleSettings> ();
+
 		GameObject objPlayer = GameObject.FindGameObjectWithTag ("Player");
 		playerTransform = objPlayer.transform;
 
 		if (!playerTransform)
 						print ("プレーヤーが存在しません。タグ'Player'を追加してください。");
+
 		//FSMを構築
 		BuildFSM ();
 	}
 
 	protected override void StateUpdate ()
 	{
-
+			elapsedTime += Time.deltaTime;
 	}
 
 	protected override void StateFixedUpdate()
@@ -90,10 +95,7 @@ public class EnemyCtrl : AdvancedFSM {
 		AddFSMState (attack);
 		AddFSMState (dead);
 	}
-
-	public void WalkStart(){
-		StateStartCommon ();
-	}
+	
 	
 	public	void Walking(Vector3 destPos){
 			//待機時間がまだあれば
@@ -102,9 +104,7 @@ public class EnemyCtrl : AdvancedFSM {
 				waitTime -= Time.deltaTime;
 				//待機時間が無くなったら
 				if (waitTime <= 0.0f) {
-					//範囲内の何処か
-					Vector2 randomValue = Random.insideUnitCircle * walkRange;
-					//移動先の設定
+					//移動先の設定（WanderPointのうちランダムにどこかへ）
 					Vector3 destinationPosition = destPos;
 					//目的地の指定
 					SendMessage ("SetDestination", destinationPosition);
@@ -123,36 +123,42 @@ public class EnemyCtrl : AdvancedFSM {
 			}
 		}
 
-	public void AttackStart(){
-		StateStartCommon ();
-		status.attacking = true;
+	public void AttackStart()
+	{
+			if(elapsedTime >= attackRate)
+			{
+				status.attacking = true;
+				elapsedTime = 0.0f;
+			}
 		
 		//移動を止める
 		SendMessage ("StopMove");
-
 		Attacking ();
 	}
 
+
 	//攻撃中の処理
 	public void Attacking(){
-		//待機時間を再設定
-		//waitTime = Random.Range(waitBaseTime, waitBaseTime * 20.0f);
-		//ターゲットをリセット
-		attackTarget = null;
+			//ターゲットをリセット
+			attackTarget = null;
 	}
 
-	void Damage(AttackArea.AttackInfo attackInfo){
+	void Damage(AttackArea.AttackInfo attackInfo)
+	{
 		//ヒットエフェクト
 		GameObject effect = Instantiate (hitEffect, transform.position, Quaternion.identity) as GameObject;
 		effect.transform.localPosition = transform.position + new Vector3 (0.0f, 0.5f, 0.0f);
 		Destroy (effect, 0.3f);
 		
 		status.HP -= attackInfo.attackPower;
-		if(status.HP <= 0){
+		if(status.HP <= 0)
+		{
 			status.HP = 0;
 			//死体を攻撃できないようにする
-			foreach (Transform child in transform){
-				if(child.tag == "EnemyHit"){
+			foreach (Transform child in transform)
+			{
+				if(child.tag == "EnemyHit")
+				{
 					target = child.gameObject;
 				}
 			}
@@ -164,7 +170,8 @@ public class EnemyCtrl : AdvancedFSM {
 		}
 	}
 
-	public void dropItem(){
+	public void dropItem()
+	{
 		if(dropItemPrefab.Length == 0){ return; }
 		GameObject dropItem = dropItemPrefab[Random.Range(0, dropItemPrefab.Length)];
 		Vector3 vec = dropItem.transform.up;
@@ -172,32 +179,39 @@ public class EnemyCtrl : AdvancedFSM {
 		Instantiate (dropItem, transform.position + vec, Quaternion.identity);
 	}
 	
-	public void Died(){
+	public void Died()
+	{
 		status.died = true;
 		dropItem ();
 		Destroy (gameObject, DestroyTime);
 		AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
-		if(gameObject.tag == "Enemy"){
+		if(gameObject.tag == "Enemy")
+		{
 				//ボスだった場合、ゲームクリア
-				foreach (Transform child in transform){
-					if(child.tag == "Boss"){
+				foreach (Transform child in transform)
+				{
+					if(child.tag == "Boss")
+					{
 						gameRuleSettings.GameClear();
 					}
 				}
 		}
+			//Deadタグへ更新
 			this.gameObject.tag = "Dead";
 	}
 
 
 	//ステータスを初期化
-	public void StateStartCommon(){
+	public void StateStartCommon()
+	{
 		status.attacking = false;
 		status.died = false;
 	}
 	
 
 	//攻撃対象を設定する
-	public void SetAttackTarget(Transform target){
+	public void SetAttackTarget(Transform target)
+	{
 		attackTarget = target;
 	}
 }

@@ -11,6 +11,11 @@ public class FSM : MonoBehaviour {
 	//索敵する地点のリスト
 	protected GameObject[] pointList;
 
+
+	//攻撃の間隔
+	protected float attackRate;
+	protected float elapsedTime;
+
 	protected virtual void StartUp(){}
 	protected virtual void StateUpdate(){}
 	protected virtual void StateFixedUpdate(){}

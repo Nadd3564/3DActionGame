@@ -11,7 +11,7 @@ public class ApproachState : FSMState {
 		stateID = FSMStateID.Approaching;
 		RotSpeed = 360.0f;
 		FindNextPoint ();
-		}
+	}
 
 	public override void Reason(Transform player, Transform npc)
 	{
@@ -32,12 +32,15 @@ public class ApproachState : FSMState {
 
 	public override void Act(Transform player, Transform npc)
 	{
+		//攻撃フラグを初期化
 		npc.GetComponent<EnemyCtrl> ().StateStartCommon ();
+
 		destPos = player.position;
 
 		Quaternion targetRotation = Quaternion.LookRotation (destPos - npc.position);
 		npc.rotation = Quaternion.Slerp (npc.rotation, targetRotation, Time.deltaTime * RotSpeed);
-
+		
+		//目的地をプレイヤーに変更
 		npc.GetComponent<CharaMove> ().SendMessage ("SetDestination", destPos);
 	}
 }
