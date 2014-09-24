@@ -64,5 +64,4 @@
 
 	<!-- <jpa:repositories base-package="jp.com.inotaku.persistence"></jpa:repositories> -->
 
-
 </beans>
