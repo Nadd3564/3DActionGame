@@ -9,6 +9,7 @@ import jp.com.inotaku.service.ItemService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,26 +30,28 @@ public class JsonController {
 		return itemService.getItemById(itemId);
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.POST, headers = "Content-Type=application/json")
+	@RequestMapping(value = "/", method = RequestMethod.POST, consumes = "application/json", produces = "application/json", headers = { "Content-Type=application/json,text/json" })
 	public @ResponseBody Item createItem(@RequestBody Item item) {
 		itemService.addItem(item);
 		return item;
 	}
-	
-	@RequestMapping(value = "/{itemId}", method = RequestMethod.PUT, consumes =  "application/json", produces = "application/json")/*headers = "Content-Type=application/json"*/
-	public @ResponseBody Item updateItem(@PathVariable long itemId,@RequestBody Item item){
+
+	@RequestMapping(value = "/{itemId}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json", headers = "Content-Type=application/json")
+	public @ResponseBody Item updateItem(@PathVariable long itemId,
+			@RequestBody Item item) {
 		item.setItemId(itemId);
 		itemService.updateItem(item);
 		return item;
 	}
-	
+
 	@RequestMapping(value = "/{itemId}", method = RequestMethod.DELETE)
-	public @ResponseBody Item deleteItem(@PathVariable long itemId){
+	public @ResponseBody Item deleteItem(@PathVariable long itemId) {
 		Item item = itemService.getItemById(itemId);
 		itemService.delete(itemId);
 		return item;
-		
+
 	}
+
 	@RequestMapping(value = "/itemlist", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Item> get() {
