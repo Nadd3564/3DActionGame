@@ -52,7 +52,7 @@ public class JsonController {
 
 	}
 
-	@RequestMapping(value = "/itemlist", method = RequestMethod.GET)
+	@RequestMapping(value = "/itemlist", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE+ ";charset=utf-8")
 	@ResponseBody
 	public List<Item> get() {
 		return itemService.getAllItem();

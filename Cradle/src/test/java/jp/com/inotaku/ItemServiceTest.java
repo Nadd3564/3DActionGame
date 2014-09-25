@@ -33,7 +33,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:spring/*.xml","WEB-INF.*.xml"},
 loader = SpringockitoContextLoader.class)
-public class Test3 {
+public class ItemServiceTest {
 
 	
 	@ReplaceWithMock

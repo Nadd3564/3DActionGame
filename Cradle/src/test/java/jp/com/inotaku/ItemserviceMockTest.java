@@ -32,7 +32,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class Test4 {
+public class ItemserviceMockTest {
 
 	@Mock
 	private ItemDao itemDao;
