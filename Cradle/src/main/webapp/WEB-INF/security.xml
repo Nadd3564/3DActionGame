@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:bean xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/security"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
 	<http auto-config="true">
 		<intercept-url pattern="/item" access="ROLE_USER,ROLE_ADMIN" />
-		<intercept-url pattern="/create" access="ROLE_ADMIN"/>
-		<intercept-url pattern="/update" access="ROLE_ADMIN"/>
-		<intercept-url pattern="/delete" access="ROLE_ADMIN"/>
+		<intercept-url pattern="/create" access="ROLE_ADMIN" />
+		<intercept-url pattern="/update" access="ROLE_ADMIN" />
+		<intercept-url pattern="/delete" access="ROLE_ADMIN" />
 		<form-login login-page="/spring_security_login"
 			login-processing-url="/item/" default-target-url="/item" />
 		<logout logout-success-url="/spring_security_login" />
 	</http>
 	<authentication-manager>
 		<authentication-provider>
-			<user-service>
-				<user name="user" password="user" authorities="ROLE_USER" />
-				<user name="admin" password="admin" authorities="ROLE_ADMIN"/>
-			</user-service>
+			<!-- <user-service> <user name="user" password="user" authorities="ROLE_USER" 
+				/> <user name="admin" password="admin" authorities="ROLE_ADMIN" /> </user-service> -->
+			<jdbc-user-service data-source-ref="securityDataSource"
+				users-by-username-query="SELECT username, password, enabled FROM users WHERE username = ?"
+				authorities-by-username-query="SELECT username, authority FROM authorities WHERE username = ?" />
 		</authentication-provider>
 	</authentication-manager>
+
+	<jdbc:embedded-database id="securityDataSource" type="H2">
+		<jdbc:script location="classpath:security-schema.sql" />
+		<jdbc:script location="classpath:security-data.sql" />
+	</jdbc:embedded-database>
 
 
 </beans:bean>
