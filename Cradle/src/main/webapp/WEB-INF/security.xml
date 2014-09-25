@@ -11,7 +11,6 @@
 		<intercept-url pattern="/create" access="ROLE_ADMIN" />
 		<intercept-url pattern="/update" access="ROLE_ADMIN" />
 		<intercept-url pattern="/delete" access="ROLE_ADMIN" />
-		<intercept-url pattern="/json/**" access="ROLE_USER,ROLE_ADMIN"/>
 		<form-login login-page="/spring_security_login"
 			login-processing-url="/item/" default-target-url="/item" />
 		<logout logout-success-url="/spring_security_login" />
