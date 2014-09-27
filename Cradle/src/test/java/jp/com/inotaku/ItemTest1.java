@@ -35,7 +35,7 @@ public class ItemTest1 {
 				.postForEntity("http://localhost:8080/Cradle/json/",
 						requestEntity, Item.class);
 		
-		System.out.println(entity.getHeaders().getLocation());
+		System.out.println(entity.getHeaders().getLocation().getPath());
 
 	/*	String path = entity.getHeaders().getLocation().getPath();
 

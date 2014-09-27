@@ -1,39 +1,40 @@
 package jp.com.inotaku;
 
-import java.util.Arrays;
 
 import static org.junit.Assert.*;
+
+import java.util.Arrays;
+
 import jp.com.inotaku.domain.Item;
 
-import org.apache.commons.codec.binary.Base64;
 import org.junit.Test;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.web.client.RestTemplate;
+
 
 public class ItemTest2 {
 
-	private String jsonString = "{\"itemName\":\"Spear\",\"itemType\":\"aa\",\"price\":30000,\"attack\":100,\"defense\":0,\"description\":\"10000\"}";
+	private String jsonString = "{\"itemName\":\"Spear\",\"itemType\":\"aa\","
+			+ "\"price\":30000,\"attack\":100,"
+			+ "\"defense\":0,\"description\":\"10000\"}";
 
 	static HttpHeaders getHeaders(String auth) {
-	    HttpHeaders headers = new HttpHeaders();
-	    headers.setContentType(MediaType.APPLICATION_JSON);
-	    headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 
-	    byte[] encodedAuthorisation = Base64.encodeBase64(auth.getBytes());
-	    headers.add("Authorization", "Basic " + new String(encodedAuthorisation));
+		byte[] encodedAuthorisation = Base64.encode(auth.getBytes());
+		headers.add("Authorization", "Basic "
+				+ new String(encodedAuthorisation));
 
-	    return headers;
+		return headers;
 	}
 
 	@Test
 	public void test() {
 		HttpEntity<String> requestEntity = new HttpEntity<String>(jsonString,
-				getHeaders("letsnosh" + ":" + "noshing"));
-		System.out.println(requestEntity);
+				getHeaders("user" + ":" + "user"));
 
 		RestTemplate template = new RestTemplate();
 		ResponseEntity<Item> entity = template
@@ -41,15 +42,17 @@ public class ItemTest2 {
 						requestEntity, Item.class);
 		System.out.println(entity.getHeaders().getLocation());
 		/* String path = entity.getHeaders().getLocation().getPath(); */
-				 assertEquals(HttpStatus.OK, entity.getStatusCode());
-		/* * assertTrue(path.startsWith("/Cradle/json/")); Item item =
+		assertEquals(HttpStatus.OK, entity.getStatusCode());
+		/*
+		 * * assertTrue(path.startsWith("/Cradle/json/")); Item item =
 		 * entity.getBody();
 		 * 
 		 * System.out.println("The Item Id is " + item.getItemId());
 		 */
 		/*
 		 * System.out.println("The Location is" +
-		 * entity.getHeaders().getLocation());*/
-		 
+		 * entity.getHeaders().getLocation());
+		 */
+
 	}
 }
