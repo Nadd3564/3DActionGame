@@ -45,7 +45,6 @@ public class ItemserviceMockTest {
 	public void itemDaoTest(){
 		Item item = new Item();
 		item.setItemName("katana");
-		when(itemDao.getAllItem()).thenCallRealMethod();
 		
 		doReturn(item).when(itemDao).findById(anyLong());
 		String ret = ItemService.findById(100).getItemName();
