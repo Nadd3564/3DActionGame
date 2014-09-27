@@ -30,13 +30,13 @@ public class JsonController {
 		return itemService.getItemById(itemId);
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.POST, consumes = "application/json", produces = "application/json", headers = { "Content-Type=application/json,text/json" })
+	@RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE + ";charset=utf-8")
 	public @ResponseBody Item createItem(@RequestBody Item item) {
 		itemService.addItem(item);
 		return item;
 	}
 
-	@RequestMapping(value = "/{itemId}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json", headers = "Content-Type=application/json")
+	@RequestMapping(value = "/{itemId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE + ";charset=utf-8")
 	public @ResponseBody Item updateItem(@PathVariable long itemId,
 			@RequestBody Item item) {
 		item.setItemId(itemId);

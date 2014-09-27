@@ -105,6 +105,19 @@ public class Item implements Serializable {
 	public void setUpdateTime(Timestamp updateTime) {
 		this.updateTime = updateTime;
 	}
+	public Item(){}
+	
+
+	public Item( String itemName, String itemType, int price, int attack,
+			int defense, String description) {
+		super();
+		this.itemName = itemName;
+		this.itemType = itemType;
+		this.price = price;
+		this.attack = attack;
+		this.defense = defense;
+		this.description = description;
+	}
 
 	@Override
 	public String toString() {
