@@ -59,21 +59,6 @@ namespace Cradle {
 		public void StopEffect() {
 			this.powerUpEffect.Stop ();
 		}
-
-		public int GetPower() {
-			return controller.Power;
-		}
-		public bool GetPowerBoost() {
-			return controller.powerBoost;
-		}
-
-		public bool IsAttacking() {
-			return controller.attacking;
-		}
-
-		public bool IsDead() {
-			return controller.died;
-		}
 		
 	}
 }
