@@ -8,7 +8,7 @@ namespace Cradle.Server{
 public class GPWWW : MonoBehaviour {
 
 	void Start () {
-		StartCoroutine(Get("http://localhost:8080/Cradle/json/3"));
+		StartCoroutine(Get("http://localhost:8080/Cradle/json/1"));
 		StartCoroutine(Post("http://localhost:8080/Cradle/json/"));  
 	}
 	
@@ -17,7 +17,7 @@ public class GPWWW : MonoBehaviour {
 	}
 	
 	IEnumerator Get (string url) {
-		// HEADERはHashtableで記述
+		// HEADER
 		Hashtable header = new Hashtable ();
 		header.Add ("Accept-Language", "ja");
 		
