@@ -1353,7 +1353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastAttackTarget: {fileID: 0}
-  powerUpEffect: {fileID: 19800000, guid: c12d9df1de65fcb4ca12a41acc82991f, type: 2}
+  powerUpEffect: {fileID: 0}
   controller:
     HP: 100
     MaxHP: 100

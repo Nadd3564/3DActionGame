@@ -35,7 +35,7 @@ namespace Cradle {
 		
 		void Update(){
 			
-			if(controller.IsPlayer(gameObject.tag)){
+			if(controller.IsNPC(gameObject.tag)){
 				return;
 			}
 			
