@@ -1,52 +1,91 @@
 ﻿using UnityEngine;
+using System.Collections;
 using Cradle;
 
 namespace Cradle{
-public class CharaAnimation : MonoBehaviour {
-	Animator animator;
-	CharaStatus status;
-	Vector3 prePosition;
-	bool isDown = false;
-	bool attacked = false;
-
-	public bool isAttacked(){
-		return attacked;
-	}
-
-	void StartAttackHit(){
-		Debug.Log ("StartAttackHit");
-	}
-
-	void EndAttackHit(){
-		Debug.Log ("EndAttackHit");
-	}
-
-	void EndAttack(){
-		attacked = true;
-	}
-
-	void Start () {
-		animator = GetComponent<Animator>();
-		status = GetComponent<CharaStatus>();
-		prePosition = transform.position;
-	}
-
-	void Update () {
-		Vector3 delta_position = transform.position - prePosition;
-		animator.SetFloat ("Speed", delta_position.magnitude / Time.deltaTime);
-
-		if(attacked && !status.isAttacking()){
-			attacked = false;
+	public class CharaAnimation : MonoBehaviour, IAnimationController {
+		public CharaAnimationController cAController;
+		Animator animator;
+		CharaStatus status;
+		Vector3 prePosition;
+		Vector3 delta_position;
+		
+		
+		public void OnEnable() {
+			cAController.SetAnimationController(this);
 		}
-
-		animator.SetBool ("Attacking", (!attacked && status.isAttacking()));
-
-		if(!isDown && status.IsDead()){
-			isDown = true;
-			animator.SetTrigger("Down");
+		
+		void Start () {
+			FindAnimatorComponent ();
+			FindCharaStatusComponent ();
+			SetPrePosition ();
 		}
-
-		prePosition = transform.position;
+		
+		void Update () {
+			DeltaPosition ();
+			AnimatorSetFloat ();
+			cAController.StopAttack ();
+			AnimatorSetBool ();
+			
+			if(!cAController.IsDown() && IsDied()){
+				cAController.SetDown(true);
+				AnimatorSetTrigger();
+			}
+			
+			SetPrePosition ();
+		}
+		
+		public void FindAnimatorComponent() {
+			this.animator = GetComponent<Animator> ();
+		}
+		
+		public void FindCharaStatusComponent(){
+			this.status = GetComponent<CharaStatus>();
+		}
+		
+		public bool isAttacked(){
+			return cAController.IsAttacked ();
+		}
+		
+		public bool isSetAttacked(bool flg){
+			return cAController.SetAttacked(flg);
+		}
+		
+		void EndAttack(){
+			cAController.SetAttacked (true);
+		}
+		
+		void StartAttackHit(){
+			Debug.Log ("StartAttackHit");
+		}
+		
+		void EndAttackHit(){
+			Debug.Log ("EndAttackHit");
+		}
+		
+		public void SetPrePosition(){
+			prePosition = transform.position;
+		}
+		
+		public bool IsDied(){
+			return this.status.IsDead ();		
+		}
+		
+		public void DeltaPosition(){
+			this.delta_position = transform.position - prePosition;
+		}
+		
+		public void AnimatorSetFloat(){
+			this.animator.SetFloat ("Speed", delta_position.magnitude / Time.deltaTime);
+		}
+		
+		public void AnimatorSetBool(){
+			this.animator.SetBool ("Attacking", (!isAttacked() && status.isAttacking()));
+		}
+		
+		public void AnimatorSetTrigger(){
+			this.animator.SetTrigger("Down");
+		}
 	}
-}
+	
 }

@@ -2760,7 +2760,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastAttackTarget: {fileID: 0}
-  powerUpEffect: {fileID: 0}
   controller:
     HP: 100
     MaxHP: 100
@@ -2781,6 +2780,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2859429439f05724cb2fc7ab0acbfaf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cAController:
+    isDown: 0
+    attacked: 0
 --- !u!114 &669342552
 MonoBehaviour:
   m_ObjectHideFlags: 0

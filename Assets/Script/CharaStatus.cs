@@ -7,7 +7,7 @@ namespace Cradle {
 	public class CharaStatus : MonoBehaviour, IEffectController {
 		
 		public GameObject lastAttackTarget = null;
-		public ParticleSystem powerUpEffect;
+		private ParticleSystem powerUpEffect;
 		public CharaStatusController controller;
 		
 		public void OnEnable() {
