@@ -27,9 +27,9 @@ public class AttackArea : MonoBehaviour {
 	//ダメージ値と攻撃者を設定して返す
 	AttackInfo GetAttackInfo(){
 		AttackInfo attackInfo = new AttackInfo ();
-		attackInfo.attackPower = status.Power;
+		attackInfo.attackPower = status.GetPower();
 		//攻撃強化中
-		if (status.powerBoost)
+		if (status.GetPowerBoost())
 						attackInfo.attackPower += attackInfo.attackPower;
 
 		attackInfo.attacker = transform.root;

@@ -127,7 +127,7 @@ public class EnemyCtrl : AdvancedFSM {
 	{
 			if(elapsedTime >= attackRate)
 			{
-				status.attacking = true;
+				status.SetAttacking(true);
 				elapsedTime = 0.0f;
 			}
 		
@@ -150,10 +150,10 @@ public class EnemyCtrl : AdvancedFSM {
 		effect.transform.localPosition = transform.position + new Vector3 (0.0f, 0.5f, 0.0f);
 		Destroy (effect, 0.3f);
 		
-		status.HP -= attackInfo.attackPower;
-		if(status.HP <= 0)
+		status.DamageHP(attackInfo.attackPower);
+		if(status.GetHP() <= 0)
 		{
-			status.HP = 0;
+				status.SetHP(0);
 			//死体を攻撃できないようにする
 			foreach (Transform child in transform)
 			{
@@ -181,7 +181,7 @@ public class EnemyCtrl : AdvancedFSM {
 	
 	public void Died()
 	{
-		status.died = true;
+		status.SetDied (true);
 		dropItem ();
 		Destroy (gameObject, DestroyTime);
 		AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
@@ -204,8 +204,8 @@ public class EnemyCtrl : AdvancedFSM {
 	//ステータスを初期化
 	public void StateStartCommon()
 	{
-		status.attacking = false;
-		status.died = false;
+		status.SetAttacking (false);
+		status.SetDied(false);
 	}
 	
 

@@ -35,13 +35,13 @@ public class CharaAnimation : MonoBehaviour {
 		Vector3 delta_position = transform.position - prePosition;
 		animator.SetFloat ("Speed", delta_position.magnitude / Time.deltaTime);
 
-		if(attacked && !status.attacking){
+		if(attacked && !status.isAttacking()){
 			attacked = false;
 		}
 
-		animator.SetBool ("Attacking", (!attacked && status.attacking));
+		animator.SetBool ("Attacking", (!attacked && status.isAttacking()));
 
-		if(!isDown && status.died){
+		if(!isDown && status.IsDead()){
 			isDown = true;
 			animator.SetTrigger("Down");
 		}
