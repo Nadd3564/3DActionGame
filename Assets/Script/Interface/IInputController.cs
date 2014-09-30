@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Cradle
 {
 	public interface IInputController

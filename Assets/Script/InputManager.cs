@@ -1,55 +1,52 @@
-﻿using UnityEngine;
+﻿﻿using UnityEngine;
 using System.Collections;
 using Cradle;
 
 namespace Cradle{
-public class InputManager : MonoBehaviour {
-	Vector2 slideStartPosition;
-	Vector2 prevPosition;
-	Vector2 delta = Vector2.zero;
-	bool moved = false;
-
-	
-	void Update () {
-	if (Input.GetButtonDown ("Fire2"))
-						slideStartPosition = GetCursorPosition ();
-
-		if(Input.GetButton("Fire2")){
-			if(Vector2.Distance(slideStartPosition, GetCursorPosition())
-				 >= (Screen.width * 0.1f))
-			moved = true;
+	public class InputManager : MonoBehaviour, IInputController {
+		
+		public InputManagerController inputController;
+		
+		public void OnEnable() {
+			inputController.SetInputController (this);
 		}
-
-		if (!Input.GetButtonUp ("Fire2") && !Input.GetButton ("Fire2"))
-						moved = false;
-
-		if (moved)
-						delta = GetCursorPosition () - prevPosition;
-				else
-						delta = Vector2.zero;
-
-		prevPosition = GetCursorPosition();
+		
+		void Update () {
+			//スライド開始地点
+			inputController.SlideStart ();				
+			
+			//画面の一割以上移動させたらスライド開始
+			inputController.Sliding ();
+			
+			//スライド操作が終了したか
+			inputController.StopSlide ();
+			
+			//移動量を求める
+			inputController.Moved ();
+			
+			//カーソル位置を更新
+			inputController.PrevPosition ();
+		}
+		
+		//クリックされたか
+		public bool Clicked(){
+			return inputController.IsClicked ();		
+		}
+		
+		//スライド時のカーソルの移動量
+		public Vector2 GetDeltaPosition(){
+			return inputController.IsGetDeltaPosition();
+		}
+		
+		//スライド中か
+		public bool Moved(){
+			return inputController.IsMoved();
+		}
+		
+		public Vector2 GetCursorPosition()
+		{
+			return inputController.IsGetCursorPosition();
+		}
 		
 	}
-	
-	public bool Clicked(){
-		if (!moved && Input.GetButtonUp ("Fire1") || Input.GetButton("Fire1"))
-						return true;
-				else
-						return false;
-	}
-	
-	public Vector2 GetDeltaPosition(){
-		return delta;
-	}
-	
-	public bool Moved(){
-		return moved;
-	}
-
-	public Vector2 GetCursorPosition()
-	{
-		return Input.mousePosition;
-	}
-}
 }
