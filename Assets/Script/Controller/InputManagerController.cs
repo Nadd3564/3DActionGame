@@ -72,52 +72,15 @@ namespace Cradle
 				return false;
 		}
 
-		public bool InputGetButtonFire1(){
-			return Input.GetButton("Fire1");		
-		}
 
-		public bool InputGetButtonUpFire1(){
-			return Input.GetButtonUp("Fire1");		
-		}
-
-		public bool InputTestGetButtonFire1(){
-			return InputGetButtonFire1 ();		
-		}
-
-		public bool InputTestGetButtonUpFire1(){
-			return InputGetButtonUpFire1 ();		
-		}
-
-		public bool InputGetButton(){
-			return Input.GetButton("Fire2");		
-		}
-
-		public bool InputGetButtonDown(){
-			return Input.GetButtonDown("Fire2");		
-		}
-
-		public bool InputGetButtonUp(){
-			return Input.GetButtonUp("Fire2");		
-		}
-
-		public bool InputTestGetButton(){
-			return InputGetButtonDown();		
-		}
-		
-		public bool InputTestGetButtonDown(){
-			return InputGetButtonDown();		
-		}
-		
-		public bool InputTestGetButtonUp(){
-			return InputGetButtonUp();		
-		}
-
+		//スライド開始地点
 		public void SlideStart(){
 					if (InputGetButtonDown())
 							SetSlideStartPosition ();
 							CalcBoostTime ();
 				}
 
+		//画面の一割以上移動させたらスライド開始
 		public void Sliding()
 		{
 					if (InputGetButton()) {
@@ -131,6 +94,7 @@ namespace Cradle
 				SetMoved (true);
 		}
 
+		//移動量を求める
 		public void Moved(){
 					if (IsMoved ())
 							GetDeltaDistance ();
@@ -138,6 +102,7 @@ namespace Cradle
 							StayDelta ();		
 		}
 
+		//スライド操作が終了したか
 		public void StopSlide(){
 			if (InputGetButtonUp() && !InputGetButton())
 						SetMoved (false);
@@ -153,6 +118,46 @@ namespace Cradle
 
 		public void SetInputController(IInputController inputController) {
 			this.inputController = inputController;
+		}
+
+		public bool InputGetButtonFire1(){
+			return Input.GetButton("Fire1");		
+		}
+		
+		public bool InputGetButtonUpFire1(){
+			return Input.GetButtonUp("Fire1");		
+		}
+		
+		public bool InputTestGetButtonFire1(){
+			return InputGetButtonFire1 ();		
+		}
+		
+		public bool InputTestGetButtonUpFire1(){
+			return InputGetButtonUpFire1 ();		
+		}
+		
+		public bool InputGetButton(){
+			return Input.GetButton("Fire2");		
+		}
+		
+		public bool InputGetButtonDown(){
+			return Input.GetButtonDown("Fire2");		
+		}
+		
+		public bool InputGetButtonUp(){
+			return Input.GetButtonUp("Fire2");		
+		}
+		
+		public bool InputTestGetButton(){
+			return InputGetButtonDown();		
+		}
+		
+		public bool InputTestGetButtonDown(){
+			return InputGetButtonDown();		
+		}
+		
+		public bool InputTestGetButtonUp(){
+			return InputGetButtonUp();		
 		}
 		
 	}

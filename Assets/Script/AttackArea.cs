@@ -3,21 +3,42 @@ using System.Collections;
 using Cradle;
 
 namespace Cradle{
-public class AttackArea : MonoBehaviour {
+public class AttackArea : MonoBehaviour, IAttackAreaController 
+	{
 	CharaStatus status;
-	
 	public AudioClip hitSeClip;
 	AudioSource hitSeAudio;
+	public AttackAreaController aAcontroller;
+
+		public void OnEnable() {
+			aAcontroller.SetAttackAreaController (this);
+		}
 
 	void Start () {
-		status = transform.root.GetComponent<CharaStatus>();
+		FindCharaStatusComponent ();
 
 		//オーディオの初期化
-		hitSeAudio = gameObject.AddComponent<AudioSource>();
-		hitSeAudio.clip = hitSeClip;
-		hitSeAudio.loop = false;
+		AddAudioSourceComponent ();
+		HitSeAudioClip ();
+		HitSeAudioLoop ();
 	}
+
+		public void FindCharaStatusComponent(){
+			this.status = transform.root.GetComponent<CharaStatus>();
+		}
 	
+		public void AddAudioSourceComponent(){
+			this.hitSeAudio = gameObject.AddComponent<AudioSource>();
+		}
+
+		public void HitSeAudioClip(){
+			this.hitSeAudio.clip = hitSeClip;
+		}
+
+		public void HitSeAudioLoop(){
+			this.hitSeAudio.loop = false;	
+		}
+
 	//攻撃力や攻撃者の情報を入れるクラス
 	public class AttackInfo {
 		public int attackPower;
