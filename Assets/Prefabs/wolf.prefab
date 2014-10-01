@@ -131,6 +131,7 @@ GameObject:
   - 135: {fileID: 13500002}
   - 54: {fileID: 5400002}
   - 114: {fileID: 11400014}
+  - 114: {fileID: 11400008}
   m_Layer: 11
   m_Name: mixamorig:RightHand
   m_TagString: Untagged
@@ -1341,6 +1342,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2859429439f05724cb2fc7ab0acbfaf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cAController:
+    isDown: 0
+    attacked: 0
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1352,8 +1356,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84582043c11b024880da88e1f8d88f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Power: 10
   lastAttackTarget: {fileID: 0}
-  powerUpEffect: {fileID: 0}
   controller:
     HP: 100
     MaxHP: 100
@@ -1362,6 +1366,18 @@ MonoBehaviour:
     died: 0
     powerBoost: 0
     charactername: Player
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16acd66d945981540863d7e2722fd7fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPower: 0
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1

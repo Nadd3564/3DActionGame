@@ -5,7 +5,6 @@ using Cradle;
 namespace Cradle {
 	
 	public class CharaStatus : MonoBehaviour, IEffectController {
-		
 		public GameObject lastAttackTarget = null;
 		private ParticleSystem powerUpEffect;
 		public CharaStatusController controller;

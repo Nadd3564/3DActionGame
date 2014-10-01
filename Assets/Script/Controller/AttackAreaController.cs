@@ -18,6 +18,14 @@ namespace Cradle
 			return this.attackPower;		
 		}
 
+		public int SetAttackPower(int atk){
+			return this.attackPower = atk;		
+		}
+
+		public int SetAttackBoostPower(int atk){
+			return this.attackPower += atk;		
+		}
+
 		public void CalcBoostTime() {
 			this.calcTime = CalcTime ();
 		}

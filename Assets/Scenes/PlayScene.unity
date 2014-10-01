@@ -4970,6 +4970,7 @@ GameObject:
   - 136: {fileID: 1745830361}
   - 54: {fileID: 1745830360}
   - 114: {fileID: 1745830362}
+  - 114: {fileID: 1745830363}
   m_Layer: 12
   m_Name: Box001
   m_TagString: Untagged
@@ -5061,6 +5062,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSeClip: {fileID: 8300000, guid: 988ad850f99996c4a8bfb7b7bb6b60b6, type: 3}
+--- !u!114 &1745830363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1745830356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16acd66d945981540863d7e2722fd7fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1760776000
 GameObject:
   m_ObjectHideFlags: 0

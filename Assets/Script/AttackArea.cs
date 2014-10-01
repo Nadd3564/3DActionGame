@@ -39,22 +39,17 @@ public class AttackArea : MonoBehaviour, IAttackAreaController
 			this.hitSeAudio.loop = false;	
 		}
 
-	//攻撃力や攻撃者の情報を入れるクラス
-	public class AttackInfo {
-		public int attackPower;
-		public Transform attacker;
-	}
-	
 	//ダメージ値と攻撃者を設定して返す
 	AttackInfo GetAttackInfo(){
-		AttackInfo attackInfo = new AttackInfo ();
-		attackInfo.attackPower = status.GetPower();
-		//攻撃強化中
-		if (status.GetPowerBoost())
-						attackInfo.attackPower += attackInfo.attackPower;
+			AttackInfo attackInfo = GetComponentInChildren<AttackInfo>();
+			attackInfo.SetAttackPower (status.GetPower());
 
-		attackInfo.attacker = transform.root;
-		return attackInfo;
+		//攻撃強化中
+			if (status.GetPowerBoost ())
+								attackInfo.SetAttackBoostPower (attackInfo.GetAttackPower());
+
+			attackInfo.SetAttacker (transform.root);
+			return attackInfo;
 	}
 	
 	

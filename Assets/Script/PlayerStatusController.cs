@@ -135,11 +135,13 @@ public class PlayerStatusController : MonoBehaviour {
 		deathSeAudio.Play ();
 	}
 
-void Damage(AttackArea.AttackInfo attackInfo){
+//void Damage(AttackArea.AttackInfo attackInfo){
+		void Damage(AttackInfo attackInfo){
 		GameObject effect = Instantiate (hitEffect, transform.position, Quaternion.identity) as GameObject;
 		effect.transform.localPosition = transform.position + new Vector3 (0.0f, 0.5f, 0.0f);
 		Destroy (effect, 0.3f);
-		status.DamageHP (attackInfo.attackPower); 
+		//status.DamageHP (attackInfo.attackPower); 
+		status.DamageHP (attackInfo.GetAttackPower());
 		if(status.GetHP() <= 0){
 				status.SetHP(0);
 			//体力0でダウン
