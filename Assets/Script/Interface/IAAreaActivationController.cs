@@ -8,5 +8,6 @@ namespace Cradle
 		void AddAudioSourceComponent ();
 		void AttackSeAudioClip ();
 		void AttackSeAudioLoop ();
+		void PlayAudio();
 	}	
 }

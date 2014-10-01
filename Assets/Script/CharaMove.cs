@@ -4,24 +4,30 @@ using Cradle;
 
 namespace Cradle{
 
-public class CharaMove : MonoBehaviour {
-	const float GravityPower = 9.8f; 
-	const float StoppingDistance = 0.6f;
+public class CharaMove : MonoBehaviour, IMoveController {
 	Vector3 velocity = Vector3.zero; 
 	CharacterController characterController; 
-	public bool arrived = false; 
-	bool forceRotate = false;
 	Vector3 forceRotateDirection;
 	public Vector3 destination; 
-	public float walkSpeed = 6.0f;
-	public float rotationSpeed = 360.0f;
-	
+	public CharaMoveController cMcontroller;
+		
+		public void OnEnable() {
+			cMcontroller.SetMoveController (this);
+		}
 	
 	void Start () {
-		characterController = GetComponent<CharacterController>();
-		destination = transform.position;
+		FindCharacterControllerComponent ();
+		SetDest ();
 	}
 	
+		public void FindCharacterControllerComponent(){
+			this.characterController = GetComponent<CharacterController>();
+		}
+
+		void SetDest(){
+			this.destination = transform.position;
+		}
+
 	void Update () {
 		if (characterController.isGrounded) {
 			Vector3 destinationXZ = destination; 
@@ -32,32 +38,32 @@ public class CharaMove : MonoBehaviour {
 			
 			Vector3 currentVelocity = velocity;
 			
-			if (arrived || distance < StoppingDistance)
-				arrived = true;
+			if (cMcontroller.IsArrived() || distance < cMcontroller.GetStoppingDist())
+					cMcontroller.SetArrived(true);
 		
 			
-			if (arrived)
+			if (cMcontroller.IsArrived())
 				velocity = Vector3.zero;
 			else 
-				velocity = direction * walkSpeed;
+				velocity = direction * cMcontroller.GetWalkSpeed();
 			
 			velocity = Vector3.Lerp(currentVelocity, velocity,Mathf.Min (Time.deltaTime * 5.0f ,1.0f));
 			velocity.y = 0;
 			
 			
-			if (!forceRotate) {
-				if (velocity.magnitude > 0.1f && !arrived) { 
+			if (!cMcontroller.IsForceRotate()) {
+				if (velocity.magnitude > 0.1f && !cMcontroller.IsArrived()) { 
 					Quaternion characterTargetRotation = Quaternion.LookRotation(direction);
-					transform.rotation = Quaternion.RotateTowards(transform.rotation,characterTargetRotation,rotationSpeed * Time.deltaTime);
+					transform.rotation = Quaternion.RotateTowards(transform.rotation,characterTargetRotation,cMcontroller.GetRotationSpeed() * Time.deltaTime);
 				}
 			} else {
 				Quaternion characterTargetRotation = Quaternion.LookRotation(forceRotateDirection);
-				transform.rotation = Quaternion.RotateTowards(transform.rotation,characterTargetRotation,rotationSpeed * Time.deltaTime);
+				transform.rotation = Quaternion.RotateTowards(transform.rotation,characterTargetRotation,cMcontroller.GetRotationSpeed() * Time.deltaTime);
 			}
 			
 		}
 		
-		velocity += Vector3.down * GravityPower * Time.deltaTime;
+		velocity += Vector3.down * cMcontroller.GetGravityPower() * Time.deltaTime;
 		
 		Vector3 snapGround = Vector3.zero;
 		if (characterController.isGrounded)
@@ -66,17 +72,17 @@ public class CharaMove : MonoBehaviour {
 		characterController.Move(velocity * Time.deltaTime+snapGround);
 		
 		if (characterController.velocity.magnitude < 0.1f)
-			arrived = true;
+								cMcontroller.SetArrived (true);
 		
-		if (forceRotate && Vector3.Dot(transform.forward,forceRotateDirection) > 0.99f)
-			forceRotate = false;
+		if (cMcontroller.IsForceRotate () && Vector3.Dot (transform.forward, forceRotateDirection) > 0.99f)
+								cMcontroller.SetForceRotate (false);
 		
 		
 	}
 	
 	public void SetDestination(Vector3 destination)
 	{
-		arrived = false;
+		cMcontroller.SetArrived (false);
 		this.destination = destination;
 	}
 	
@@ -85,7 +91,7 @@ public class CharaMove : MonoBehaviour {
 		forceRotateDirection = direction;
 		forceRotateDirection.y = 0;
 		forceRotateDirection.Normalize();
-		forceRotate = true;
+		cMcontroller.SetForceRotate (true);
 	}
 
 	public void StopMove()
@@ -95,7 +101,7 @@ public class CharaMove : MonoBehaviour {
 
 	public bool Arrived()
 	{
-		return arrived;
+		return cMcontroller.IsArrived();
 	}
 	
 	
