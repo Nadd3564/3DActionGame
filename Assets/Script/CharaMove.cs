@@ -9,13 +9,12 @@ public class CharaMove : MonoBehaviour, IMoveController {
 		CharacterController characterController; 
 		Vector3 forceRotateDirection;
 		public Vector3 destination; 
-		public CharaMoveController cMcontroller;
 		Vector3 destinationXZ;
 		Vector3 direction;
 		Vector3 currentVelocity;
 		Vector3 snapGround;
 		Quaternion characterTargetRotation;
-
+		public CharaMoveController cMcontroller;
 		
 		public void OnEnable() {
 			cMcontroller.SetMoveController (this);
@@ -27,7 +26,7 @@ public class CharaMove : MonoBehaviour, IMoveController {
 		}
 	
 		void Update () {
-			//移動速度Velocityを更新する
+			//移動に関する総合処理
 			IsGrounded ();
 
 			//重力
@@ -50,6 +49,7 @@ public class CharaMove : MonoBehaviour, IMoveController {
 
 		void SetSnapGround(Vector3 snapGround){
 			this.snapGround = snapGround;
+			cMcontroller.CalcBoostTime ();
 		}
 
 		void SetDest(){
@@ -173,13 +173,14 @@ public class CharaMove : MonoBehaviour, IMoveController {
 				cMcontroller.SetForceRotate (false);
 		}
 	
+		//目的地を指定する（引数が目的地）
 		public void SetDestination(Vector3 destination)
 		{
 			cMcontroller.SetArrived (false);
 			this.destination = destination;
 		}
 	
-
+		//指定した向きを向かせる
 		public void SetDirection(Vector3 direction)
 		{
 			forceRotateDirection = direction;
@@ -193,6 +194,7 @@ public class CharaMove : MonoBehaviour, IMoveController {
 			destination = transform.position;
 		}
 
+		//目的地に到着したかを調べる
 		public bool Arrived()
 		{
 			return cMcontroller.IsArrived();
