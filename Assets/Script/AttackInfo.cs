@@ -3,21 +3,25 @@ using System.Collections;
 using Cradle;
 
 namespace Cradle{
-public class AttackInfo : MonoBehaviour{
-	
-	private int attackPower;
+public class AttackInfo : MonoBehaviour, IInfoController{
 	private Transform attacker;
+	public AttackInfoController aIController;
+		
+	public void OnEnable() {
+		aIController.SetInfoController (this);
+	}
 
 	public int GetAttackPower(){
-		return this.attackPower;
+		aIController.CalcBoostTime ();
+		return aIController.getAttackPower();
 	}
 
 	public int SetAttackPower(int atk){
-		return this.attackPower = atk ;
+			return aIController.setAttackPower (atk);
 	}
 
 	public int SetAttackBoostPower(int atk){
-		return this.attackPower += atk ;
+			return aIController.setAttackBoostPower (atk);
 	}
 
 	public Transform SetAttacker(Transform atc){

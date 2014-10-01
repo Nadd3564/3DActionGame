@@ -98,6 +98,10 @@ namespace Cradle {
 		public bool SetDied(bool flg){
 			return controller.died = flg;
 		}
-		
+
+		public GameObject SetLastAttackTarget(GameObject obj){
+			return this.lastAttackTarget = obj;
+		}
+
 	}
 }

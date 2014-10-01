@@ -6,24 +6,11 @@ namespace Cradle
 	[Serializable]
 	public class AttackAreaController
 	{
-		private int attackPower;
 		private float calcTime = 0.0f;
 		
 		private IAttackAreaController aAttackController;
 		
 		public AttackAreaController (){
-		}
-
-		public int GetAttackPower(){
-			return this.attackPower;		
-		}
-
-		public int SetAttackPower(int atk){
-			return this.attackPower = atk;		
-		}
-
-		public int SetAttackBoostPower(int atk){
-			return this.attackPower += atk;		
 		}
 
 		public void CalcBoostTime() {

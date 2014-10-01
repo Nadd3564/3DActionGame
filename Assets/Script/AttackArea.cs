@@ -8,6 +8,7 @@ public class AttackArea : MonoBehaviour, IAttackAreaController
 	CharaStatus status;
 	public AudioClip hitSeClip;
 	AudioSource hitSeAudio;
+	AttackInfo attackInfo;
 	public AttackAreaController aAcontroller;
 
 		public void OnEnable() {
@@ -16,32 +17,15 @@ public class AttackArea : MonoBehaviour, IAttackAreaController
 
 	void Start () {
 		FindCharaStatusComponent ();
-
+		FindAttackInfoComponent ();
 		//オーディオの初期化
 		AddAudioSourceComponent ();
 		HitSeAudioClip ();
 		HitSeAudioLoop ();
 	}
 
-		public void FindCharaStatusComponent(){
-			this.status = transform.root.GetComponent<CharaStatus>();
-		}
-	
-		public void AddAudioSourceComponent(){
-			this.hitSeAudio = gameObject.AddComponent<AudioSource>();
-		}
-
-		public void HitSeAudioClip(){
-			this.hitSeAudio.clip = hitSeClip;
-		}
-
-		public void HitSeAudioLoop(){
-			this.hitSeAudio.loop = false;	
-		}
-
 	//ダメージ値と攻撃者を設定して返す
 	AttackInfo GetAttackInfo(){
-			AttackInfo attackInfo = GetComponentInChildren<AttackInfo>();
 			attackInfo.SetAttackPower (status.GetPower());
 
 		//攻撃強化中
@@ -55,8 +39,8 @@ public class AttackArea : MonoBehaviour, IAttackAreaController
 	
 	void OnTriggerEnter(Collider other){
 		other.SendMessage ("Damage", GetAttackInfo());
-		status.lastAttackTarget = other.transform.root.gameObject;
-		hitSeAudio.Play ();
+		status.SetLastAttackTarget (other.transform.root.gameObject); 
+		PlayAudio ();
 	}
 	
 	//攻撃判定の有効、無効
@@ -66,5 +50,29 @@ public class AttackArea : MonoBehaviour, IAttackAreaController
 	void OnAttackTermination(){
 		collider.enabled = false;
 	}
+
+		public void FindCharaStatusComponent(){
+			this.status = transform.root.GetComponent<CharaStatus>();
+		}
+		
+		public void FindAttackInfoComponent(){
+			this.attackInfo = GetComponentInChildren<AttackInfo>();
+		}
+		
+		public void AddAudioSourceComponent(){
+			this.hitSeAudio = gameObject.AddComponent<AudioSource>();
+		}
+		
+		public void HitSeAudioClip(){
+			this.hitSeAudio.clip = hitSeClip;
+		}
+		
+		public void HitSeAudioLoop(){
+			this.hitSeAudio.loop = false;	
+		}
+
+		public void PlayAudio(){
+			this.hitSeAudio.Play ();
+		}
 }
 }
