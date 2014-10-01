@@ -11,9 +11,9 @@ public class AttackArea : MonoBehaviour, IAttackAreaController
 	AttackInfo attackInfo;
 	public AttackAreaController aAcontroller;
 
-		public void OnEnable() {
-			aAcontroller.SetAttackAreaController (this);
-		}
+	public void OnEnable() {
+		aAcontroller.SetAttackAreaController (this);
+	}
 
 	void Start () {
 		FindCharaStatusComponent ();
@@ -29,13 +29,11 @@ public class AttackArea : MonoBehaviour, IAttackAreaController
 			attackInfo.SetAttackPower (status.GetPower());
 
 		//攻撃強化中
-			if (status.GetPowerBoost ())
-								attackInfo.SetAttackBoostPower (attackInfo.GetAttackPower());
-
+	if (status.GetPowerBoost ())
+			attackInfo.SetAttackBoostPower (attackInfo.GetAttackPower());
 			attackInfo.SetAttacker (transform.root);
 			return attackInfo;
 	}
-	
 	
 	void OnTriggerEnter(Collider other){
 		other.SendMessage ("Damage", GetAttackInfo());
@@ -51,28 +49,28 @@ public class AttackArea : MonoBehaviour, IAttackAreaController
 		collider.enabled = false;
 	}
 
-		public void FindCharaStatusComponent(){
-			this.status = transform.root.GetComponent<CharaStatus>();
-		}
+	public void FindCharaStatusComponent(){
+		this.status = transform.root.GetComponent<CharaStatus>();
+	}
 		
-		public void FindAttackInfoComponent(){
-			this.attackInfo = GetComponentInChildren<AttackInfo>();
-		}
+	public void FindAttackInfoComponent(){
+		this.attackInfo = GetComponentInChildren<AttackInfo>();
+	}
 		
-		public void AddAudioSourceComponent(){
-			this.hitSeAudio = gameObject.AddComponent<AudioSource>();
-		}
+	public void AddAudioSourceComponent(){
+		this.hitSeAudio = gameObject.AddComponent<AudioSource>();
+	}
+	
+	public void HitSeAudioClip(){
+		this.hitSeAudio.clip = hitSeClip;
+	}
 		
-		public void HitSeAudioClip(){
-			this.hitSeAudio.clip = hitSeClip;
-		}
-		
-		public void HitSeAudioLoop(){
-			this.hitSeAudio.loop = false;	
-		}
+	public void HitSeAudioLoop(){
+		this.hitSeAudio.loop = false;	
+	}
 
-		public void PlayAudio(){
-			this.hitSeAudio.Play ();
-		}
-}
+	public void PlayAudio(){
+		this.hitSeAudio.Play ();
+	}
+ }
 }
