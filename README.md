@@ -7,7 +7,7 @@ ACTIONGAME
 ![image](title.jpg)
 ![image](3DACTIONGAME.jpg)
 <br>
-開発環境　Unity ver 4.6.0b17
+開発環境　Unity ver 4.6.0b20
 
 使用アセット（フリー）
 ----- 下記アセットをインポートせずとも動作するようにしてあります。 -----
