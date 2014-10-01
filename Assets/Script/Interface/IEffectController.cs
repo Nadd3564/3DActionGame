@@ -14,6 +14,7 @@ namespace Cradle
 		{
 			void FindEffectComponent();
 			void StopEffect();
+
 		}	
 }
 

@@ -13,6 +13,7 @@ namespace Cradle
 		public float walkSpeed = 6.0f;
 		public float rotationSpeed = 360.0f;
 		private float calcTime = 0.0f;
+		private float distance;
 		
 		private IMoveController iMoveController;
 		
@@ -33,6 +34,19 @@ namespace Cradle
 
 		public bool SetForceRotate(bool flg){
 			return this.forceRotate = flg;
+		}
+
+		public float GetDistance(){
+			return this.distance;	
+		}
+
+		public float SetDistance(float f){
+			return this.distance = f;	
+		}
+
+		public void DestArrived(){
+			if (IsArrived() || GetDistance() < GetStoppingDist())
+				 SetArrived(true);	
 		}
 
 		public float GetStoppingDist(){

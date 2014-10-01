@@ -2712,10 +2712,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc55453bb4a7959438784ba7eefd7c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrived: 0
   destination: {x: 0, y: 0, z: 0}
-  walkSpeed: 6
-  rotationSpeed: 360
+  cMcontroller:
+    arrived: 0
+    forceRotate: 0
+    walkSpeed: 6
+    rotationSpeed: 360
 --- !u!143 &669342548
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2796,6 +2798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSeClip: {fileID: 8300000, guid: b910f06cfef6a10448d4cfa7f0ea51d2, type: 3}
+  AAAcontroller: {fileID: 0}
 --- !u!114 &669342553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3027,6 +3030,7 @@ MonoBehaviour:
   m_LightmapIndex: -1
   m_LightmapSize: 1024
   m_DrawTreesAndFoliage: 1
+  m_CollectDetailPatches: 1
   m_MaterialTemplate: {fileID: 0}
 --- !u!4 &750213820
 Transform:
@@ -5048,7 +5052,7 @@ CapsuleCollider:
   m_Radius: .0199999996
   m_Height: .400000006
   m_Direction: 2
-  m_Center: {x: -5.74922478e-06, y: -9.85813458e-08, z: .699999988}
+  m_Center: {x: -5.74922478e-06, y: .0299999993, z: .699999988}
 --- !u!114 &1745830362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5073,6 +5077,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16acd66d945981540863d7e2722fd7fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aIController:
+    attackPower: 0
 --- !u!1 &1760776000
 GameObject:
   m_ObjectHideFlags: 0

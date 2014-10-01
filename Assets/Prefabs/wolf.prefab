@@ -1315,10 +1315,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc55453bb4a7959438784ba7eefd7c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrived: 0
   destination: {x: 0, y: 0, z: 0}
-  walkSpeed: 3
-  rotationSpeed: 360
+  cMcontroller:
+    arrived: 0
+    forceRotate: 0
+    walkSpeed: 3
+    rotationSpeed: 360
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1331,6 +1333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSeClip: {fileID: 8300000, guid: 2e16dc82a66650b49af2f0a8a7215982, type: 3}
+  AAAcontroller: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1356,7 +1359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84582043c11b024880da88e1f8d88f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Power: 10
   lastAttackTarget: {fileID: 0}
   controller:
     HP: 100
@@ -1377,7 +1379,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16acd66d945981540863d7e2722fd7fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 0
+  aIController:
+    attackPower: 0
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
