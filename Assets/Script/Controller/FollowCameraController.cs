@@ -10,13 +10,24 @@ namespace Cradle
 		public float horizontalAngle = 0.0f;
 		public float rotAngle = 180.0f;
 		public float verticalAngle = 10.0f;
+		public float anglePerPixel;
 		private float calcTime = 0.0f;
 		private ICameraController cameraController;
+
 		
 		public FollowCameraController (){
 			
 		}
-		
+
+		public float GetAnglePerPixel(){
+			return this.anglePerPixel;		
+		}
+
+		//１ピクセル移動した時の回転速度
+		public void SetAnglePerPixel(){
+			this.anglePerPixel = GetRotAngle() / (float)Screen.width;		
+		}
+
 		public float GetDistance(){
 			return this.distance;		
 		}
@@ -29,8 +40,8 @@ namespace Cradle
 			return this.horizontalAngle;		
 		}
 
-		public float SetHorizontalAngle(float f){
-			return this.horizontalAngle = f;		
+		public void SetHorizontalAngle(){
+			this.horizontalAngle = Mathf.Repeat(GetHorizontalAngle(), 360.0f);		
 		}
 
 		public float SetUpHorizontalAngle(float f){
@@ -41,8 +52,8 @@ namespace Cradle
 			return this.verticalAngle;		
 		}
 
-		public float SetVerticalAngle(float f){
-			return this.verticalAngle = f;		
+		public void SetVerticalAngle(){
+			this.verticalAngle = Mathf.Clamp(GetVerticalAngle(), -60.0f, 60.0f);		
 		}
 
 		public float SetDownVerticalAngle(float f){
