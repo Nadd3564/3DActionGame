@@ -55,6 +55,7 @@ public class DropItem : MonoBehaviour, IDropItemController {
 
 		public void PlaySE(){
 			AudioSource.PlayClipAtPoint(itemSeClip, transform.position);
+			controller.CalcBoostTime ();
 		}
 
 		public void SetTrigger(bool flg){

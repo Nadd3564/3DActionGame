@@ -6,7 +6,7 @@ namespace Cradle
 	[Serializable]
 	public class DropItemController
 	{
-		
+		private float calcTime = 0.0f;
 		private IDropItemController dropItemController;
 		
 		public DropItemController (){
@@ -22,6 +22,14 @@ namespace Cradle
 			if (tag == "Terrain")
 			return true;
 			return false;	
+		}
+
+		public void CalcBoostTime() {
+			this.calcTime = CalcTime ();
+		}
+		
+		public virtual float CalcTime() {
+			return Mathf.Max (this.calcTime - Time.deltaTime, 0.0f);
 		}
 
 		public void SetDropItemController(IDropItemController dropItemController) {
