@@ -3,39 +3,45 @@ using System.Collections;
 using Cradle;
 
 namespace Cradle{
-public class FollowCamera : MonoBehaviour {
-	public float distance = 5.0f;
-	public float horizontalAngle = 0.0f;
-	public float rotAngle = 180.0f;
-	public float verticalAngle = 10.0f;
-	public Transform lookTarget;
-	public Vector3 offset = Vector3.zero;
-
-	InputManager inputManager;
-
-	void Start () {
-		inputManager = FindObjectOfType<InputManager> ();
-	}
-
-	void LateUpdate(){
-		if(inputManager.Moved()){
-			float anglePerPixel = rotAngle / (float)Screen.width;
-			Vector2 delta = inputManager.GetDeltaPosition();
-			horizontalAngle += delta.x * anglePerPixel;
-			horizontalAngle = Mathf.Repeat(horizontalAngle, 360.0f);
-			verticalAngle -= delta.y * anglePerPixel;
-			verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
+public class FollowCamera : MonoBehaviour, ICameraController {
+		public Transform lookTarget;
+		public Vector3 offset = Vector3.zero;
+		public FollowCameraController controller;
+		InputManager inputManager;
+		
+		public void OnEnable() {
+			controller.SetCameraController (this);
 		}
 
-		if(lookTarget != null){
-			Vector3 lookPosition = lookTarget.position + offset;
-			Vector3 relativePos = Quaternion.Euler(verticalAngle, horizontalAngle, 0) * new Vector3(0,0,-distance);
-			transform.position = lookPosition + relativePos;
-			transform.LookAt(lookPosition);
-			RaycastHit hitInfo;
-			if(Physics.Linecast(lookPosition, transform.position, out hitInfo, 1<<LayerMask.NameToLayer("Ground")))
-				transform.position = hitInfo.point;
+		void Start () {
+			FindInputComponent ();
+		}
+
+		void LateUpdate(){
+			if(inputManager.Moved()){
+				float anglePerPixel = controller.GetRotAngle() / (float)Screen.width;
+				Vector2 delta = inputManager.GetDeltaPosition();
+				controller.SetUpHorizontalAngle(delta.x * anglePerPixel);
+				controller.SetHorizontalAngle(Mathf.Repeat(controller.GetHorizontalAngle(), 360.0f));
+				controller.SetDownVerticalAngle(delta.y * anglePerPixel);
+				controller.SetVerticalAngle(Mathf.Clamp(controller.GetVerticalAngle(), -60.0f, 60.0f));
+			}
+
+
+
+			if(lookTarget != null){
+				Vector3 lookPosition = lookTarget.position + offset;
+				Vector3 relativePos = Quaternion.Euler(controller.GetVerticalAngle(), controller.GetHorizontalAngle(), 0) * new Vector3(0,0,-controller.GetDistance());
+				transform.position = lookPosition + relativePos;
+				transform.LookAt(lookPosition);
+				RaycastHit hitInfo;
+				if(Physics.Linecast(lookPosition, transform.position, out hitInfo, 1<<LayerMask.NameToLayer("Ground")))
+					transform.position = hitInfo.point;
+			}
+		}
+
+		public void FindInputComponent(){
+			this.inputManager = FindObjectOfType<InputManager> ();
 		}
 	}
-}
 }

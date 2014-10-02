@@ -269,6 +269,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 100084, guid: bbc80d7109588944a8569f79a96e9967, type: 2}
   controller:
     maxActive: 2
+    RePopTime: 8
 --- !u!4 &67760707
 Transform:
   m_ObjectHideFlags: 0
@@ -520,12 +521,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b2fd6d530b41b14ca86c423a50810d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 5
-  horizontalAngle: 180
-  rotAngle: 180
-  verticalAngle: 10
   lookTarget: {fileID: 669342545}
   offset: {x: 0, y: 1.5, z: 0}
+  controller:
+    distance: 5
+    horizontalAngle: 180
+    rotAngle: 180
+    verticalAngle: 10
 --- !u!82 &147292502
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2269,6 +2271,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 100078, guid: 410600c78d747bc47b64642c4116d4c8, type: 2}
   controller:
     maxActive: 0
+    RePopTime: 8
 --- !u!4 &480565954
 Transform:
   m_ObjectHideFlags: 0
@@ -3993,6 +3996,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 100084, guid: bbc80d7109588944a8569f79a96e9967, type: 2}
   controller:
     maxActive: 0
+    RePopTime: 8
 --- !u!4 &1348134972
 Transform:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ namespace Cradle
 	{
 		//アクティブの最大数
 		public int maxActive = 2;
+		//再出現までの時間
 		public float RePopTime = 8.0f;
 		private float calcTime = 0.0f;
 		private IGeneratorController generatorController;
