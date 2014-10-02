@@ -267,7 +267,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 100084, guid: bbc80d7109588944a8569f79a96e9967, type: 2}
-  maxActive: 2
+  controller:
+    maxActive: 2
 --- !u!4 &67760707
 Transform:
   m_ObjectHideFlags: 0
@@ -2266,7 +2267,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 100078, guid: 410600c78d747bc47b64642c4116d4c8, type: 2}
-  maxActive: 0
+  controller:
+    maxActive: 0
 --- !u!4 &480565954
 Transform:
   m_ObjectHideFlags: 0
@@ -3989,7 +3991,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 100084, guid: bbc80d7109588944a8569f79a96e9967, type: 2}
-  maxActive: 0
+  controller:
+    maxActive: 0
 --- !u!4 &1348134972
 Transform:
   m_ObjectHideFlags: 0
