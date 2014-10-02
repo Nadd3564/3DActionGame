@@ -528,6 +528,7 @@ MonoBehaviour:
     horizontalAngle: 180
     rotAngle: 180
     verticalAngle: 10
+    anglePerPixel: 0
 --- !u!82 &147292502
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2768,7 +2769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastAttackTarget: {fileID: 0}
   controller:
-    HP: 100
+    HP: 10
     MaxHP: 100
     Power: 10
     attacking: 0
@@ -3656,12 +3657,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf104f3e04a42e47a8f66cba6296d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSpeed: 1
-  timeRemaining: 65
-  gameOver: 0
-  gameClear: 0
-  sceneChangeTime: 3
   clearSeClip: {fileID: 8300000, guid: a45a65a9b681cab42844b252bde79553, type: 3}
+  controller:
+    gameSpeed: 1
+    timeRemaining: 65
+    gameOver: 0
+    gameClear: 0
+    sceneChangeTime: 10
 --- !u!1 &1221994388
 GameObject:
   m_ObjectHideFlags: 0

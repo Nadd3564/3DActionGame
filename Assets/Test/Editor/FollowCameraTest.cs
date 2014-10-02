@@ -34,7 +34,7 @@ namespace Cradle.Test
 		[Category ("Calc Test")]
 		[TestCase(null)]
 		[TestCase("string")]
-		public void SetAnglePerPixelTest([Values(-1.0,0.0f,1.0f,2.0f)]float x) 
+		public void SetAnglePerPixelTest([Values(-1.0f,0.0f,1.0f,2.0f)]float x) 
 		{
 			fCController.SetAnglePerPixel ();
 			Assert.That (fCController.anglePerPixel, Is.EqualTo(x));		
@@ -44,7 +44,7 @@ namespace Cradle.Test
 		[Category ("Calc Test")]
 		[TestCase(null)]
 		[TestCase("string")]
-		public void SetHorizontalAngleTest([Values(-1.0,0.0f,1.0f,2.0f)]float x) 
+		public void SetHorizontalAngleTest([Values(-1.0f,0.0f,1.0f,2.0f)]float x) 
 		{
 			fCController.SetHorizontalAngle();
 			Assert.That (fCController.horizontalAngle, Is.EqualTo(x));		
