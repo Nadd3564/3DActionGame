@@ -11,7 +11,7 @@ namespace Cradle
 		// 回転速度
 		public float angularVelocity = 480.0f;
 		// 角度
-		float angle = 0.0f;
+		public float angle = 0.0f;
 		private float calcTime = 0.0f;
 		private ICursorController cursorController;
 		
