@@ -1361,7 +1361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastAttackTarget: {fileID: 0}
   controller:
-    HP: 100
+    HP: 10
     MaxHP: 100
     Power: 10
     attacking: 0

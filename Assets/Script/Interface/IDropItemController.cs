@@ -3,6 +3,8 @@ namespace Cradle
 {
 	public interface IDropItemController
 	{
-		//void FindCharaStatusComponent(Collider other);
+		void PlaySE();
+		void PopItem();
+		void FindTerrainColliderComponent ();
 	}	
 }

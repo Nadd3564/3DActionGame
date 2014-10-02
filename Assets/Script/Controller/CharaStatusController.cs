@@ -65,11 +65,7 @@ namespace Cradle
 				return true;
 			return false;		
 		}
-		
-		public void SetEffectController(IEffectController effectController) {
-			this.effectController = effectController;
-		}
-		
+
 		public bool IsAttacking(){
 			return this.attacking;
 		}
@@ -78,5 +74,9 @@ namespace Cradle
 			return this.attacking = flg;
 		}
 		
+		public void SetEffectController(IEffectController effectController) {
+			this.effectController = effectController;
+		}
+
 	}
 }
