@@ -38,6 +38,12 @@ namespace Cradle.FM
 			return this.elapsedTime += f;	
 		}
 
+		public bool AttackCount(){
+			if (GetElapsedTime () >= GetAttackRate ())	
+				return true;
+			return false;
+		}
+
 		public virtual float CalcTime() {
 			return Mathf.Max (this.calcTime - Time.deltaTime, 0.0f);
 		}

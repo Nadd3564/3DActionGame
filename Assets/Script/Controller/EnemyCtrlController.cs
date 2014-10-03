@@ -39,6 +39,18 @@ namespace Cradle.FM
 			return this.DestroyTime;	
 		}
 
+		public bool ThanTime(){
+			if (GetWaitTime () > 0.0f)
+				return true;
+			return false;
+		}
+
+		public bool LessThanTime(){
+			if (GetWaitTime() <= 0.0f)
+				return true;
+			return false;
+		}
+
 		public virtual float CalcTime() {
 			return Mathf.Max (this.calcTime - Time.deltaTime, 0.0f);
 		}

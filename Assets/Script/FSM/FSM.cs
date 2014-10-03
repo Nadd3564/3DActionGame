@@ -4,7 +4,7 @@ using Cradle;
 
 namespace Cradle.FM{
 public class FSM : MonoBehaviour, IFSMController {
-	protected Transform playerTransform;
+		protected Transform playerTransform;
 
 		//NPCの次の到達点
 		protected Vector3 destPos;
@@ -37,6 +37,14 @@ public class FSM : MonoBehaviour, IFSMController {
 		
 		protected float getElapsedTime(){
 			return controller.GetElapsedTime ();	
+		}
+
+		protected bool attackCount(){
+			return controller.AttackCount ();
+		}
+		
+		protected void SetPlayerTransform(Transform trans){
+			this.playerTransform = trans;	
 		}
 
 		protected virtual void StartUp(){}
