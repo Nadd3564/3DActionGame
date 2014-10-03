@@ -3,44 +3,42 @@ using System.Collections;
 using Cradle;
 
 namespace Cradle{
-public class AttackArea : MonoBehaviour {
+public class AttackArea : MonoBehaviour, IAttackAreaController 
+	{
 	CharaStatus status;
-	
 	public AudioClip hitSeClip;
 	AudioSource hitSeAudio;
+	AttackInfo attackInfo;
+	public AttackAreaController aAcontroller;
+
+	public void OnEnable() {
+		aAcontroller.SetAttackAreaController (this);
+	}
 
 	void Start () {
-		status = transform.root.GetComponent<CharaStatus>();
-
+		FindCharaStatusComponent ();
+		FindAttackInfoComponent ();
 		//オーディオの初期化
-		hitSeAudio = gameObject.AddComponent<AudioSource>();
-		hitSeAudio.clip = hitSeClip;
-		hitSeAudio.loop = false;
+		AddAudioSourceComponent ();
+		HitSeAudioClip ();
+		HitSeAudioLoop ();
 	}
-	
-	//攻撃力や攻撃者の情報を入れるクラス
-	public class AttackInfo {
-		public int attackPower;
-		public Transform attacker;
-	}
-	
+
 	//ダメージ値と攻撃者を設定して返す
 	AttackInfo GetAttackInfo(){
-		AttackInfo attackInfo = new AttackInfo ();
-		attackInfo.attackPower = status.Power;
-		//攻撃強化中
-		if (status.powerBoost)
-						attackInfo.attackPower += attackInfo.attackPower;
+			attackInfo.SetAttackPower (status.GetPower());
 
-		attackInfo.attacker = transform.root;
-		return attackInfo;
+		//攻撃強化中
+	if (status.GetPowerBoost ())
+			attackInfo.SetAttackBoostPower (attackInfo.GetAttackPower());
+			attackInfo.SetAttacker (transform.root);
+			return attackInfo;
 	}
-	
 	
 	void OnTriggerEnter(Collider other){
 		other.SendMessage ("Damage", GetAttackInfo());
-		status.lastAttackTarget = other.transform.root.gameObject;
-		hitSeAudio.Play ();
+		status.SetLastAttackTarget (other.transform.root.gameObject); 
+		PlayAudio ();
 	}
 	
 	//攻撃判定の有効、無効
@@ -50,5 +48,29 @@ public class AttackArea : MonoBehaviour {
 	void OnAttackTermination(){
 		collider.enabled = false;
 	}
-}
+
+	public void FindCharaStatusComponent(){
+		this.status = transform.root.GetComponent<CharaStatus>();
+	}
+		
+	public void FindAttackInfoComponent(){
+		this.attackInfo = GetComponentInChildren<AttackInfo>();
+	}
+		
+	public void AddAudioSourceComponent(){
+		this.hitSeAudio = gameObject.AddComponent<AudioSource>();
+	}
+	
+	public void HitSeAudioClip(){
+		this.hitSeAudio.clip = hitSeClip;
+	}
+		
+	public void HitSeAudioLoop(){
+		this.hitSeAudio.loop = false;	
+	}
+
+	public void PlayAudio(){
+		this.hitSeAudio.Play ();
+	}
+ }
 }

@@ -3,40 +3,70 @@ using System.Collections;
 using Cradle;
 
 namespace Cradle{
-public class AttackAreaActivation : MonoBehaviour {
+public class AttackAreaActivation : MonoBehaviour, IAAreaActivationController
+{
 	Collider[] attackAreaColliders; //攻撃判定コライダーの配列
-
+	AttackArea[] attackAreas;
 	public AudioClip attackSeClip;
 	AudioSource attackSeAudio;
+	public AAreaActivationController AAAcontroller;
+
+		
+	public void OnEnable() {
+		//AAAcontroller.SetEffectController (this);
+	}
 
 	void Start () {
-		AttackArea[] attackAreas = GetComponentsInChildren<AttackArea> ();
-		attackAreaColliders = new Collider[attackAreas.Length];
+		FindAttackAreaComponent ();
+		AttackAreaColliders ();
 
 		for(int attackAreaCount = 0; attackAreaCount < attackAreas.Length; attackAreaCount++){
 			attackAreaColliders[attackAreaCount] = attackAreas[attackAreaCount].collider;
 			attackAreaColliders[attackAreaCount].enabled = false; 
 		}
 		//オーディオの初期化
-		attackSeAudio = gameObject.AddComponent<AudioSource>();
-		attackSeAudio.clip = attackSeClip;
-		attackSeAudio.loop = false;
+			AddAudioSourceComponent ();
+			AttackSeAudioClip ();
+			AttackSeAudioLoop ();
 	}
 
+		//AnimatorイベントのStartAttackHitを受け取ってコライダを有効に
+		void StartAttackHit(){
+			foreach (Collider attackAreaCollider in attackAreaColliders)
+				attackAreaCollider.enabled = true;
+			//SE再生
+			PlayAudio ();
+		}
+		//AnimatorイベントのEndAttackHitを受け取ってコライダを無効に
+		void EndAttackHit(){
+			foreach (Collider attackAreaCollider in attackAreaColliders)
+				attackAreaCollider.enabled = false;
+		}
 
+		public void FindAttackAreaComponent(){
+			this.attackAreas = GetComponentsInChildren<AttackArea> ();
+		}
 
-	//AnimatorイベントのStartAttackHitを受け取ってコライダを有効に
-	void StartAttackHit(){
-		foreach (Collider attackAreaCollider in attackAreaColliders)
-						attackAreaCollider.enabled = true;
+		public void AttackAreaColliders(){
+			this.attackAreaColliders = new Collider[attackAreas.Length];
+		} 
 
-		//SE再生
-		attackSeAudio.Play ();
-	}
-	//AnimatorイベントのEndAttackHitを受け取ってコライダを無効に
-	void EndAttackHit(){
-		foreach (Collider attackAreaCollider in attackAreaColliders)
-						attackAreaCollider.enabled = false;
-	}
+		public void AddAudioSourceComponent(){
+			this.attackSeAudio = gameObject.AddComponent<AudioSource>();
+		}
+		
+		public void AttackSeAudioClip(){
+			this.attackSeAudio.clip = attackSeClip;
+		}
+		
+		public void AttackSeAudioLoop(){
+			this.attackSeAudio.loop = false;	
+		}
+
+		public void PlayAudio(){
+			this.attackSeAudio.Play ();
+		}
+
+	
 }
 }
