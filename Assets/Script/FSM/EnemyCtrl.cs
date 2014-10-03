@@ -23,8 +23,8 @@ public class EnemyCtrl : AdvancedFSM {
 
 	protected override void StartUp ()
 	{
-		elapsedTime = 0.0f;
-		attackRate = 4.0f;
+			setElapsedTime (0.0f);
+			setAttackRate (4.0f);
 
 		//コンポーネント取得
 		status = GetComponent<CharaStatus>();
@@ -46,7 +46,7 @@ public class EnemyCtrl : AdvancedFSM {
 
 	protected override void StateUpdate ()
 	{
-			elapsedTime += Time.deltaTime;
+			setUpElapsedTime (Time.deltaTime);
 	}
 
 	protected override void StateFixedUpdate()
@@ -125,10 +125,11 @@ public class EnemyCtrl : AdvancedFSM {
 
 	public void AttackStart()
 	{
-			if(elapsedTime >= attackRate)
+			if(getElapsedTime() >= getAttackRate())
 			{
 				status.SetAttacking(true);
-				elapsedTime = 0.0f;
+				//elapsedTime = 0.0f;
+				setElapsedTime(0.0f);
 			}
 		
 		//移動を止める
