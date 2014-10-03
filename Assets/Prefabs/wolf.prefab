@@ -1398,7 +1398,7 @@ MonoBehaviour:
   waitBaseTime: 2
   waitTime: 0
   walkRange: 5
-  DestroyTime: 0
+  DestroyTime: 5
   basePosition: {x: 0, y: 0, z: 0}
   dropItemPrefab:
   - {fileID: 100000, guid: 7fc73f4893030814989ca6772e29a0a9, type: 2}
