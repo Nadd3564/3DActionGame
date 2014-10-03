@@ -65,6 +65,7 @@ namespace Cradle.Test
 			}
 			catch(DifferentStringException e)
 			{
+
 			}
 
 			Assert.That (dIController.IsPlayer(s), Is.EqualTo(flg));
