@@ -14,7 +14,7 @@ namespace Cradle.Test
 		[SetUp] public void Init()
 		{ 
 			iDrop = GetItemMock ();
-			dIController = GetControllerMock (iDrop);	
+			dIController = GetControllerMock (iDrop);
 		}
 		
 		[TearDown] public void Cleanup()
@@ -33,15 +33,44 @@ namespace Cradle.Test
 		[Test]
 		[Category ("Calc Test")]
 		[TestCase(true)]
-		[TestCase(false)]
-		[TestCase(null)]
-		public void IsPlayerTest (bool flg) 
+		public void IsPlayerTest (bool flg)
 		{
 			string s = "Player";
-			string t = "NPC";
 			Assert.That (dIController.IsPlayer(s), Is.EqualTo(flg));
 		}
-		
+
+		[Test]
+		[Category ("Calc Test")]
+		[ExpectedException(typeof(DifferentStringException))]
+		[TestCase(true)]
+		[TestCase(false)]
+		[TestCase(null)]
+		public void IsPlayerWithDifferntStringTest (bool flg)
+		{
+			string s = "Player";
+			Assert.That (dIController.IsPlayer(s), Is.EqualTo(flg));
+		}
+
+		[Test]
+		[Category ("Calc Test")]
+		[ExpectedException(typeof(DifferentStringException))]
+		[TestCase(true)]
+		[TestCase(false)]
+		[TestCase(null)]
+		public void IsPlayerWithDifferntStringTest1 (bool flg)
+		{
+			string s = "Player";
+			try{
+				s = "NPC";
+			}
+			catch(DifferentStringException e)
+			{
+			}
+
+			Assert.That (dIController.IsPlayer(s), Is.EqualTo(flg));
+		}
+
+
 		[Test]
 		[Category ("Calc Test")]
 		[TestCase(true)]

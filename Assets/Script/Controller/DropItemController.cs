@@ -16,6 +16,8 @@ namespace Cradle
 			if (tag == "Player")
 					return true;
 			return false;
+			if(tag != "Player")
+				throw new DifferentStringException();
 		}
 
 		public bool IsTerrain(string tag) {
