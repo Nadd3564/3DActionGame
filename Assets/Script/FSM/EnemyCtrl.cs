@@ -3,45 +3,47 @@ using System.Collections;
 using Cradle.FM;
 
 namespace Cradle.FM{
-public class EnemyCtrl : AdvancedFSM {
-	CharaStatus status;
-	CharaAnimation charaAnimation;
-	CharaMove characterMove;
-	Transform attackTarget;
-	GameRuleSettings gameRuleSettings;
-	public GameObject hitEffect;
-	public float waitBaseTime = 2.0f; //待機時間
-	public float waitTime; //残り待機時間
-	public float walkRange = 5.0f; //移動範囲
-	public float DestroyTime = 5.0f;	//死体消滅時間
-	public Vector3 basePosition; //初期位置を保存
-	public GameObject[] dropItemPrefab; //複数のアイテムを入れる配列
-	GameObject target;
-	GUILayer layer;
-	public AudioClip deathSeClip;
-	AudioSource deathSeAudio;
+public class EnemyCtrl : AdvancedFSM, IEnemyController 
+	{
+		CharaStatus status;
+		CharaAnimation charaAnimation;
+		CharaMove characterMove;
+		Transform attackTarget;
+		GameRuleSettings gameRuleSettings;
+		public GameObject hitEffect;
+		public Vector3 basePosition; //初期位置を保存
+		public GameObject[] dropItemPrefab; //複数のアイテムを入れる配列
+		GameObject target;
+		GUILayer layer;
+		public AudioClip deathSeClip;
+		AudioSource deathSeAudio;
+		public EnemyCtrlController eController;
+		
+		public void OnEnable() {
+			eController.SetEnemyController (this);
+		}
 
 	protected override void StartUp ()
 	{
 			setElapsedTime (0.0f);
-			setAttackRate (4.0f);
+			setAttackRate (3.0f);
 
-		//コンポーネント取得
-		status = GetComponent<CharaStatus>();
-		charaAnimation = GetComponent<CharaAnimation>();
-		characterMove = GetComponent<CharaMove> ();
-		basePosition = transform.position;
-		waitTime = waitBaseTime;
-		gameRuleSettings = FindObjectOfType<GameRuleSettings> ();
+			//コンポーネント取得
+			status = GetComponent<CharaStatus>();
+			charaAnimation = GetComponent<CharaAnimation>();
+			characterMove = GetComponent<CharaMove> ();
+			basePosition = transform.position;
+			eController.SetWaitTime (eController.GetWaitBaseTime ());
+			gameRuleSettings = FindObjectOfType<GameRuleSettings> ();
 
-		GameObject objPlayer = GameObject.FindGameObjectWithTag ("Player");
-		playerTransform = objPlayer.transform;
+			GameObject objPlayer = GameObject.FindGameObjectWithTag ("Player");
+			playerTransform = objPlayer.transform;
 
-		if (!playerTransform)
-						print ("プレーヤーが存在しません。タグ'Player'を追加してください。");
+			if (!playerTransform)
+							print ("プレーヤーが存在しません。タグ'Player'を追加してください。");
 
-		//FSMを構築
-		BuildFSM ();
+			//FSMを構築
+			BuildFSM ();
 	}
 
 	protected override void StateUpdate ()
@@ -99,11 +101,11 @@ public class EnemyCtrl : AdvancedFSM {
 	
 	public	void Walking(Vector3 destPos){
 			//待機時間がまだあれば
-			if (waitTime > 0.0f) {
+			if (eController.GetWaitTime() > 0.0f) {
 				//待機時間を減らす
-				waitTime -= Time.deltaTime;
+				eController.SetDownWaitTime(Time.deltaTime);
 				//待機時間が無くなったら
-				if (waitTime <= 0.0f) {
+				if (eController.GetWaitTime() <= 0.0f) {
 					//移動先の設定（WanderPointのうちランダムにどこかへ）
 					Vector3 destinationPosition = destPos;
 					//目的地の指定
@@ -114,7 +116,7 @@ public class EnemyCtrl : AdvancedFSM {
 				//目的地へ到着
 				if(characterMove.Arrived()){
 					//待機状態へ
-					waitTime = Random.Range(waitBaseTime, waitBaseTime * 2.0f);
+					eController.SetWaitTime(Random.Range(eController.GetWaitBaseTime(), eController.GetWaitBaseTime() * 2.0f));
 				}
 				//ターゲットを発見したら追跡
 				if(attackTarget){
@@ -128,7 +130,6 @@ public class EnemyCtrl : AdvancedFSM {
 			if(getElapsedTime() >= getAttackRate())
 			{
 				status.SetAttacking(true);
-				//elapsedTime = 0.0f;
 				setElapsedTime(0.0f);
 			}
 		
@@ -185,7 +186,7 @@ public class EnemyCtrl : AdvancedFSM {
 	{
 		status.SetDied (true);
 		dropItem ();
-		Destroy (gameObject, DestroyTime);
+		Destroy (gameObject, eController.GetDestroyTime());
 		AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
 		if(gameObject.tag == "Enemy")
 		{

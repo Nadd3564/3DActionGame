@@ -60,14 +60,6 @@ namespace Cradle.Test
 		public void IsPlayerWithDifferntStringTest1 (bool flg)
 		{
 			string s = "Player";
-			try{
-				s = "NPC";
-			}
-			catch(DifferentStringException e)
-			{
-
-			}
-
 			Assert.That (dIController.IsPlayer(s), Is.EqualTo(flg));
 		}
 
@@ -83,7 +75,8 @@ namespace Cradle.Test
 			string t = "Terrain";
 			Assert.That (dIController.IsTerrain(t), Is.EqualTo(flg));
 		}
-		
+
+
 		private IDropItemController GetItemMock () {
 			return Substitute.For<IDropItemController> ();
 		}

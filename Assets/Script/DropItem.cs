@@ -5,11 +5,11 @@ using Cradle;
 namespace Cradle{
 public class DropItem : MonoBehaviour, IDropItemController {
 
-	public enum ItemKind
-	{
-		Attack,
-		Heal,
-	};
+		public enum ItemKind
+		{
+			Attack,
+			Heal,
+		};
 
 		public ItemKind kind;
 		public AudioClip itemSeClip;

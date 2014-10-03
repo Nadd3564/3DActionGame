@@ -40,7 +40,7 @@ namespace Cradle.Test
 
 		[Test]
 		[Category ("Calc Test")]
-		public void GetAttackRateIsNotTest([Range(1.0f, 10.0f, 1.0f)]float f) 
+		public void GetAttackRateIsNotTest([Values(1.0f, 10.0f, 100.0f, 1000.0f)]float f) 
 		{
 			Assert.That (fController.GetAttackRate(), Is.Not.EqualTo(f));		
 		}
