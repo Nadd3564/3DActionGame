@@ -2822,11 +2822,18 @@ MonoBehaviour:
 --- !u!114 &669342554
 MonoBehaviour:
   m_ObjectHideFlags: 0
+<<<<<<< HEAD
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 669342544}
+  m_Enabled: 1
+=======
   m_PrefabParentObject: {fileID: 11400018, guid: c0da5ed5b9f0cb24f8c326dc48b5366d,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 669342544}
   m_Enabled: 0
+>>>>>>> 1f4f1695cf0bd73b696ffd7209ff1a10347344fe
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d301a2550fd84d46b3ddc5cbd8c6a68, type: 3}
   m_Name: 
