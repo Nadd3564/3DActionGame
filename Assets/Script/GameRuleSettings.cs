@@ -3,53 +3,77 @@ using System.Collections;
 using Cradle;
 
 namespace Cradle{
-public class GameRuleSettings : MonoBehaviour {
-		//残り時間
-		public float gameSpeed = 1.0f;
-		public float timeRemaining = 5.0f + 60.0f;
-		public bool gameOver = false;
-		public bool gameClear = false;
-		public float sceneChangeTime = 20.0f;
+public class GameRuleSettings : MonoBehaviour, IRuleController {
+			public AudioClip clearSeClip;
+			AudioSource clearSeAudio;
+			public GameRuleSettingsController controller;
+			
+			
+			public void OnEnable() {
+				controller.SetRuleController (this);
+			}
 
-		public AudioClip clearSeClip;
-		AudioSource clearSeAudio;
+			void Start(){
+					//ゲームスピード初期化
+					InitializeGameSpeed ();
+					
+					//オーディオの初期化
+					FindAudioComponent ();
+					DisableLoopSE ();
+					ClipSE ();
+			}
 
-	void Start(){
-			Time.timeScale = gameSpeed;
-			//オーディオの初期化
-			clearSeAudio = gameObject.AddComponent<AudioSource>();
-			clearSeAudio.loop = false;
-			clearSeAudio.clip = clearSeClip;
-	}
 
+			void Update () {
+				//ゲームオーバー、クリア後、タイトルへ
+				ReturnTitle ();
+			}
 
-	void Update () {
-		//ゲームオーバー、クリア後、タイトルへ
-		if(gameOver || gameClear){
-			sceneChangeTime -= Time.deltaTime;
-			if(sceneChangeTime <= -10.0f){
+			public void GameOver(){
+				controller.SetGameOver (true);
+				Debug.Log ("GameOver");
+			}
+
+			public void GameClear(){
+				controller.SetGameClear (true);
+				Debug.Log ("GameClear");
+				PlaySE ();
+			}
+
+			public void FindAudioComponent(){
+				this.clearSeAudio = gameObject.AddComponent<AudioSource>();
+			}
+
+			public void DisableLoopSE(){
+				this.clearSeAudio.loop = false;
+			}
+
+			public void ClipSE(){
+				this.clearSeAudio.clip = clearSeClip;
+			}
+
+			public void PlaySE(){
+				this.clearSeAudio.Play ();
+			}
+
+			public void InitializeGameSpeed(){
+				Time.timeScale = controller.GetGameSpeed();
+			}
+
+			public void SwitchScene(){
 				Application.LoadLevel("TitleScene");
 			}
-			return;
+
+			public void ReturnTitle(){
+				if(controller.GameFlgs()){
+					//シーン切り替えまでのカウント開始
+					controller.SetCountSceneChangeTime(Time.deltaTime);
+					if(controller.TimeRemaining()){
+						SwitchScene();
+					}
+					return;
+				}
+			}
+			
 		}
-
-		//timeRemaining -= Time.deltaTime;
-		//残り時間が無くなったらゲームオーバー
-		//if(timeRemaining <= 0.0f){
-		//	GameOver();
-		//}
-	}
-
-	public void GameOver(){
-		gameOver = true;
-		Debug.Log ("GameOver");
-	}
-
-	public void GameClear(){
-		gameClear = true;
-		Debug.Log ("GameClear");
-
-		clearSeAudio.Play ();
-	}
-}
 }

@@ -112,7 +112,7 @@ public class PlayerStatusController : MonoBehaviour {
 	//攻撃状態が始まる前に呼び出される
 	void AttackStart(){
 		StateStartCommon ();
-		status.attacking = true;
+			status.SetAttacking (true);
 
 		//敵の方向に振り向かせる
 		Vector3 targetDirection = (attackTarget.position- transform.position).normalized;
@@ -130,18 +130,20 @@ public class PlayerStatusController : MonoBehaviour {
 	}
 
 	void Died(){
-		status.died = true;
+		status.SetDied (true);
 		gameRuleSettings.GameOver ();
 		deathSeAudio.Play ();
 	}
 
-void Damage(AttackArea.AttackInfo attackInfo){
+//void Damage(AttackArea.AttackInfo attackInfo){
+		void Damage(AttackInfo attackInfo){
 		GameObject effect = Instantiate (hitEffect, transform.position, Quaternion.identity) as GameObject;
 		effect.transform.localPosition = transform.position + new Vector3 (0.0f, 0.5f, 0.0f);
 		Destroy (effect, 0.3f);
-		status.HP -= attackInfo.attackPower;
-		if(status.HP <= 0){
-			status.HP = 0;
+		//status.DamageHP (attackInfo.attackPower); 
+		status.DamageHP (attackInfo.GetAttackPower());
+		if(status.GetHP() <= 0){
+				status.SetHP(0);
 			//体力0でダウン
 			ChangeState(State.Died);
 		}
@@ -149,8 +151,8 @@ void Damage(AttackArea.AttackInfo attackInfo){
 
 	//ステータスを初期化
 	void StateStartCommon(){
-		status.attacking = false;
-		status.died = false;
+		status.SetAttacking (false);
+		status.SetDied(false);
 	}
 }
 }
