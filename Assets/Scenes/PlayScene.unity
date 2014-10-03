@@ -1058,9 +1058,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d87a09103f56eb4296b456ac19828d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   radius: 1
   angularVelocity: 480
   destination: {x: 0, y: .5, z: 0}
+=======
+  destination: {x: 0, y: .5, z: 0}
+  controller:
+    radius: 1
+    angularVelocity: 480
+    angle: 0
+>>>>>>> 9bc8bf2df32f49396e61d74703a7da41ff2907f5
 --- !u!199 &475155724
 ParticleSystemRenderer:
   m_ObjectHideFlags: 0
@@ -2820,11 +2828,24 @@ MonoBehaviour:
 --- !u!114 &669342554
 MonoBehaviour:
   m_ObjectHideFlags: 0
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 669342544}
+  m_Enabled: 1
+=======
+>>>>>>> 9bc8bf2df32f49396e61d74703a7da41ff2907f5
   m_PrefabParentObject: {fileID: 11400018, guid: c0da5ed5b9f0cb24f8c326dc48b5366d,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 669342544}
   m_Enabled: 0
+<<<<<<< HEAD
+=======
+>>>>>>> 1f4f1695cf0bd73b696ffd7209ff1a10347344fe
+>>>>>>> 9bc8bf2df32f49396e61d74703a7da41ff2907f5
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d301a2550fd84d46b3ddc5cbd8c6a68, type: 3}
   m_Name: 
