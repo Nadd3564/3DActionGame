@@ -2724,7 +2724,7 @@ MonoBehaviour:
   cMcontroller:
     arrived: 0
     forceRotate: 0
-    walkSpeed: 4
+    walkSpeed: 5
     rotationSpeed: 360
 --- !u!143 &669342548
 CharacterController:
