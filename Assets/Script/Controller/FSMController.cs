@@ -12,10 +12,9 @@ namespace Cradle.FM
 		private float elapsedTime;
 		private float calcTime = 0.0f;
 		private IFSMController fsmController;
-		
-		
+
 		public FSMController(){
-			
+
 		}
 
 		public float GetAttackRate(){

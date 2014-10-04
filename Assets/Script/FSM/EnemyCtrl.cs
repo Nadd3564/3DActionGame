@@ -6,25 +6,28 @@ using Cradle;
 namespace Cradle.FM{
 public class EnemyCtrl : AdvancedFSM, IEnemyController 
 	{
-		GameObject objPlayer;
+		GameObject objPlayer; //Playerの位置
+		GameObject dropItem;
+		GameObject target;	
+		public Vector3 basePosition; //初期位置を保存
+		Vector3 vec;
+		Vector3 destinationPosition;
+		public GameObject hitEffect;
+		private GameObject effect;
+		public GameObject[] dropItemPrefab; //複数のアイテムを入れる配列
+
+
 		CharaStatus status;
 		CharaAnimation charaAnimation;
 		CharaMove characterMove;
-		Transform attackTarget;
 		GameRuleSettings gameRuleSettings;
-		public GameObject hitEffect;
-		public Vector3 basePosition; //初期位置を保存
-		public GameObject[] dropItemPrefab; //複数のアイテムを入れる配列
-		private GameObject effect;
-		GameObject dropItem;
-		Vector3 vec;
-		Vector3 destinationPosition;
-		GameObject target;
+
 		public AudioClip deathSeClip;
 		AudioSource deathSeAudio;
 
 		public EnemyCtrlController eController;
-		
+
+
 		public void OnEnable() {
 			eController.SetEnemyController (this);
 		}
@@ -40,6 +43,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 				SetBasePosition ();
 				SetPlayerTransform (objPlayer.transform);
 				Log ();
+				eController.CalcBoostTime ();
 
 				//FSMを構築
 				BuildFSM ();
@@ -55,6 +59,8 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 			CurrentState.Reason (playerTransform, transform);
 			CurrentState.Act (playerTransform, transform);
 		}
+
+
 
 		public void GetComponents(){
 			FindStatusComponent ();
@@ -135,13 +141,9 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 			AddFSMState (attack);
 			AddFSMState (dead);
 		}
-		
 
-		public void DestPos(Vector3 destPos){
-			this.destinationPosition = destPos;		
-		}
 
-		public	void Walking(Vector3 destPos){
+		public void Walking(Vector3 destPos){
 				//待機時間がまだあれば
 				if (eController.ThanTime()) {
 					//待機時間を減らす
@@ -160,12 +162,14 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 						//待機状態へ
 						eController.SetWaitTime(Random.Range(eController.GetWaitBaseTime(), eController.GetWaitBaseTime() * 2.0f));
 					}
-					//ターゲットを発見したら追跡
-					if(attackTarget){
-						SetTransition(Transition.ReachPlayer);
-					}
 				}
 			}
+
+		//移動先の設定
+		public void DestPos(Vector3 destPos){
+			this.destinationPosition = destPos;		
+		}
+
 
 		//ElapsedTimeがattackRateを超えたら攻撃
 		public void AttackStart()
@@ -178,15 +182,8 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 			
 			//移動を止める
 			SendMessage ("StopMove");
-			Attacking ();
 		}
 
-
-		//攻撃中の処理
-		public void Attacking(){
-				//ターゲットをリセット
-				attackTarget = null;
-		}
 
 			void Damage(AttackInfo attackInfo)
 		{
@@ -202,7 +199,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 				//死体を攻撃できないようにする
 				foreach (Transform child in transform)
 				{
-					if(eController.IsEnemyHit(child.tag))
+					if(eController.IsTagCheck(child.tag, "EnemyHit"))
 					{
 						target = child.gameObject;
 					}
@@ -223,6 +220,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 			this.effect.transform.localPosition = transform.position + new Vector3 (0.0f, 0.5f, 0.0f);
 		}
 
+
 		public void DropItem()
 		{
 			if(eController.ThanItemPrefab(dropItemPrefab.Length)){ return; }
@@ -231,21 +229,26 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 			Instantiate (dropItem, transform.position + vec, Quaternion.identity);
 		}
 
+
+		//ランダムでドロップするアイテムを選出
+		public void InitItem(){
+			this.dropItem = dropItemPrefab[Random.Range(0, dropItemPrefab.Length)];
+		}
+
+		//アイテムがポップする
 		public void JumpItem(){
 			this.vec = dropItem.transform.up;
 			this.vec.y += 1.0f;
 		}
 
-		public void InitItem(){
-			this.dropItem = dropItemPrefab[Random.Range(0, dropItemPrefab.Length)];
-		}
+
 
 		public void Died()
 		{
 			status.SetDied (true);
 			DropItem ();
 			Destroy (gameObject, eController.GetDestroyTime());
-			AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
+			PlayDeathSE ();
 				//ボスだった場合、ゲームクリア
 				foreach (Transform child in transform)
 				{
@@ -256,9 +259,16 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 				}
 
 				//Deadタグへ更新
-			this.gameObject.tag = "Dead";
+			SetTag ();
 		}
 
+		public void PlayDeathSE(){
+			AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
+		}
+
+		public void SetTag(){
+			this.gameObject.tag = "Dead";
+		}
 
 		//ステータスを初期化
 		public void StateStartCommon()
@@ -266,12 +276,6 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 			status.SetAttacking (false);
 			status.SetDied(false);
 		}
-		
 
-		//攻撃対象を設定する
-		public void SetAttackTarget(Transform target)
-		{
-			attackTarget = target;
-		}
 	}
-	}
+}
