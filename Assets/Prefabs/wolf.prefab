@@ -599,7 +599,7 @@ GameObject:
   - 4: {fileID: 400078}
   m_Layer: 0
   m_Name: mixamorig:LeftUpLeg
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1367,7 +1367,7 @@ MonoBehaviour:
     attacking: 0
     died: 0
     powerBoost: 0
-    charactername: Player
+    charactername: Wolf
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1416,15 +1416,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 100000, guid: 5277b4077b5df634aa70c4bf149df554, type: 2}
-  waitBaseTime: 2
-  waitTime: 0
-  walkRange: 5
-  DestroyTime: 5
   basePosition: {x: 0, y: 0, z: 0}
   dropItemPrefab:
   - {fileID: 100000, guid: 7fc73f4893030814989ca6772e29a0a9, type: 2}
   - {fileID: 100002, guid: c9e08aa43f5b9fa4f97137e036231644, type: 2}
   deathSeClip: {fileID: 8300000, guid: 4482e81215e545446b247a68ba0ae6ad, type: 3}
+  eController:
+    waitBaseTime: 2
+    waitTime: 0
+    walkRange: 5
+    DestroyTime: 5
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

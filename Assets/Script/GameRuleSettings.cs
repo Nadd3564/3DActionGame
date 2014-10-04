@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Cradle;
+using Cradle.FM;
 
 namespace Cradle{
 public class GameRuleSettings : MonoBehaviour, IRuleController {

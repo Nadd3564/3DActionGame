@@ -5,6 +5,5 @@ namespace Cradle.FM
 {
 	public interface IFSMController
 	{
-
 	}
 }

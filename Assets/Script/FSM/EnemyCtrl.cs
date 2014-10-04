@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Cradle.FM;
+using Cradle;
 
 namespace Cradle.FM{
 public class EnemyCtrl : AdvancedFSM, IEnemyController 
@@ -14,6 +15,10 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 		public GameObject hitEffect;
 		public Vector3 basePosition; //初期位置を保存
 		public GameObject[] dropItemPrefab; //複数のアイテムを入れる配列
+		private GameObject effect;
+		GameObject dropItem;
+		Vector3 vec;
+		Vector3 destinationPosition;
 		GameObject target;
 		public AudioClip deathSeClip;
 		AudioSource deathSeAudio;
@@ -81,7 +86,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 		}
 
 		public void FindGameRuleComponent(){
-			this.gameRuleSettings = GetComponent<GameRuleSettings>();		
+			this.gameRuleSettings = FindObjectOfType<GameRuleSettings>();		
 		}
 
 		public void SetBasePosition(){
@@ -131,7 +136,11 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 			AddFSMState (dead);
 		}
 		
-		
+
+		public void DestPos(Vector3 destPos){
+			this.destinationPosition = destPos;		
+		}
+
 		public	void Walking(Vector3 destPos){
 				//待機時間がまだあれば
 				if (eController.ThanTime()) {
@@ -140,7 +149,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 					//待機時間が無くなったら
 					if (eController.LessThanTime()) {
 						//移動先の設定（WanderPointのうちランダムにどこかへ）
-						Vector3 destinationPosition = destPos;
+						DestPos(destPos);
 						//目的地の指定
 						SendMessage ("SetDestination", destinationPosition);
 						SendMessage("SetDirection", destinationPosition);
@@ -158,6 +167,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 				}
 			}
 
+		//ElapsedTimeがattackRateを超えたら攻撃
 		public void AttackStart()
 		{
 				if(attackCount())
@@ -181,18 +191,18 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 			void Damage(AttackInfo attackInfo)
 		{
 			//ヒットエフェクト
-			GameObject effect = Instantiate (hitEffect, transform.position, Quaternion.identity) as GameObject;
-			effect.transform.localPosition = transform.position + new Vector3 (0.0f, 0.5f, 0.0f);
+			CreateHitEffect ();
+			EffectPos ();
 			Destroy (effect, 0.3f);
 			
 			status.DamageHP(attackInfo.GetAttackPower());
-			if(status.GetHP() <= 0)
+			if(eController.LessThanHP(status.GetHP()))
 			{
 					status.SetHP(0);
 				//死体を攻撃できないようにする
 				foreach (Transform child in transform)
 				{
-					if(child.tag == "EnemyHit")
+					if(eController.IsEnemyHit(child.tag))
 					{
 						target = child.gameObject;
 					}
@@ -205,34 +215,48 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 			}
 		}
 
-		public void dropItem()
+		public void CreateHitEffect(){
+			this.effect = Instantiate (hitEffect, transform.position, Quaternion.identity) as GameObject;
+		}
+
+		public void EffectPos(){
+			this.effect.transform.localPosition = transform.position + new Vector3 (0.0f, 0.5f, 0.0f);
+		}
+
+		public void DropItem()
 		{
-			if(dropItemPrefab.Length == 0){ return; }
-			GameObject dropItem = dropItemPrefab[Random.Range(0, dropItemPrefab.Length)];
-			Vector3 vec = dropItem.transform.up;
-			vec.y += 1.0f;
+			if(eController.ThanItemPrefab(dropItemPrefab.Length)){ return; }
+			InitItem ();
+			JumpItem ();
 			Instantiate (dropItem, transform.position + vec, Quaternion.identity);
 		}
-		
+
+		public void JumpItem(){
+			this.vec = dropItem.transform.up;
+			this.vec.y += 1.0f;
+		}
+
+		public void InitItem(){
+			this.dropItem = dropItemPrefab[Random.Range(0, dropItemPrefab.Length)];
+		}
+
 		public void Died()
 		{
 			status.SetDied (true);
-			dropItem ();
+			DropItem ();
 			Destroy (gameObject, eController.GetDestroyTime());
 			AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
-			if(gameObject.tag == "Enemy")
-			{
-					//ボスだった場合、ゲームクリア
-					foreach (Transform child in transform)
+				//ボスだった場合、ゲームクリア
+				foreach (Transform child in transform)
+				{
+					if(eController.IsTagCheck(child.tag, "Boss"))
 					{
-						if(child.tag == "Boss")
-						{
-							gameRuleSettings.GameClear();
-						}
+						gameRuleSettings.GameClear();
 					}
-			}
+				}
+
 				//Deadタグへ更新
-				this.gameObject.tag = "Dead";
+			this.gameObject.tag = "Dead";
 		}
 
 

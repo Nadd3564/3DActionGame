@@ -39,6 +39,35 @@ namespace Cradle.FM
 			return this.DestroyTime;	
 		}
 
+
+		public bool IsEnemyHit(string s){
+		if (s == "EnemyHit")
+				return true;
+			return false;
+		}
+
+		public string SetTag(string s){
+			return s = "Dead";
+		}
+
+		public bool IsTagCheck(string s, string t){
+			if (s == t)
+				return true;
+			return false;
+		}
+
+		public bool LessThanHP(int i){
+		if (i <= 0)
+				return true;
+			return false;
+		}
+
+		public bool ThanItemPrefab(int itemLength){
+			if (itemLength == 0)
+				return true;
+			return false;
+		}
+
 		public bool ThanTime(){
 			if (GetWaitTime () > 0.0f)
 				return true;
