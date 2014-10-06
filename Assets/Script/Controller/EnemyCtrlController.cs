@@ -46,10 +46,6 @@ namespace Cradle.FM
 			return false;
 		}
 
-		public string SetTag(string s){
-			return s = "Dead";
-		}
-
 		public bool IsTagCheck(string s, string t){
 			if (s == t)
 				return true;

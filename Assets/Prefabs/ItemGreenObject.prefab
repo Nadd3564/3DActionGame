@@ -142,8 +142,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dbc8fe7a320f554f9c4a8f52dce3257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kind: 1
   itemSeClip: {fileID: 8300000, guid: 4e93626cd7d23cc40b2de5d76b928ee4, type: 3}
+  iStatus: {fileID: 0}
+  controller:
+    kind: 1
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

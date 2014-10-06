@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Cradle;
+using Cradle.FM;
+
 namespace Cradle{
 public class EnemyGenerator : MonoBehaviour, IGeneratorController {
 		//生成される敵

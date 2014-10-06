@@ -21,6 +21,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 		CharaAnimation charaAnimation;
 		CharaMove characterMove;
 		GameRuleSettings gameRuleSettings;
+		//public FSMState fsmState;
 
 		public AudioClip deathSeClip;
 		AudioSource deathSeAudio;
@@ -122,20 +123,20 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 			SearchState search = new SearchState (waypoints);
 			search.AddTransition (Transition.SawPlayer, FSMStateID.Approaching);
 			search.AddTransition (Transition.NoHealth, FSMStateID.Dead);
-
+			
 			ApproachState approach = new ApproachState (waypoints);
 			approach.AddTransition (Transition.LostPlayer, FSMStateID.Searching);
 			approach.AddTransition (Transition.ReachPlayer, FSMStateID.Attacking);
 			approach.AddTransition (Transition.NoHealth, FSMStateID.Dead);
-
+			
 			AttackState attack = new AttackState (waypoints);
 			attack.AddTransition (Transition.LostPlayer, FSMStateID.Searching);
 			attack.AddTransition (Transition.SawPlayer, FSMStateID.Approaching);
 			attack.AddTransition (Transition.NoHealth, FSMStateID.Dead);
-
+			
 			DeadState dead = new DeadState ();
 			dead.AddTransition (Transition.NoHealth, FSMStateID.Dead);
-
+			
 			AddFSMState (search);
 			AddFSMState (approach);
 			AddFSMState (attack);

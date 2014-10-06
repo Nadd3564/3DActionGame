@@ -5,19 +5,14 @@ using Cradle;
 namespace Cradle{
 public class DropItem : MonoBehaviour, IDropItemController {
 
-		public enum ItemKind
-		{
-			Attack,
-			Heal,
-		};
-
-		public ItemKind kind;
 		public AudioClip itemSeClip;
 		public CharaStatus iStatus;
-		public DropItemController controller;
 		Vector3 velocity;
 		TerrainCollider tCollider;
-		
+
+
+		public DropItemController controller;
+
 		public void OnEnable() {
 			controller.SetDropItemController (this);
 		}
@@ -28,7 +23,7 @@ public class DropItem : MonoBehaviour, IDropItemController {
 			{
 				//アイテム取得
 				FindCharaStatusComponent(other);
-				iStatus.GetItem (kind);
+				iStatus.GetItem (controller.kind);
 				//取得したらアイテムを消す
 				Destroy (gameObject);
 				PlaySE();

@@ -14,13 +14,13 @@ namespace Cradle {
 		}
 		
 		//アイテム取得
-		public void GetItem(DropItem.ItemKind itemKind){
+		public void GetItem(DropItemController.ItemKind itemKind){
 			switch(itemKind){
-			case DropItem.ItemKind.Attack:
+			case DropItemController.ItemKind.Attack:
 				controller.SetBoostTime(10.0f);
 				PlayEffect();
 				break;
-			case DropItem.ItemKind.Heal:
+			case DropItemController.ItemKind.Heal:
 				controller.CalcHP();
 				break;
 			}

@@ -5,122 +5,130 @@ using Cradle.FM;
 
 
 /// @http://creativecommons.org/licenses/by-sa/3.0/
+ 
 namespace Cradle.FM{
-
-public enum Transition
-{
-	None = 0,
-	SawPlayer,
-	ReachPlayer,
-	LostPlayer,
-	NoHealth,
-}
-
-public enum FSMStateID
-{
-	None = 0,
-	Searching,
-	Approaching,
-	Attacking,
-	Dead,
-}
-
-
-public class AdvancedFSM : FSM {
-	private List<FSMState> fsmStates;
 	
-	//fsmStates
-	private FSMStateID currentStateID;
-	public FSMStateID CurrentStateID{ get { return currentStateID; }}
-
-	private FSMState currentState;
-	public FSMState CurrentState { get { return currentState; } }
-
-
-	public AdvancedFSM(){
-		fsmStates = new List<FSMState> ();
+	public enum Transition
+	{
+		None = 0,
+		SawPlayer,
+		ReachPlayer,
+		LostPlayer,
+		NoHealth,
 	}
 	
-	//新たに状態を追加
-	public void AddFSMState(FSMState fsmState){
-	//引数の確認
-		if(fsmState == null){
-			Debug.LogError("FSM ERROR: Null reference is not allowed");
+	public enum FSMStateID
+	{
+		None = 0,
+		Searching,
+		Approaching,
+		Attacking,
+		Dead,
+	}
+	
+	
+	public class AdvancedFSM : FSM, IAdvancedController {
+		private List<FSMState> fsmStates;
+		
+		//fsmStates
+		private FSMStateID currentStateID;
+		public FSMStateID CurrentStateID{ get { return currentStateID; }}
+		
+		private FSMState currentState;
+		public FSMState CurrentState { get { return currentState; } }
+		
+
+		public AdvancedFSMController aFSMcontroller;
+		
+		public void OnEnable() {
+			aFSMcontroller.SetAdvancedController (this);
 		}
 
-		//状態が存在しないときの条件式
-		if(fsmStates.Count == 0)
-		{
-			fsmStates.Add(fsmState);
-			currentState = fsmState;
-			currentStateID = fsmState.ID;
-			return;
+		public AdvancedFSM(){
+			fsmStates = new List<FSMState> ();
 		}
-
-		//状態が存在する場合の条件式
-		foreach(FSMState state in fsmStates)
-		{
-			if(state.ID == fsmState.ID)
+		
+		//新たに状態を追加
+		public void AddFSMState(FSMState fsmState){
+			//引数の確認
+			if(fsmState == null){
+				Debug.LogError("FSM ERROR: Null reference is not allowed");
+			}
+			
+			//状態が存在しないときの条件式
+			//if(fsmStates.Count == 0)
+			if(aFSMcontroller.FSMStateCount(fsmStates.Count))
 			{
-				Debug.LogError("FSM ERROR: 既に存在する状態をリストに追加しようとしています。");
+				fsmStates.Add(fsmState);
+				currentState = fsmState;
+				currentStateID = fsmState.ID;
 				return;
 			}
-		}
-
-		//状態をリストに追加する
-		fsmStates.Add (fsmState);
-	}
-
-	//状態を削除する場合に使う
-	public void DeleteState(FSMStateID fsmState)
-	{
-		//削除する前に、状態が空でないか確認
-		if (fsmState == FSMStateID.None)
-		{
-			Debug.LogError("FSM ERROR: 不正なIDです。");
-			return;
-		}
-
-		//状態を削除
-		foreach(FSMState state in fsmStates)
-		{
-			if(state.ID == fsmState)
+			
+			//状態が存在する場合の条件式
+			foreach(FSMState state in fsmStates)
 			{
-				fsmStates.Remove(state);
+				if(aFSMcontroller.AsFSMStateID(state.ID, fsmState.ID))
+				{
+					Debug.LogError("FSM ERROR: 既に存在する状態をリストに追加しようとしています。");
+					return;
+				}
+			}
+			
+			//状態をリストに追加する
+			fsmStates.Add (fsmState);
+		}
+		
+		//状態を削除する場合に使う
+		public void DeleteState(FSMStateID fsmState)
+		{
+			//削除する前に、状態が空でないか確認
+			if (aFSMcontroller.AsFSMStateID(fsmState, FSMStateID.None))
+			{
+				Debug.LogError("FSM ERROR: 不正なIDです。");
 				return;
 			}
-		}
-		Debug.LogError ("FSM ERROR: 指定された状態が存在しません。削除に失敗しました。");
-	}
-
-	//このメソッドで遷移させる
-	public void RunTransition(Transition trans)
-	{
-		//引数の確認
-		if(trans == Transition.None)
-		{
-			Debug.LogError("FSM ERROR: Null遷移は不正です。");
-			return;
-		}
-
-		//currentStateが指定の遷移についての状態を持つか
-		FSMStateID id = currentState.GetOutputState (trans);
-		if(id == FSMStateID.None)
-		{
-			Debug.LogError("FSM ERROR: 現在の状態はこの遷移が指定する状態を持ちません。");
-			return;
-		}
-
-		//currentStateIDとcurrentStateを更新
-		currentStateID = id;
-		foreach(FSMState state in fsmStates)
-		{
-			if(state.ID == currentStateID)
+			
+			//状態を削除
+			foreach(FSMState state in fsmStates)
 			{
-				currentState = state;
-				break;
+				if(aFSMcontroller.AsFSMStateID(state.ID, fsmState))
+				{
+					fsmStates.Remove(state);
+					return;
+				}
+			}
+			Debug.LogError ("FSM ERROR: 指定された状態が存在しません。削除に失敗しました。");
+		}
+		
+		//このメソッドで遷移させる
+		public void RunTransition(Transition trans)
+		{
+			//引数の確認
+			if(aFSMcontroller.AsTrans(trans))
+			{
+				Debug.LogError("FSM ERROR: Null遷移は不正です。");
+				return;
+			}
+			
+			//currentStateが指定の遷移についての状態を持つか
+			FSMStateID id = currentState.GetOutputState (trans);
+			if(aFSMcontroller.AsFSMStateID(id, FSMStateID.None))
+			{
+				Debug.LogError("FSM ERROR: 現在の状態はこの遷移が指定する状態を持ちません。");
+				return;
+			}
+			
+			//currentStateIDとcurrentStateを更新
+			currentStateID = id;
+			foreach(FSMState state in fsmStates)
+			{
+				if(aFSMcontroller.AsFSMStateID(state.ID, currentStateID))
+				{
+					currentState = state;
+					break;
+				}
 			}
 		}
-	}
 	}
 }

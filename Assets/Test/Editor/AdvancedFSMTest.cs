@@ -6,26 +6,23 @@ using Cradle.FM;
 namespace Cradle.Test
 {
 	[TestFixture]
-	[Category ("DropItem Test")]
-	public class DropItemTest
+	[Category ("AdvancedFSM Test")]
+	public class AdvancedFSMTest
 	{
-		public IDropItemController iDrop;
-		public DropItemController dIController;
-	
+		
 		[SetUp] public void Init()
 		{ 
-			iDrop = GetItemMock ();
-			dIController = GetControllerMock (iDrop);
+			//iDrop = GetItemMock ();
+			//dIController = GetControllerMock (iDrop);
 		}
 		
 		[TearDown] public void Cleanup()
 		{
 			
 		}
-
-
+		
 		//正常値テスト
-		[Test]
+		/*[Test]
 		[Category ("Calc Test")]
 		public void CalcTimeTest ()
 		{
@@ -40,7 +37,7 @@ namespace Cradle.Test
 			string s = "Player";
 			Assert.That (dIController.IsPlayer(s), Is.EqualTo(flg));
 		}
-
+		
 		[Test]
 		[Category ("Calc Test")]
 		[ExpectedException(typeof(DifferentStringException))]
@@ -52,7 +49,7 @@ namespace Cradle.Test
 			string s = "Player";
 			Assert.That (dIController.IsPlayer(s), Is.EqualTo(flg));
 		}
-
+		
 		[Test]
 		[Category ("Calc Test")]
 		[ExpectedException(typeof(DifferentStringException))]
@@ -64,8 +61,8 @@ namespace Cradle.Test
 			string s = "Player";
 			Assert.That (dIController.IsPlayer(s), Is.EqualTo(flg));
 		}
-
-
+		
+		
 		[Test]
 		[Category ("Calc Test")]
 		[ExpectedException(typeof(DifferentStringException))]
@@ -76,8 +73,8 @@ namespace Cradle.Test
 		{
 			Assert.That (dIController.itemKind(), Is.EqualTo(flg));
 		}
-
-
+		
+		
 		[Test]
 		[Category ("Calc Test")]
 		[TestCase(true)]
@@ -89,8 +86,8 @@ namespace Cradle.Test
 			string t = "Terrain";
 			Assert.That (dIController.IsTerrain(t), Is.EqualTo(flg));
 		}
-
-
+		
+		
 		private IDropItemController GetItemMock () {
 			return Substitute.For<IDropItemController> ();
 		}
@@ -100,7 +97,7 @@ namespace Cradle.Test
 			dIController.SetDropItemController (iDrop);
 			dIController.CalcTime ().Returns (0.0f);
 			return dIController;
-		}
+		}*/
 		
 	}
 }

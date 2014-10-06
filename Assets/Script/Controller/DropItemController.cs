@@ -6,10 +6,31 @@ namespace Cradle
 	[Serializable]
 	public class DropItemController
 	{
+
+		public enum ItemKind
+		{
+			Attack,
+			Heal,
+		};
+
+		public ItemKind kind;
 		private float calcTime = 0.0f;
 		private IDropItemController dropItemController;
 		
 		public DropItemController (){
+		}
+
+		public ItemKind GetAttackKind(){
+			return ItemKind.Attack;	
+		}
+
+		public ItemKind GetHealKind(){
+			return ItemKind.Heal;	
+		}
+
+		public ItemKind itemKind(){
+			return ItemKind.Heal; 
+				return ItemKind.Attack;	
 		}
 
 		public bool IsPlayer(string tag) {
