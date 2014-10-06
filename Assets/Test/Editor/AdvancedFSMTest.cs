@@ -9,11 +9,13 @@ namespace Cradle.Test
 	[Category ("AdvancedFSM Test")]
 	public class AdvancedFSMTest
 	{
+		public IAdvancedController iAdv;
+		public AdvancedFSMController advController;
 		
 		[SetUp] public void Init()
 		{ 
-			//iDrop = GetItemMock ();
-			//dIController = GetControllerMock (iDrop);
+			iAdv = GetAdvancedMock ();
+			advController = GetControllerMock (iAdv);
 		}
 		
 		[TearDown] public void Cleanup()
@@ -21,83 +23,90 @@ namespace Cradle.Test
 			
 		}
 		
+		
 		//正常値テスト
-		/*[Test]
+		[Test]
 		[Category ("Calc Test")]
 		public void CalcTimeTest ()
 		{
-			Assert.That (dIController.CalcTime(), Is.EqualTo (0.0f));
+			Assert.That (advController.CalcTime(), Is.EqualTo (0.0f));
 		}
 		
 		[Test]
-		[Category ("Calc Test")]
-		[TestCase(true)]
-		public void IsPlayerTest (bool flg)
+		[Category ("Boolian Test")]
+		public void IsFSMStateCountTest ([Values(0,null)]int i)
 		{
-			string s = "Player";
-			Assert.That (dIController.IsPlayer(s), Is.EqualTo(flg));
+			Assert.True(advController.FSMStateCount(i));
+		}
+
+		[Test]
+		[Category ("Boolian Test")]
+		public void IsNotFSMStateCountTest ([Values(-100,-1,1,100)]int i)
+		{
+			Assert.False(advController.FSMStateCount(i));
+		}
+
+		[Test]
+		[Category ("Boolian Test")]
+		public void IsAsTrans ([Values(Transition.None, null)]Transition t)
+		{
+			Assert.True(advController.AsTrans(t));
 		}
 		
 		[Test]
-		[Category ("Calc Test")]
-		[ExpectedException(typeof(DifferentStringException))]
-		[TestCase(true)]
-		[TestCase(false)]
-		[TestCase(null)]
-		public void IsPlayerWithDifferntStringTest (bool flg)
+		[Category ("Boolian Test")]
+		public void IsNotAsTrans ([Values(Transition.LostPlayer,
+		                                  Transition.NoHealth, Transition.ReachPlayer,
+		                                  Transition.SawPlayer)]Transition t)
 		{
-			string s = "Player";
-			Assert.That (dIController.IsPlayer(s), Is.EqualTo(flg));
+			Assert.False(advController.AsTrans(t));
+		}
+
+
+		[Test]
+		[Category ("Boolian Test")]
+		public void AsFSMStateID ([Values(FSMStateID.None, null)]FSMStateID f, [Values(FSMStateID.None, null)]FSMStateID s)
+		{
+			Assert.True(advController.AsFSMStateID(f, s));
 		}
 		
 		[Test]
-		[Category ("Calc Test")]
-		[ExpectedException(typeof(DifferentStringException))]
-		[TestCase(true)]
-		[TestCase(false)]
-		[TestCase(null)]
-		public void IsPlayerWithDifferntStringTest1 (bool flg)
+		[Category ("Boolian Test")]
+		public void NotAsFSMStateID ([Values(FSMStateID.Approaching, FSMStateID.Searching)]FSMStateID f, 
+		                             [Values(FSMStateID.Attacking, FSMStateID.Dead,FSMStateID.None)]FSMStateID s)
 		{
-			string s = "Player";
-			Assert.That (dIController.IsPlayer(s), Is.EqualTo(flg));
+			Assert.False(advController.AsFSMStateID(f, s));
 		}
-		
+
+
+		[Test]
+		[Category ("Boolian Test")]
+		public void SetCurrentStateID ([Values(FSMStateID.None, null)]FSMStateID f, [Values(FSMStateID.None, null)]FSMStateID s)
+		{
+			advController.SetCurrentStateID (f, s);
+			Assert.That(s, Is.EqualTo(f));
+		}
 		
 		[Test]
-		[Category ("Calc Test")]
-		[ExpectedException(typeof(DifferentStringException))]
-		[TestCase(true)]
-		[TestCase(false)]
-		[TestCase(null)]
-		public void ItemKind (bool flg)
+		[Category ("Boolian Test")]
+		public void NotSetCurrentStateID([Values(FSMStateID.Approaching, FSMStateID.Searching)]FSMStateID f, 
+		                             [Values(FSMStateID.Attacking, FSMStateID.Dead,FSMStateID.None)]FSMStateID s)
 		{
-			Assert.That (dIController.itemKind(), Is.EqualTo(flg));
+			advController.SetCurrentStateID (f, s);
+			Assert.That(s, Is.Not.EqualTo(f));
+		}
+
+		
+		private IAdvancedController GetAdvancedMock () {
+			return Substitute.For<IAdvancedController> ();
 		}
 		
-		
-		[Test]
-		[Category ("Calc Test")]
-		[TestCase(true)]
-		[TestCase(false)]
-		[TestCase(null)]
-		public void IsTerrainTest (bool flg) 
-		{
-			string s = "Player";
-			string t = "Terrain";
-			Assert.That (dIController.IsTerrain(t), Is.EqualTo(flg));
+		private AdvancedFSMController GetControllerMock(IAdvancedController iAdv) {
+			var advController = Substitute.For<AdvancedFSMController> ();
+			advController.SetAdvancedController (iAdv);
+			advController.CalcTime ().Returns (0.0f);
+			return advController;
 		}
-		
-		
-		private IDropItemController GetItemMock () {
-			return Substitute.For<IDropItemController> ();
-		}
-		
-		private DropItemController GetControllerMock(IDropItemController iDrop) {
-			var dIController = Substitute.For<DropItemController> ();
-			dIController.SetDropItemController (iDrop);
-			dIController.CalcTime ().Returns (0.0f);
-			return dIController;
-		}*/
 		
 	}
 }

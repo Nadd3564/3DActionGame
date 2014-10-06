@@ -56,14 +56,14 @@ namespace Cradle.FM{
 			}
 			
 			//状態が存在しないときの条件式
-			//if(fsmStates.Count == 0)
 			if(aFSMcontroller.FSMStateCount(fsmStates.Count))
 			{
 				fsmStates.Add(fsmState);
 				currentState = fsmState;
-				currentStateID = fsmState.ID;
+				aFSMcontroller.SetCurrentStateID(currentStateID, fsmState.ID);
 				return;
 			}
+
 			
 			//状態が存在する場合の条件式
 			foreach(FSMState state in fsmStates)
@@ -77,6 +77,7 @@ namespace Cradle.FM{
 			
 			//状態をリストに追加する
 			fsmStates.Add (fsmState);
+			aFSMcontroller.CalcBoostTime ();
 		}
 		
 		//状態を削除する場合に使う

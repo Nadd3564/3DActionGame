@@ -11,29 +11,18 @@ namespace Cradle
 	{
 		private float calcTime = 0.0f;
 
-
 		private IAdvancedController iAController;
 		
 		public AdvancedFSMController (){
+
 		}
-
-
-		/*public bool EmptyID(){
-		if (id == FSMStateID.None)
-								return true;
-			return false;
-		}
-
-		public List<FSMState> GetFsmStates(){
-			return this.fsmStates;	
-		} */
 
 		//状態が存在しないときの条件式
-		/*public void EmptyStates(){
-						if (FSMStateCount()) {
+		/*public void EmptyStates(FSMState fsmState){
+						if (FSMStateCount(fsmStates.Count)) {
 								fsmStates.Add (fsmState);
 								currentState = fsmState;
-								currentStateID = fsmState.ID;
+								SetCurrentStateID(currentState.ID, fsmState.ID);
 								return;
 						}
 				}*/
@@ -56,51 +45,8 @@ namespace Cradle
 			return false;
 		}
 
-		/*public void RemoveState(FSMStateID fsmState){
-			//状態を削除
-			foreach(FSMState state in fsmStates)
-			{
-				if(state.ID == fsmState)
-				{
-					fsmStates.Remove(state);
-					return;
-				}
-			}
-		}*/
-
-
-
-
-		/*public void EmptyFSM(FSMState fsmState){
-						//状態が存在しないときの条件式
-						if (SameCount()) {
-								fsmStates.Add (fsmState);
-								currentState = fsmState;
-								currentStateID = fsmState.ID;
-								return;
-						}
-				}*/
-
-
-
-		/*public bool SameCount(){
-			if (fsmStates.Count == 0)
-					return true;
-			return false;
-		}*/
-		
-		public bool IsPlayer(string tag) {
-			if (tag == "Player")
-				return true;
-			return false;
-			if(tag != "Player")
-				throw new DifferentStringException();
-		}
-		
-		public bool IsTerrain(string tag) {
-			if (tag == "Terrain")
-				return true;
-			return false;	
+		public void SetCurrentStateID(FSMStateID f, FSMStateID s){
+			f = s;
 		}
 		
 		public void CalcBoostTime() {
