@@ -9,7 +9,6 @@ namespace Cradle
 		public bool isDown = false;
 		public bool attacked = false;
 		private CharaStatusController statusController;
-		private float calcTime = 0.0f;
 		private IAnimationController animationController;
 		
 		public CharaAnimationController (){
@@ -38,7 +37,6 @@ namespace Cradle
 		public bool StopAttack(){
 				if (IsAttacked () && !isAttacking()) {
 						SetAttacked (false);
-						CalcBoostTime();
 				return false;
 					}
 			return true;
@@ -52,14 +50,6 @@ namespace Cradle
 		public bool SetAttacking(bool flg){
 			CharaStatusCtrl ();
 			return statusController.SetAttacking (flg);		
-		}
-
-		public void CalcBoostTime() {
-			this.calcTime = CalcTime ();
-		}
-		
-		public virtual float CalcTime() {
-			return Mathf.Max (this.calcTime - Time.deltaTime, 0.0f);
 		}
 
 		public void SetAnimationController(IAnimationController animationController) {

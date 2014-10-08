@@ -9,7 +9,6 @@ namespace Cradle
 	[Serializable]
 	public class AdvancedFSMController
 	{
-		private float calcTime = 0.0f;
 
 		private IAdvancedController iAController;
 		
@@ -47,14 +46,6 @@ namespace Cradle
 
 		public void SetCurrentStateID(FSMStateID f, FSMStateID s){
 			f = s;
-		}
-		
-		public void CalcBoostTime() {
-			this.calcTime = CalcTime ();
-		}
-		
-		public virtual float CalcTime() {
-			return Mathf.Max (this.calcTime - Time.deltaTime, 0.0f);
 		}
 		
 		public void SetAdvancedController(IAdvancedController iAController) {

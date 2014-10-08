@@ -10,7 +10,6 @@ namespace Cradle
 		private Vector2 prevPosition;
 		private Vector2 delta = Vector2.zero;
 		private bool moved = false;
-		private float calcTime = 0.0f;
 		
 		private IInputController inputController;
 		
@@ -77,7 +76,6 @@ namespace Cradle
 		public void SlideStart(){
 					if (InputGetButtonDown())
 							SetSlideStartPosition ();
-							CalcBoostTime ();
 				}
 
 		//画面の一割以上移動させたらスライド開始
@@ -106,14 +104,6 @@ namespace Cradle
 		public void StopSlide(){
 			if (InputGetButtonUp() && !InputGetButton())
 						SetMoved (false);
-		}
-
-		public void CalcBoostTime() {
-			this.calcTime = CalcTime ();
-		}
-
-		public virtual float CalcTime() {
-			return Mathf.Max (this.calcTime - Time.deltaTime, 0.0f);
 		}
 
 		public void SetInputController(IInputController inputController) {

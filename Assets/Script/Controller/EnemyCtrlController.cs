@@ -11,7 +11,7 @@ namespace Cradle.FM
 		public float waitTime; //残り待機時間
 		public float walkRange = 5.0f; //移動範囲
 		public float DestroyTime = 5.0f;	//死体消滅時間
-		private float calcTime = 0.0f;
+	
 		private IEnemyController enemyController;
 		
 		
@@ -76,14 +76,6 @@ namespace Cradle.FM
 			return false;
 		}
 
-		public virtual float CalcTime() {
-			return Mathf.Max (this.calcTime - Time.deltaTime, 0.0f);
-		}
-		
-		public void CalcBoostTime() {
-			this.calcTime = CalcTime ();
-		}
-		
 		public void SetEnemyController(IEnemyController enemyController) {
 			this.enemyController = enemyController;
 		}

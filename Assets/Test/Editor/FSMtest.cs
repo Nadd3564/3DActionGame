@@ -26,13 +26,6 @@ namespace Cradle.Test
 		//正常値テスト
 		[Test]
 		[Category ("Calc Test")]
-		public void CalcTimeTest ()
-		{
-			Assert.That (fController.CalcTime(), Is.EqualTo (0.0f));
-		}
-		
-		[Test]
-		[Category ("Calc Test")]
 		public void GetAttackRateTest() 
 		{
 			Assert.That (fController.GetAttackRate(), Is.EqualTo(0.0f));		
@@ -59,7 +52,6 @@ namespace Cradle.Test
 		private FSMController GetControllerMock(IFSMController iFsm) {
 			var fController = Substitute.For<FSMController> ();
 			fController.SetFSMController (iFsm);
-			fController.CalcTime ().Returns (0.0f);
 			return fController;
 		}
 		

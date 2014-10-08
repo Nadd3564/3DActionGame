@@ -49,7 +49,6 @@ public class CharaMove : MonoBehaviour, IMoveController {
 
 		void SetSnapGround(Vector3 snapGround){
 			this.snapGround = snapGround;
-			cMcontroller.CalcBoostTime ();
 		}
 
 		void SetDest(){

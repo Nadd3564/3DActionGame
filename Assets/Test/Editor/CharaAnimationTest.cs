@@ -24,13 +24,6 @@ namespace Cradle.Test
 		
 		//正常値テスト
 		[Test]
-		[Category ("Calc Test")]
-		public void CalcTimeTest ()
-		{
-			Assert.That (cAnimation.CalcTime(), Is.EqualTo (0.0f));
-		}
-
-		[Test]
 		[Category ("Bool Test")]
 		[TestCase(true)]
 		[TestCase(false)]
@@ -106,7 +99,6 @@ namespace Cradle.Test
 		private CharaAnimationController GetControllerMock(IAnimationController animation) {
 			var cAnimation = Substitute.For<CharaAnimationController> ();
 			cAnimation.SetAnimationController (animation);
-			cAnimation.CalcTime ().Returns (0.0f);
 			return cAnimation;
 		}
 		

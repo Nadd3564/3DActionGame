@@ -56,7 +56,6 @@ public class FSM : MonoBehaviour, IFSMController {
 		// Use this for initialization
 		void Start () {
 			StartUp ();
-			controller.CalcBoostTime ();
 		}
 		
 		// Update is called once per frame

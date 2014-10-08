@@ -44,7 +44,6 @@ public class FollowCamera : MonoBehaviour, ICameraController {
 				controller.SetHorizontalAngle();
 				controller.SetDownVerticalAngle(delta.y * controller.GetAnglePerPixel());
 				controller.SetVerticalAngle();
-				controller.CalcBoostTime();
 			}
 		}
 

@@ -7,8 +7,6 @@ namespace Cradle.FM
 	[Serializable]
 	public class FSMStateController : FSMState
 	{
-		//攻撃の間隔
-		private float calcTime = 0.0f;
 		private IFSMStateController fsmSController;
 		
 		public FSMStateController(){
@@ -100,21 +98,12 @@ namespace Cradle.FM
 			return false;
 		}
 
-
 		public bool CheckRange(float xPos, float zPos){
 		if (LessThanXPos(xPos) && LessThanZPos(zPos))
 				return true;
 			return false;
 		}
 
-		public virtual float CalcTime() {
-			return Mathf.Max (this.calcTime - Time.deltaTime, 0.0f);
-		}
-		
-		public void CalcBoostTime() {
-			this.calcTime = CalcTime ();
-		}
-		
 		public void SetFSMStateController(IFSMStateController fsmSController) {
 			this.fsmSController = fsmSController;
 		}

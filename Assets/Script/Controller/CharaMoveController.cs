@@ -12,7 +12,6 @@ namespace Cradle
 		public bool forceRotate = false;
 		public float walkSpeed = 6.0f;
 		public float rotationSpeed = 360.0f;
-		private float calcTime = 0.0f;
 		private float distance;
 		
 		private IMoveController iMoveController;
@@ -63,14 +62,6 @@ namespace Cradle
 
 		public float GetGravityPower(){
 			return this.GravityPower;	
-		}
-		
-		public void CalcBoostTime() {
-			this.calcTime = CalcTime ();
-		}
-		
-		public virtual float CalcTime() {
-			return Mathf.Max (this.calcTime - Time.deltaTime, 0.0f);
 		}
 		
 		public void SetMoveController(IMoveController iMoveController) {

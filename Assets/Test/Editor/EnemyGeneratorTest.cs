@@ -25,13 +25,6 @@ namespace Cradle.Test
 		//正常値テスト
 		[Test]
 		[Category ("Calc Test")]
-		public void CalcTimeTest ()
-		{
-			Assert.That (eGController.CalcTime(), Is.EqualTo (0.0f));
-		}
-		
-		[Test]
-		[Category ("Calc Test")]
 		[TestCase("string")]
 		public void GetMaxActiveTest ([Values(-1,0,1,2,null)]int x) 
 		{
@@ -75,7 +68,6 @@ namespace Cradle.Test
 		private EnemyGeneratorController GetControllerMock(IGeneratorController iGenerator) {
 			var eGController = Substitute.For<EnemyGeneratorController> ();
 			eGController.SetGeneratorController (iGenerator);
-			eGController.CalcTime ().Returns (0.0f);
 			return eGController;
 		}
 		

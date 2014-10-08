@@ -26,13 +26,6 @@ namespace Cradle.Test
 		//正常値テスト
 		[Test]
 		[Category ("Calc Test")]
-		public void CalcTimeTest ()
-		{
-			Assert.That (eController.CalcTime(), Is.EqualTo (0.0f));
-		}
-		
-		[Test]
-		[Category ("Calc Test")]
 		public void IsEnemyHitTest([Values("EnemyHit")]string s) 
 		{
 			Assert.True (eController.IsEnemyHit(s));		
@@ -67,7 +60,6 @@ namespace Cradle.Test
 		private EnemyCtrlController GetControllerMock(IEnemyController iEnemy) {
 			var eController = Substitute.For<EnemyCtrlController> ();
 			eController.SetEnemyController (iEnemy);
-			eController.CalcTime ().Returns (0.0f);
 			return eController;
 		}
 		

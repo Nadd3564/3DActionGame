@@ -10,7 +10,7 @@ namespace Cradle
 		public int maxActive = 2;
 		//再出現までの時間
 		public float RePopTime = 8.0f;
-		private float calcTime = 0.0f;
+	
 		private IGeneratorController generatorController;
 		
 		public EnemyGeneratorController (){
@@ -31,14 +31,6 @@ namespace Cradle
 
 		public float SetRePopTime(float f){
 			return this.RePopTime = f;		
-		}
-
-		public void CalcBoostTime() {
-			this.calcTime = CalcTime ();
-		}
-		
-		public virtual float CalcTime() {
-			return Mathf.Max (this.calcTime - Time.deltaTime, 0.0f);
 		}
 
 		public void SetGeneratorController(IGeneratorController generatorController) {

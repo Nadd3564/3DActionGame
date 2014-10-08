@@ -25,13 +25,6 @@ namespace Cradle.Test
 		//正常値テスト
 		[Test]
 		[Category ("Calc Test")]
-		public void CalcTimeTest ()
-		{
-			Assert.That (cMove.CalcTime(), Is.EqualTo (0.0f));
-		}
-		
-		[Test]
-		[Category ("Calc Test")]
 		[TestCase(-1.0f)]
 		[TestCase(null)]
 		public void GetWalkSpeedTest ([Range(0.0f,10.0f,1.0f)]float x)
@@ -46,7 +39,6 @@ namespace Cradle.Test
 		private CharaMoveController GetControllerMock(IMoveController move) {
 			var cMove = Substitute.For<CharaMoveController> ();
 			cMove.SetMoveController (move);
-			cMove.CalcTime ().Returns (0.0f);
 			return cMove;
 		}
 		

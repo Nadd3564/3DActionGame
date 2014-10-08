@@ -27,13 +27,6 @@ namespace Cradle.Test
 		//正常値テスト
 		[Test]
 		[Category ("Calc Test")]
-		public void CalcTimeTest ()
-		{
-			Assert.That (dIController.CalcTime(), Is.EqualTo (0.0f));
-		}
-		
-		[Test]
-		[Category ("Calc Test")]
 		[TestCase(true)]
 		public void IsPlayerTest (bool flg)
 		{
@@ -98,7 +91,6 @@ namespace Cradle.Test
 		private DropItemController GetControllerMock(IDropItemController iDrop) {
 			var dIController = Substitute.For<DropItemController> ();
 			dIController.SetDropItemController (iDrop);
-			dIController.CalcTime ().Returns (0.0f);
 			return dIController;
 		}
 		

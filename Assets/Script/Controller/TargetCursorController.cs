@@ -12,7 +12,7 @@ namespace Cradle
 		public float angularVelocity = 480.0f;
 		// 角度
 		public float angle = 0.0f;
-		private float calcTime = 0.0f;
+
 		private ICursorController cursorController;
 		
 		
@@ -34,14 +34,6 @@ namespace Cradle
 
 		public float SetAngularVelocity(float f){
 			return this.angularVelocity * f;	
-		}
-		
-		public virtual float CalcTime() {
-			return Mathf.Max (this.calcTime - Time.deltaTime, 0.0f);
-		}
-
-		public void CalcBoostTime() {
-			this.calcTime = CalcTime ();
 		}
 
 		public void SetCursorController(ICursorController cursorController) {

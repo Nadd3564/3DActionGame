@@ -77,7 +77,6 @@ namespace Cradle.FM{
 			
 			//状態をリストに追加する
 			fsmStates.Add (fsmState);
-			aFSMcontroller.CalcBoostTime ();
 		}
 		
 		//状態を削除する場合に使う

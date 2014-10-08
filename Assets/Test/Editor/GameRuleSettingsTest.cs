@@ -22,14 +22,7 @@ namespace Cradle.Test
 			
 		}
 		
-		//正常値テスト
-		[Test]
-		[Category ("Calc Test")]
-		public void CalcTimeTest ()
-		{
-			Assert.That (gRSController.CalcTime(), Is.EqualTo (0.0f));
-		}
-		
+		//正常値テスト	
 		[Test]
 		[Category ("Calc Test")]
 		[TestCase(1)]
@@ -65,7 +58,6 @@ namespace Cradle.Test
 		private GameRuleSettingsController GetControllerMock(IRuleController iRule) {
 			var gRSController = Substitute.For<GameRuleSettingsController> ();
 			gRSController.SetRuleController (iRule);
-			gRSController.CalcTime ().Returns (0.0f);
 			return gRSController;
 		}
 		

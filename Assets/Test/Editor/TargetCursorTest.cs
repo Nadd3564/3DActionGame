@@ -25,13 +25,6 @@ namespace Cradle.Test
 		//正常値テスト
 		[Test]
 		[Category ("Calc Test")]
-		public void CalcTimeTest ()
-		{
-			Assert.That (tCController.CalcTime(), Is.EqualTo (0.0f));
-		}
-		
-		[Test]
-		[Category ("Calc Test")]
 		[TestCase(1000)]
 		[TestCase(null)]
 		[TestCase("string")]
@@ -60,7 +53,6 @@ namespace Cradle.Test
 		private TargetCursorController GetControllerMock(ICursorController iCursor) {
 			var tCController = Substitute.For<TargetCursorController> ();
 			tCController.SetCursorController (iCursor);
-			tCController.CalcTime ().Returns (0.0f);
 			return tCController;
 		}
 		

@@ -11,7 +11,6 @@ namespace Cradle
 		public float rotAngle = 180.0f;
 		public float verticalAngle = 10.0f;
 		public float anglePerPixel;
-		private float calcTime = 0.0f;
 		private ICameraController cameraController;
 
 		
@@ -59,15 +58,7 @@ namespace Cradle
 		public float SetDownVerticalAngle(float f){
 			return this.verticalAngle -= f;		
 		}
-		
-		public void CalcBoostTime() {
-			this.calcTime = CalcTime ();
-		}
-		
-		public virtual float CalcTime() {
-			return Mathf.Max (this.calcTime - Time.deltaTime, 0.0f);
-		}
-		
+
 		public void SetCameraController(ICameraController cameraController) {
 			this.cameraController = cameraController;
 		}

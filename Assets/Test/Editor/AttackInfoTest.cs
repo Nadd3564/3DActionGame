@@ -25,13 +25,6 @@ namespace Cradle.Test
 		//正常値テスト
 		[Test]
 		[Category ("Calc Test")]
-		public void CalcTimeTest ()
-		{
-			Assert.That (aIController.CalcTime(), Is.EqualTo (0.0f));
-		}
-		
-		[Test]
-		[Category ("Calc Test")]
 		public void CalcGetAttackPowerTest ([Values(-1,0,1,null)]int x) 
 		{
 			aIController.getAttackPower ();
@@ -68,7 +61,6 @@ namespace Cradle.Test
 		private AttackInfoController GetControllerMock(IInfoController iInfo) {
 			var aIController = Substitute.For<AttackInfoController> ();
 			aIController.SetInfoController (iInfo);
-			aIController.CalcTime ().Returns (0.0f);
 			return aIController;
 		}
 		

@@ -12,7 +12,6 @@ public class AttackInfo : MonoBehaviour, IInfoController{
 	}
 
 	public int GetAttackPower(){
-		aIController.CalcBoostTime ();
 		return aIController.getAttackPower();
 	}
 

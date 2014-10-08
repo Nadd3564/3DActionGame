@@ -12,7 +12,6 @@ namespace Cradle
 		public bool gameOver = false;
 		public bool gameClear = false;
 		public float sceneChangeTime = 10.0f;
-		private float calcTime = 0.0f;
 		private IRuleController ruleController;
 		
 		
@@ -54,18 +53,10 @@ namespace Cradle
 				return false;
 		}
 
-		public void CalcBoostTime() {
-			this.calcTime = CalcTime ();
-		}
-
 		public bool TimeRemaining(){
 			if (GetSceneChangeTime () <= 0.0f)	
 					return true;
 				return false;
-		}
-
-		public virtual float CalcTime() {
-			return Mathf.Max (this.calcTime - Time.deltaTime, 0.0f);
 		}
 		
 		public void SetRuleController(IRuleController ruleController) {

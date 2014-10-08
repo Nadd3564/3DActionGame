@@ -25,13 +25,6 @@ namespace Cradle.Test
 		//正常値テスト
 		[Test]
 		[Category ("Calc Test")]
-		public void CalcTimeTest ()
-		{
-			Assert.That (fCController.CalcTime(), Is.EqualTo (0.0f));
-		}
-		
-		[Test]
-		[Category ("Calc Test")]
 		[TestCase(null)]
 		[TestCase("string")]
 		public void SetAnglePerPixelTest([Values(-1.0f,0.0f,1.0f,2.0f)]float x) 
@@ -57,7 +50,6 @@ namespace Cradle.Test
 		private FollowCameraController GetControllerMock(ICameraController iCamera) {
 			var fCController = Substitute.For<FollowCameraController> ();
 			fCController.SetCameraController (iCamera);
-			fCController.CalcTime ().Returns (0.0f);
 			return fCController;
 		}
 		

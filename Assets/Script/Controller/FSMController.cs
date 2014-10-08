@@ -10,7 +10,6 @@ namespace Cradle.FM
 		//攻撃の間隔
 		private float attackRate;
 		private float elapsedTime;
-		private float calcTime = 0.0f;
 		private IFSMController fsmController;
 
 		public FSMController(){
@@ -43,14 +42,6 @@ namespace Cradle.FM
 			return false;
 		}
 
-		public virtual float CalcTime() {
-			return Mathf.Max (this.calcTime - Time.deltaTime, 0.0f);
-		}
-		
-		public void CalcBoostTime() {
-			this.calcTime = CalcTime ();
-		}
-		
 		public void SetFSMController(IFSMController fsmController) {
 			this.fsmController = fsmController;
 		}

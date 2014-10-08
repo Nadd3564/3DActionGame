@@ -26,13 +26,6 @@ namespace Cradle.Test
 		
 		//正常値テスト
 		[Test]
-		[Category ("Calc Test")]
-		public void CalcTimeTest ()
-		{
-			Assert.That (advController.CalcTime(), Is.EqualTo (0.0f));
-		}
-		
-		[Test]
 		[Category ("Boolian Test")]
 		public void IsFSMStateCountTest ([Values(0,null)]int i)
 		{
@@ -104,7 +97,6 @@ namespace Cradle.Test
 		private AdvancedFSMController GetControllerMock(IAdvancedController iAdv) {
 			var advController = Substitute.For<AdvancedFSMController> ();
 			advController.SetAdvancedController (iAdv);
-			advController.CalcTime ().Returns (0.0f);
 			return advController;
 		}
 		

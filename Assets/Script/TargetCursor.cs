@@ -51,7 +51,6 @@ public class TargetCursor : MonoBehaviour, ICursorController {
 
 		public void EffectPosition(){
 			this.transform.localPosition = position + offset;
-			controller.CalcBoostTime ();
 		}
 	}
 }

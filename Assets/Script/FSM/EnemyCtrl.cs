@@ -44,8 +44,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 				SetBasePosition ();
 				SetPlayerTransform (objPlayer.transform);
 				Log ();
-				eController.CalcBoostTime ();
-
+	
 				//FSMを構築
 				BuildFSM ();
 		}

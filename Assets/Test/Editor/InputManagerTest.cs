@@ -24,14 +24,6 @@ namespace Cradle.Test
 
 		//正常値テスト
 		[Test]
-		[Category ("Calc Test")]
-		public void CalcTimeTest ()
-		{
-			Assert.That (inputManager.CalcTime(), Is.EqualTo (0.0f));
-		}
-
-
-		[Test]
 		[Category ("Input Test")]
 		[TestCase(true)]
 		[TestCase(false)]
@@ -86,7 +78,6 @@ namespace Cradle.Test
 		private InputManagerController GetControllerMock(IInputController input) {
 			var inputManager = Substitute.For<InputManagerController> ();
 			inputManager.SetInputController (input);
-			inputManager.CalcTime ().Returns (0.0f);
 			return inputManager;
 		}
 		

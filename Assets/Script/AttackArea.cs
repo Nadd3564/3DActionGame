@@ -73,5 +73,6 @@ public class AttackArea : MonoBehaviour, IAttackAreaController
 	public void PlayAudio(){
 		this.hitSeAudio.Play ();
 	}
+
  }
 }
