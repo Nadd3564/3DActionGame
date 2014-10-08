@@ -105,21 +105,37 @@ namespace Cradle.FM{
 			this.RotSpeed = f;
 		}
 
+		public Quaternion SetTargetRot(Vector3 v){
+			Quaternion targetRotation = Quaternion.LookRotation (destPos - v);
+			return targetRotation;
+		}
+		
+		public void SetRot(Transform npc, Vector3 v){
+			npc.rotation = Quaternion.Slerp (npc.rotation, SetTargetRot(v), Time.deltaTime * RotSpeed);
+		}
+
+
 		//distが一定の距離内かチェック
 		public bool CheckDist(float f, float l, float o){
-			if (ThanCheckReach (f, l) && LessThanCheckReach (f, o))
+			if (MoreThanCheckReach (f, l) && LessCheckReach (f, o))
 				return true;
 			return false;
 		}
 		
-		public bool ThanCheckReach(float f, float l){
+		public bool MoreThanCheckReach(float f, float l){
 			if (f >= l)
 				return true;
 			return false;
 		}
 		
-		public bool LessThanCheckReach(float f, float o){
+		public bool LessCheckReach(float f, float o){
 			if (f < o)
+				return true;
+			return false;
+		}
+
+		public bool LessThanCheckReach(float f, float o){
+			if (f <= o)
 				return true;
 			return false;
 		}

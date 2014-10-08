@@ -18,12 +18,12 @@ namespace Cradle.FM{
 			SetDest (player);
 			SetDist (Vector3.Distance (npc.position, destPos));
 
-			if(dist <= 2.0f)
+			if(LessThanCheckReach(dist, 2.0f))
 			{
 				Debug.Log("Switch to Attack state");
 				npc.GetComponent<EnemyCtrl>().SetTransition(Transition.ReachPlayer);
 			}
-			else if(dist >= 10.0f)
+			else if(MoreThanCheckReach(dist, 10.0f))
 			{
 				Debug.Log("Switch to Search state");
 				npc.GetComponent<EnemyCtrl>().SetTransition(Transition.LostPlayer);
@@ -34,12 +34,13 @@ namespace Cradle.FM{
 		{
 			//攻撃フラグを初期化
 			npc.GetComponent<EnemyCtrl> ().StateStartCommon ();
-			
+
+			//ターゲット地点をプレーヤーポジションに設定
 			SetDest (player);
 
-			Quaternion targetRotation = Quaternion.LookRotation (destPos - npc.position);
-			npc.rotation = Quaternion.Slerp (npc.rotation, targetRotation, Time.deltaTime * RotSpeed);
-			
+			//ターゲット地点に回転
+			SetRot (npc, npc.position);
+
 			//目的地をプレイヤーに変更
 			npc.GetComponent<CharaMove> ().SendMessage ("SetDestination", destPos);
 		}
