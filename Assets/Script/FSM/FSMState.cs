@@ -7,23 +7,27 @@ using Cradle;
 /// @http://creativecommons.org/licenses/by-sa/3.0/
 
 namespace Cradle.FM{
-	public abstract class FSMState
+	public abstract class FSMState /*: IFSMStateController*/
 	{
 		protected Dictionary<Transition, FSMStateID> map = new Dictionary<Transition, FSMStateID>();
 		protected FSMStateID stateID;
 		public FSMStateID ID { get { return stateID; }}
 		protected Vector3 destPos;
 		protected Transform[] waypoints;
-		protected EnemyCtrl enemyCtrl;
 		protected float RotSpeed;
 		protected float dist;
-		protected GameObject[] arr;
+
+		/*public FSMStateController fsmSController;
 		
+		public void OnEnable() {
+			fsmSController.SetFSMStateController (this);
+		}*/
+
 		
 		public void AddTransition(Transition transition, FSMStateID id)
 		{
 			//引数の確認
-			if(transition == Transition.None || id == FSMStateID.None)
+			if(CheckTransOrID(transition, id))
 			{
 				Debug.LogWarning("FSMState: Null transition not allowed");
 				return;
@@ -44,7 +48,7 @@ namespace Cradle.FM{
 		public void DeleteTransition(Transition trans)
 		{
 			//null遷移か確認
-			if(trans == Transition.None)
+			if(EmptyTrans(trans))
 			{
 				Debug.LogError("FSMState ERROR: NullTransition is not allowed");
 				return;
@@ -63,7 +67,7 @@ namespace Cradle.FM{
 		public FSMStateID GetOutputState(Transition trans)
 		{
 			//遷移がnullか確認
-			if(trans == Transition.None)
+			if(EmptyTrans(trans))
 			{
 				Debug.LogError("FSMState ERROR: 不正なnull遷移です。");
 				return FSMStateID.None;
@@ -114,6 +118,26 @@ namespace Cradle.FM{
 			npc.rotation = Quaternion.Slerp (npc.rotation, SetTargetRot(v), Time.deltaTime * RotSpeed);
 		}
 
+		//TansitionとIDのチェック
+		public bool CheckTransOrID(Transition transition, FSMStateID id){
+			if(EmptyTrans(transition) || EmptyID(id))
+				return true;
+			return false;
+		}
+		
+		public bool EmptyTrans(Transition t){
+			if(t == Transition.None)
+				return true;
+			return false;
+		}
+		
+		public bool EmptyID(FSMStateID f){
+			if(f == FSMStateID.None)
+				return true;
+			return false;
+		}
+
+
 
 		//distが一定の距離内かチェック
 		public bool CheckDist(float f, float l, float o){
@@ -144,21 +168,59 @@ namespace Cradle.FM{
 		public void FindNextPoint()
 		{
 			Debug.Log("Finding next point");
-			int rndIndex = Random.Range(0, waypoints.Length);
-			Vector3 rndPosition = Vector3.zero;
-			destPos = waypoints[rndIndex].position + rndPosition;
+			SetFindDest ();
 			Debug.Log ("destPos :" + destPos);
 		}
-		
+
+		public int RndIndex(){
+			int rndIndex = Random.Range(0, waypoints.Length);
+			return rndIndex;
+		}
+
+		public Vector3 RndPosition(){
+			Vector3 rndPosition = Vector3.zero;
+			return rndPosition;
+		}
+
+		public void SetFindDest(){
+			this.destPos = waypoints[RndIndex()].position + RndPosition();
+		}
+
 		//次のポジションが、現在の位置と同じかチェックする
 		protected bool IsInCurrentRange(Transform trans, Vector3 pos)
 		{
-			float xPos = Mathf.Abs (pos.x - trans.position.x);
-			float zPos = Mathf.Abs (pos.z - trans.position.z);
-			
-			if (xPos <= 10 && zPos <= 10)
+			if (CheckRange (CheckXRange (pos.x, trans.position.x), CheckZRange (pos.z, trans.position.z)))
+						return true;
+					return false;
+		}
+
+		public float CheckXRange(float f, float l){
+			float xPos = Mathf.Abs (f - l);	
+			return xPos;
+		}
+		
+		public float CheckZRange(float f, float l){
+			float zPos = Mathf.Abs (f - l);	
+			return zPos;
+		}
+		
+		public bool LessThanXPos(float xPos){
+			if(xPos <= 10)	
 				return true;
 			return false;
 		}
+		
+		public bool LessThanZPos(float zPos){
+			if(zPos <= 10)	
+				return true;
+			return false;
+		}
+
+		public bool CheckRange(float xPos, float zPos){
+			if (LessThanXPos(xPos) && LessThanZPos(zPos))
+				return true;
+			return false;
+		}
+
 	}
 }

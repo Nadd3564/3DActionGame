@@ -17,7 +17,7 @@ namespace Cradle.FM{
 		
 		public override void Act(Transform player, Transform npc)
 		{
-			arr = GameObject.FindGameObjectsWithTag("Dead");
+
 		}
 
 	}
