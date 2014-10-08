@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using Cradle.FM;
 
@@ -7,8 +7,8 @@ namespace Cradle.FM{
 		
 		public SearchState(Transform[] wp)
 		{
-			waypoints = wp;
-			stateID = FSMStateID.Searching;
+			SetWayPoints (wp);
+			SetStateID(FSMStateID.Searching);
 		}
 		
 		public override void Reason(Transform player, Transform npc)
@@ -39,5 +39,6 @@ namespace Cradle.FM{
 				FindNextPoint();
 			}
 		}
+
 	}
 }

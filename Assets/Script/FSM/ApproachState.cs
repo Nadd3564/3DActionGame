@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using Cradle.FM;
 
@@ -7,17 +7,17 @@ namespace Cradle.FM{
 		
 		public ApproachState(Transform[] wp)
 		{
-			waypoints = wp;
-			stateID = FSMStateID.Approaching;
-			RotSpeed = 360.0f;
+			SetWayPoints (wp);
+			SetStateID (FSMStateID.Approaching);
+			SetRotSpeed (360.0f);
 			FindNextPoint ();
 		}
 		
 		public override void Reason(Transform player, Transform npc)
 		{
-			destPos = player.position;
-			
-			float dist = Vector3.Distance (npc.position, destPos);
+			SetDest (player);
+			SetDist (Vector3.Distance (npc.position, destPos));
+
 			if(dist <= 2.0f)
 			{
 				Debug.Log("Switch to Attack state");
@@ -35,13 +35,14 @@ namespace Cradle.FM{
 			//攻撃フラグを初期化
 			npc.GetComponent<EnemyCtrl> ().StateStartCommon ();
 			
-			destPos = player.position;
-			
+			SetDest (player);
+
 			Quaternion targetRotation = Quaternion.LookRotation (destPos - npc.position);
 			npc.rotation = Quaternion.Slerp (npc.rotation, targetRotation, Time.deltaTime * RotSpeed);
 			
 			//目的地をプレイヤーに変更
 			npc.GetComponent<CharaMove> ().SendMessage ("SetDestination", destPos);
 		}
+
 	}
 }

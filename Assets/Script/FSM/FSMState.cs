@@ -16,6 +16,7 @@ namespace Cradle.FM{
 		protected Transform[] waypoints;
 		protected EnemyCtrl enemyCtrl;
 		protected float RotSpeed;
+		protected float dist;
 		protected GameObject[] arr;
 		
 		
@@ -83,7 +84,46 @@ namespace Cradle.FM{
 		
 		//NPC(敵キャラ)の処理、行動、動作を指定する
 		public abstract void Act(Transform player, Transform npc);
+
+		//ターゲット地点をプレーヤーポジションに設定
+		public void SetDest(Transform player){
+			this.destPos = player.position;	
+		}
+		public void SetDist(float f){
+			this.dist = f;
+		}
+
+		public void SetWayPoints(Transform[] wp){
+			this.waypoints = wp;
+		}
+
+		public void SetStateID(FSMStateID fsmState){
+			this.stateID = fsmState;
+		}
+
+		public void SetRotSpeed(float f){
+			this.RotSpeed = f;
+		}
+
+		//distが一定の距離内かチェック
+		public bool CheckDist(float f, float l, float o){
+			if (ThanCheckReach (f, l) && LessThanCheckReach (f, o))
+				return true;
+			return false;
+		}
 		
+		public bool ThanCheckReach(float f, float l){
+			if (f >= l)
+				return true;
+			return false;
+		}
+		
+		public bool LessThanCheckReach(float f, float o){
+			if (f < o)
+				return true;
+			return false;
+		}
+
 		//次の索敵ポイントを指定する。乱数で動作
 		public void FindNextPoint()
 		{

@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using Cradle.FM;
 
@@ -7,7 +7,7 @@ namespace Cradle.FM{
 		
 		public DeadState()
 		{
-			stateID = FSMStateID.Dead;
+			SetStateID (FSMStateID.Dead);
 		}
 		
 		public override void Reason(Transform player, Transform npc)
@@ -19,5 +19,6 @@ namespace Cradle.FM{
 		{
 			arr = GameObject.FindGameObjectsWithTag("Dead");
 		}
+
 	}
 }
