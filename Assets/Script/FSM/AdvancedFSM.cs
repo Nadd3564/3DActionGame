@@ -1,11 +1,10 @@
-﻿using UnityEngine;
+﻿﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Cradle.FM;
 
 
 /// @http://creativecommons.org/licenses/by-sa/3.0/
- 
 namespace Cradle.FM{
 	
 	public enum Transition
@@ -27,7 +26,7 @@ namespace Cradle.FM{
 	}
 	
 	
-	public class AdvancedFSM : FSM, IAdvancedController {
+	public class AdvancedFSM : FSM {
 		private List<FSMState> fsmStates;
 		
 		//fsmStates
@@ -37,13 +36,7 @@ namespace Cradle.FM{
 		private FSMState currentState;
 		public FSMState CurrentState { get { return currentState; } }
 		
-
-		public AdvancedFSMController aFSMcontroller;
 		
-		public void OnEnable() {
-			aFSMcontroller.SetAdvancedController (this);
-		}
-
 		public AdvancedFSM(){
 			fsmStates = new List<FSMState> ();
 		}
@@ -56,19 +49,18 @@ namespace Cradle.FM{
 			}
 			
 			//状態が存在しないときの条件式
-			if(aFSMcontroller.FSMStateCount(fsmStates.Count))
+			if(fsmStates.Count == 0)
 			{
 				fsmStates.Add(fsmState);
 				currentState = fsmState;
-				aFSMcontroller.SetCurrentStateID(currentStateID, fsmState.ID);
+				currentStateID = fsmState.ID;
 				return;
 			}
-
 			
 			//状態が存在する場合の条件式
 			foreach(FSMState state in fsmStates)
 			{
-				if(aFSMcontroller.AsFSMStateID(state.ID, fsmState.ID))
+				if(state.ID == fsmState.ID)
 				{
 					Debug.LogError("FSM ERROR: 既に存在する状態をリストに追加しようとしています。");
 					return;
@@ -83,7 +75,7 @@ namespace Cradle.FM{
 		public void DeleteState(FSMStateID fsmState)
 		{
 			//削除する前に、状態が空でないか確認
-			if (aFSMcontroller.AsFSMStateID(fsmState, FSMStateID.None))
+			if (fsmState == FSMStateID.None)
 			{
 				Debug.LogError("FSM ERROR: 不正なIDです。");
 				return;
@@ -92,7 +84,7 @@ namespace Cradle.FM{
 			//状態を削除
 			foreach(FSMState state in fsmStates)
 			{
-				if(aFSMcontroller.AsFSMStateID(state.ID, fsmState))
+				if(state.ID == fsmState)
 				{
 					fsmStates.Remove(state);
 					return;
@@ -105,7 +97,7 @@ namespace Cradle.FM{
 		public void RunTransition(Transition trans)
 		{
 			//引数の確認
-			if(aFSMcontroller.AsTrans(trans))
+			if(trans == Transition.None)
 			{
 				Debug.LogError("FSM ERROR: Null遷移は不正です。");
 				return;
@@ -113,7 +105,7 @@ namespace Cradle.FM{
 			
 			//currentStateが指定の遷移についての状態を持つか
 			FSMStateID id = currentState.GetOutputState (trans);
-			if(aFSMcontroller.AsFSMStateID(id, FSMStateID.None))
+			if(id == FSMStateID.None)
 			{
 				Debug.LogError("FSM ERROR: 現在の状態はこの遷移が指定する状態を持ちません。");
 				return;
@@ -123,7 +115,7 @@ namespace Cradle.FM{
 			currentStateID = id;
 			foreach(FSMState state in fsmStates)
 			{
-				if(aFSMcontroller.AsFSMStateID(state.ID, currentStateID))
+				if(state.ID == currentStateID)
 				{
 					currentState = state;
 					break;

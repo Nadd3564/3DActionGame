@@ -45,6 +45,14 @@ namespace Cradle.Test
 			Assert.IsNotNull (fController.GetAttackRate());		
 		}
 
+		/*[Test]
+		[Category ("Calc Test")]
+		public void GetDestPos() 
+		{
+			Assert.That (fController.GetDest(), Is.EqualTo("aaaa"));	
+		}*/
+
+
 		private IFSMController GetFsmMock () {
 			return Substitute.For<IFSMController> ();
 		}
@@ -52,6 +60,8 @@ namespace Cradle.Test
 		private FSMController GetControllerMock(IFSMController iFsm) {
 			var fController = Substitute.For<FSMController> ();
 			fController.SetFSMController (iFsm);
+			//fController.GetDest().Returns("a");
+			//fController.SetPlayerTransform ().Returns ();
 			return fController;
 		}
 		

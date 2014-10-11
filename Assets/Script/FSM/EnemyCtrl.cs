@@ -42,7 +42,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 				GetComponents ();
 				eController.SetWaitTime (eController.GetWaitBaseTime ());
 				SetBasePosition ();
-				SetPlayerTransform (objPlayer.transform);
+				setPlayerTransform (objPlayer.transform);
 				Log ();
 	
 				//FSMを構築
@@ -56,8 +56,8 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 		
 		protected override void StateFixedUpdate()
 		{
-			CurrentState.Reason (playerTransform, transform);
-			CurrentState.Act (playerTransform, transform);
+			CurrentState.Reason (getPlayerTrans(), transform);
+			CurrentState.Act (getPlayerTrans(), transform);
 		}
 
 
@@ -71,7 +71,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 		}
 
 		public void Log(){
-			if (!playerTransform)
+			if (!getPlayerTrans())
 				print ("プレーヤーが存在しません。タグ'Player'を追加してください。");
 		}
 

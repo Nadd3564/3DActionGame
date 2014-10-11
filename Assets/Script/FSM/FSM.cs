@@ -5,66 +5,65 @@ using Cradle.FM;
 
 namespace Cradle.FM{
 public class FSM : MonoBehaviour, IFSMController {
-		protected Transform playerTransform;
+			//索敵する地点のリスト
+			protected GameObject[] pointList;
 
-		//NPCの次の到達点
-		protected Vector3 destPos;
+			public FSMController controller;
+				
+			public void OnEnable() {
+				controller.SetFSMController (this);
+			}
 
-		//索敵する地点のリスト
-		protected GameObject[] pointList;
+			protected Transform getPlayerTrans(){
+				return controller.GetPlayerTrans ();	
+			}
 
-		public FSMController controller;
+			//攻撃の間隔
+			protected float setAttackRate(float f){
+				return controller.SetAttackRate (f);	
+			}
+
+			protected float setElapsedTime(float f){
+				return controller.SetElapsedTime (f);	
+			}
+
+			protected float setUpElapsedTime(float f){
+				return controller.SetUpElapsedTime (f);	
+			}
+
+			protected float getAttackRate(){
+				return controller.GetAttackRate ();	
+			}
 			
-		public void OnEnable() {
-			controller.SetFSMController (this);
-		}
+			protected float getElapsedTime(){
+				return controller.GetElapsedTime ();	
+			}
 
-		//攻撃の間隔
-		protected float setAttackRate(float f){
-			return controller.SetAttackRate (f);	
-		}
+			protected bool attackCount(){
+				return controller.AttackCount ();
+			}
+			
+			protected void setPlayerTransform(Transform trans){
+				controller.SetPlayerTransform (trans);	
+			}
 
-		protected float setElapsedTime(float f){
-			return controller.SetElapsedTime (f);	
-		}
-
-		protected float setUpElapsedTime(float f){
-			return controller.SetUpElapsedTime (f);	
-		}
-
-		protected float getAttackRate(){
-			return controller.GetAttackRate ();	
-		}
-		
-		protected float getElapsedTime(){
-			return controller.GetElapsedTime ();	
-		}
-
-		protected bool attackCount(){
-			return controller.AttackCount ();
-		}
-		
-		protected void SetPlayerTransform(Transform trans){
-			this.playerTransform = trans;	
-		}
-
-		protected virtual void StartUp(){}
-		protected virtual void StateUpdate(){}
-		protected virtual void StateFixedUpdate(){}
+			protected virtual void StartUp(){}
+			protected virtual void StateUpdate(){}
+			protected virtual void StateFixedUpdate(){}
 
 
-		// Use this for initialization
-		void Start () {
-			StartUp ();
-		}
-		
-		// Update is called once per frame
-		void Update () {
-			StateUpdate ();
-		}
+			// Use this for initialization
+			void Start () {
+				StartUp ();
+			}
+			
+			// Update is called once per frame
+			void Update () {
+				StateUpdate ();
+			}
 
-		void FixedUpdate(){
-			StateFixedUpdate ();
+			void FixedUpdate(){
+				StateFixedUpdate ();
+			}
 		}
-	}
 }

@@ -7,6 +7,9 @@ namespace Cradle.FM
 	[Serializable]
 	public class FSMController
 	{
+
+		private Transform playerTransform;
+
 		//攻撃の間隔
 		private float attackRate;
 		private float elapsedTime;
@@ -15,6 +18,24 @@ namespace Cradle.FM
 		public FSMController(){
 
 		}
+
+		public Transform GetPlayerTrans(){
+			return this.playerTransform;	
+		}
+
+		public void SetPlayerTransform(Transform trans){
+			this.playerTransform = trans;	
+		}
+
+		/*public virtual Vector3 GetDestPos(){
+			return this.destPos;	
+		}
+
+		public virtual String GetDest(){
+			string des = this.destPos.ToString ();
+			Debug.Log ("GetDest : " + des);
+			return des;
+		}*/
 
 		public float GetAttackRate(){
 			return this.attackRate;

@@ -39,7 +39,15 @@ namespace Cradle.FM{
 			
 			//攻撃
 			npc.GetComponent<EnemyCtrl> ().AttackStart ();
+			GetDest ();
+
 		}
+
+		/*public virtual string GetDest(){
+			string des = this.destPos.ToString ();
+			Debug.Log ("GetDest : " + des);
+			return des;
+		}*/
 
 	}
 }
