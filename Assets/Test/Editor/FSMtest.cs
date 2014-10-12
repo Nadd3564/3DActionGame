@@ -152,20 +152,15 @@ namespace Cradle.Test
 			Assert.False(fController.AttackCount());		
 		}
 
-		/*[Test]
-		[Category ("SetUpElapsedTime Range Test")]
-		public void SetUpElapsedTimeRangeTest([Range(-4,4,1)]float f) 
+		//例外処理テスト
+		[Test]
+		[Category ("AttackCount Exception Test")]
+		[ExpectedException(typeof(TimeoutException))]
+		public void AttackCountExceptionTest() 
 		{
-			float l = fController.SetElapsedTime (f);
-			l = fController.SetElapsedTime (10);
-			Assert.That (fController.GetElapsedTime(), Is.EqualTo(l));		
-		}*/
-		/*[Test]
-		[Category ("Calc Test")]
-		public void GetDestPos() 
-		{
-			Assert.That (fController.GetDest(), Is.EqualTo("aaaa"));	
-		}*/
+			fController.SetElapsedTime (30.0f);
+			Assert.False(fController.AttackCount());		
+		}
 
 
 		private IFSMController GetFsmMock () {

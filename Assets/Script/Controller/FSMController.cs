@@ -58,6 +58,8 @@ namespace Cradle.FM
 		}
 
 		public bool AttackCount(){
+			if (GetElapsedTime () >= 30.0f)
+				throw new TimeoutException ("The Method Must be performed.", default(Exception));
 			if (GetElapsedTime () >= GetAttackRate ())	
 				return true;
 			return false;
