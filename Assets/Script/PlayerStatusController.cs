@@ -130,7 +130,7 @@ public class PlayerStatusController : MonoBehaviour {
 	}
 
 	void Died(){
-		status.SetDied (true);
+		status.setDied (true);
 		gameRuleSettings.GameOver ();
 		deathSeAudio.Play ();
 	}
@@ -152,7 +152,7 @@ public class PlayerStatusController : MonoBehaviour {
 	//ステータスを初期化
 	void StateStartCommon(){
 		status.SetAttacking (false);
-		status.SetDied(false);
+		status.setDied(false);
 	}
 }
 }

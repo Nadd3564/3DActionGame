@@ -73,7 +73,11 @@ namespace Cradle
 		public bool SetAttacking(bool flg){
 			return this.attacking = flg;
 		}
-		
+
+		public bool SetDied(bool flg){
+			return this.died = flg;	
+		}
+
 		public void SetEffectController(IEffectController effectController) {
 			this.effectController = effectController;
 		}

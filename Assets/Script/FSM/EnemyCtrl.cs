@@ -11,7 +11,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 		GameObject target;	
 		public Vector3 basePosition; //初期位置を保存
 		Vector3 vec;
-		Vector3 destinationPosition;
+		/*Vector3 destinationPosition;*/
 		public GameObject hitEffect;
 		private GameObject effect;
 		public GameObject[] dropItemPrefab; //複数のアイテムを入れる配列
@@ -21,7 +21,6 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 		CharaAnimation charaAnimation;
 		CharaMove characterMove;
 		GameRuleSettings gameRuleSettings;
-		//public FSMState fsmState;
 
 		public AudioClip deathSeClip;
 		AudioSource deathSeAudio;
@@ -37,7 +36,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 		{
 				setElapsedTime (3.0f);
 				setAttackRate (4.0f);
-
+			      
 				//コンポーネント取得
 				GetComponents ();
 				eController.SetWaitTime (eController.GetWaitBaseTime ());
@@ -46,7 +45,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 				Log ();
 	
 				//FSMを構築
-				BuildFSM ();
+				eController.BuildFSM ();
 		}
 
 		protected override void StateUpdate ()
@@ -106,43 +105,6 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 			RunTransition (t);
 		}
 
-		private void BuildFSM()
-		{
-			//ポイントのリスト
-			pointList = GameObject.FindGameObjectsWithTag ("WandarPoint");
-
-			Transform[] waypoints = new Transform[pointList.Length];
-			int i = 0;
-			foreach(GameObject obj in pointList)
-			{
-				waypoints[i] = obj.transform;
-				i++;
-			}
-
-			SearchState search = new SearchState (waypoints);
-			search.AddTransition (Transition.SawPlayer, FSMStateID.Approaching);
-			search.AddTransition (Transition.NoHealth, FSMStateID.Dead);
-			
-			ApproachState approach = new ApproachState (waypoints);
-			approach.AddTransition (Transition.LostPlayer, FSMStateID.Searching);
-			approach.AddTransition (Transition.ReachPlayer, FSMStateID.Attacking);
-			approach.AddTransition (Transition.NoHealth, FSMStateID.Dead);
-			
-			AttackState attack = new AttackState (waypoints);
-			attack.AddTransition (Transition.LostPlayer, FSMStateID.Searching);
-			attack.AddTransition (Transition.SawPlayer, FSMStateID.Approaching);
-			attack.AddTransition (Transition.NoHealth, FSMStateID.Dead);
-			
-			DeadState dead = new DeadState ();
-			dead.AddTransition (Transition.NoHealth, FSMStateID.Dead);
-			
-			AddFSMState (search);
-			AddFSMState (approach);
-			AddFSMState (attack);
-			AddFSMState (dead);
-		}
-
-
 		public void Walking(Vector3 destPos){
 				//待機時間がまだあれば
 				if (eController.ThanTime()) {
@@ -151,10 +113,10 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 					//待機時間が無くなったら
 					if (eController.LessThanTime()) {
 						//移動先の設定（WanderPointのうちランダムにどこかへ）
-						DestPos(destPos);
+						eController.DestPos(destPos);
 						//目的地の指定
-						SendMessage ("SetDestination", destinationPosition);
-						SendMessage("SetDirection", destinationPosition);
+						SendMessage ("SetDestination", eController.GetDestination());
+						SendMessage("SetDirection", eController.GetDestination());
 					}
 				} else {
 					//目的地へ到着
@@ -164,26 +126,32 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 					}
 				}
 			}
+		
 
-		//移動先の設定
-		public void DestPos(Vector3 destPos){
-			this.destinationPosition = destPos;		
-		}
-
-
-		//ElapsedTimeがattackRateを超えたら攻撃
+		/*//ElapsedTimeがattackRateを超えたら攻撃
 		public void AttackStart()
 		{
 				if(attackCount())
 				{
-					status.SetAttacking(true);
+				setAttacking();
 					setElapsedTime(0.0f);
 				}
 			
 			//移動を止める
+			SendMsgStop ();
+		}*/
+
+		public void AttackStart(){
+			eController.attackStart ();	
+		}
+
+		public void SendMsgStop(){
 			SendMessage ("StopMove");
 		}
 
+		public bool setAttacking(){
+			return status.SetAttacking(true);
+		}
 
 			void Damage(AttackInfo attackInfo)
 		{
@@ -245,7 +213,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 
 		public void Died()
 		{
-			status.SetDied (true);
+			status.setDied (true);
 			DropItem ();
 			Destroy (gameObject, eController.GetDestroyTime());
 			PlayDeathSE ();
@@ -262,6 +230,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 			SetTag ();
 		}
 
+
 		public void PlayDeathSE(){
 			AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
 		}
@@ -274,7 +243,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 		public void StateStartCommon()
 		{
 			status.SetAttacking (false);
-			status.SetDied(false);
+			status.setDied(false);
 		}
 
 	}

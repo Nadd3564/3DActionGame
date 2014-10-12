@@ -15,7 +15,7 @@ namespace Cradle.Test
 		[SetUp] public void Init()
 		{ 
 			iEnemy = GetEnemyMock ();
-			eController = GetControllerMock (iEnemy);	
+			eController = GetControllerMock (iEnemy);
 		}
 		
 		[TearDown] public void Cleanup()
@@ -51,6 +51,29 @@ namespace Cradle.Test
 		{
 			Assert.False (eController.LessThanHP(i));		
 		}
+
+		[Test]
+		[Category ("attackStart Test")]
+		public void attackStartTest() 
+		{
+			//Arrange
+			iEnemy.attackCount ().Returns (true);
+
+			//Assert
+			Assert.True (eController.attackStart());
+		}
+
+		[Test]
+		[Category ("attackStart False Test")]
+		public void attackStartFalseTest() 
+		{
+			//Arrange
+			iEnemy.attackCount ().Returns (false);
+			
+			//Assert
+			Assert.False (eController.attackStart());
+		}
+
 
 		
 		private IEnemyController GetEnemyMock () {

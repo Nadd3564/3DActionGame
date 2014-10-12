@@ -17,5 +17,10 @@ namespace Cradle.FM
 		void AttackStart();
 		void DropItem();
 		void Died();
+		void AddFSMState(FSMState fsmstate);
+		bool attackCount();
+		float setElapsedTime(float f);
+		void SendMsgStop();
+		bool setAttacking();
 	}
 }

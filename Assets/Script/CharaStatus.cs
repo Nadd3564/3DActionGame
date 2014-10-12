@@ -95,7 +95,7 @@ namespace Cradle {
 			return controller.died;
 		}
 		
-		public bool SetDied(bool flg){
+		public bool setDied(bool flg){
 			return controller.died = flg;
 		}
 

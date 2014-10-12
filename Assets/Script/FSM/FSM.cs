@@ -23,7 +23,7 @@ public class FSM : MonoBehaviour, IFSMController {
 				return controller.SetAttackRate (f);	
 			}
 
-			protected float setElapsedTime(float f){
+			public float setElapsedTime(float f){
 				return controller.SetElapsedTime (f);	
 			}
 
@@ -39,7 +39,7 @@ public class FSM : MonoBehaviour, IFSMController {
 				return controller.GetElapsedTime ();	
 			}
 
-			protected bool attackCount(){
+			public bool attackCount(){
 				return controller.AttackCount ();
 			}
 			
