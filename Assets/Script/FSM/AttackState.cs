@@ -39,8 +39,6 @@ namespace Cradle.FM{
 			
 			//攻撃
 			npc.GetComponent<EnemyCtrl> ().AttackStart ();
-			GetDest ();
-
 		}
 
 		/*public virtual string GetDest(){
