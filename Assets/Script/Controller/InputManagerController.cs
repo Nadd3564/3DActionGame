@@ -26,6 +26,10 @@ namespace Cradle
 			return s;
 		}
 
+		public void SetSlideStartPosition(){
+			this.slideStartPosition = GetCursorPosition ();		
+		}
+
 		public Vector2 GetPrevPosition(){
 			return this.prevPosition;		
 		}
@@ -51,14 +55,10 @@ namespace Cradle
 		public bool SetMoved(bool flg){
 			return this.moved = flg;	
 		} 
-		
-		public void SetSlideStartPosition(){
-			this.slideStartPosition = IsGetCursorPosition ();		
-		}
 
 		public void GetDeltaDistance(){
 			//移動量を求める
-			this.delta = IsGetCursorPosition () - this.prevPosition;		
+			this.delta = GetCursorPosition () - this.prevPosition;		
 		}
 
 		public void StayDelta(){
@@ -67,14 +67,19 @@ namespace Cradle
 
 		public void PrevPosition(){
 			//カーソル位置を更新
-			this.prevPosition = IsGetCursorPosition ();		
+			this.prevPosition = GetCursorPosition ();
 		}
 
-		public Vector2 IsGetCursorPosition()
+		public Vector2 GetCursorPosition()
 		{
 			return Input.mousePosition;
 		}
 
+		public string getCursorPosition()
+		{
+			string s = GetCursorPosition ().ToString ();
+			return s;
+		}
 
 
 		public bool IsClicking(){
@@ -99,10 +104,12 @@ namespace Cradle
 			}
 		}
 
-		public void SlidingCursor(){
-			if (Vector2.Distance (GetSlideStartPosition (), IsGetCursorPosition ())
+		public bool SlidingCursor(){
+			if (Vector2.Distance (GetSlideStartPosition (), GetCursorPosition ())
 			    >= (Screen.width * 0.1f))
 				SetMoved (true);
+			return true;
+			return false;
 		}
 
 		//移動量を求める

@@ -45,7 +45,7 @@ namespace Cradle{
 		
 		public Vector2 GetCursorPosition()
 		{
-			return inputController.IsGetCursorPosition();
+			return inputController.GetCursorPosition();
 		}
 
 		public bool InputGetButtonFire1(){
