@@ -60,7 +60,7 @@ namespace Cradle.Test
 			Assert.That (eController.getDestination(), Is.TypeOf(typeof(string)));	
 		}
 
-		//Null値テスト
+		//Null値テスト(オブジェクト)
 		[Test]
 		[Category ("WaitTime NotNull Test")]
 		public void NotNullWaitTimeTest() 
@@ -96,7 +96,7 @@ namespace Cradle.Test
 			Assert.NotNull (eController.getDestination());		
 		}
 
-		//データ存在テスト
+		//データ存在テスト(オブジェクト)
 		[Test]
 		[Category ("DestinationPosition NotEmpty Test")]
 		public void IsNotEmptyDestinationPositionTest() 
@@ -179,6 +179,22 @@ namespace Cradle.Test
 
 		//正常値テスト(メソッド)
 		[Test]
+		[Category ("SetWaitTime Test")]
+		public void SetWaitTimeTest() 
+		{
+			float f = eController.SetWaitTime (2.0f);
+			Assert.That (eController.GetWaitTime(), Is.EqualTo(f));		
+		}
+
+		[Test]
+		[Category ("SetDownWaitTime Test")]
+		public void SetDownWaitTimeTest() 
+		{
+			float f = eController.SetDownWaitTime (2.0f);
+			Assert.That (eController.GetWaitTime(), Is.EqualTo(f));		
+		}
+
+		[Test]
 		[Category ("IsEnemyHit Test")]
 		public void IsEnemyHitTest([Values("EnemyHit")]string s) 
 		{
@@ -186,24 +202,40 @@ namespace Cradle.Test
 		}
 
 		[Test]
-		[Category ("IsNotEnemyHit Test")]
-		public void IsNotEnemyHitTest([Values("false", "", null)]string s) 
+		[Category ("IsTagCheck Test")]
+		public void IsTagCheckTest([Values("EnemyHit")]string s, [Values("EnemyHit")]string t) 
 		{
-			Assert.False (eController.IsEnemyHit(s));		
+			Assert.True (eController.IsTagCheck(s, t));		
 		}
 
 		[Test]
 		[Category ("LessThanHP Test")]
-		public void LessThanHPTest([Values(-10, 0, null)]int i) 
+		public void LessThanHPTest([Values(0)]int i) 
 		{
-			Assert.True (eController.LessThanHP(i));		
+			Assert.True (eController.LessThanHP(0));		
 		}
 
 		[Test]
-		[Category ("IsNotLessThanHP Test")]
-		public void IsNotLessThanHPTest([Values(1, 10, 100)]int i) 
+		[Category ("ThanItemPrefab Test")]
+		public void ThanItemPrefabTest([Values(0, null)]int i) 
 		{
-			Assert.False (eController.LessThanHP(i));		
+			Assert.True (eController.ThanItemPrefab(i));		
+		}
+
+		[Test]
+		[Category ("ThanTime Test")]
+		public void ThanTimeTest([Values(1.0f)]float f) 
+		{
+			eController.SetWaitTime (f);
+			Assert.True (eController.ThanTime());		
+		}
+
+		[Test]
+		[Category ("LessThanTime Test")]
+		public void LessThanTimeTest([Values(0.0f)]float f) 
+		{
+			eController.SetWaitTime (f);
+			Assert.True (eController.LessThanTime());		
 		}
 
 		[Test]
@@ -216,6 +248,69 @@ namespace Cradle.Test
 
 			//Assert
 			Assert.True (eController.attackStart());
+		}
+
+		//異常値テスト(メソッド)
+		[Test]
+		[Category ("NotSetWaitTime Test")]
+		public void NotSetWaitTimeTest() 
+		{
+			float f = eController.SetWaitTime (2.0f);
+			float l = 3.0f;
+			Assert.That (eController.GetWaitTime(), Is.Not.EqualTo(l));		
+		}
+		
+		[Test]
+		[Category ("NorSetDownWaitTime Test")]
+		public void NotSetDownWaitTimeTest() 
+		{
+			float f = eController.SetDownWaitTime (2.0f);
+			float l = 3.0f;
+			Assert.That (eController.GetWaitTime(), Is.Not.EqualTo(l));		
+		}
+
+		[Test]
+		[Category ("IsNotEnemyHit Test")]
+		public void IsNotEnemyHitTest([Values("false", "", null)]string s) 
+		{
+			Assert.False (eController.IsEnemyHit(s));		
+		}
+
+		[Test]
+		[Category ("IsNotTagCheck Test")]
+		public void IsNotTagCheckTest([Values("")]string s, [Values("EnemyHit")]string t) 
+		{
+			Assert.False (eController.IsTagCheck(s, t));		
+		}
+
+		[Test]
+		[Category ("IsNotLessThanHP Test")]
+		public void IsNotLessThanHPTest([Values(1, 10, 100)]int i) 
+		{
+			Assert.False (eController.LessThanHP(i));		
+		}
+
+		[Test]
+		[Category ("IsNotThanItemPrefab Test")]
+		public void IsNotThanItemPrefabTest([Values(-1, 1, 10)]int i) 
+		{
+			Assert.False (eController.ThanItemPrefab(i));		
+		}
+		
+		[Test]
+		[Category ("IsNotThanTime Test")]
+		public void IsNotThanTimeTest([Values(0.0f, -1.0f, -10.0f)]float f) 
+		{
+			eController.SetWaitTime (f);
+			Assert.False (eController.ThanTime());		
+		}
+
+		[Test]
+		[Category ("IsNotLessThanTime Test")]
+		public void IsNotLessThanTimeTest([Values(0.1f, 1.0f, 10.0f)]float f) 
+		{
+			eController.SetWaitTime (f);
+			Assert.False (eController.LessThanTime());		
 		}
 
 		[Test]

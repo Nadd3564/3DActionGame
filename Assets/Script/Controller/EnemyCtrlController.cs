@@ -47,8 +47,6 @@ namespace Cradle.FM
 			return search;
 		}
 
-
-
 		public ApproachState Approach(Transform[] waypoints){
 			ApproachState approach = new ApproachState (waypoints);
 			approach.AddTransition (Transition.LostPlayer, FSMStateID.Searching);
@@ -69,28 +67,6 @@ namespace Cradle.FM
 			DeadState dead = new DeadState ();
 			dead.AddTransition (Transition.NoHealth, FSMStateID.Dead);
 			return dead;
-		}
-
-		//ElapsedTimeがattackRateを超えたら攻撃
-		public bool attackStart()
-		{
-			if(!enemyController.attackCount())
-			{
-				return false;
-			}
-
-			if(enemyController.attackCount())
-			{
-				if(!enemyController.setAttacking())
-					throw new ArgumentException("The setAttacking Must be True.");
-				
-				enemyController.setAttacking();
-				enemyController.setElapsedTime(0.0f);
-			}
-			//移動を止める
-			enemyController.SendMsgStop ();
-			return true;
-			return false;
 		}
 
 
@@ -128,10 +104,6 @@ namespace Cradle.FM
 			return s;
 		}
 
-		//移動先の設定
-		public void DestPos(Vector3 destPos){
-			this.destinationPosition = destPos;		
-		}
 		public bool IsEnemyHit(string s){
 		if (s == "EnemyHit")
 				return true;
@@ -166,6 +138,33 @@ namespace Cradle.FM
 			if (GetWaitTime() <= 0.0f)
 				return true;
 			return false;
+		}
+
+		//ElapsedTimeがattackRateを超えたら攻撃
+		public bool attackStart()
+		{
+			if(!enemyController.attackCount())
+			{
+				return false;
+			}
+			
+			if(enemyController.attackCount())
+			{
+				if(!enemyController.setAttacking())
+					throw new ArgumentException("The setAttacking Must be True.");
+				
+				enemyController.setAttacking();
+				enemyController.setElapsedTime(0.0f);
+			}
+			//移動を止める
+			enemyController.SendMsgStop ();
+			return true;
+			return false;
+		}
+
+		//移動先の設定
+		public void DestPos(Vector3 destPos){
+			this.destinationPosition = destPos;
 		}
 
 		public void SetEnemyController(IEnemyController enemyController) {
