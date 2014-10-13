@@ -6,5 +6,10 @@ namespace Cradle
 	{
 		bool Clicked();
 		bool Moved();
+		bool InputGetButtonFire1 ();
+		bool InputGetButtonUpFire1 ();
+		bool InputGetButton ();
+		bool InputGetButtonDown ();
+		bool InputGetButtonUp();
 	}	
 }

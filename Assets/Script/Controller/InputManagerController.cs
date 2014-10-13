@@ -21,14 +21,37 @@ namespace Cradle
 			return this.slideStartPosition;		
 		}
 
+		public string getSlideStartPosition(){
+			string s = GetSlideStartPosition().ToString ();
+			return s;
+		}
+
+		public Vector2 GetPrevPosition(){
+			return this.prevPosition;		
+		}
+		
+		public string getPrevPosition(){
+			string s = GetPrevPosition().ToString ();
+			return s;
+		}
+
+		public Vector2 GetDeltaPosition(){
+			return this.delta;
+		}
+
+		public string getDeltaPosition(){
+			string s = GetDeltaPosition().ToString ();
+			return s;
+		}
+
 		public bool IsMoved(){
 			return this.moved;
 		}
-
+		
 		public bool SetMoved(bool flg){
 			return this.moved = flg;	
 		} 
-
+		
 		public void SetSlideStartPosition(){
 			this.slideStartPosition = IsGetCursorPosition ();		
 		}
@@ -42,10 +65,6 @@ namespace Cradle
 			this.delta = Vector2.zero;	
 		}
 
-		public Vector2 GetPrevPosition(){
-			return this.prevPosition;		
-		}
-
 		public void PrevPosition(){
 			//カーソル位置を更新
 			this.prevPosition = IsGetCursorPosition ();		
@@ -56,16 +75,10 @@ namespace Cradle
 			return Input.mousePosition;
 		}
 
-		public Vector2 IsGetDeltaPosition(){
-			return this.delta;
-		}
 
-		public bool IsClicked(){
-			return IsClicking ();
-		}
 
 		public bool IsClicking(){
-			if (!IsMoved() && InputGetButtonUpFire1() || InputGetButtonFire1())
+			if (!IsMoved() && inputController.InputGetButtonUpFire1() || inputController.InputGetButtonFire1())
 				return true;
 			else
 				return false;
@@ -74,14 +87,14 @@ namespace Cradle
 
 		//スライド開始地点
 		public void SlideStart(){
-					if (InputGetButtonDown())
+					if (inputController.InputGetButtonDown())
 							SetSlideStartPosition ();
 				}
 
 		//画面の一割以上移動させたらスライド開始
 		public void Sliding()
 		{
-					if (InputGetButton()) {
+			if (inputController.InputGetButton()) {
 							SlidingCursor();
 			}
 		}
@@ -102,7 +115,7 @@ namespace Cradle
 
 		//スライド操作が終了したか
 		public void StopSlide(){
-			if (InputGetButtonUp() && !InputGetButton())
+			if (inputController.InputGetButtonUp() && !inputController.InputGetButton())
 						SetMoved (false);
 		}
 
@@ -110,45 +123,5 @@ namespace Cradle
 			this.inputController = inputController;
 		}
 
-		public bool InputGetButtonFire1(){
-			return Input.GetButton("Fire1");		
-		}
-		
-		public bool InputGetButtonUpFire1(){
-			return Input.GetButtonUp("Fire1");		
-		}
-		
-		public bool InputTestGetButtonFire1(){
-			return InputGetButtonFire1 ();		
-		}
-		
-		public bool InputTestGetButtonUpFire1(){
-			return InputGetButtonUpFire1 ();		
-		}
-		
-		public bool InputGetButton(){
-			return Input.GetButton("Fire2");		
-		}
-		
-		public bool InputGetButtonDown(){
-			return Input.GetButtonDown("Fire2");		
-		}
-		
-		public bool InputGetButtonUp(){
-			return Input.GetButtonUp("Fire2");		
-		}
-		
-		public bool InputTestGetButton(){
-			return InputGetButtonDown();		
-		}
-		
-		public bool InputTestGetButtonDown(){
-			return InputGetButtonDown();		
-		}
-		
-		public bool InputTestGetButtonUp(){
-			return InputGetButtonUp();		
-		}
-		
 	}
 }

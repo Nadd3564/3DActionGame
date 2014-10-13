@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using Cradle;
 
@@ -30,12 +30,12 @@ namespace Cradle{
 		
 		//クリックされたか
 		public bool Clicked(){
-			return inputController.IsClicked ();		
+			return inputController.IsClicking ();
 		}
 		
 		//スライド時のカーソルの移動量
 		public Vector2 GetDeltaPosition(){
-			return inputController.IsGetDeltaPosition();
+			return inputController.GetDeltaPosition();
 		}
 		
 		//スライド中か
@@ -47,6 +47,26 @@ namespace Cradle{
 		{
 			return inputController.IsGetCursorPosition();
 		}
+
+		public bool InputGetButtonFire1(){
+			return Input.GetButton("Fire1");		
+		}
 		
+		public bool InputGetButtonUpFire1(){
+			return Input.GetButtonUp("Fire1");		
+		}
+		
+		public bool InputGetButton(){
+			return Input.GetButton("Fire2");		
+		}
+		
+		public bool InputGetButtonDown(){
+			return Input.GetButtonDown("Fire2");		
+		}
+		
+		public bool InputGetButtonUp(){
+			return Input.GetButtonUp("Fire2");		
+		}
+
 	}
 }

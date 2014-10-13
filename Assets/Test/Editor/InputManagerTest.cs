@@ -22,6 +22,78 @@ namespace Cradle.Test
 			
 		}
 
+		//データ型テスト（オブジェクト）
+		[Test]
+		[Category ("moved Type Test")]
+		public void movedType() 
+		{
+			Assert.That (inputManager.IsMoved(), Is.TypeOf(typeof(bool)));		
+		}
+
+		//Null値テスト（オブジェクト）
+		[Test]
+		[Category ("moved NotNull Test")]
+		public void NotNullMovedTest() 
+		{
+			Assert.NotNull (inputManager.IsMoved());		
+		}
+
+		//データ存在テスト
+		[Test]
+		[Category ("SlideStartPosition NotEmpty Test")]
+		public void IsNotEmptySlideStartPositionTest() 
+		{
+			Assert.IsNotEmpty (inputManager.getSlideStartPosition());		
+		}
+
+
+		[Test]
+		[Category ("SlideStartPosition NotEmpty Test")]
+		public void IsNotEmptySlideStartPositionTest() 
+		{
+			Assert.IsNotEmpty (inputManager.getSlideStartPosition());		
+		}
+
+		[Test]
+		[Category ("SlideStartPosition NotEmpty Test")]
+		public void IsNotEmptySlideStartPositionTest() 
+		{
+			Assert.IsNotEmpty (inputManager.getSlideStartPosition());		
+		}
+
+		//正常値テスト(オブジェクト)
+		[Test]
+		[Category ("SlideStartPosition Test")]
+		public void SlideStartPosition ()
+		{
+			string s = "(0.0, 0.0)";
+			Assert.That (inputManager.getSlideStartPosition(), Is.EqualTo(s));
+		}
+
+		[Test]
+		[Category ("prevPosition Test")]
+		public void prevPosition ()
+		{
+			string s = "(0.0, 0.0)";
+			Assert.That (inputManager.getPrevPosition(), Is.EqualTo(s));
+		}
+
+		[Test]
+		[Category ("delta Test")]
+		public void delta ()
+		{
+			string s = "(0.0, 0.0)";
+			Assert.That (inputManager.getDeltaPosition(), Is.EqualTo(s));
+		}
+
+		[Test]
+		[Category ("moved Test")]
+		public void moved ()
+		{
+			Assert.False (inputManager.IsMoved());
+		}
+
+
 		//正常値テスト
 		[Test]
 		[Category ("Input Test")]
@@ -29,7 +101,7 @@ namespace Cradle.Test
 		[TestCase(false)]
 		public void IsClickedTest (bool flg)
 		{
-			Assert.That (inputManager.IsClicked (), Is.EqualTo (flg));
+			Assert.That (inputManager.IsClicking(), Is.EqualTo (flg));
 		}
 
 		[Test]
@@ -38,7 +110,7 @@ namespace Cradle.Test
 		[TestCase(false)]
 		public void InputTestGetButtonDownTest (bool flg)
 		{
-			Assert.That (inputManager.InputTestGetButton(), Is.EqualTo (flg));
+			Assert.That (input.InputGetButtonDown(), Is.EqualTo (flg));
 		}
 
 
@@ -48,8 +120,8 @@ namespace Cradle.Test
 		[TestCase(false)]
 		public void IsClickingTest1 (bool flg)
 		{
-			inputManager.InputTestGetButtonFire1();
-			inputManager.InputTestGetButtonUpFire1();
+			input.InputGetButtonFire1();
+			input.InputGetButtonUpFire1 ();
 			Assert.That (inputManager.IsClicking(), Is.EqualTo(flg));
 		}
 
@@ -65,10 +137,11 @@ namespace Cradle.Test
 		[Category ("Input Test")]
 		public void GetDeltaDistanceTest (float x, float y)
 		{
-			bool xLess = x < inputManager.IsGetDeltaPosition().x;
-			bool yLess = y < inputManager.IsGetDeltaPosition().y;
-			inputManager.GetDeltaDistance ();
-			Assert.AreEqual (inputManager.IsGetDeltaPosition(), Is.EqualTo(xLess));
+			//bool xLess = x < inputManager.IsGetDeltaPosition ().x.ToString ();
+			//bool yLess = y < inputManager.IsGetDeltaPosition().y.ToString();
+			string xLess = inputManager.GetSlideStartPosition().ToString ();
+			//inputManager.GetDeltaDistance ();
+			Assert.IsEmpty(xLess);
 		}
 
 		private IInputController GetInputMock () {

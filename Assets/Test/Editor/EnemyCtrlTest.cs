@@ -57,6 +57,7 @@ namespace Cradle.Test
 		[Category ("DestinationPosition Test")]
 		public void DestinationPositionTest() 
 		{
+
 			Assert.That (eController.getDestination(), Is.TypeOf(typeof(string)));	
 		}
 
