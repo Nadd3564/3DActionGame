@@ -8,16 +8,12 @@ namespace Cradle.FM
 	public class EnemyCtrlController
 	{
 		private GameObject[] pointList;
-		public Vector3 basePosition; //初期位置を保存
 		public float waitBaseTime = 2.0f; //待機時間
 		public float waitTime; //残り待機時間
 		public float walkRange = 5.0f; //移動範囲
 		public float DestroyTime = 5.0f;	//死体消滅時間
-		private Vector3 vec;
 		private Vector3 destinationPosition;
 	
-		FSMController fsm;
-		CharaStatusController status;
 		private IEnemyController enemyController;
 		
 		
@@ -78,7 +74,6 @@ namespace Cradle.FM
 		//ElapsedTimeがattackRateを超えたら攻撃
 		public bool attackStart()
 		{
-
 			if(!enemyController.attackCount())
 			{
 				return false;
@@ -86,26 +81,18 @@ namespace Cradle.FM
 
 			if(enemyController.attackCount())
 			{
+				if(!enemyController.setAttacking())
+					throw new ArgumentException("The setAttacking Must be True.");
+				
 				enemyController.setAttacking();
 				enemyController.setElapsedTime(0.0f);
 			}
 			//移動を止める
 			enemyController.SendMsgStop ();
 			return true;
-		}
-		
-		public Vector3 GetVec(){
-			return this.vec;	
+			return false;
 		}
 
-		public Vector3 GetDestination(){
-			return this.destinationPosition;	
-		}
-
-		//移動先の設定
-		public void DestPos(Vector3 destPos){
-			this.destinationPosition = destPos;		
-		}
 
 		public float GetWaitTime(){
 			return this.waitTime;	
@@ -127,7 +114,24 @@ namespace Cradle.FM
 			return this.DestroyTime;	
 		}
 
+		public float GetWalkRange(){
+			return this.walkRange;	
+		}
 
+		//目的地の取得
+		public Vector3 GetDestination(){
+			return this.destinationPosition;	
+		}
+
+		public string getDestination(){
+			string s = GetDestination ().ToString ();
+			return s;
+		}
+
+		//移動先の設定
+		public void DestPos(Vector3 destPos){
+			this.destinationPosition = destPos;		
+		}
 		public bool IsEnemyHit(string s){
 		if (s == "EnemyHit")
 				return true;

@@ -11,7 +11,6 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 		GameObject target;	
 		public Vector3 basePosition; //初期位置を保存
 		Vector3 vec;
-		/*Vector3 destinationPosition;*/
 		public GameObject hitEffect;
 		private GameObject effect;
 		public GameObject[] dropItemPrefab; //複数のアイテムを入れる配列
@@ -127,19 +126,6 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 				}
 			}
 		
-
-		/*//ElapsedTimeがattackRateを超えたら攻撃
-		public void AttackStart()
-		{
-				if(attackCount())
-				{
-				setAttacking();
-					setElapsedTime(0.0f);
-				}
-			
-			//移動を止める
-			SendMsgStop ();
-		}*/
 
 		public void AttackStart(){
 			eController.attackStart ();	
