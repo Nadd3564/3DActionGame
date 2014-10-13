@@ -105,9 +105,14 @@ namespace Cradle
 		}
 
 		public bool SlidingCursor(){
-			if (Vector2.Distance (GetSlideStartPosition (), GetCursorPosition ())
-			    >= (Screen.width * 0.1f))
-				SetMoved (true);
+			if (Vector2.Distance (
+					GetSlideStartPosition (), GetCursorPosition ())
+								>= (Screen.width * 0.1f)) {
+								SetMoved (true);
+						} else if (Vector2.Distance (
+				GetSlideStartPosition (), GetCursorPosition ())
+								>= (Screen.width * 0.3f))
+								StopSlideThatThrows (false);
 			return true;
 			return false;
 		}
@@ -122,10 +127,26 @@ namespace Cradle
 
 		//スライド操作が終了したか
 		public void StopSlide(){
-			if (inputController.InputGetButtonUp() && !inputController.InputGetButton())
-						SetMoved (false);
+			if (inputController.InputGetButtonUp () && !inputController.InputGetButton ())
+								StopSlideThatThrows (false);
 		}
 
+
+		//例外検出メソッド
+		public void StopSlideThatThrows(bool flg){
+			if (SetMoved(flg)) {
+				throw new ArgumentOutOfRangeException ("The IsMoved Must Be True.", default(Exception));
+			}
+		}
+
+		public void SlindingCursorThatThrows(bool flg){
+			if(!SetMoved(flg))
+				throw new ArgumentOutOfRangeException("The IsMoved Must Be True.", default(Exception));
+			SetMoved(true);
+		}
+
+
+		
 		public void SetInputController(IInputController inputController) {
 			this.inputController = inputController;
 		}

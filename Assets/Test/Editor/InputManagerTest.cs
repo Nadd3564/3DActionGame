@@ -187,12 +187,19 @@ namespace Cradle.Test
 		}
 
 		[Test]
+		[Category ("SlidingCurSor Test")]
+		public void SlidingCursorTest ()
+		{
+			inputManager.SlidingCursor ();
+			Assert.True(inputManager.IsMoved());
+		}
+
+		[Test]
 		[Category ("Moved Test")]
 		public void MovedTest ()
 		{
 			string s = "(0.0, 0.0)" ;
 
-			//Act
 			inputManager.SetMoved (true);
 			inputManager.Moved ();
 			
@@ -204,8 +211,7 @@ namespace Cradle.Test
 		public void MovedElseTest ()
 		{
 			string s = "(0.0, 0.0)" ;
-			
-			//Act
+
 			inputManager.Moved ();
 			
 			Assert.That(inputManager.getDeltaPosition(), Is.EqualTo(s));
@@ -225,6 +231,31 @@ namespace Cradle.Test
 			Assert.False(inputManager.IsMoved());
 		}
 
+
+		//例外検出テスト(メソッド)
+		[Test]
+		[Category ("SlidingCursor Exception Test")]
+		[ExpectedException(typeof(ArgumentOutOfRangeException))]
+		public void SlidingCursorExceptionTest ()
+		{
+
+			inputManager.SlidingCursor ();
+			inputManager.StopSlideThatThrows (true);
+		}
+
+		[Test]
+		[Category ("StopSlide Exception Test")]
+		[ExpectedException(typeof(ArgumentOutOfRangeException))]
+		public void StopSlideExceptionTest ()
+		{
+			//Arrange
+			input.InputGetButtonUp ().Returns (true);
+
+
+			//Act
+			inputManager.StopSlide ();
+			inputManager.StopSlideThatThrows (true);
+		}
 
 		private IInputController GetInputMock () {
 			return Substitute.For<IInputController> ();
