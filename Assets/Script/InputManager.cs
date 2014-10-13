@@ -16,10 +16,10 @@ namespace Cradle{
 			inputController.SlideStart ();				
 			
 			//画面の一割以上移動させたらスライド開始
-			inputController.Sliding ();
+			inputController.Sliding (true);
 			
 			//スライド操作が終了したか
-			inputController.StopSlide ();
+			inputController.StopSlide (false);
 			
 			//移動量を求める
 			inputController.Moved ();

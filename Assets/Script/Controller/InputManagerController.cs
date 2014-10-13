@@ -97,14 +97,14 @@ namespace Cradle
 				}
 
 		//画面の一割以上移動させたらスライド開始
-		public void Sliding()
+		public void Sliding(bool flg)
 		{
 			if (inputController.InputGetButton()) {
-							SlidingCursor();
+							SlidingCursor(flg);
 			}
 		}
 
-		public bool SlidingCursor(){
+		/*public bool SlidingCursor(){
 			if (Vector2.Distance (
 					GetSlideStartPosition (), GetCursorPosition ())
 								>= (Screen.width * 0.1f)) {
@@ -112,11 +112,26 @@ namespace Cradle
 						} else if (Vector2.Distance (
 				GetSlideStartPosition (), GetCursorPosition ())
 								>= (Screen.width * 0.3f))
-								StopSlideThatThrows (false);
+								SlindingCursorThatThrows (true);
+					return true;
+			return false;
+		}*/
+
+		public bool SlidingCursor(bool flg){
+			if (Vector2.Distance (
+				GetSlideStartPosition (), GetCursorPosition ())
+			    >= (Screen.width * 0.3f))
+				SlindingCursorThatThrows (flg);
+
+			if (Vector2.Distance (
+				GetSlideStartPosition (), GetCursorPosition ())
+			    >= (Screen.width * 0.1f)) {
+				SetMoved (true);
+			} 
 			return true;
 			return false;
 		}
-
+		
 		//移動量を求める
 		public void Moved(){
 					if (IsMoved ())
@@ -126,21 +141,21 @@ namespace Cradle
 		}
 
 		//スライド操作が終了したか
-		public void StopSlide(){
-			if (inputController.InputGetButtonUp () && !inputController.InputGetButton ())
-								StopSlideThatThrows (false);
+		public void StopSlide(bool flg){
+			if (!inputController.InputGetButtonUp () && !inputController.InputGetButton ())
+								StopSlideThatThrows (flg);
 		}
-
 
 		//例外検出メソッド
 		public void StopSlideThatThrows(bool flg){
+			SetMoved (false);
 			if (SetMoved(flg)) {
 				throw new ArgumentOutOfRangeException ("The IsMoved Must Be True.", default(Exception));
 			}
 		}
 
 		public void SlindingCursorThatThrows(bool flg){
-			if(!SetMoved(flg))
+			if(IsMoved() == !SetMoved(flg))
 				throw new ArgumentOutOfRangeException("The IsMoved Must Be True.", default(Exception));
 			SetMoved(true);
 		}

@@ -181,16 +181,16 @@ namespace Cradle.Test
 			input.InputGetButtonDown ().Returns (true);
 			
 			//Act
-			inputManager.Sliding();
+			inputManager.Sliding(false);
 			
-			Assert.True(inputManager.SlidingCursor());
+			Assert.True(inputManager.SlidingCursor(false));
 		}
 
 		[Test]
 		[Category ("SlidingCurSor Test")]
 		public void SlidingCursorTest ()
 		{
-			inputManager.SlidingCursor ();
+			inputManager.SlidingCursor (false);
 			Assert.True(inputManager.IsMoved());
 		}
 
@@ -226,9 +226,9 @@ namespace Cradle.Test
 
 			//Act
 			inputManager.SetMoved (true);
-			inputManager.StopSlide ();
+			inputManager.StopSlide (false);
 			
-			Assert.False(inputManager.IsMoved());
+			Assert.True(inputManager.IsMoved());
 		}
 
 
@@ -238,9 +238,7 @@ namespace Cradle.Test
 		[ExpectedException(typeof(ArgumentOutOfRangeException))]
 		public void SlidingCursorExceptionTest ()
 		{
-
-			inputManager.SlidingCursor ();
-			inputManager.StopSlideThatThrows (true);
+			inputManager.SlidingCursor(true);
 		}
 
 		[Test]
@@ -248,13 +246,7 @@ namespace Cradle.Test
 		[ExpectedException(typeof(ArgumentOutOfRangeException))]
 		public void StopSlideExceptionTest ()
 		{
-			//Arrange
-			input.InputGetButtonUp ().Returns (true);
-
-
-			//Act
-			inputManager.StopSlide ();
-			inputManager.StopSlideThatThrows (true);
+			inputManager.StopSlide (true);
 		}
 
 		private IInputController GetInputMock () {
