@@ -21,7 +21,7 @@ public class EnemyGenerator : MonoBehaviour, IGeneratorController {
 
 		IEnumerator Exec(){
 			while(true){
-				Generate();
+				controller.generate(existEnemys.Length);
 				yield return new WaitForSeconds(controller.GetRePopTime());
 			}
 		}
@@ -30,15 +30,16 @@ public class EnemyGenerator : MonoBehaviour, IGeneratorController {
 				this.existEnemys = new GameObject[controller.GetMaxActive()];
 		}
 
-		public void Generate(){
-			for(int enemyCount = 0; enemyCount < existEnemys.Length; ++ enemyCount){
-				if(existEnemys[enemyCount] == null){
-					//敵作成
-					existEnemys[enemyCount] = Instantiate(enemyPrefab, transform.position, transform.rotation) as 
-						GameObject;
-					return;
-				}
-			}
+		public void Instantiate(int enemyCount){
+			existEnemys[enemyCount] = Instantiate(enemyPrefab, transform.position, transform.rotation) as 
+				GameObject;
+		} 
+
+		public bool SameNullEnemys(int enemyCount){
+			if (existEnemys [enemyCount] == null)
+				return true;
+			return false;
 		}
+
 	}
 	}

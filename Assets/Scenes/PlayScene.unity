@@ -2791,8 +2791,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cAController:
-    isDown: 0
     attacked: 0
+    isDown: 0
 --- !u!114 &669342552
 MonoBehaviour:
   m_ObjectHideFlags: 0

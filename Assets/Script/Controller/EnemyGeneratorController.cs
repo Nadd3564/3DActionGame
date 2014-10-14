@@ -11,10 +11,20 @@ namespace Cradle
 		//再出現までの時間
 		public float RePopTime = 8.0f;
 	
-		private IGeneratorController generatorController;
+		private IGeneratorController gController;
 		
 		public EnemyGeneratorController (){
 
+		}
+
+		public void generate(int EnemysLength){
+			for(int enemyCount = 0; enemyCount < EnemysLength; ++ enemyCount){
+				if(gController.SameNullEnemys(enemyCount)){
+					//敵作成
+				gController.Instantiate(enemyCount);
+					return;
+				}
+			}		
 		}
 
 		public int GetMaxActive(){
@@ -33,8 +43,8 @@ namespace Cradle
 			return this.RePopTime = f;		
 		}
 
-		public void SetGeneratorController(IGeneratorController generatorController) {
-			this.generatorController = generatorController;
+		public void SetGeneratorController(IGeneratorController gController) {
+			this.gController = gController;
 		}
 		
 	}
