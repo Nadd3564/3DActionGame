@@ -252,6 +252,26 @@ namespace Cradle.Test
 			Assert.True (eController.attackStart());
 		}
 
+		[Test]
+		[Category ("Died Test")]
+		public void DiedTest() 
+		{
+			string s = "Dead";
+			eController.Died ();
+			
+			Assert.That (iEnemy.SetTag(), Is.EqualTo(s));		
+		}
+		
+		[Test]
+		[Category ("Down Test")]
+		public void DownTest() 
+		{
+			//Arrange
+			iEnemy.GetHP ().Returns (0);
+			
+			Assert.True (eController.Down());		
+		}
+
 		//異常値テスト(メソッド)
 		[Test]
 		[Category ("NotSetWaitTime Test")]
@@ -315,15 +335,7 @@ namespace Cradle.Test
 			Assert.False (eController.LessThanTime());		
 		}
 
-		[Test]
-		[Category ("Died Test")]
-		public void DiedTest() 
-		{
-			string s = "Dead";
-			eController.Died ();
-			
-			Assert.That (iEnemy.SetTag(), Is.EqualTo(s));		
-		}
+
 
 		//例外処理テスト
 		[Test]

@@ -118,14 +118,18 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 						SendMessage("SetDirection", eController.GetDestination());
 					}
 				} else {
-					//目的地へ到着
-					if(characterMove.Arrived()){
-						//待機状態へ
-						eController.SetWaitTime(Random.Range(eController.GetWaitBaseTime(), eController.GetWaitBaseTime() * 2.0f));
-					}
+						Arrived();
 				}
 			}
 		
+
+		public void Arrived(){
+			//目的地へ到着
+			if(characterMove.Arrived()){
+				//待機状態へ
+				eController.SetWaitTime(Random.Range(eController.GetWaitBaseTime(), eController.GetWaitBaseTime() * 2.0f));
+			}
+		}
 
 		public void AttackStart(){
 			eController.attackStart ();	
@@ -145,26 +149,36 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 			CreateHitEffect ();
 			EffectPos ();
 			Destroy (effect, 0.3f);
-			
+
+			//HPを減らす
 			status.DamageHP(attackInfo.GetAttackPower());
-			if(eController.LessThanHP(status.GetHP()))
+
+			//死体を攻撃できないようにし、体力0なので倒れる
+			eController.Down();
+		}
+
+		public int GetHP(){
+			return status.GetHP ();
+		}
+
+		public void SetHP(){
+			status.SetHP(0);
+		}
+
+		//死体を攻撃できないようにする
+		public void CanNotAttack(){
+			foreach (Transform child in transform)
 			{
-					status.SetHP(0);
-				//死体を攻撃できないようにする
-				foreach (Transform child in transform)
+				if(eController.IsTagCheck(child.tag, "EnemyHit"))
 				{
-					if(eController.IsTagCheck(child.tag, "EnemyHit"))
-					{
-						target = child.gameObject;
-					}
+					target = child.gameObject;
 				}
-				target.layer = 0;
-				//体力0なので倒れる
-				Debug.Log("Switch to Dead State");
-				SetTransition(Transition.NoHealth);
-				//Died();
-				eController.Died();
 			}
+			target.layer = 0;
+		}
+
+		public void DeadLog(){
+			Debug.Log("Switch to Dead State");
 		}
 
 		public void CreateHitEffect(){

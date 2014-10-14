@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using Cradle.FM;
 
@@ -13,8 +14,7 @@ namespace Cradle.FM
 		public float walkRange = 5.0f; //移動範囲
 		public float DestroyTime = 5.0f;	//死体消滅時間
 		private Vector3 destinationPosition;
-		private Transform transform;
-	
+
 		private IEnemyController enemyController;
 		
 		
@@ -70,7 +70,6 @@ namespace Cradle.FM
 			return dead;
 		}
 
-
 		public float GetWaitTime(){
 			return this.waitTime;	
 		}
@@ -78,6 +77,7 @@ namespace Cradle.FM
 		public float SetWaitTime(float f){
 			return this.waitTime = f;	
 		}
+
 
 		public float SetDownWaitTime(float f){
 			return this.waitTime -= f;	
@@ -169,6 +169,23 @@ namespace Cradle.FM
 			
 			//Deadタグへ更新
 			enemyController.SetTag ();
+		}
+
+		public bool Down(){
+			if(!LessThanHP(enemyController.GetHP()))
+				return false;
+
+			if (LessThanHP (enemyController.GetHP ())) {
+				enemyController.SetHP ();
+				//死体を攻撃できないようにする
+				enemyController.CanNotAttack ();
+				//体力0なので倒れる
+				enemyController.DeadLog ();
+				enemyController.SetTransition (Transition.NoHealth);
+				Died ();
+				}
+			return true;
+
 		}
 
 		//移動先の設定

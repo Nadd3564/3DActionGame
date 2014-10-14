@@ -5,6 +5,7 @@ namespace Cradle.FM
 {
 	public interface IEnemyController
 	{
+		void SetTransition(Transition t);
 		void Log();
 		void SetBasePosition();
 		void FindPlayer();
@@ -25,5 +26,10 @@ namespace Cradle.FM
 		void SetDied();
 		string SetTag();
 		void FindBossTag();
+		void Arrived();
+		void CanNotAttack();
+		void DeadLog();
+		void SetHP();
+		int GetHP();
 	}
 }
