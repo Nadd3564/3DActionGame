@@ -143,10 +143,10 @@ namespace Cradle.FM
 		//ElapsedTimeがattackRateを超えたら攻撃
 		public bool attackStart()
 		{
-			if(!enemyController.attackCount())
+			/*if(!enemyController.attackCount())
 			{
 				return false;
-			}
+			}*/
 			
 			if(enemyController.attackCount())
 			{

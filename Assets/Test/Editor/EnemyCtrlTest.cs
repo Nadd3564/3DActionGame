@@ -335,8 +335,7 @@ namespace Cradle.Test
 			iEnemy.attackCount ().Returns (true);
 			iEnemy.setAttacking ().Returns (false);
 		
-			//Assert
-			Assert.False(eController.attackStart());
+			eController.attackStart ();
 		}
 
 		private IEnemyController GetEnemyMock () {
