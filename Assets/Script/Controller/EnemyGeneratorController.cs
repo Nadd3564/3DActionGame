@@ -17,31 +17,34 @@ namespace Cradle
 
 		}
 
-		public void generate(int EnemysLength){
-			for(int enemyCount = 0; enemyCount < EnemysLength; ++ enemyCount){
-				if(gController.SameNullEnemys(enemyCount)){
-					//敵作成
-				gController.Instantiate(enemyCount);
-					return;
-				}
-			}		
-		}
-
 		public int GetMaxActive(){
 			return this.maxActive;		
 		}
-
+		
 		public int SetMaxActive(int i){
 			return this.maxActive = i;		
 		}
-
+		
 		public float GetRePopTime(){
 			return this.RePopTime;		
 		}
-
+		
 		public float SetRePopTime(float f){
 			return this.RePopTime = f;		
 		}
+
+		public void generate(int i, int EnemysLength){
+			for(int enemyCount = i; enemyCount < EnemysLength; ++ enemyCount){
+				if(gController.SameNullEnemys(enemyCount)){
+					//敵作成
+					if(!gController.Instantiate(enemyCount)){
+						throw new ArgumentOutOfRangeException("The Instantiate Must Be True.", default(Exception));
+					}
+					return;
+				}
+			}	
+		}
+
 
 		public void SetGeneratorController(IGeneratorController gController) {
 			this.gController = gController;

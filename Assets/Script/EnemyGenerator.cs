@@ -21,7 +21,7 @@ public class EnemyGenerator : MonoBehaviour, IGeneratorController {
 
 		IEnumerator Exec(){
 			while(true){
-				controller.generate(existEnemys.Length);
+				controller.generate(0, existEnemys.Length);
 				yield return new WaitForSeconds(controller.GetRePopTime());
 			}
 		}
@@ -30,9 +30,11 @@ public class EnemyGenerator : MonoBehaviour, IGeneratorController {
 				this.existEnemys = new GameObject[controller.GetMaxActive()];
 		}
 
-		public void Instantiate(int enemyCount){
+		public bool Instantiate(int enemyCount){
 			existEnemys[enemyCount] = Instantiate(enemyPrefab, transform.position, transform.rotation) as 
 				GameObject;
+			return true;
+			return false;
 		} 
 
 		public bool SameNullEnemys(int enemyCount){
