@@ -249,6 +249,7 @@ namespace Cradle.Test
 			inputManager.StopSlide (true);
 		}
 
+
 		private IInputController GetInputMock () {
 			return Substitute.For<IInputController> ();
 		}

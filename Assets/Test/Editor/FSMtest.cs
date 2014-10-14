@@ -159,7 +159,7 @@ namespace Cradle.Test
 		public void AttackCountExceptionTest() 
 		{
 			fController.SetElapsedTime (30.0f);
-			Assert.False(fController.AttackCount());		
+			fController.AttackCount ();
 		}
 
 

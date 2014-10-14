@@ -162,7 +162,8 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 				//体力0なので倒れる
 				Debug.Log("Switch to Dead State");
 				SetTransition(Transition.NoHealth);
-				Died();
+				//Died();
+				eController.Died();
 			}
 		}
 
@@ -195,25 +196,25 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 			this.vec.y += 1.0f;
 		}
 
-
-
-		public void Died()
-		{
+		public void SetDied(){
 			status.setDied (true);
-			DropItem ();
-			Destroy (gameObject, eController.GetDestroyTime());
-			PlayDeathSE ();
-				//ボスだった場合、ゲームクリア
-				foreach (Transform child in transform)
-				{
-					if(eController.IsTagCheck(child.tag, "Boss"))
-					{
-						gameRuleSettings.GameClear();
-					}
-				}
+		}
 
-				//Deadタグへ更新
-			SetTag ();
+		public void DiedDestroy(){
+			Destroy (gameObject, eController.GetDestroyTime());
+		}
+
+		public void FindBossTag(){
+			//ボスだった場合、ゲームクリア
+			foreach (Transform child in transform) {
+				if (eController.IsTagCheck (child.tag, "Boss")) {
+					GameClear ();
+				}
+			}
+		}
+
+		public void GameClear(){
+			this.gameRuleSettings.GameClear();
 		}
 
 
@@ -221,8 +222,10 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 			AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
 		}
 
-		public void SetTag(){
+		public string SetTag(){
 			this.gameObject.tag = "Dead";
+			string s = this.gameObject.tag;
+			return s;
 		}
 
 		//ステータスを初期化

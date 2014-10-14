@@ -12,15 +12,18 @@ namespace Cradle.FM
 		void EffectPos();
 		void InitItem();
 		void JumpItem();
-		void SetTag();
 		void PlayDeathSE();
 		void AttackStart();
 		void DropItem();
-		void Died();
 		void AddFSMState(FSMState fsmstate);
 		bool attackCount();
 		float setElapsedTime(float f);
 		void SendMsgStop();
 		bool setAttacking();
+		void GameClear();
+		void DiedDestroy();
+		void SetDied();
+		string SetTag();
+		void FindBossTag();
 	}
 }

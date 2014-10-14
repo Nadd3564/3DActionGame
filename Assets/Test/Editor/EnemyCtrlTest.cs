@@ -141,6 +141,7 @@ namespace Cradle.Test
 			Assert.That (eController.getDestination(), Is.EqualTo("(0.0, 0.0, 0.0)"));		
 		}
 
+
 		//異常値テスト（オブジェクト）
 		[Test]
 		[Category ("GetWaitTimeOutLiner Test")]
@@ -315,14 +316,13 @@ namespace Cradle.Test
 		}
 
 		[Test]
-		[Category ("attackStart False Test")]
-		public void attackStartFalseTest() 
+		[Category ("Died Test")]
+		public void DiedTest() 
 		{
-			//Arrange
-			iEnemy.attackCount ().Returns (false);
+			string s = "Dead";
+			eController.Died ();
 			
-			//Assert
-			Assert.False (eController.attackStart());
+			Assert.That (iEnemy.SetTag(), Is.EqualTo(s));		
 		}
 
 		//例外処理テスト
@@ -345,6 +345,7 @@ namespace Cradle.Test
 		private EnemyCtrlController GetControllerMock(IEnemyController iEnemy) {
 			var eController = Substitute.For<EnemyCtrlController> ();
 			eController.SetEnemyController (iEnemy);
+			iEnemy.SetTag ().Returns ("Dead");
 			return eController;
 		}
 		

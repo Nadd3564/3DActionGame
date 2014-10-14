@@ -13,6 +13,7 @@ namespace Cradle.FM
 		public float walkRange = 5.0f; //移動範囲
 		public float DestroyTime = 5.0f;	//死体消滅時間
 		private Vector3 destinationPosition;
+		private Transform transform;
 	
 		private IEnemyController enemyController;
 		
@@ -143,11 +144,6 @@ namespace Cradle.FM
 		//ElapsedTimeがattackRateを超えたら攻撃
 		public bool attackStart()
 		{
-			/*if(!enemyController.attackCount())
-			{
-				return false;
-			}*/
-			
 			if(enemyController.attackCount())
 			{
 				if(!enemyController.setAttacking())
@@ -160,6 +156,19 @@ namespace Cradle.FM
 			enemyController.SendMsgStop ();
 			return true;
 			return false;
+		}
+
+		public void Died()
+		{
+			enemyController.SetDied ();
+			enemyController.DropItem ();
+			enemyController.DiedDestroy ();
+			enemyController.PlayDeathSE ();
+			//ボスだった場合、ゲームクリア
+			enemyController.FindBossTag ();
+			
+			//Deadタグへ更新
+			enemyController.SetTag ();
 		}
 
 		//移動先の設定
