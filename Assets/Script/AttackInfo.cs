@@ -23,8 +23,8 @@ public class AttackInfo : MonoBehaviour, IInfoController{
 			return aIController.setAttackBoostPower (atk);
 	}
 
-	public Transform SetAttacker(Transform atc){
-		return this.attacker = atc;
+	public Transform SetAttacker(Transform atk){
+		return this.attacker = atk;
 	}
 
  }
