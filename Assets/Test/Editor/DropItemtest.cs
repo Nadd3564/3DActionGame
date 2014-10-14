@@ -11,6 +11,7 @@ namespace Cradle.Test
 	{
 		public IDropItemController iDrop;
 		public DropItemController dIController;
+		public DropItemController.ItemKind kind;
 	
 		[SetUp] public void Init()
 		{ 
@@ -24,63 +25,104 @@ namespace Cradle.Test
 		}
 
 
-		//正常値テスト
+		//データ型テスト(オブジェクト)
 		[Test]
-		[Category ("Calc Test")]
-		[TestCase(true)]
-		public void IsPlayerTest (bool flg)
+		[Category ("ItemKind Attack Type Test")]
+		public void ItemKindAttackTypeTest() 
 		{
-			string s = "Player";
-			Assert.That (dIController.IsPlayer(s), Is.EqualTo(flg));
+			Assert.That (dIController.GetAttackKind(), Is.TypeOf(typeof(DropItemController.ItemKind)));
 		}
 
 		[Test]
-		[Category ("Calc Test")]
-		[ExpectedException(typeof(DifferentStringException))]
-		[TestCase(true)]
-		[TestCase(false)]
-		[TestCase(null)]
-		public void IsPlayerWithDifferntStringTest (bool flg)
+		[Category ("ItemKind Heal Type Test")]
+		public void ItemKindHealTypeTest() 
 		{
-			string s = "Player";
-			Assert.That (dIController.IsPlayer(s), Is.EqualTo(flg));
+			Assert.That (dIController.GetHealKind(), Is.TypeOf(typeof(DropItemController.ItemKind)));
 		}
 
 		[Test]
-		[Category ("Calc Test")]
-		[ExpectedException(typeof(DifferentStringException))]
-		[TestCase(true)]
-		[TestCase(false)]
-		[TestCase(null)]
-		public void IsPlayerWithDifferntStringTest1 (bool flg)
+		[Category ("ItemKind itemKind Type Test")]
+		public void ItemKinditemKindTypeTest() 
 		{
-			string s = "Player";
-			Assert.That (dIController.IsPlayer(s), Is.EqualTo(flg));
+			Assert.That (dIController.itemKind(), Is.TypeOf(typeof(DropItemController.ItemKind)));
+		}
+
+		//Null値テスト(オブジェクト)
+		[Test]
+		[Category ("ItemKind Attack NotNull Test")]
+		public void NotNullAttackTest() 
+		{
+			Assert.NotNull (dIController.GetAttackKind());		
+		}
+
+		[Test]
+		[Category ("ItemKind Heal NotNull Test")]
+		public void NotNullHealTest() 
+		{
+			Assert.NotNull (dIController.GetHealKind());		
+		}
+
+		[Test]
+		[Category ("ItemKind itemKind NotNull Test")]
+		public void NotNullitemKindTest() 
+		{
+			Assert.NotNull (dIController.itemKind());		
 		}
 
 
+		//正常値テスト(メソッド)
 		[Test]
-		[Category ("Calc Test")]
-		[ExpectedException(typeof(DifferentStringException))]
-		[TestCase(true)]
-		[TestCase(false)]
-		[TestCase(null)]
-		public void ItemKind (bool flg)
-		{
-			Assert.That (dIController.itemKind(), Is.EqualTo(flg));
-		}
-
-
-		[Test]
-		[Category ("Calc Test")]
-		[TestCase(true)]
-		[TestCase(false)]
-		[TestCase(null)]
-		public void IsTerrainTest (bool flg) 
+		[Category ("IsPlayer Test")]
+		public void IsPlayerTest ()
 		{
 			string s = "Player";
-			string t = "Terrain";
-			Assert.That (dIController.IsTerrain(t), Is.EqualTo(flg));
+			Assert.True (dIController.IsPlayer(s));
+		}
+
+		[Test]
+		[Category ("IsNotPlayer Test")]
+		public void IsNotPlayerTest ()
+		{
+			string s = "Enemy";
+			Assert.False (dIController.IsPlayer(s));
+		}
+
+		[Test]
+		[Category ("IsTerrain Test")]
+		public void IsTerrainTest ()
+		{
+			string s = "Terrain";
+			Assert.True (dIController.IsTerrain(s));
+		}
+
+		[Test]
+		[Category ("IsNotTerrain Test")]
+		public void IsNotTerrainTest ()
+		{
+			string s = "Enemy";
+			Assert.False (dIController.IsTerrain(s));
+		}
+
+		[Test]
+		[Category ("CheckTerrain Test")]
+		public void CheckTerrainTest ()
+		{
+			string s = "Terrain";
+			bool flg = false;
+
+			dIController.CheckTerrain (s, flg);
+			Assert.False (iDrop.SetTrigger(true));
+
+		}
+
+		[Test]
+		[Category ("CanNot CheckTerrain Test")]
+		public void CanNotCheckTerrainTest ()
+		{
+			string s = "Player";
+			bool flg = false;
+			
+			Assert.False (dIController.CheckTerrain (s, flg));
 		}
 
 
@@ -91,6 +133,7 @@ namespace Cradle.Test
 		private DropItemController GetControllerMock(IDropItemController iDrop) {
 			var dIController = Substitute.For<DropItemController> ();
 			dIController.SetDropItemController (iDrop);
+			iDrop.SetTrigger(true).Returns(false);
 			return dIController;
 		}
 		

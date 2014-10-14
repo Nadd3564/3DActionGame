@@ -36,8 +36,6 @@ namespace Cradle
 			if (tag == "Player")
 					return true;
 			return false;
-			if(tag != "Player")
-				throw new DifferentStringException();
 		}
 
 		public bool IsTerrain(string tag) {
@@ -45,6 +43,17 @@ namespace Cradle
 			return true;
 			return false;	
 		}
+
+		public bool CheckTerrain(string tag, bool f){
+			if (!IsTerrain (tag)) {
+				return false;
+			}
+
+			if (IsTerrain (tag)) {
+				dropItemController.SetTrigger (f);
+			}
+				return true;
+			}
 
 		public void SetDropItemController(IDropItemController dropItemController) {
 			this.dropItemController = dropItemController;

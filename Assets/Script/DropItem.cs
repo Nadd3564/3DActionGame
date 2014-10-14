@@ -6,7 +6,7 @@ namespace Cradle{
 public class DropItem : MonoBehaviour, IDropItemController {
 
 		public AudioClip itemSeClip;
-		public CharaStatus iStatus;
+		public CharaStatus status;
 		Vector3 velocity;
 		TerrainCollider tCollider;
 
@@ -23,16 +23,13 @@ public class DropItem : MonoBehaviour, IDropItemController {
 			{
 				//アイテム取得
 				FindCharaStatusComponent(other);
-				iStatus.GetItem (controller.kind);
+				status.GetItem (controller.kind);
 				//取得したらアイテムを消す
 				Destroy (gameObject);
 				PlaySE();
 			} 
 			//地面か判定
-			if(controller.IsTerrain(other.tag))
-			{
-				SetTrigger(false);
-			}
+			controller.CheckTerrain (other.tag, false);
 		}
 	
 		void Start () {
@@ -45,15 +42,17 @@ public class DropItem : MonoBehaviour, IDropItemController {
 		}
 
 		public void FindCharaStatusComponent(Collider other) {
-			this.iStatus = other.GetComponent<CharaStatus>();
+			this.status = other.GetComponent<CharaStatus>();
 		}
 
 		public void PlaySE(){
 			AudioSource.PlayClipAtPoint(itemSeClip, transform.position);
 		}
 
-		public void SetTrigger(bool flg){
+		public bool SetTrigger(bool flg){
 			this.collider.isTrigger = flg;
+			return true;
+			return false;
 		}
 
 		public void PopItem(){
