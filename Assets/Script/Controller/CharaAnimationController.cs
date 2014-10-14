@@ -6,8 +6,9 @@ namespace Cradle
 	[Serializable]
 	public class CharaAnimationController
 	{
-		public bool isDown = false;
 		public bool attacked = false;
+		public bool isDown = false;
+
 		private CharaStatusController statusController;
 		private IAnimationController animationController;
 		
@@ -37,9 +38,12 @@ namespace Cradle
 		public bool StopAttack(){
 				if (IsAttacked () && !isAttacking()) {
 						SetAttacked (false);
-				return false;
+				if(IsAttacked() == true)
+					throw new ArgumentException("The IsAttacked Must Be False.");
+				SetAttacked(false);
 					}
 			return true;
+			return false;
 		}
 
 		public bool isAttacking(){

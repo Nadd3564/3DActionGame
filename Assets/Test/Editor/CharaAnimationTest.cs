@@ -21,75 +21,92 @@ namespace Cradle.Test
 		{
 			
 		}
+
+		//データ型テスト（オブジェクト）
+		[Test]
+		[Category ("attacked Type Test")]
+		public void attackedTypeTest() 
+		{
+			Assert.That (cAnimation.IsAttacked(), Is.TypeOf(typeof(bool)));		
+		}
+
+		[Test]
+		[Category ("isDown Type Test")]
+		public void isDownTypeTest() 
+		{
+			Assert.That (cAnimation.IsDown (), Is.TypeOf(typeof(bool)));		
+		}
+
+		//Null値テスト（オブジェクト）
+		[Test]
+		[Category ("attacked NotNull Test")]
+		public void NotNullAttackedTest() 
+		{
+			Assert.NotNull (cAnimation.IsAttacked());		
+		}
+
+		[Test]
+		[Category ("isDown NotNull Test")]
+		public void NotNullIsDownTest() 
+		{
+			Assert.NotNull (cAnimation.IsDown());		
+		}
+
+		//正常値テスト（オブジェクト）
+		[Test]
+		[Category ("IsAttacked Test")]
+		public void IsAttackedTest() 
+		{
+			Assert.False (cAnimation.IsAttacked());		
+		}
+
+		[Test]
+		[Category ("IsDown Test")]
+		public void IsDownTest() 
+		{
+			Assert.False (cAnimation.IsDown());		
+		}
+
+		//正常値テスト（メソッド）
+		[Test]
+		[Category ("SetAttacked Test")]
+		public void SetAttackedTest() 
+		{
+			cAnimation.SetAttacked (true);
+			Assert.True (cAnimation.IsAttacked());		
+		}
 		
-		//正常値テスト
 		[Test]
-		[Category ("Bool Test")]
-		[TestCase(true)]
-		[TestCase(false)]
-		[TestCase(null)]
-		public void StopAttackTest(bool flg){
-			cAnimation.StopAttack();
-			Assert.That (cAnimation.IsAttacked(), Is.EqualTo(flg));
+		[Category ("SetDown Test")]
+		public void SetDownTest() 
+		{
+			cAnimation.SetDown (true);
+			Assert.True (cAnimation.IsDown());		
 		}
 
 		[Test]
-		[Category ("Bool Test")]
-		[TestCase(true)]
-		[TestCase(false)]
-		[TestCase(null)]
-		public void StopAttackTest2(bool flg){
-			cAnimation.SetAttacked (false);
-			cAnimation.SetAttacking (true);
+		[Category ("StopAttack Test")]
+		public void StopAttackTest(){
 			cAnimation.StopAttack();
-			Assert.That (cAnimation.IsAttacked(), Is.EqualTo(flg));
+			Assert.False (cAnimation.IsAttacked());
 		}
 
 		[Test]
-		[Category ("Bool Test")]
-		[TestCase(true)]
-		[TestCase(false)]
-		[TestCase(null)]
-		public void StopAttackTest3(bool flg){
-			cAnimation.SetAttacked (true);
+		[Category ("isAttacking Test")]
+		public void isAttackingTest() 
+		{
+			//CrossCheck@CharaStatusController
+			Assert.False (cAnimation.isAttacking());		
+		}
+
+		[Test]
+		[Category ("SetAttacking Test")]
+		public void SetAttackingTest() 
+		{
+			//CrossCheck@CharaStatusController
 			cAnimation.SetAttacking (false);
-			cAnimation.StopAttack();
-			Assert.That (cAnimation.IsAttacked(), Is.EqualTo(flg));
-		}
 
-		[Test]
-		[Category ("Bool Test")]
-		[TestCase(true)]
-		[TestCase(false)]
-		[TestCase(null)]
-		public void StopAttackTest4(bool flg){
-			cAnimation.SetAttacked (false);
-			cAnimation.SetAttacking (false);
-			cAnimation.StopAttack();
-			Assert.That (cAnimation.IsAttacked(), Is.EqualTo(flg));
-		}
-
-		[Test]
-		[Category ("Bool Test")]
-		[TestCase(true)]
-		[TestCase(false)]
-		[TestCase(null)]
-		public void StopAttackTest5(bool flg){
-			cAnimation.SetAttacked (true);
-			cAnimation.SetAttacking (true);
-			cAnimation.StopAttack();
-			Assert.That (cAnimation.IsAttacked(), Is.EqualTo(flg));
-		}
-
-		[Test]
-		[Category ("Bool Test")]
-		[TestCase(true)]
-		[TestCase(false)]
-		[TestCase(null)]
-		public void StopAttackTest6(bool flg){
-			cAnimation.SetAttacked (false);
-			cAnimation.SetAttacking (false);
-			Assert.That (cAnimation.StopAttack(), Is.EqualTo(flg));
+			Assert.False (cAnimation.isAttacking());		
 		}
 
 		private IAnimationController GetAnimationMock () {

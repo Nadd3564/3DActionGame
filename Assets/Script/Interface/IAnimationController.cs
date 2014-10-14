@@ -6,10 +6,10 @@ namespace Cradle
 		void FindAnimatorComponent();
 		void FindCharaStatusComponent();
 		void SetPrePosition();
-		void AnimatorSetFloat();
-		void AnimatorSetBool();
-		void AnimatorSetTrigger(); 
+		void AnimatorSetSpdFloat();
+		void AnimatorSetAtkBool();
+		void AnimatorSetDownTrigger(); 
 		void DeltaPosition();
-		bool IsDied();
+		bool IsDead();
 	}	
 }

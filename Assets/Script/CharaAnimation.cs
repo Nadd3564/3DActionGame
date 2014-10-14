@@ -23,13 +23,13 @@ namespace Cradle{
 		
 		void Update () {
 			DeltaPosition ();
-			AnimatorSetFloat ();
+			AnimatorSetSpdFloat ();
 			cAController.StopAttack ();
-			AnimatorSetBool ();
+			AnimatorSetAtkBool ();
 			
-			if(!cAController.IsDown() && IsDied()){
+			if(!cAController.IsDown() && IsDead()){
 				cAController.SetDown(true);
-				AnimatorSetTrigger();
+				AnimatorSetDownTrigger();
 			}
 			
 			SetPrePosition ();
@@ -67,23 +67,23 @@ namespace Cradle{
 			prePosition = transform.position;
 		}
 		
-		public bool IsDied(){
-			return this.status.IsDead ();		
+		public bool IsDead(){
+			return status.IsDead ();		
 		}
 		
 		public void DeltaPosition(){
 			this.delta_position = transform.position - prePosition;
 		}
 		
-		public void AnimatorSetFloat(){
+		public void AnimatorSetSpdFloat(){
 			this.animator.SetFloat ("Speed", delta_position.magnitude / Time.deltaTime);
 		}
 		
-		public void AnimatorSetBool(){
+		public void AnimatorSetAtkBool(){
 			this.animator.SetBool ("Attacking", (!isAttacked() && status.isAttacking()));
 		}
 		
-		public void AnimatorSetTrigger(){
+		public void AnimatorSetDownTrigger(){
 			this.animator.SetTrigger("Down");
 		}
 	}
