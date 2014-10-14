@@ -168,12 +168,17 @@ namespace Cradle.FM
 			enemyController.FindBossTag ();
 			
 			//Deadタグへ更新
+			if (enemyController.SetTag () != "Dead")
+								throw new ArgumentException ("The Tag Must Be Dead.");
+
 			enemyController.SetTag ();
 		}
 
 		public bool Down(){
-			if(!LessThanHP(enemyController.GetHP()))
-				return false;
+			if (!LessThanHP (enemyController.GetHP ())) {
+						throw new ArgumentOutOfRangeException ("The GetHP Must Be 0.", default(Exception));
+							return false;
+						}
 
 			if (LessThanHP (enemyController.GetHP ())) {
 				enemyController.SetHP ();

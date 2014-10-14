@@ -347,8 +347,35 @@ namespace Cradle.Test
 			iEnemy.attackCount ().Returns (true);
 			iEnemy.setAttacking ().Returns (false);
 		
+			//Act
 			eController.attackStart ();
 		}
+
+		[Test]
+		[Category ("Died Exception Test")]
+		[ExpectedException(typeof(ArgumentException))]
+		public void DiedExceptionTest() 
+		{
+			//Arrange
+			iEnemy.SetTag ().Returns ("Arrive");
+			
+			//Act
+			eController.Died ();
+		}
+
+
+		[Test]
+		[Category ("Down Exception Test")]
+		[ExpectedException(typeof(ArgumentOutOfRangeException))]
+		public void DownExceptionTest() 
+		{
+			//Arrange
+			iEnemy.GetHP ().Returns (10);
+			
+			//Act
+			eController.Down ();
+		}
+
 
 		private IEnemyController GetEnemyMock () {
 			return Substitute.For<IEnemyController> ();
