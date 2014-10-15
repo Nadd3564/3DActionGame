@@ -21,7 +21,7 @@ public class EnemyGenerator : MonoBehaviour, IGeneratorController {
 
 		IEnumerator Exec(){
 			while(true){
-				controller.generate(0, existEnemys.Length);
+				controller.Generate(0, existEnemys.Length);
 				yield return new WaitForSeconds(controller.GetRePopTime());
 			}
 		}

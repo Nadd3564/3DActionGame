@@ -13,6 +13,8 @@ namespace Cradle.FM{
 			FindNextPoint ();
 		}
 
+
+
 		public override void Reason(Transform player, Transform npc){
 			//プレイヤーとの距離を確認
 			SetDist (Vector3.Distance (npc.position, player.position));

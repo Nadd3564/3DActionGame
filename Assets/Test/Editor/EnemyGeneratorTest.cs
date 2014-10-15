@@ -105,17 +105,17 @@ namespace Cradle.Test
 		}
 
 
-		//例外処理テスト
+		//例外検知テスト
 		[Test]
-		[Category ("generate Test")]
-		[ExpectedException(typeof(ArgumentOutOfRangeException))]
-		public void generateTest () 
+		[Category ("generate Exception Test")]
+		[ExpectedException(typeof(ArgumentException))]
+		public void generateExceptionTest () 
 		{
 			//Arrange
 			iGenerator.Instantiate (2).Returns (false);
 
 			//Act
-			eGController.generate (0, 2);
+			eGController.Generate (0, 2);
 		}
 
 		private IGeneratorController GetGeneratorMock () {

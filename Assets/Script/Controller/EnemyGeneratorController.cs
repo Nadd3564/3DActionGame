@@ -33,12 +33,12 @@ namespace Cradle
 			return this.RePopTime = f;		
 		}
 
-		public void generate(int i, int EnemysLength){
+		public void Generate(int i, int EnemysLength){
 			for(int enemyCount = i; enemyCount < EnemysLength; ++ enemyCount){
 				if(gController.SameNullEnemys(enemyCount)){
 					//敵作成
 					if(!gController.Instantiate(enemyCount)){
-						throw new ArgumentOutOfRangeException("The Instantiate Must Be True.", default(Exception));
+						throw new ArgumentException("The Instantiate Must Be True.", default(Exception));
 					}
 					return;
 				}
