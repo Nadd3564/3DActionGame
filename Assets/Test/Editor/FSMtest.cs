@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-//using UnityEngine;
 using System;
 using NSubstitute;
 using Cradle.FM;
@@ -159,7 +158,7 @@ namespace Cradle.Test
 		[ExpectedException(typeof(TimeoutException))]
 		public void AttackCountExceptionTest() 
 		{
-			fController.SetElapsedTime (30.0f);
+			fController.SetElapsedTime (40.0f);
 			fController.AttackCount ();
 		}
 

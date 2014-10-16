@@ -1,3 +1,6 @@
-10/16/2014 7:26:40 PMSystem.TimeoutException: The Method Must be performed.
-  at Cradle.FM.FSMController.AttackCount () [0x00010] in E:\DaikiNakajima\TB@Nadd3564\Assets\Script\Controller\FSMController.cs:62 
-  at Cradle.FM.FSM.attackCount () [0x00000] in E:\DaikiNakajima\TB@Nadd3564\Assets\Script\FSM\FSM.cs:46 
+10/17/2014 12:29:29 AMUnityEngine.UnityException: Tag: Dea is not defined!
+  at (wrapper managed-to-native) UnityEngine.GameObject:set_tag (string)
+  at Cradle.FM.EnemyCtrl.SetTag () [0x00000] in E:\DaikiNakajima\TB@Nadd3564\Assets\Script\FSM\EnemyCtrl.cs:255 
+  at Cradle.FM.EnemyCtrlController.Died () [0x00037] in E:\DaikiNakajima\TB@Nadd3564\Assets\Script\Controller\EnemyCtrlController.cs:172 
+  at Cradle.FM.EnemyCtrlController.Down () [0x0005f] in E:\DaikiNakajima\TB@Nadd3564\Assets\Script\Controller\EnemyCtrlController.cs:197 
+  at Cradle.FM.EnemyCtrl.Damage (Cradle.AttackInfo attackInfo) [0x0002e] in E:\DaikiNakajima\TB@Nadd3564\Assets\Script\FSM\EnemyCtrl.cs:167 

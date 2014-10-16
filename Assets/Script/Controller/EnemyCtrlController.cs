@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using Cradle.FM;
+using Cradle.Resource;
 
 namespace Cradle.FM
 {
@@ -147,8 +148,8 @@ namespace Cradle.FM
 			if(enemyController.attackCount())
 			{
 				if(!enemyController.setAttacking())
-					throw new ArgumentException("The setAttacking Must be True.");
-				
+					throw new ConditionException();
+
 				enemyController.setAttacking();
 				enemyController.setElapsedTime(0.0f);
 			}
@@ -169,14 +170,14 @@ namespace Cradle.FM
 			
 			//Deadタグへ更新
 			if (enemyController.SetTag () != "Dead")
-								throw new ArgumentException ("The Tag Must Be Dead.");
+								throw new ConditionException ();
 
 			enemyController.SetTag ();
 		}
 
 		public bool Down(){
 			if (!LessThanHP (enemyController.GetHP ())) {
-						throw new ArgumentOutOfRangeException ("The GetHP Must Be 0.", default(Exception));
+						throw new ConditionException();
 							return false;
 						}
 

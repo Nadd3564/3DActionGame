@@ -340,7 +340,7 @@ namespace Cradle.Test
 		//例外処理テスト
 		[Test]
 		[Category ("attackStart Exception Test")]
-		[ExpectedException(typeof(ArgumentException))]
+		[ExpectedException(typeof(ConditionException))]
 		public void attackStartExceptionTest() 
 		{
 			//Arrange
@@ -353,7 +353,7 @@ namespace Cradle.Test
 
 		[Test]
 		[Category ("Died Exception Test")]
-		[ExpectedException(typeof(ArgumentException))]
+		[ExpectedException(typeof(ConditionException))]
 		public void DiedExceptionTest() 
 		{
 			//Arrange
@@ -366,7 +366,7 @@ namespace Cradle.Test
 
 		[Test]
 		[Category ("Down Exception Test")]
-		[ExpectedException(typeof(ArgumentOutOfRangeException))]
+		[ExpectedException(typeof(ConditionException))]
 		public void DownExceptionTest() 
 		{
 			//Arrange

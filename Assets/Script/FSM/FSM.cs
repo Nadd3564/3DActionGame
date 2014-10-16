@@ -45,13 +45,13 @@ public class FSM : MonoBehaviour, IFSMController {
 			try{
 				return controller.AttackCount ();
 			} catch(TimeoutException e){
-				Debug.Log("SaveErrorLog : " + e);
+				Debug.Log("SaveExceptionLog : " + e);
 				TextReadWriteManager write = new TextReadWriteManager();
 				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
 			}
 
 			return true;
-				}
+			}
 			
 			protected void setPlayerTransform(Transform trans){
 				controller.SetPlayerTransform (trans);	

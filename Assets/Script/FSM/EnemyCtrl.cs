@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿//using System;
 using System.Collections;
+using UnityEngine;
 using Cradle.FM;
 using Cradle;
+using Cradle.Resource;
 
 namespace Cradle.FM{
 public class EnemyCtrl : AdvancedFSM, IEnemyController 
@@ -132,7 +134,14 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 		}
 
 		public void AttackStart(){
-			eController.attackStart ();	
+			try{
+				eController.attackStart ();
+			}catch(ConditionException e){
+				Debug.Log("SaveExceptionLog : " + e);
+				TextReadWriteManager write = new TextReadWriteManager();
+				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+			}
+				
 		}
 
 		public void SendMsgStop(){
@@ -154,7 +163,13 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 			status.DamageHP(attackInfo.GetAttackPower());
 
 			//死体を攻撃できないようにし、体力0なので倒れる
-			eController.Down();
+			try{
+				eController.Down();
+			}catch (UnityException e){
+				Debug.Log("SaveExceptionLog : " + e);
+				TextReadWriteManager write = new TextReadWriteManager();
+				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+			}
 		}
 
 		public int GetHP(){
@@ -237,7 +252,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 		}
 
 		public string SetTag(){
-			this.gameObject.tag = "Dead";
+			this.gameObject.tag = "Dea";
 			string s = this.gameObject.tag;
 			return s;
 		}

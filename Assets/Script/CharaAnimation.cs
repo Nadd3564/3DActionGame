@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using Cradle;
 using Cradle.Resource;
@@ -54,7 +55,7 @@ namespace Cradle{
 		private void StopAttack(){
 			try{
 				cAController.StopAttack ();
-			}catch(UnityException e){
+			}catch(ArgumentException e){
 				Debug.Log("SaveErrorLog : " + e);
 				TextReadWriteManager write = new TextReadWriteManager();
 				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
