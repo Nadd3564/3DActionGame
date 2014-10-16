@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+//using UnityEngine;
 using System;
 using NSubstitute;
 using Cradle.FM;
@@ -149,7 +150,7 @@ namespace Cradle.Test
 		{
 			fController.SetElapsedTime (3.0f);
 			fController.SetAttackRate (4.0f);
-			Assert.False(fController.AttackCount());		
+			Assert.False(fController.AttackCount());	
 		}
 
 		//例外処理テスト

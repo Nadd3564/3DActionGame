@@ -17,7 +17,8 @@ public class TextReadWriteManager {
 		writer = textFile.CreateText(); 
 		
 		// write text to file
-		writer.Write(stringData); 
+		System.DateTime now = System.DateTime.Now;
+		writer.Write(now + stringData); 
 		
 		// close file
 		writer.Close(); 

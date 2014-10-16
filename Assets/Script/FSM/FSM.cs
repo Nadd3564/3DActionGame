@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using Cradle;
 using Cradle.FM;
@@ -41,8 +42,16 @@ public class FSM : MonoBehaviour, IFSMController {
 			}
 
 			public bool attackCount(){
+			try{
 				return controller.AttackCount ();
+			} catch(TimeoutException e){
+				Debug.Log("SaveErrorLog : " + e);
+				TextReadWriteManager write = new TextReadWriteManager();
+				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
 			}
+
+			return true;
+				}
 			
 			protected void setPlayerTransform(Transform trans){
 				controller.SetPlayerTransform (trans);	
