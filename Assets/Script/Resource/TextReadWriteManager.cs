@@ -9,16 +9,17 @@ public class TextReadWriteManager {
 	public void WriteTextFile(string pathAndName, string stringData) { 
 		// remove file (if exists)
 		FileInfo textFile = new FileInfo(  pathAndName ); 
-		if( textFile.Exists ) 
-			textFile.Delete(); 
+		//if( textFile.Exists ) 
+			//textFile.Delete(); 
 		
 		// create new empty file
 		StreamWriter writer; 
-		writer = textFile.CreateText(); 
+		//writer = textFile.CreateText(); 
+			writer = textFile.AppendText (); 
 		
 		// write text to file
 		System.DateTime now = System.DateTime.Now;
-		writer.Write(now + stringData); 
+			writer.Write("[" + now + "] " + stringData + "\r\n"); 
 		
 		// close file
 		writer.Close(); 

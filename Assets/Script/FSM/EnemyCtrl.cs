@@ -136,7 +136,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 		public void AttackStart(){
 			try{
 				eController.attackStart ();
-			}catch(ConditionException e){
+			}catch(UnityException e){
 				Debug.Log("SaveExceptionLog : " + e);
 				TextReadWriteManager write = new TextReadWriteManager();
 				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
@@ -252,7 +252,7 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 		}
 
 		public string SetTag(){
-			this.gameObject.tag = "Dea";
+			this.gameObject.tag = "Dead";
 			string s = this.gameObject.tag;
 			return s;
 		}
