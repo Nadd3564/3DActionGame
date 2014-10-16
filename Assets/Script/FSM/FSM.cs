@@ -2,12 +2,13 @@
 using System.Collections;
 using Cradle;
 using Cradle.FM;
+using Cradle.Resource;
 
 namespace Cradle.FM{
 public class FSM : MonoBehaviour, IFSMController {
 			//索敵する地点のリスト
 			protected GameObject[] pointList;
-
+			
 			public FSMController controller;
 				
 			public void OnEnable() {
