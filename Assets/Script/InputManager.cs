@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using Cradle;
+using Cradle.Resource;
 
 namespace Cradle{
 	public class InputManager : MonoBehaviour, IInputController {
@@ -14,13 +16,20 @@ namespace Cradle{
 		void Update () {
 			//スライド開始地点
 			inputController.SlideStart ();				
-			
+
+			try{
 			//画面の一割以上移動させたらスライド開始
 			inputController.Sliding (true);
 			
 			//スライド操作が終了したか
 			inputController.StopSlide (false);
-			
+
+			}catch(ArgumentOutOfRangeException e){
+				Debug.Log("SaveErrorLog : " + e);
+				TextReadWriteManager write = new TextReadWriteManager();
+				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+			}
+
 			//移動量を求める
 			inputController.Moved ();
 			
