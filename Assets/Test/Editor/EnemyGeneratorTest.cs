@@ -124,8 +124,8 @@ namespace Cradle.Test
 		
 		private EnemyGeneratorController GetControllerMock(IGeneratorController iGenerator) {
 			var eGController = Substitute.For<EnemyGeneratorController> ();
-			eGController.SetGeneratorController (iGenerator);
 			iGenerator.SameNullEnemys (1).Returns (true);
+			eGController.SetGeneratorController (iGenerator);
 			return eGController;
 		}
 		

@@ -383,8 +383,8 @@ namespace Cradle.Test
 		
 		private EnemyCtrlController GetControllerMock(IEnemyController iEnemy) {
 			var eController = Substitute.For<EnemyCtrlController> ();
-			eController.SetEnemyController (iEnemy);
 			iEnemy.SetTag ().Returns ("Dead");
+			eController.SetEnemyController (iEnemy);
 			return eController;
 		}
 		
