@@ -15,6 +15,7 @@ namespace Cradle.Test
 		[SetUp] public void Init()
 		{ 
 			iEnemy = GetEnemyMock ();
+			iEnemy.SetTag ().Returns ("Dead");
 			eController = GetControllerMock (iEnemy);
 		}
 		
@@ -383,7 +384,6 @@ namespace Cradle.Test
 		
 		private EnemyCtrlController GetControllerMock(IEnemyController iEnemy) {
 			var eController = Substitute.For<EnemyCtrlController> ();
-			iEnemy.SetTag ().Returns ("Dead");
 			eController.SetEnemyController (iEnemy);
 			return eController;
 		}

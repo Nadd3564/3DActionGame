@@ -16,6 +16,7 @@ namespace Cradle.Test
 		[SetUp] public void Init()
 		{ 
 			iDrop = GetItemMock ();
+			iDrop.SetTrigger(true).Returns(false);
 			dIController = GetControllerMock (iDrop);
 		}
 		
@@ -131,7 +132,6 @@ namespace Cradle.Test
 		
 		private DropItemController GetControllerMock(IDropItemController iDrop) {
 			var dIController = Substitute.For<DropItemController> ();
-			iDrop.SetTrigger(true).Returns(false);
 			dIController.SetDropItemController (iDrop);
 			return dIController;
 		}

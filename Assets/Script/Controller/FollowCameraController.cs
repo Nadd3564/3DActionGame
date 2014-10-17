@@ -6,8 +6,13 @@ namespace Cradle
 	[Serializable]
 	public class FollowCameraController
 	{
+		public Vector3 offset = Vector3.zero;
+		public Vector2 delta;
+		public Vector3 lookPosition;
+		public Vector3 relativePos;
+
 		public float distance = 5.0f;
-		public float horizontalAngle = 0.0f;
+		public float horizontalAngle = 180.0f;
 		public float rotAngle = 180.0f;
 		public float verticalAngle = 10.0f;
 		public float anglePerPixel;
@@ -15,7 +20,29 @@ namespace Cradle
 
 		
 		public FollowCameraController (){
-			
+		
+		}
+
+
+		public Vector3 GetOffSet(){
+			return this.offset;
+		}
+
+		public Vector3 GetLookPosition(){
+			return this.lookPosition;	
+		}
+
+		public Vector3 GetRelativePos(){
+			return this.relativePos;	
+		}
+
+		public Vector2 GetDelta(){
+			return this.delta;	
+		}
+
+		//注視対象からの相対位置を求める
+		public void RelativePos(){
+			this.relativePos = Quaternion.Euler(GetVerticalAngle(), GetHorizontalAngle(), 0) * new Vector3(0,0,-GetDistance());
 		}
 
 		public float GetAnglePerPixel(){
@@ -58,6 +85,42 @@ namespace Cradle
 		public float SetDownVerticalAngle(float f){
 			return this.verticalAngle -= f;		
 		}
+
+		//ドラッグ入力でカメラのアングルを更新
+		public void MoveAngle(){
+			if(cameraController.Moved()){
+				//１ピクセル移動した時の回転速度
+				SetAnglePerPixel();
+				
+				//スライド時のカーソル移動量
+				cameraController.Delta();
+				
+				SetUpHorizontalAngle(GetDelta ().x * GetAnglePerPixel());
+				SetHorizontalAngle();
+				SetDownVerticalAngle(GetDelta ().y * GetAnglePerPixel());
+				SetVerticalAngle();
+			}
+		}
+
+		//カメラの位置と回転を更新
+		public void CameraPosUpdate(){
+			if(cameraController.NotNullLookTarget()){
+				cameraController.Look();
+				
+				//注視対象からの相対位置を求める
+				RelativePos();
+				
+				//注視対象の位置にオフセットを加算した位置へ移動させる
+				cameraController.SetPosition();
+				
+				//transform.LookAt(controller.GetLookPosition());
+				cameraController.LookAtTrans();
+
+				//障害物を避ける
+				cameraController.AvoidObstacle();
+			}
+		}
+
 
 		public void SetCameraController(ICameraController cameraController) {
 			this.cameraController = cameraController;

@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using NSubstitute;
+using Cradle;
 
 namespace Cradle.Test
 {
@@ -14,6 +15,7 @@ namespace Cradle.Test
 		[SetUp] public void Init()
 		{ 
 			iGenerator = GetGeneratorMock ();
+			iGenerator.SameNullEnemys (1).Returns (true);
 			eGController = GetControllerMock (iGenerator);	
 		}
 		
@@ -124,7 +126,6 @@ namespace Cradle.Test
 		
 		private EnemyGeneratorController GetControllerMock(IGeneratorController iGenerator) {
 			var eGController = Substitute.For<EnemyGeneratorController> ();
-			iGenerator.SameNullEnemys (1).Returns (true);
 			eGController.SetGeneratorController (iGenerator);
 			return eGController;
 		}

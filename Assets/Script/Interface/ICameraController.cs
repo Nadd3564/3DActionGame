@@ -6,5 +6,11 @@ namespace Cradle
 	{
 		void FindInputComponent();
 		void AvoidObstacle();
+		void SetPosition();
+		void Delta();
+		bool Moved();
+		void Look();
+		void LookAtTrans();
+		bool NotNullLookTarget();
 	}	
 }

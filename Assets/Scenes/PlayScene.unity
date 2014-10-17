@@ -522,8 +522,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookTarget: {fileID: 669342545}
-  offset: {x: 0, y: 1.5, z: 0}
   controller:
+    offset: {x: 0, y: 1.5, z: 0}
+    delta: {x: 0, y: 0}
+    lookPosition: {x: 0, y: 0, z: 0}
+    relativePos: {x: 0, y: 0, z: 0}
     distance: 5
     horizontalAngle: 180
     rotAngle: 180
