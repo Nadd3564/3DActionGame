@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using Cradle;
+using Cradle.Resource;
 
 namespace Cradle{
 public class FollowCamera : MonoBehaviour, ICameraController {
@@ -19,9 +21,15 @@ public class FollowCamera : MonoBehaviour, ICameraController {
 		}
 
 		void LateUpdate()
-		{				
-			//ドラッグ入力でカメラのアングルを更新
-			controller.MoveAngle ();
+		{		
+			try{
+				//ドラッグ入力でカメラのアングルを更新
+				controller.MoveAngle ();
+			}catch(ArgumentOutOfRangeException e){
+				Debug.Log("SaveErrorLog : " + e);
+				TextReadWriteManager write = new TextReadWriteManager();
+				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+			}
 
 			//カメラの位置と回転を更新
 			controller.CameraPosUpdate ();
