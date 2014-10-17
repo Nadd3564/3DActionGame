@@ -265,7 +265,7 @@ namespace Cradle.Test
 		{
 			float f = 0.0f;
 			fCController.SetAnglePerPixel ();
-			Assert.That (fCController.GetAnglePerPixel(), Is.Not.EqualTo(f));		
+			Assert.That (fCController.GetAnglePerPixel(), Is.EqualTo(f));		
 		}
 
 		[Test]

@@ -30,7 +30,7 @@ public class AttackArea : MonoBehaviour, IAttackAreaController
 			attackInfo.SetAttackPower (status.GetPower());
 
 		//攻撃強化中
-	if (status.GetPowerBoost ())
+	if (status.IsPowerBoost ())
 			attackInfo.SetAttackBoostPower (attackInfo.GetAttackPower());
 			attackInfo.SetAttacker (transform.root);
 			return attackInfo;

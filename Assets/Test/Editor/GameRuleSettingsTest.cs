@@ -134,7 +134,7 @@ namespace Cradle.Test
 		[Category ("gameClear Test")]
 		public void gameClearTest() 
 		{
-			Assert.That (gRSController.IsGameClear());		
+			Assert.False (gRSController.IsGameClear());		
 		}
 
 		//正常値テスト(メソッド)
@@ -151,24 +151,26 @@ namespace Cradle.Test
 		[Category ("SetGameOver Test")]
 		public void SetGameOverTest() 
 		{
-			gRSController.SetGameOver (true);
-			Assert.True (gRSController.IsGameOver ());	
+			gRSController.SetGameOver (false);
+			Assert.False (gRSController.IsGameOver ());	
 		}
 
 		[Test]
 		[Category ("SetGameClear Test")]
 		public void SetGameClearTest() 
 		{
-			gRSController.SetGameClear (true);
-			Assert.True (gRSController.IsGameClear());		
+			gRSController.SetGameClear (false);
+			Assert.False (gRSController.IsGameClear());		
 		}
 
 		[Test]
 		[Category ("GameFlgs Test")]
 		public void GameFlgsTest() 
 		{
-			gRSController.SetGameOver (true);
-			gRSController.SetGameClear (false);
+			//Arrange
+			gRSController.IsGameClear ().Returns (true);
+
+			//Assert
 			Assert.True (gRSController.GameFlgs());		
 		}
 
@@ -185,7 +187,10 @@ namespace Cradle.Test
 		public void ReturnTitleTest() 
 		{
 			//Arrange
-			gRSController.GameFlgs ().Returns (true);
+			gRSController.IsGameOver ().Returns (true);
+
+			//Act
+			gRSController.GameFlgs ();
 
 			//Assert
 			Assert.True (gRSController.ReturnTitle());		
@@ -199,6 +204,8 @@ namespace Cradle.Test
 		private GameRuleSettingsController GetControllerMock(IRuleController iRule) {
 			var gRSController = Substitute.For<GameRuleSettingsController> ();
 			gRSController.SetRuleController (iRule);
+			gRSController.IsGameOver ().Returns (false);
+			gRSController.IsGameClear ().Returns (false);
 			return gRSController;
 		}
 		

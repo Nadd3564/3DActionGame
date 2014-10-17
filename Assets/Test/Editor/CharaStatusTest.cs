@@ -31,6 +31,193 @@ namespace Cradle.Test
 
 			}
 
+
+		//データ型テスト（オブジェクト）
+		[Test]
+		[Category ("HP Type Test")]
+		public void HPTypeTest() 
+		{
+			Assert.That (status.GetHP(), Is.TypeOf(typeof(int)));		
+		}
+
+		[Test]
+		[Category ("MaxHP Type Test")]
+		public void MaxHPTypeTest() 
+		{
+			Assert.That (status.GetMaxHP(), Is.TypeOf(typeof(int)));		
+		}
+
+		[Test]
+		[Category ("Power Type Test")]
+		public void PowerTypeTest() 
+		{
+			Assert.That (status.GetPower(), Is.TypeOf(typeof(int)));		
+		}
+
+		[Test]
+		[Category ("attacking Type Test")]
+		public void attackingTypeTest() 
+		{
+			Assert.That (status.IsAttacking(), Is.TypeOf(typeof(bool)));		
+		}
+
+		[Test]
+		[Category ("died Type Test")]
+		public void diedTypeTest() 
+		{
+			Assert.That (status.IsDied(), Is.TypeOf(typeof(bool)));		
+		}
+
+		[Test]
+		[Category ("powerBoost Type Test")]
+		public void powerBoostTypeTest() 
+		{
+			Assert.That (status.IsPowerBoost(), Is.TypeOf(typeof(bool)));		
+		}
+
+		[Test]
+		[Category ("charactername Type Test")]
+		public void characternameTypeTest() 
+		{
+			Assert.That (status.GetCharacterName(), Is.TypeOf(typeof(string)));		
+		}
+
+		[Test]
+		[Category ("powerBoostTime Type Test")]
+		public void powerBoostTimeTypeTest() 
+		{
+			Assert.That (status.GetPowerBoostTime(), Is.TypeOf(typeof(float)));		
+		}
+
+
+		//データ存在テスト(オブジェクト)
+		[Test]
+		[Category ("charactername NotEmpty Test")]
+		public void IsNotEmptycharacternameTest() 
+		{
+			Assert.IsNotEmpty (status.GetCharacterName());		
+		}
+
+		//Null値テスト（オブジェクト）
+		[Test]
+		[Category ("HP NotNull Test")]
+		public void NotNullHPTest() 
+		{
+			Assert.NotNull (status.GetHP());		
+		}
+
+		[Test]
+		[Category ("MaxHP NotNull Test")]
+		public void NotNullMaxHPTest() 
+		{
+			Assert.NotNull (status.GetMaxHP());		
+		}
+
+		[Test]
+		[Category ("Power NotNull Test")]
+		public void NotNullPowerTest() 
+		{
+			Assert.NotNull (status.GetPower());		
+		}
+
+		[Test]
+		[Category ("attacking NotNull Test")]
+		public void NotNullAttackingTest() 
+		{
+			Assert.NotNull (status.IsAttacking());		
+		}
+
+		[Test]
+		[Category ("died NotNull Test")]
+		public void NotNullDiedTest() 
+		{
+			Assert.NotNull (status.IsDied());		
+		}
+
+		[Test]
+		[Category ("powerBoost NotNull Test")]
+		public void NotNullPowerBoostTest() 
+		{
+			Assert.NotNull (status.GetPowerBoostTime());		
+		}
+
+		[Test]
+		[Category ("charactername NotNull Test")]
+		public void NotNullCharacternameTest() 
+		{
+			Assert.NotNull (status.GetCharacterName());		
+		}
+
+		[Test]
+		[Category ("powerBoostTime NotNull Test")]
+		public void NotNullPowerBoostTimeTest() 
+		{
+			Assert.NotNull (status.GetPowerBoostTime());		
+		}
+
+
+		//正常値テスト（オブジェクト）
+		[Test]
+		[Category ("HP Test")]
+		public void HPTest() 
+		{
+			int i = 100;
+			Assert.That (status.GetHP(), Is.EqualTo(i));		
+		}
+
+		[Test]
+		[Category ("MaxHP Test")]
+		public void MaxHPTest() 
+		{
+			int i = 100;
+			Assert.That (status.GetMaxHP(), Is.EqualTo(i));		
+		}
+
+		[Test]
+		[Category ("Power Test")]
+		public void PowerTest() 
+		{
+			int i = 10;
+			Assert.That (status.GetPower(), Is.EqualTo(i));		
+		}
+
+		[Test]
+		[Category ("attacking Test")]
+		public void attackingTest() 
+		{
+			Assert.False (status.IsAttacking());		
+		}
+
+		[Test]
+		[Category ("died Test")]
+		public void diedTest() 
+		{
+			Assert.False (status.IsDied());		
+		}
+
+		[Test]
+		[Category ("powerBoost Test")]
+		public void powerBoostTest() 
+		{
+			Assert.False (status.IsPowerBoost());		
+		}
+
+		[Test]
+		[Category ("charactername Test")]
+		public void characternameTest() 
+		{
+			string s = "Player";
+			Assert.That (status.GetCharacterName(), Is.EqualTo(s));		
+		}
+
+		[Test]
+		[Category ("powerBoostTime Test")]
+		public void powerBoostTimeTest() 
+		{
+			float f = 0.0f;
+			Assert.That (status.GetPowerBoostTime(), Is.EqualTo(f));		
+		}
+
 			//正常値テスト
 			[Test]
 			[Category ("Calc Test")]

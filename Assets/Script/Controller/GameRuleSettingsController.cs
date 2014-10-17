@@ -35,7 +35,7 @@ namespace Cradle
 			return this.sceneChangeTime -= f;		
 		}
 
-		public bool IsGameOver(){
+		public virtual bool IsGameOver(){
 			return this.gameOver;		
 		}
 
@@ -43,7 +43,7 @@ namespace Cradle
 			return this.gameOver = flg;		
 		}
 
-		public bool IsGameClear(){
+		public virtual bool IsGameClear(){
 			return this.gameClear;		
 		}
 
@@ -51,7 +51,7 @@ namespace Cradle
 			return this.gameClear = flg;		
 		}
 
-		public virtual bool GameFlgs(){
+		public bool GameFlgs(){
 			if (IsGameOver () || IsGameClear ())
 					return true;
 				return false;
