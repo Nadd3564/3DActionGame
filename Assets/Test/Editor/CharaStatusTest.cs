@@ -218,20 +218,162 @@ namespace Cradle.Test
 			Assert.That (status.GetPowerBoostTime(), Is.EqualTo(f));		
 		}
 
-			//正常値テスト
-			[Test]
-			[Category ("Calc Test")]
-			public void CalcTimeTest ()
-			{
-				Assert.That (status.CalcTime(), Is.EqualTo (0.0f));
-			}
 
-			[Test]
-			[Category ("Calc Test")]
-			public void CalcHPTest () {
-				status.CalcHP ();
-				Assert.That (status.HP, Is.EqualTo(100));		
-			}
+		//正常値テスト(メソッド)
+		[Test]
+		[Category ("SetHP Test")]
+		public void SetHPTest() 
+		{
+			int i = 0;
+			status.SetHP (0);
+			Assert.That (status.GetHP(), Is.EqualTo(i));		
+		}
+
+		[Test]
+		[Category ("HealHP Test")]
+		public void HealHPTest() 
+		{
+			int i = 150;
+			status.HealHP (50);
+			Assert.That (status.GetHP(), Is.EqualTo(i));		
+		}
+
+		[Test]
+		[Category ("DamageHP Test")]
+		public void DamageHPTest() 
+		{
+			int i = 50;
+			status.DamageHP (50);
+			Assert.That (status.GetHP(), Is.EqualTo(i));		
+		}
+
+		[Test]
+		[Category ("SetAttacking Test")]
+		public void SetAttackingTest() 
+		{
+			status.SetAttacking (true);
+			Assert.True (status.IsAttacking());		
+		}
+
+		[Test]
+		[Category ("SetDied Test")]
+		public void SetDiedTest() 
+		{
+			status.SetDied (true);
+			Assert.True (status.IsDied());		
+		}
+
+		[Test]
+		[Category ("EnablePowerBoost Test")]
+		public void EnablePowerBoostTest() 
+		{
+			status.EnablePowerBoost();
+			Assert.True (status.IsPowerBoost());		
+		}
+
+		[Test]
+		[Category ("DisablePowerBoost Test")]
+		public void DisablePowerBoostTest() 
+		{
+			status.DisablePowerBoost();
+			Assert.False(status.IsPowerBoost());		
+		}
+
+		[Test]
+		[Category ("SetBoostTime Test")]
+		public void SetBoostTimeTest() 
+		{
+			float f = 10.0f;
+			status.SetBoostTime(10.0f);
+			Assert.That (status.GetPowerBoostTime(), Is.EqualTo(f));	
+		}
+
+		[Test]
+		[Category ("CalcBoostTime Test")]
+		public void CalcBoostTimeTest() 
+		{
+			float f = 0.0f;
+			status.CalcBoostTime();
+			Assert.That (status.GetPowerBoostTime(), Is.EqualTo(f));	
+		}
+
+		[Test]
+		[Category ("CalcTime Test")]
+		public void CalcTimeTest ()
+		{
+			Assert.That (status.CalcTime(), Is.EqualTo (0.0f));
+		}
+
+		[Test]
+		[Category ("CalcHP Test")]
+		public void CalcHPTest () 
+		{
+			status.CalcHP ();
+			Assert.That (status.GetHP(), Is.EqualTo(100));		
+		}
+
+		[Test]
+		[Category ("CanBoost Test")]
+		public void CanBoostTest () 
+		{
+			status.SetBoostTime (10.0f);
+			Assert.True (status.CanBoost ());		
+		}
+
+		[Test]
+		[Category ("IsPlayer Test")]
+		public void IsPlayerTest () 
+		{
+			string s = "Player";
+			Assert.True (status.IsPlayer (s));		
+		}
+
+		[Test]
+		[Category ("IsNPC Test")]
+		public void IsNPCTest () 
+		{
+			string s = "NPC";
+			Assert.True (status.IsNPC(s));		
+		}
+
+		[Test]
+		[Category ("PowerUp Test")]
+		public void PowerUpWithEnablePowerBoostTest () 
+		{
+			status.SetBoostTime (10.0f);
+			status.PowerUp ();
+			Assert.True (status.IsPowerBoost());		
+		}
+
+		[Test]
+		[Category ("GetItem Case_Attack Test")]
+		public void GetItemCase_AttackTest () 
+		{
+			float f = 10.0f;
+			status.GetItem (DropItemController.ItemKind.Attack);
+			Assert.That (status.GetPowerBoostTime(), Is.EqualTo(f));		
+		}
+
+		[Test]
+		[Category ("GetItem Case_Heal Test")]
+		public void GetItemCase_HealTest () 
+		{
+			int i = 100;
+			status.GetItem (DropItemController.ItemKind.Heal);
+			Assert.That (status.GetHP(), Is.EqualTo(i));		
+		}
+
+
+		//例外検出テスト
+		[Test]
+		[Category ("GetItem Exception Test")]
+		[ExpectedException(typeof(ArgumentException))]
+		public void GetItemExceptionTest() 
+		{
+			status.SetHP (500);
+			status.GetItem (DropItemController.ItemKind.Heal);
+		}
+
 
 			private IEffectController GetEffectMock () {
 				return Substitute.For<IEffectController> ();

@@ -116,13 +116,13 @@ namespace Cradle
 		}
 
 		public void PowerUp(){
-						if (CanBoost ()) {
-								EnablePowerBoost ();
-								CalcBoostTime ();
-						} else {
-								effectController.StopEffect ();
-						}
-				}
+			if (CanBoost ()) {
+					EnablePowerBoost ();
+					CalcBoostTime ();
+			} else {
+					effectController.StopEffect ();
+			}
+			}
 
 
 		//アイテム取得
@@ -133,6 +133,9 @@ namespace Cradle
 				effectController.PlayEffect();
 				break;
 			case DropItemController.ItemKind.Heal:
+				if(GetHP() > GetMaxHP())
+					throw new ArgumentException("The Heal Must Be PositiveHP.", default(Exception));
+
 				CalcHP();
 				break;
 			}

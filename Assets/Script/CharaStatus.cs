@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using Cradle;
+using Cradle.Resource;
 
 namespace Cradle {
 	
@@ -32,7 +34,14 @@ namespace Cradle {
 
 		//アイテム取得
 		public void GetItem(DropItemController.ItemKind itemKind){
-			controller.GetItem (itemKind);
+			try{
+				controller.GetItem (itemKind);
+			}catch(ArgumentException e){
+				Debug.Log("SaveErrorLog : " + e);
+				TextReadWriteManager write = new TextReadWriteManager();
+				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+			}
+
 		}
 
 		public void FindEffectComponent() {
