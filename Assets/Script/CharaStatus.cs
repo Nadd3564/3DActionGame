@@ -12,19 +12,7 @@ namespace Cradle {
 		public void OnEnable() {
 			controller.SetEffectController (this);
 		}
-		
-		//アイテム取得
-		public void GetItem(DropItemController.ItemKind itemKind){
-			switch(itemKind){
-			case DropItemController.ItemKind.Attack:
-				controller.SetBoostTime(10.0f);
-				PlayEffect();
-				break;
-			case DropItemController.ItemKind.Heal:
-				controller.CalcHP();
-				break;
-			}
-		}
+
 		
 		void Start(){
 			if(controller.IsPlayer(gameObject.tag)){
@@ -37,16 +25,16 @@ namespace Cradle {
 			if(controller.IsNPC(gameObject.tag)){
 				return;
 			}
-			
+
 			controller.DisablePowerBoost ();
-			if (controller.CanBoost()) {
-				controller.EnablePowerBoost();
-				controller.CalcBoostTime();
-			} else {
-				StopEffect();
-			}
+			controller.PowerUp ();
 		}
-		
+
+		//アイテム取得
+		public void GetItem(DropItemController.ItemKind itemKind){
+			controller.GetItem (itemKind);
+		}
+
 		public void FindEffectComponent() {
 			this.powerUpEffect = transform.Find ("PowerUpEffect").GetComponent<ParticleSystem> ();
 		}
@@ -60,27 +48,27 @@ namespace Cradle {
 		}
 		
 		public int GetPower() {
-			return controller.Power;
+			return controller.GetPower ();
 		}
 
 		public int GetHP(){
-			return controller.HP;	
+			return controller.GetHP ();	
 		}
 
 		public int SetHP(int hp){
-			return controller.HP = hp;	
+			return controller.SetHP (hp);	
 		}
 
 		public int HealHP(int hp){
-			return controller.HP += hp;	
+			return controller.HealHP (hp);
 		}
 
 		public int DamageHP(int hp){
-			return controller.HP -= hp;	
+			return controller.DamageHP (hp);
 		}
 
-		public bool GetPowerBoost() {
-			return controller.powerBoost;
+		public bool IsPowerBoost() {
+			return controller.IsPowerBoost ();
 		}
 		
 		public bool isAttacking() {
@@ -88,15 +76,15 @@ namespace Cradle {
 		}
 		
 		public bool SetAttacking(bool flg){
-			return controller.attacking = flg;		
+			return controller.SetAttacking (flg);	
 		}
 		
 		public bool IsDead() {
-			return controller.died;
+			return controller.IsDied ();
 		}
 		
 		public bool setDied(bool flg){
-			return controller.died = flg;
+			return controller.SetDied (flg);
 		}
 
 		public GameObject SetLastAttackTarget(GameObject obj){

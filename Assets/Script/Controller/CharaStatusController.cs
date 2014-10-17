@@ -19,13 +19,70 @@ namespace Cradle
 		
 		public CharaStatusController (){
 		}
-		
-		public void SetBoostTime (float boostTime) {
-			this.powerBoostTime = boostTime;
+
+
+		public int GetHP(){
+			return this.HP;	
+		}
+
+		public int GetMaxHP(){
+			return this.MaxHP;
+		}
+
+		public int GetPower(){
+			return this.Power;	
+		}
+
+		public bool IsAttacking(){
+			return this.attacking;	
+		}
+
+		public bool IsDied(){
+			return this.died;	
+		}
+
+		public bool IsPowerBoost(){
+			return this.powerBoost;	
+		}
+
+		public string GetCharacterName(){
+			return this.charactername;
+		}
+
+		public float GetPowerBoostTime(){
+			return this.powerBoostTime;	
+		}
+
+		public int SetHP(int hp){
+			return this.HP = hp;	
+		}
+
+		public int HealHP(int hp){
+			return this.HP += hp;	
+		}
+
+		public int DamageHP(int hp){
+			return this.HP -= hp;	
 		}
 		
-		public float GetBoostTime () {
-			return this.powerBoostTime;
+		public bool SetAttacking(bool flg){
+			return this.attacking = flg;
+		}
+		
+		public bool SetDied(bool flg){
+			return this.died = flg;	
+		}
+		
+		public void EnablePowerBoost() {
+			this.powerBoost = true;
+		}
+
+		public void DisablePowerBoost() {
+			this.powerBoost = false;
+		}
+
+		public void SetBoostTime (float boostTime) {
+			this.powerBoostTime = boostTime;
 		}
 		
 		public void CalcBoostTime() {
@@ -46,14 +103,6 @@ namespace Cradle
 			return false;
 		}
 		
-		public void EnablePowerBoost() {
-			this.powerBoost = true;
-		}
-		
-		public void DisablePowerBoost() {
-			this.powerBoost = false;
-		}
-		
 		public bool IsPlayer(string tag) {
 			if (tag == charactername)
 				return true;
@@ -66,17 +115,29 @@ namespace Cradle
 			return false;		
 		}
 
-		public bool IsAttacking(){
-			return this.attacking;
-		}
-		
-		public bool SetAttacking(bool flg){
-			return this.attacking = flg;
+		public void PowerUp(){
+						if (CanBoost ()) {
+								EnablePowerBoost ();
+								CalcBoostTime ();
+						} else {
+								effectController.StopEffect ();
+						}
+				}
+
+
+		//アイテム取得
+		public void GetItem(DropItemController.ItemKind itemKind){
+			switch(itemKind){
+			case DropItemController.ItemKind.Attack:
+				SetBoostTime(10.0f);
+				effectController.PlayEffect();
+				break;
+			case DropItemController.ItemKind.Heal:
+				CalcHP();
+				break;
+			}
 		}
 
-		public bool SetDied(bool flg){
-			return this.died = flg;	
-		}
 
 		public void SetEffectController(IEffectController effectController) {
 			this.effectController = effectController;
