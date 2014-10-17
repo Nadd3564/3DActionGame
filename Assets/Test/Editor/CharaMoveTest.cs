@@ -21,7 +21,16 @@ namespace Cradle.Test
 		{
 			
 		}
-		
+
+		//正常値テスト
+		[Test]
+		[Category ("getCharaTag Test")]
+		public void getCharaTag()
+		{
+			string s = "(0.0)";
+			Assert.That (cMove.getCharacterTargetRot(), Is.EqualTo (s));
+		}
+
 		//正常値テスト
 		[Test]
 		[Category ("Calc Test")]
