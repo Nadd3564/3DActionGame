@@ -5,15 +5,7 @@ using Cradle;
 namespace Cradle{
 
 public class CharaMove : MonoBehaviour, IMoveController {
-		Vector3 velocity = Vector3.zero; 
 		CharacterController characterController; 
-		Vector3 forceRotateDirection;
-		public Vector3 destination; 
-		Vector3 destinationXZ;
-		Vector3 direction;
-		Vector3 currentVelocity;
-		Vector3 snapGround;
-		Quaternion characterTargetRotation;
 		public CharaMoveController cMcontroller;
 		
 		public void OnEnable() {
@@ -30,13 +22,13 @@ public class CharaMove : MonoBehaviour, IMoveController {
 			IsGrounded ();
 
 			//重力
-			SetGravityAcceleration (Vector3.down * cMcontroller.GetGravityPower() * Time.deltaTime);
+			cMcontroller.SetGravityAcceleration ();
 
 			//接地時地面に押し付ける
-			SetSnapGround (Vector3.zero);
+			cMcontroller.SnapZero ();
 
 			//CharacterControllerを使って動かす
-			characterController.Move(velocity * Time.deltaTime+snapGround);
+			characterController.Move(cMcontroller.GetVelocity() * Time.deltaTime+cMcontroller.GetSnapGround());
 			WalkStop ();
 
 			//強制的に向きを変えるのを解除
@@ -47,45 +39,21 @@ public class CharaMove : MonoBehaviour, IMoveController {
 			this.characterController = GetComponent<CharacterController>();
 		}
 
-		void SetSnapGround(Vector3 snapGround){
-			this.snapGround = snapGround;
-		}
-
 		void SetDest(){
-			this.destination = transform.position;
-		}
-
-		void SetDestXZ(){
-			this.destinationXZ = destination; 
+			cMcontroller.destination = transform.position;
 		}
 
 		void SetDestAlign(){
-			this.destinationXZ.y = transform.position.y;
+			cMcontroller.destinationXZ.y = transform.position.y;
 		}
 
 		//目的地への方向を求める
 		void DirectionSeek(){
-			this.direction = (destinationXZ - transform.position).normalized;
-		}
-
-		void SetVelocity(Vector3 velocity){
-			this.velocity = velocity;
-		}
-
-		void SetGravityAcceleration(Vector3 velocity){
-			this.velocity += velocity;
-		}
-
-		void SetVelocityY(float velocity){
-			this.velocity.y = velocity;
-		}
-
-		void SetCurrentVelocity(){
-			this.currentVelocity = velocity;
+			cMcontroller.direction = (cMcontroller.GetDestinationXZ() - transform.position).normalized;
 		}
 
 		void SetTargetRotation(Quaternion q){
-			this.characterTargetRotation = q;
+			cMcontroller.characterTargetRotation = q;
 		}
 
 		void SetTransFormRotation(Quaternion q){
@@ -94,10 +62,10 @@ public class CharaMove : MonoBehaviour, IMoveController {
 
 		//移動速度を求める
 		void WalkSpeedVelocity(){
-			if (cMcontroller.IsArrived())
-				SetVelocity(Vector3.zero);
-			else 
-				SetVelocity(direction * cMcontroller.GetWalkSpeed());
+			if (cMcontroller.IsArrived ())
+								cMcontroller.SetVelocityZero ();
+						else 
+								cMcontroller.SetWalkSpdVelocity ();
 		}
 
 
@@ -105,32 +73,25 @@ public class CharaMove : MonoBehaviour, IMoveController {
 			if (!cMcontroller.IsForceRotate()) 
 			{
 				//行きたい方向へ向く
-				if (WalkRotateCondition()) 
+				if (cMcontroller.WalkRotateCondition()) 
 				{ 
-					SetTargetRotation(Quaternion.LookRotation(direction));
-					SetTransFormRotation(Quaternion.RotateTowards(transform.rotation,characterTargetRotation,cMcontroller.GetRotationSpeed() * Time.deltaTime));
+					SetTargetRotation(Quaternion.LookRotation(cMcontroller.GetDirection()));
+					SetTransFormRotation(Quaternion.RotateTowards(transform.rotation,cMcontroller.GetCharacterTargetRot(),cMcontroller.GetRotationSpeed() * Time.deltaTime));
 				}
 			}
 			else 
 			{
 				//強制向き指定
-					SetTargetRotation(Quaternion.LookRotation(forceRotateDirection));
-					SetTransFormRotation(Quaternion.RotateTowards(transform.rotation,characterTargetRotation,cMcontroller.GetRotationSpeed() * Time.deltaTime));
+					SetTargetRotation(Quaternion.LookRotation(cMcontroller.GetForceRotateDirection()));
+					SetTransFormRotation(Quaternion.RotateTowards(transform.rotation,cMcontroller.GetCharacterTargetRot(),cMcontroller.GetRotationSpeed() * Time.deltaTime));
 			}
 		}
-
-		bool WalkRotateCondition(){
-			if (velocity.magnitude > 0.1f && !cMcontroller.IsArrived ())
-								return true;
-						return false;
-		}
-
 
 		//移動に関する総合処理
 		public void IsGrounded(){
 			if (characterController.isGrounded) {
 				//水平面移動のみなのでXZを扱う
-				SetDestXZ();
+				cMcontroller.SetDestXZ();
 
 				//高さを目的地と現在と合わせる
 				SetDestAlign();
@@ -139,10 +100,10 @@ public class CharaMove : MonoBehaviour, IMoveController {
 				DirectionSeek();
 
 				//目的地への距離を求める
-				cMcontroller.SetDistance(Vector3.Distance(transform.position,destinationXZ));
+				cMcontroller.SetDistance(Vector3.Distance(transform.position,cMcontroller.GetDestinationXZ()));
 
 				//現在の速度を退避
-				SetCurrentVelocity();
+				cMcontroller.SetCurrentVelocity();
 
 				//目的に近づいたら到着
 				cMcontroller.DestArrived();
@@ -151,14 +112,14 @@ public class CharaMove : MonoBehaviour, IMoveController {
 				WalkSpeedVelocity();
 
 				//スムーズに動くよう補間
-				SetVelocity(Vector3.Lerp(currentVelocity, velocity,Mathf.Min (Time.deltaTime * 5.0f ,1.0f)));
-				SetVelocityY(0);
+				cMcontroller.SmoothVelocity();
+				cMcontroller.SetVelocityY();
 
 				//向きを行きたい方向へ向ける
 				WalkRotation();
 
 				//接地していたら地面に押し付ける
-				SetSnapGround (Vector3.down);
+				cMcontroller.SnapDown();
 			}
 		}
 
@@ -168,7 +129,7 @@ public class CharaMove : MonoBehaviour, IMoveController {
 		}
 
 		void ForceRotateCancel(){
-			if (cMcontroller.IsForceRotate () && Vector3.Dot (transform.forward, forceRotateDirection) > 0.99f)
+			if (cMcontroller.IsForceRotate () && Vector3.Dot (transform.forward, cMcontroller.GetForceRotateDirection()) > 0.99f)
 				cMcontroller.SetForceRotate (false);
 		}
 	
@@ -176,21 +137,18 @@ public class CharaMove : MonoBehaviour, IMoveController {
 		public void SetDestination(Vector3 destination)
 		{
 			cMcontroller.SetArrived (false);
-			this.destination = destination;
+			cMcontroller.destination = destination;
 		}
 	
 		//指定した向きを向かせる
 		public void SetDirection(Vector3 direction)
 		{
-			forceRotateDirection = direction;
-			forceRotateDirection.y = 0;
-			forceRotateDirection.Normalize();
-			cMcontroller.SetForceRotate (true);
+			cMcontroller.SetDirection (direction);
 		}
 
 		public void StopMove()
 		{
-			destination = transform.position;
+			cMcontroller.destination = transform.position;
 		}
 
 		//目的地に到着したかを調べる

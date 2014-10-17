@@ -134,7 +134,7 @@ namespace Cradle
 				break;
 			case DropItemController.ItemKind.Heal:
 				if(GetHP() > GetMaxHP())
-					throw new ArgumentException("The Heal Must Be PositiveHP.", default(Exception));
+					throw new ArgumentException("The Heal Must Be LessThan MaxHP.", default(Exception));
 
 				CalcHP();
 				break;

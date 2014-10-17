@@ -2723,12 +2723,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc55453bb4a7959438784ba7eefd7c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destination: {x: 0, y: 0, z: 0}
   cMcontroller:
     arrived: 0
     forceRotate: 0
     walkSpeed: 5
     rotationSpeed: 360
+    velocity: {x: 0, y: 0, z: 0}
+    forceRotateDirection: {x: 0, y: 0, z: 0}
+    destination: {x: 0, y: 0, z: 0}
+    destinationXZ: {x: 0, y: 0, z: 0}
+    direction: {x: 0, y: 0, z: 0}
+    currentVelocity: {x: 0, y: 0, z: 0}
+    snapGround: {x: 0, y: 0, z: 0}
+    characterTargetRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!143 &669342548
 CharacterController:
   m_ObjectHideFlags: 0
