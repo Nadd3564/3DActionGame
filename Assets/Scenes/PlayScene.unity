@@ -524,9 +524,9 @@ MonoBehaviour:
   lookTarget: {fileID: 669342545}
   controller:
     offset: {x: 0, y: 1.5, z: 0}
-    delta: {x: 0, y: 0}
     lookPosition: {x: 0, y: 0, z: 0}
     relativePos: {x: 0, y: 0, z: 0}
+    delta: {x: 0, y: 0}
     distance: 5
     horizontalAngle: 180
     rotAngle: 180
@@ -552,7 +552,7 @@ AudioSource:
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
-  BypassEffects: 0
+  BypassEffects: 1
   BypassListenerEffects: 0
   BypassReverbZones: 0
   rolloffCustomCurve:
@@ -3666,9 +3666,9 @@ MonoBehaviour:
   controller:
     gameSpeed: 1
     timeRemaining: 65
+    sceneChangeTime: 10
     gameOver: 0
     gameClear: 0
-    sceneChangeTime: 10
 --- !u!1 &1221994388
 GameObject:
   m_ObjectHideFlags: 0

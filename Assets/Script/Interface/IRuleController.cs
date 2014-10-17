@@ -8,7 +8,5 @@ namespace Cradle
 		void DisableLoopSE();
 		void ClipSE();
 		void PlaySE();
-		void InitializeGameSpeed();
-		void SwitchScene();
-	}	
+	}
 }
