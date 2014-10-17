@@ -1061,8 +1061,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d87a09103f56eb4296b456ac19828d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destination: {x: 0, y: .5, z: 0}
   controller:
+    destination: {x: 0, y: .5, z: 0}
     radius: 1
     angularVelocity: 480
     angle: 0
