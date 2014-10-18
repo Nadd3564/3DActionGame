@@ -614,22 +614,19 @@ namespace Cradle.Test
 		}
 
 		[Test]
-		[Category ("MoveManagementWithSetDestAlignTest")]
+		[Category ("MoveManagementTest")]
 		public void MoveManagementWithSetDestAlignTest() 
 		{
 			string s = "10";
-			cMove.MoveManagement (10.0f, 0.0f);
-			Assert.That(cMove.getDestinationXZ_Y(), Is.EqualTo(s));		
-		}
-
-		[Test]
-		[Category ("MoveManagementWithSetDistanceTest")]
-		public void MoveManagementWithSetDistanceTest() 
-		{
 			float f = 100.0f;
+			string t = "(0.0, -1.0, 0.0)";
+
 			cMove.SetArrived (true);
 			cMove.MoveManagement (10.0f, 100.0f);
-			Assert.That(cMove.GetDistance(), Is.EqualTo(f));		
+
+			Assert.That(cMove.getDestinationXZ_Y(), Is.EqualTo(s));		
+			Assert.That(cMove.GetDistance(), Is.EqualTo(f));	
+			Assert.That (cMove.getSnapGround(), Is.EqualTo(t));
 		}
 
 		//例外検出テスト
