@@ -539,6 +539,14 @@ namespace Cradle.Test
 			Assert.That(cMove.getSnapGround(), Is.EqualTo(s));		
 		}
 
+
+		[Test]
+		[Category ("LessThanDist Test")]
+		public void LessThanDistTest() 
+		{
+			Assert.True(cMove.LessThanDist());		
+		}
+
 		[Test]
 		[Category ("DestArrived Test")]
 		public void DestArrivedTest() 
@@ -619,9 +627,22 @@ namespace Cradle.Test
 		public void MoveManagementWithSetDistanceTest() 
 		{
 			float f = 100.0f;
+			cMove.SetArrived (true);
 			cMove.MoveManagement (10.0f, 100.0f);
 			Assert.That(cMove.GetDistance(), Is.EqualTo(f));		
 		}
+
+		//例外検出テスト
+		[Test]
+		[Category ("WalkSpeedVelocity Exception Test")]
+		[ExpectedException(typeof(ArgumentOutOfRangeException))]
+		public void WalkSpeedVelocityExceptionTest() 
+		{
+			cMove.WalkSpeedVelocity ();
+		}
+
+
+
 
 		private IMoveController GetMoveMock () {
 			return Substitute.For<IMoveController> ();

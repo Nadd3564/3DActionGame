@@ -1315,12 +1315,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc55453bb4a7959438784ba7eefd7c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destination: {x: 0, y: 0, z: 0}
   cMcontroller:
-    arrived: 0
-    forceRotate: 0
     walkSpeed: 3
     rotationSpeed: 360
+    arrived: 0
+    forceRotate: 0
+    destination: {x: 0, y: 0, z: 0}
+    direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1346,8 +1347,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cAController:
-    isDown: 0
     attacked: 0
+    isDown: 0
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using Cradle;
+using Cradle.Resource;
 
 namespace Cradle{
 
@@ -17,10 +19,18 @@ public class CharaMove : MonoBehaviour, IMoveController {
 			SetDest ();
 		}
 	
+
 		void Update () {
 			//移動に関する総合処理
-			cMcontroller.MoveManagement (transform.position.y,
-			                             Vector3.Distance(transform.position,cMcontroller.GetDestinationXZ()));
+			try{
+				cMcontroller.MoveManagement (transform.position.y,
+				                             Vector3.Distance(transform.position,cMcontroller.GetDestinationXZ()));
+			} catch(ArgumentOutOfRangeException e){
+				Debug.Log("SaveExceptionLog : " + e);
+				TextReadWriteManager write = new TextReadWriteManager();
+				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+			}
+
 
 			//重力
 			cMcontroller.SetGravityAcceleration ();

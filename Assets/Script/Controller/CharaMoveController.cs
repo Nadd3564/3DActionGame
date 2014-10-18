@@ -189,9 +189,15 @@ namespace Cradle
 		public void SnapDown(){
 			this.snapGround = Vector3.down;
 		}
-		
+
+		public bool LessThanDist(){
+			if (GetDistance () < GetStoppingDist ())
+								return true;
+			return false;
+		}
+
 		public void DestArrived(){
-			if (IsArrived() || GetDistance() < GetStoppingDist())
+			if (IsArrived() || LessThanDist())
 				SetArrived(true);	
 		}
 
@@ -208,6 +214,11 @@ namespace Cradle
 
 		//移動速度を求める
 		public void WalkSpeedVelocity(){
+			if (!IsArrived()) {
+				if(GetVelocity() == Vector3.zero)
+					throw new ArgumentOutOfRangeException ("The velocity must be positive.", default(Exception));
+			}
+
 			if (IsArrived ())
 				SetVelocityZero ();
 			else 
