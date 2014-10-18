@@ -65,6 +65,11 @@ namespace Cradle
 			return s;
 		}
 
+		public string getVelocityY(){
+			string s = GetVelocity().y.ToString ();
+			return s;
+		}
+
 		public Vector3 GetForceRotateDirection(){
 			return this.forceRotateDirection;	
 		}
