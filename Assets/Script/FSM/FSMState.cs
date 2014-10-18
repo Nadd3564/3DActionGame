@@ -3,45 +3,47 @@ using System.Collections;
 using System.Collections.Generic;
 using Cradle.FM;
 using Cradle;
+using Cradle.Resource;
 
 /// @http://creativecommons.org/licenses/by-sa/3.0/
 
 namespace Cradle.FM{
-	public abstract class FSMState /*: IFSMStateController*/
+	public abstract class FSMState/* : IFSMStateController*/
 	{
 		protected Dictionary<Transition, FSMStateID> map = new Dictionary<Transition, FSMStateID>();
 		protected FSMStateID stateID;
 		public FSMStateID ID { get { return stateID; }}
-		protected Vector3 destPos;
-		protected Transform[] waypoints;
 		protected float RotSpeed;
 		protected float dist;
+		protected Vector3 destPos;
+		protected Transform[] waypoints;
 
-		/*public FSMStateController fsmSController;
-		
-		public void OnEnable() {
-			fsmSController.SetFSMStateController (this);
-		}*/
 
-		
-		public void AddTransition(Transition transition, FSMStateID id)
+		public float GetDist(){
+			return this.dist;	
+		}
+	
+
+		public Dictionary<Transition, FSMStateID> AddTransition(Transition transition, FSMStateID id)
 		{
 			//引数の確認
 			if(CheckTransOrID(transition, id))
 			{
 				Debug.LogWarning("FSMState: Null transition not allowed");
-				return;
+				//return;
 			}
 			
 			//現在の状態が、Map(Dictionary)に存在するかを確認。
 			if(map.ContainsKey(transition))
 			{
 				Debug.LogWarning("FSMState ERROR: transition is already inside the map");
-				return;
+				//return;
 			}
 			
 			map.Add (transition, id);
 			Debug.Log ("Added : " + transition + "with ID : " + id);
+
+			return map;
 		}
 		
 		//不要な遷移をDictionaryから削除
@@ -62,7 +64,8 @@ namespace Cradle.FM{
 			}
 			Debug.LogError ("FSMState ERROR: 指定された遷移はリストにありません。");
 		}
-		
+
+
 		//この状態が遷移するときに、どの状態になるかを判別する
 		public FSMStateID GetOutputState(Transition trans)
 		{

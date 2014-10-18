@@ -848,6 +848,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: ee8b7082e60050c4dba9558f57639656, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ee8b7082e60050c4dba9558f57639656, type: 2}
   m_RootGameObject: {fileID: 475155722}
@@ -2672,8 +2676,6 @@ GameObject:
   - 114: {fileID: 669342550}
   - 114: {fileID: 669342551}
   - 114: {fileID: 669342552}
-  - 114: {fileID: 669342553}
-  - 114: {fileID: 669342554}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2811,30 +2813,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackSeClip: {fileID: 8300000, guid: b910f06cfef6a10448d4cfa7f0ea51d2, type: 3}
   AAAcontroller: {fileID: 0}
---- !u!114 &669342553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400016, guid: c0da5ed5b9f0cb24f8c326dc48b5366d,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 669342544}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccbeafaf1dadc944284147994877f500, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &669342554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400018, guid: c0da5ed5b9f0cb24f8c326dc48b5366d,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 669342544}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d301a2550fd84d46b3ddc5cbd8c6a68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &699555354
 GameObject:
   m_ObjectHideFlags: 0

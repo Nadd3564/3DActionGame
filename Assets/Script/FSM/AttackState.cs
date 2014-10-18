@@ -43,11 +43,5 @@ namespace Cradle.FM{
 			npc.GetComponent<EnemyCtrl> ().AttackStart ();
 		}
 
-		/*public virtual string GetDest(){
-			string des = this.destPos.ToString ();
-			Debug.Log ("GetDest : " + des);
-			return des;
-		}*/
-
 	}
 }

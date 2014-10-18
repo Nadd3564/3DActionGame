@@ -80,6 +80,7 @@ public class CharaMove : MonoBehaviour, IMoveController {
 				cMcontroller.SetForceRotate (false);
 		}
 	
+
 		//目的地を指定する（引数が目的地）
 		public void SetDestination(Vector3 destination)
 		{

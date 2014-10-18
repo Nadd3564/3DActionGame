@@ -615,7 +615,7 @@ namespace Cradle.Test
 
 		[Test]
 		[Category ("MoveManagementTest")]
-		public void MoveManagementWithSetDestAlignTest() 
+		public void MoveManagementTest() 
 		{
 			string s = "10";
 			float f = 100.0f;
@@ -635,6 +635,7 @@ namespace Cradle.Test
 		[ExpectedException(typeof(ArgumentOutOfRangeException))]
 		public void WalkSpeedVelocityExceptionTest() 
 		{
+			cMove.SetVelocityZero ();
 			cMove.WalkSpeedVelocity ();
 		}
 
