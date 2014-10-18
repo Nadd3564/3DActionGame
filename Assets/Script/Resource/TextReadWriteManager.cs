@@ -27,7 +27,10 @@ public class TextReadWriteManager {
 	
 	public string ReadTextFile(string pathAndName) { 
 		string dataAsString = "";
-		
+
+			if(pathAndName == null)
+				throw new ArgumentNullException("File not found", default(Exception));
+			
 		try {
 			// open text file
 			StreamReader textReader = File.OpenText( pathAndName ); 
@@ -40,6 +43,7 @@ public class TextReadWriteManager {
 			
 		}	
 		catch (Exception e) {
+
 		}
 		
 		// return contents

@@ -43,6 +43,16 @@ namespace Cradle.Test
 			Assert.That (tManager.ReadTextFile("/" + "ErrorLog_Cradle.txt"), Is.Not.EqualTo(s));		
 		}
 
+		//例外検出テスト
+		[Test]
+		[Category ("ReadTextFile Exception Test")]
+		[ExpectedException(typeof(ArgumentNullException))]
+		public void ReadTextFileExceptionTest() 
+		{
+			tManager.ReadTextFile(null);
+		}
+
+
 	}
 }
 

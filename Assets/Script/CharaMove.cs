@@ -9,7 +9,7 @@ namespace Cradle{
 public class CharaMove : MonoBehaviour, IMoveController {
 		CharacterController characterController; 
 		public CharaMoveController cMcontroller;
-		
+
 		public void OnEnable() {
 			cMcontroller.SetMoveController (this);
 		}
