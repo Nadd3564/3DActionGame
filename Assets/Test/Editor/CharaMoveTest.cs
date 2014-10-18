@@ -643,7 +643,6 @@ namespace Cradle.Test
 
 
 
-
 		private IMoveController GetMoveMock () {
 			return Substitute.For<IMoveController> ();
 		}
