@@ -97,6 +97,11 @@ namespace Cradle
 			return s;
 		}
 
+		public string getDestinationXZ_Y(){
+			string s = GetDestinationXZ().y.ToString ();
+			return s;
+		}
+
 		public Vector3 GetDirection(){
 			return this.direction;	
 		}
@@ -190,7 +195,7 @@ namespace Cradle
 				SetArrived(true);	
 		}
 
-		public bool WalkRotateCondition(){
+		public virtual bool WalkRotateCondition(){
 			if (velocity.magnitude > 0.1f && !IsArrived ())
 				return true;
 			return false;

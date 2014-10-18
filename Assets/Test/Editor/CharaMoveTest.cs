@@ -14,6 +14,8 @@ namespace Cradle.Test
 		[SetUp] public void Init()
 		{ 
 			move = GetMoveMock ();
+			move.LessThanVMagnitude ().Returns (true);
+			move.IsGrounded ().Returns (true);
 			cMove = GetControllerMock (move);	
 		}
 		
@@ -499,6 +501,126 @@ namespace Cradle.Test
 			string s = "(0.0, 0.0, 0.0)";
 			cMove.SetWalkSpdVelocity ();
 			Assert.That(cMove.getVelocity(), Is.EqualTo(s));		
+		}
+
+		[Test]
+		[Category ("SetDestXZ Test")]
+		public void SetDestXZTest() 
+		{
+			string s = "(0.0, 0.0, 0.0)";
+			cMove.SetDestXZ ();
+			Assert.That(cMove.getDestinationXZ(), Is.EqualTo(s));		
+		}
+
+		[Test]
+		[Category ("SetDestAlign Test")]
+		public void SetDestAlignTest() 
+		{
+			string s = "0";
+			cMove.SetDestAlign (0.0f);
+			Assert.That(cMove.getDestinationXZ_Y(), Is.EqualTo(s));		
+		}
+
+		[Test]
+		[Category ("SnapZero Test")]
+		public void SnapZeroTest() 
+		{
+			string s = "(0.0, 0.0, 0.0)";
+			cMove.SnapZero ();
+			Assert.That(cMove.getSnapGround(), Is.EqualTo(s));		
+		}
+
+		[Test]
+		[Category ("SnapDown Test")]
+		public void SnapDownTest() 
+		{
+			string s = "(0.0, -1.0, 0.0)";
+			cMove.SnapDown ();
+			Assert.That(cMove.getSnapGround(), Is.EqualTo(s));		
+		}
+
+		[Test]
+		[Category ("DestArrived Test")]
+		public void DestArrivedTest() 
+		{
+			cMove.DestArrived ();
+			Assert.True(cMove.IsArrived());		
+		}
+
+		[Test]
+		[Category ("WalkRotateCondition Test")]
+		public void WalkRotateConditionTest() 
+		{
+			Assert.False(cMove.WalkRotateCondition());		
+		}
+
+		[Test]
+		[Category ("WalkStop Test")]
+		public void WalkStopTest() 
+		{
+			cMove.WalkStop ();
+			Assert.True(cMove.IsArrived());		
+		}
+
+		[Test]
+		[Category ("WalkSpeedVelocity Test")]
+		public void WalkSpeedVelocityTest() 
+		{
+			string s = "(0.0, 0.0, 0.0)";
+			cMove.SetArrived (true);
+			cMove.WalkSpeedVelocity ();
+			Assert.That(cMove.getVelocity(), Is.EqualTo(s));		
+		}
+
+		[Test]
+		[Category ("SetTargetRot Test")]
+		public void SetTargetRotTest() 
+		{
+			string s = "(0.0, 0.0, 0.0, 1.0)";
+			cMove.SetTargetRot ();
+			Assert.That(cMove.getCharacterTargetRot(), Is.EqualTo(s));		
+		}
+
+		[Test]
+		[Category ("SetTargetForceRot Test")]
+		public void SetTargetForceRotTest() 
+		{
+			string s = "(0.0, 0.0, 0.0, 1.0)";
+			cMove.SetTargetForceRot ();
+			Assert.That(cMove.getCharacterTargetRot(), Is.EqualTo(s));		
+		}
+
+		[Test]
+		[Category ("WalkRotation Test")]
+		public void WalkRotationTest() 
+		{
+			//Arrange
+			cMove.WalkRotateCondition ().Returns (true);
+
+			//Act
+			string s = "(0.0, 0.0, 0.0, 1.0)";
+			cMove.WalkRotation ();
+
+			//Assert
+			Assert.That(cMove.getCharacterTargetRot(), Is.EqualTo(s));		
+		}
+
+		[Test]
+		[Category ("MoveManagementWithSetDestAlignTest")]
+		public void MoveManagementWithSetDestAlignTest() 
+		{
+			string s = "10";
+			cMove.MoveManagement (10.0f, 0.0f);
+			Assert.That(cMove.getDestinationXZ_Y(), Is.EqualTo(s));		
+		}
+
+		[Test]
+		[Category ("MoveManagementWithSetDistanceTest")]
+		public void MoveManagementWithSetDistanceTest() 
+		{
+			float f = 100.0f;
+			cMove.MoveManagement (10.0f, 100.0f);
+			Assert.That(cMove.GetDistance(), Is.EqualTo(f));		
 		}
 
 		private IMoveController GetMoveMock () {
