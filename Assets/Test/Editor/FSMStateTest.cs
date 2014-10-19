@@ -11,7 +11,6 @@ namespace Cradle.Test
 	public class FSMStateTest
 	{
 		private FSMState fsmState;
-		private IFSMStateController iFsm;
 		private Dictionary<Transition, FSMStateID> map;
 
 		

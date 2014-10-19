@@ -16,7 +16,7 @@ public class Authentication : MonoBehaviour {
 			var url = "http://localhost:8080/Cradle/";
 
 			headers["Authorization"] = 
-				"Basic " + System.Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes("username:password"));
+				"Basic " + System.Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes("admin:admin"));
 
 			var www = new WWW(url, rawData, headers);
 			yield return www;
@@ -27,7 +27,7 @@ public class Authentication : MonoBehaviour {
 			}
 			// 失敗
 			else{
-				Debug.Log("Get Failure"+ www.error);           
+				Debug.Log("Get Failure : " + www.error);           
 			}
 		}
 	}
