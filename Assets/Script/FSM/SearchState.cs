@@ -4,13 +4,14 @@ using Cradle.FM;
 
 namespace Cradle.FM{
 	public class SearchState : FSMState {
-		
+
 		public SearchState(Transform[] wp)
 		{
 			SetWayPoints (wp);
 			SetStateID(FSMStateID.Searching);
 		}
-		
+
+
 		public override void Reason(Transform player, Transform npc)
 		{
 			if(LessThanCheckReach(Vector3.Distance(npc.position, player.position), 7.0f))
@@ -26,7 +27,7 @@ namespace Cradle.FM{
 			npc.GetComponent<EnemyCtrl>().Walking(destPos);
 			
 			//ターゲット地点が遠すぎる場合、パトロール地点を再度設定
-			if(MoreThanCheckReach(Vector3.Distance(npc.position, destPos), 50.0f))
+			if(GreaterThanCheckReach(Vector3.Distance(npc.position, destPos), 50.0f))
 			{
 				Debug.Log("Reached to the destination point/ncalculating the next point");
 				FindNextPoint();

@@ -4,7 +4,7 @@ using Cradle.FM;
 
 namespace Cradle.FM{
 	public class ApproachState : FSMState {
-		
+
 		public ApproachState(Transform[] wp)
 		{
 			SetWayPoints (wp);
@@ -23,7 +23,7 @@ namespace Cradle.FM{
 				Debug.Log("Switch to Attack state");
 				npc.GetComponent<EnemyCtrl>().SetTransition(Transition.ReachPlayer);
 			}
-			else if(MoreThanCheckReach(dist, 10.0f))
+			else if(GreaterThanCheckReach(dist, 10.0f))
 			{
 				Debug.Log("Switch to Search state");
 				npc.GetComponent<EnemyCtrl>().SetTransition(Transition.LostPlayer);

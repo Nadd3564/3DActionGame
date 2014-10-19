@@ -8,7 +8,7 @@ using Cradle.Resource;
 /// @http://creativecommons.org/licenses/by-sa/3.0/
 
 namespace Cradle.FM{
-	public abstract class FSMState/* : IFSMStateController*/
+	public abstract class FSMState : IFSMStateController
 	{
 		protected Dictionary<Transition, FSMStateID> map = new Dictionary<Transition, FSMStateID>();
 		protected FSMStateID stateID;
@@ -19,10 +19,65 @@ namespace Cradle.FM{
 		protected Transform[] waypoints;
 
 
+		public Dictionary<Transition, FSMStateID> GetTFDictionary(){
+			return this.map;	
+		}
+
+		public FSMStateID GetStateID(){
+			return this.ID;	
+		}
+	
+		public float GetRotSpeed(){
+			return this.RotSpeed;	
+		}
+
 		public float GetDist(){
 			return this.dist;	
 		}
-	
+
+		public Vector3 GetDestPos(){
+			return this.destPos;	
+		}
+
+		public string getDestPos(){
+			string s = GetDestPos ().ToString ();
+			return s;
+		}
+
+		//ターゲット地点をプレーヤーポジションに設定
+		public void SetDest(Transform player){
+			this.destPos = player.position;	
+		}
+
+		public void SetWayPoints(Transform[] wp){
+			this.waypoints = wp;
+		}
+
+		public Quaternion SetTargetRot(Vector3 v){
+			Quaternion targetRotation = Quaternion.LookRotation (destPos - v);
+			return targetRotation;
+		}
+		
+		public void SetRot(Transform npc, Vector3 v){
+			npc.rotation = Quaternion.Slerp (npc.rotation, SetTargetRot(v), Time.deltaTime * RotSpeed);
+		}
+
+		public void SetFindDest(){
+			this.destPos = waypoints[RndIndex()].position + RndPosition();
+		}
+
+		public void SetDist(float f){
+			this.dist = f;
+		}
+		
+		public void SetStateID(FSMStateID fsmState){
+			this.stateID = fsmState;
+		}
+		
+		public void SetRotSpeed(float f){
+			this.RotSpeed = f;
+		}
+
 
 		public Dictionary<Transition, FSMStateID> AddTransition(Transition transition, FSMStateID id)
 		{
@@ -47,22 +102,23 @@ namespace Cradle.FM{
 		}
 		
 		//不要な遷移をDictionaryから削除
-		public void DeleteTransition(Transition trans)
+		public Dictionary<Transition, FSMStateID> DeleteTransition(Transition trans)
 		{
 			//null遷移か確認
 			if(EmptyTrans(trans))
 			{
 				Debug.LogError("FSMState ERROR: NullTransition is not allowed");
-				return;
+				//return;
 			}
 			
 			//ペアがMAPにあるか判別
 			if(map.ContainsKey(trans))
 			{
 				map.Remove(trans);
-				return;
+				//return;
 			}
 			Debug.LogError ("FSMState ERROR: 指定された遷移はリストにありません。");
+			return map;
 		}
 
 
@@ -92,48 +148,20 @@ namespace Cradle.FM{
 		//NPC(敵キャラ)の処理、行動、動作を指定する
 		public abstract void Act(Transform player, Transform npc);
 
-		//ターゲット地点をプレーヤーポジションに設定
-		public void SetDest(Transform player){
-			this.destPos = player.position;	
-		}
-		public void SetDist(float f){
-			this.dist = f;
-		}
-
-		public void SetWayPoints(Transform[] wp){
-			this.waypoints = wp;
-		}
-
-		public void SetStateID(FSMStateID fsmState){
-			this.stateID = fsmState;
-		}
-
-		public void SetRotSpeed(float f){
-			this.RotSpeed = f;
-		}
-
-		public Quaternion SetTargetRot(Vector3 v){
-			Quaternion targetRotation = Quaternion.LookRotation (destPos - v);
-			return targetRotation;
-		}
-		
-		public void SetRot(Transform npc, Vector3 v){
-			npc.rotation = Quaternion.Slerp (npc.rotation, SetTargetRot(v), Time.deltaTime * RotSpeed);
-		}
-
 		//TansitionとIDのチェック
 		public bool CheckTransOrID(Transition transition, FSMStateID id){
 			if(EmptyTrans(transition) || EmptyID(id))
 				return true;
 			return false;
 		}
-		
-		public bool EmptyTrans(Transition t){
+
+		public bool EmptyTrans (Transition t)
+		{
 			if(t == Transition.None)
 				return true;
 			return false;
 		}
-		
+
 		public bool EmptyID(FSMStateID f){
 			if(f == FSMStateID.None)
 				return true;
@@ -144,12 +172,12 @@ namespace Cradle.FM{
 
 		//distが一定の距離内かチェック
 		public bool CheckDist(float f, float l, float o){
-			if (MoreThanCheckReach (f, l) && LessCheckReach (f, o))
+			if (GreaterThanCheckReach (f, l) && LessCheckReach (f, o))
 				return true;
 			return false;
 		}
 		
-		public bool MoreThanCheckReach(float f, float l){
+		public bool GreaterThanCheckReach(float f, float l){
 			if (f >= l)
 				return true;
 			return false;
@@ -185,12 +213,13 @@ namespace Cradle.FM{
 			return rndPosition;
 		}
 
-		public void SetFindDest(){
-			this.destPos = waypoints[RndIndex()].position + RndPosition();
+		public string rndPosition(){
+			string s = RndPosition ().ToString ();
+			return s;
 		}
 
 		//次のポジションが、現在の位置と同じかチェックする
-		protected bool IsInCurrentRange(Transform trans, Vector3 pos)
+		public bool IsInCurrentRange(Transform trans, Vector3 pos)
 		{
 			if (CheckRange (CheckXRange (pos.x, trans.position.x), CheckZRange (pos.z, trans.position.z)))
 						return true;

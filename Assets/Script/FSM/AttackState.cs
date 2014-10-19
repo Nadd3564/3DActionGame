@@ -14,7 +14,6 @@ namespace Cradle.FM{
 		}
 
 
-
 		public override void Reason(Transform player, Transform npc){
 			//プレイヤーとの距離を確認
 			SetDist (Vector3.Distance (npc.position, player.position));
@@ -28,7 +27,7 @@ namespace Cradle.FM{
 			}
 			
 			//距離が遠すぎる場合
-			else if(MoreThanCheckReach(dist, 10.0f))
+			else if(GreaterThanCheckReach(dist, 10.0f))
 			{
 				Debug.Log("Switch to Search State");
 				npc.GetComponent<EnemyCtrl>().SetTransition(Transition.LostPlayer);
