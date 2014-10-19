@@ -1,7 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 using Cradle.FM;
 using Cradle;
+using Cradle.Resource;
 
 namespace Cradle.FM{
 public class EnemyCtrl : AdvancedFSM, IEnemyController 
@@ -43,8 +44,14 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 				setPlayerTransform (objPlayer.transform);
 				Log ();
 	
+			try{
 				//FSMを構築
 				eController.BuildFSM ();
+			}catch(UnityException e){
+				Debug.Log("SaveExceptionLog : " + e);
+				TextReadWriteManager write = new TextReadWriteManager();
+				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+			}
 		}
 
 		protected override void StateUpdate ()
@@ -101,7 +108,13 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 
 		public void SetTransition(Transition t)
 		{
+			try{
 			RunTransition (t);
+			}catch(UnityException e){
+				Debug.Log("SaveExceptionLog : " + e);
+				TextReadWriteManager write = new TextReadWriteManager();
+				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+			}
 		}
 
 		public void Walking(Vector3 destPos){
@@ -132,7 +145,14 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 		}
 
 		public void AttackStart(){
-			eController.attackStart ();	
+			try{
+				eController.attackStart ();
+			}catch(UnityException e){
+				Debug.Log("SaveExceptionLog : " + e);
+				TextReadWriteManager write = new TextReadWriteManager();
+				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+			}
+				
 		}
 
 		public void SendMsgStop(){
@@ -154,7 +174,13 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 			status.DamageHP(attackInfo.GetAttackPower());
 
 			//死体を攻撃できないようにし、体力0なので倒れる
-			eController.Down();
+			try{
+				eController.Down();
+			}catch (UnityException e){
+				Debug.Log("SaveExceptionLog : " + e);
+				TextReadWriteManager write = new TextReadWriteManager();
+				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+			}
 		}
 
 		public int GetHP(){

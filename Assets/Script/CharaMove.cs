@@ -1,21 +1,15 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using Cradle;
+using Cradle.Resource;
 
 namespace Cradle{
 
 public class CharaMove : MonoBehaviour, IMoveController {
-		Vector3 velocity = Vector3.zero; 
 		CharacterController characterController; 
-		Vector3 forceRotateDirection;
-		public Vector3 destination; 
-		Vector3 destinationXZ;
-		Vector3 direction;
-		Vector3 currentVelocity;
-		Vector3 snapGround;
-		Quaternion characterTargetRotation;
 		public CharaMoveController cMcontroller;
-		
+
 		public void OnEnable() {
 			cMcontroller.SetMoveController (this);
 		}
@@ -25,19 +19,28 @@ public class CharaMove : MonoBehaviour, IMoveController {
 			SetDest ();
 		}
 	
+
 		void Update () {
 			//移動に関する総合処理
-			IsGrounded ();
+			try{
+				cMcontroller.MoveManagement (transform.position.y,
+				                             Vector3.Distance(transform.position,cMcontroller.GetDestinationXZ()));
+			} catch(ArgumentOutOfRangeException e){
+				Debug.Log("SaveExceptionLog : " + e);
+				TextReadWriteManager write = new TextReadWriteManager();
+				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+			}
+
 
 			//重力
-			SetGravityAcceleration (Vector3.down * cMcontroller.GetGravityPower() * Time.deltaTime);
+			cMcontroller.SetGravityAcceleration ();
 
 			//接地時地面に押し付ける
-			SetSnapGround (Vector3.zero);
+			cMcontroller.SnapZero ();
 
 			//CharacterControllerを使って動かす
-			characterController.Move(velocity * Time.deltaTime+snapGround);
-			WalkStop ();
+			characterController.Move(cMcontroller.GetVelocity() * Time.deltaTime+cMcontroller.GetSnapGround());
+			cMcontroller.WalkStop ();
 
 			//強制的に向きを変えるのを解除
 			ForceRotateCancel ();
@@ -47,150 +50,52 @@ public class CharaMove : MonoBehaviour, IMoveController {
 			this.characterController = GetComponent<CharacterController>();
 		}
 
-		void SetSnapGround(Vector3 snapGround){
-			this.snapGround = snapGround;
-		}
-
 		void SetDest(){
-			this.destination = transform.position;
-		}
-
-		void SetDestXZ(){
-			this.destinationXZ = destination; 
-		}
-
-		void SetDestAlign(){
-			this.destinationXZ.y = transform.position.y;
+			cMcontroller.destination = transform.position;
 		}
 
 		//目的地への方向を求める
-		void DirectionSeek(){
-			this.direction = (destinationXZ - transform.position).normalized;
+		public void DirectionSeek(){
+			cMcontroller.direction = (cMcontroller.GetDestinationXZ() - transform.position).normalized;
 		}
 
-		void SetVelocity(Vector3 velocity){
-			this.velocity = velocity;
+		public void SetTransFormRot(){
+			this.transform.rotation = Quaternion.RotateTowards(transform.rotation,cMcontroller.GetCharacterTargetRot(),cMcontroller.GetRotationSpeed() * Time.deltaTime);
 		}
 
-		void SetGravityAcceleration(Vector3 velocity){
-			this.velocity += velocity;
+		public bool IsGrounded(){
+			if (characterController.isGrounded)
+				return true;
+			return false;
 		}
 
-		void SetVelocityY(float velocity){
-			this.velocity.y = velocity;
-		}
-
-		void SetCurrentVelocity(){
-			this.currentVelocity = velocity;
-		}
-
-		void SetTargetRotation(Quaternion q){
-			this.characterTargetRotation = q;
-		}
-
-		void SetTransFormRotation(Quaternion q){
-			this.transform.rotation = q;
-		}
-
-		//移動速度を求める
-		void WalkSpeedVelocity(){
-			if (cMcontroller.IsArrived())
-				SetVelocity(Vector3.zero);
-			else 
-				SetVelocity(direction * cMcontroller.GetWalkSpeed());
-		}
-
-
-		public void WalkRotation(){
-			if (!cMcontroller.IsForceRotate()) 
-			{
-				//行きたい方向へ向く
-				if (WalkRotateCondition()) 
-				{ 
-					SetTargetRotation(Quaternion.LookRotation(direction));
-					SetTransFormRotation(Quaternion.RotateTowards(transform.rotation,characterTargetRotation,cMcontroller.GetRotationSpeed() * Time.deltaTime));
-				}
-			}
-			else 
-			{
-				//強制向き指定
-					SetTargetRotation(Quaternion.LookRotation(forceRotateDirection));
-					SetTransFormRotation(Quaternion.RotateTowards(transform.rotation,characterTargetRotation,cMcontroller.GetRotationSpeed() * Time.deltaTime));
-			}
-		}
-
-		bool WalkRotateCondition(){
-			if (velocity.magnitude > 0.1f && !cMcontroller.IsArrived ())
-								return true;
-						return false;
-		}
-
-
-		//移動に関する総合処理
-		public void IsGrounded(){
-			if (characterController.isGrounded) {
-				//水平面移動のみなのでXZを扱う
-				SetDestXZ();
-
-				//高さを目的地と現在と合わせる
-				SetDestAlign();
-
-				//目的地への方向を求める
-				DirectionSeek();
-
-				//目的地への距離を求める
-				cMcontroller.SetDistance(Vector3.Distance(transform.position,destinationXZ));
-
-				//現在の速度を退避
-				SetCurrentVelocity();
-
-				//目的に近づいたら到着
-				cMcontroller.DestArrived();
-
-				//移動速度を求める
-				WalkSpeedVelocity();
-
-				//スムーズに動くよう補間
-				SetVelocity(Vector3.Lerp(currentVelocity, velocity,Mathf.Min (Time.deltaTime * 5.0f ,1.0f)));
-				SetVelocityY(0);
-
-				//向きを行きたい方向へ向ける
-				WalkRotation();
-
-				//接地していたら地面に押し付ける
-				SetSnapGround (Vector3.down);
-			}
-		}
-
-		void WalkStop(){
+		public bool LessThanVMagnitude(){
 			if (characterController.velocity.magnitude < 0.1f)
-				cMcontroller.SetArrived (true);
-		}
+								return true;
+			return false;
+		} 
 
 		void ForceRotateCancel(){
-			if (cMcontroller.IsForceRotate () && Vector3.Dot (transform.forward, forceRotateDirection) > 0.99f)
+			if (cMcontroller.IsForceRotate () && Vector3.Dot (transform.forward, cMcontroller.GetForceRotateDirection()) > 0.99f)
 				cMcontroller.SetForceRotate (false);
 		}
 	
+
 		//目的地を指定する（引数が目的地）
 		public void SetDestination(Vector3 destination)
 		{
-			cMcontroller.SetArrived (false);
-			this.destination = destination;
+			cMcontroller.SetDestination (destination);
 		}
 	
 		//指定した向きを向かせる
 		public void SetDirection(Vector3 direction)
 		{
-			forceRotateDirection = direction;
-			forceRotateDirection.y = 0;
-			forceRotateDirection.Normalize();
-			cMcontroller.SetForceRotate (true);
+			cMcontroller.SetDirection (direction);
 		}
 
 		public void StopMove()
 		{
-			destination = transform.position;
+			cMcontroller.destination = transform.position;
 		}
 
 		//目的地に到着したかを調べる
@@ -198,5 +103,6 @@ public class CharaMove : MonoBehaviour, IMoveController {
 		{
 			return cMcontroller.IsArrived();
 		}
+
 	}
 }

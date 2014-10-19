@@ -9,11 +9,11 @@ namespace Cradle
 		//残り時間
 		public float gameSpeed = 1.0f;
 		public float timeRemaining = 5.0f + 60.0f;
+		public float sceneChangeTime = 10.0f;
 		public bool gameOver = false;
 		public bool gameClear = false;
-		public float sceneChangeTime = 10.0f;
-		private IRuleController ruleController;
-		
+
+		private IRuleController ruleController;		
 		
 		public GameRuleSettingsController (){
 			
@@ -21,6 +21,10 @@ namespace Cradle
 		
 		public float GetGameSpeed(){
 			return this.gameSpeed;		
+		}
+
+		public float GetTimeRemaining(){
+			return this.timeRemaining;	
 		}
 
 		public float GetSceneChangeTime(){
@@ -31,7 +35,7 @@ namespace Cradle
 			return this.sceneChangeTime -= f;		
 		}
 
-		public bool IsGameOver(){
+		public virtual bool IsGameOver(){
 			return this.gameOver;		
 		}
 
@@ -39,7 +43,7 @@ namespace Cradle
 			return this.gameOver = flg;		
 		}
 
-		public bool IsGameClear(){
+		public virtual bool IsGameClear(){
 			return this.gameClear;		
 		}
 
@@ -57,6 +61,28 @@ namespace Cradle
 			if (GetSceneChangeTime () <= 0.0f)	
 					return true;
 				return false;
+		}
+
+		public void InitializeGameSpeed(){
+			Time.timeScale = GetGameSpeed();
+		}
+
+		public void SwitchScene(){
+			Application.LoadLevel("TitleScene");
+		}
+
+		public bool ReturnTitle(){
+			if (!GameFlgs ())
+				return false;
+
+			if(GameFlgs()){
+				//シーン切り替えまでのカウント開始
+				SetCountSceneChangeTime(Time.deltaTime);
+				if(TimeRemaining()){
+					SwitchScene();
+				}
+			}
+			return true;
 		}
 		
 		public void SetRuleController(IRuleController ruleController) {

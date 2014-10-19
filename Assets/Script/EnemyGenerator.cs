@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using Cradle;
 using Cradle.FM;
+using Cradle.Resource;
 
 namespace Cradle{
 public class EnemyGenerator : MonoBehaviour, IGeneratorController {
@@ -21,7 +23,13 @@ public class EnemyGenerator : MonoBehaviour, IGeneratorController {
 
 		IEnumerator Exec(){
 			while(true){
-				controller.Generate(0, existEnemys.Length);
+				try{
+					controller.Generate(0, existEnemys.Length);
+				}catch(ArgumentException e){
+					Debug.Log("SaveErrorLog : " + e);
+					TextReadWriteManager write = new TextReadWriteManager();
+					write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+				}
 				yield return new WaitForSeconds(controller.GetRePopTime());
 			}
 		}

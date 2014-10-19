@@ -10,7 +10,7 @@ namespace Cradle.Test
 	{
 		public IInfoController iInfo;
 		public AttackInfoController aIController;
-		
+
 		[SetUp] public void Init()
 		{ 
 			iInfo = GetInfoMock ();

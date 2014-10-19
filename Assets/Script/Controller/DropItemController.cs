@@ -14,7 +14,7 @@ namespace Cradle
 		};
 
 		public ItemKind kind;
-		private IDropItemController dropItemController;
+		private IDropItemController iDropItemController;
 		
 		public DropItemController (){
 		}
@@ -50,13 +50,13 @@ namespace Cradle
 			}
 
 			if (IsTerrain (tag)) {
-				dropItemController.SetTrigger (f);
+				iDropItemController.SetTrigger (f);
 			}
 				return true;
 			}
 
-		public void SetDropItemController(IDropItemController dropItemController) {
-			this.dropItemController = dropItemController;
+		public void SetDropItemController(IDropItemController iDropItemController) {
+			this.iDropItemController = iDropItemController;
 		}
 		
 	}

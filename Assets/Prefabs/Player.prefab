@@ -241,8 +241,6 @@ GameObject:
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400008}
-  - 114: {fileID: 11400016}
-  - 114: {fileID: 11400018}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -658,6 +656,7 @@ GameObject:
   - 136: {fileID: 13600000}
   - 54: {fileID: 5400002}
   - 114: {fileID: 11400014}
+  - 114: {fileID: 11400016}
   m_Layer: 12
   m_Name: Box001
   m_TagString: Untagged
@@ -1602,10 +1601,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc55453bb4a7959438784ba7eefd7c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrived: 0
-  destination: {x: 0, y: 0, z: 0}
-  walkSpeed: 6
-  rotationSpeed: 360
+  cMcontroller:
+    walkSpeed: 5
+    rotationSpeed: 360
+    arrived: 0
+    forceRotate: 0
+    destination: {x: 0, y: 0, z: 0}
+    direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1617,14 +1619,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84582043c11b024880da88e1f8d88f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 100
-  MaxHP: 100
-  Power: 10
   lastAttackTarget: {fileID: 0}
-  charactername: Player
-  attacking: 0
-  died: 0
-  powerBoost: 0
+  controller:
+    HP: 100
+    MaxHP: 100
+    Power: 10
+    attacking: 0
+    died: 0
+    powerBoost: 0
+    charactername: Player
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1636,6 +1639,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2859429439f05724cb2fc7ab0acbfaf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cAController:
+    attacked: 0
+    isDown: 0
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1648,6 +1654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSeClip: {fileID: 8300000, guid: b910f06cfef6a10448d4cfa7f0ea51d2, type: 3}
+  AAAcontroller: {fileID: 0}
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1691,23 +1698,14 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100030}
-  m_Enabled: 0
+  m_GameObject: {fileID: 100084}
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccbeafaf1dadc944284147994877f500, type: 3}
+  m_Script: {fileID: 11500000, guid: 16acd66d945981540863d7e2722fd7fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11400018
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100030}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d301a2550fd84d46b3ddc5cbd8c6a68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  aIController:
+    attackPower: 0
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1717,10 +1715,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: .0500000007
-  m_Height: .5
+  m_Radius: .0199999996
+  m_Height: .400000006
   m_Direction: 2
-  m_Center: {x: -5.74922478e-06, y: -9.85813458e-08, z: .699999988}
+  m_Center: {x: -5.74922478e-06, y: .0299999993, z: .699999988}
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

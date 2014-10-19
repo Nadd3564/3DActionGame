@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using Cradle;
+using Cradle.Resource;
 
 namespace Cradle{
 	public class CharaAnimation : MonoBehaviour, IAnimationController {
@@ -9,8 +11,7 @@ namespace Cradle{
 		CharaStatus status;
 		Vector3 prePosition;
 		Vector3 delta_position;
-		
-		
+
 		public void OnEnable() {
 			cAController.SetAnimationController(this);
 		}
@@ -24,7 +25,7 @@ namespace Cradle{
 		void Update () {
 			DeltaPosition ();
 			AnimatorSetSpdFloat ();
-			cAController.StopAttack ();
+			StopAttack ();
 			AnimatorSetAtkBool ();
 			
 			if(!cAController.IsDown() && IsDead()){
@@ -50,7 +51,17 @@ namespace Cradle{
 		public bool isSetAttacked(bool flg){
 			return cAController.SetAttacked(flg);
 		}
-		
+
+		private void StopAttack(){
+			try{
+				cAController.StopAttack ();
+			}catch(ArgumentException e){
+				Debug.Log("SaveErrorLog : " + e);
+				TextReadWriteManager write = new TextReadWriteManager();
+				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+			}
+		}
+
 		void EndAttack(){
 			cAController.SetAttacked (true);
 		}

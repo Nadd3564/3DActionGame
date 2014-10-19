@@ -39,8 +39,7 @@ namespace Cradle
 				if (IsAttacked () && !isAttacking()) {
 						SetAttacked (false);
 				if(IsAttacked() == true)
-					throw new ArgumentException("The IsAttacked Must Be False.");
-				SetAttacked(false);
+					throw new ArgumentException("The IsAttacked Must Be False.", default(Exception));
 					}
 			return true;
 			return false;

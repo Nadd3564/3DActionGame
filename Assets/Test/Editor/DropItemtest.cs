@@ -16,6 +16,7 @@ namespace Cradle.Test
 		[SetUp] public void Init()
 		{ 
 			iDrop = GetItemMock ();
+			iDrop.SetTrigger(true).Returns(false);
 			dIController = GetControllerMock (iDrop);
 		}
 		
@@ -109,7 +110,6 @@ namespace Cradle.Test
 		{
 			string s = "Terrain";
 			bool flg = false;
-
 			dIController.CheckTerrain (s, flg);
 			Assert.False (iDrop.SetTrigger(true));
 
@@ -121,7 +121,7 @@ namespace Cradle.Test
 		{
 			string s = "Player";
 			bool flg = false;
-			
+
 			Assert.False (dIController.CheckTerrain (s, flg));
 		}
 
@@ -133,7 +133,6 @@ namespace Cradle.Test
 		private DropItemController GetControllerMock(IDropItemController iDrop) {
 			var dIController = Substitute.For<DropItemController> ();
 			dIController.SetDropItemController (iDrop);
-			iDrop.SetTrigger(true).Returns(false);
 			return dIController;
 		}
 		

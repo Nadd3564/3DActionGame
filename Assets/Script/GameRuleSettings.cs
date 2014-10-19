@@ -16,8 +16,7 @@ public class GameRuleSettings : MonoBehaviour, IRuleController {
 
 			void Start(){
 					//ゲームスピード初期化
-					InitializeGameSpeed ();
-					
+					controller.InitializeGameSpeed ();
 					//オーディオの初期化
 					FindAudioComponent ();
 					DisableLoopSE ();
@@ -27,7 +26,7 @@ public class GameRuleSettings : MonoBehaviour, IRuleController {
 
 			void Update () {
 				//ゲームオーバー、クリア後、タイトルへ
-				ReturnTitle ();
+				controller.ReturnTitle ();
 			}
 
 			public void GameOver(){
@@ -57,24 +56,5 @@ public class GameRuleSettings : MonoBehaviour, IRuleController {
 				this.clearSeAudio.Play ();
 			}
 
-			public void InitializeGameSpeed(){
-				Time.timeScale = controller.GetGameSpeed();
-			}
-
-			public void SwitchScene(){
-				Application.LoadLevel("TitleScene");
-			}
-
-			public void ReturnTitle(){
-				if(controller.GameFlgs()){
-					//シーン切り替えまでのカウント開始
-					controller.SetCountSceneChangeTime(Time.deltaTime);
-					if(controller.TimeRemaining()){
-						SwitchScene();
-					}
-					return;
-				}
-			}
-			
 		}
 }

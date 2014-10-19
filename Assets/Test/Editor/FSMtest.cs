@@ -149,7 +149,7 @@ namespace Cradle.Test
 		{
 			fController.SetElapsedTime (3.0f);
 			fController.SetAttackRate (4.0f);
-			Assert.False(fController.AttackCount());		
+			Assert.False(fController.AttackCount());	
 		}
 
 		//例外処理テスト
@@ -158,7 +158,7 @@ namespace Cradle.Test
 		[ExpectedException(typeof(TimeoutException))]
 		public void AttackCountExceptionTest() 
 		{
-			fController.SetElapsedTime (30.0f);
+			fController.SetElapsedTime (40.0f);
 			fController.AttackCount ();
 		}
 

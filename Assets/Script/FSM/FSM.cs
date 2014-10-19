@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using Cradle;
 using Cradle.FM;
+using Cradle.Resource;
 
 namespace Cradle.FM{
 public class FSM : MonoBehaviour, IFSMController {
 			//索敵する地点のリスト
 			protected GameObject[] pointList;
-
+			
 			public FSMController controller;
 				
 			public void OnEnable() {
@@ -40,7 +42,15 @@ public class FSM : MonoBehaviour, IFSMController {
 			}
 
 			public bool attackCount(){
+			try{
 				return controller.AttackCount ();
+			} catch(TimeoutException e){
+				Debug.Log("SaveExceptionLog : " + e);
+				TextReadWriteManager write = new TextReadWriteManager();
+				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+			}
+
+			return true;
 			}
 			
 			protected void setPlayerTransform(Transform trans){

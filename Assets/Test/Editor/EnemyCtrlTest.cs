@@ -15,6 +15,7 @@ namespace Cradle.Test
 		[SetUp] public void Init()
 		{ 
 			iEnemy = GetEnemyMock ();
+			iEnemy.SetTag ().Returns ("Dead");
 			eController = GetControllerMock (iEnemy);
 		}
 		
@@ -340,7 +341,7 @@ namespace Cradle.Test
 		//例外処理テスト
 		[Test]
 		[Category ("attackStart Exception Test")]
-		[ExpectedException(typeof(ArgumentException))]
+		[ExpectedException(typeof(ConditionException))]
 		public void attackStartExceptionTest() 
 		{
 			//Arrange
@@ -353,7 +354,7 @@ namespace Cradle.Test
 
 		[Test]
 		[Category ("Died Exception Test")]
-		[ExpectedException(typeof(ArgumentException))]
+		[ExpectedException(typeof(ConditionException))]
 		public void DiedExceptionTest() 
 		{
 			//Arrange
@@ -366,7 +367,7 @@ namespace Cradle.Test
 
 		[Test]
 		[Category ("Down Exception Test")]
-		[ExpectedException(typeof(ArgumentOutOfRangeException))]
+		[ExpectedException(typeof(ConditionException))]
 		public void DownExceptionTest() 
 		{
 			//Arrange
@@ -384,7 +385,6 @@ namespace Cradle.Test
 		private EnemyCtrlController GetControllerMock(IEnemyController iEnemy) {
 			var eController = Substitute.For<EnemyCtrlController> ();
 			eController.SetEnemyController (iEnemy);
-			iEnemy.SetTag ().Returns ("Dead");
 			return eController;
 		}
 		
