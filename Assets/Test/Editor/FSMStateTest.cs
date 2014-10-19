@@ -316,6 +316,23 @@ namespace Cradle.Test
 		}
 
 
+		//例外検出テスト
+		[Test]
+		[Category ("AddTransition Exception Test")]
+		[ExpectedException(typeof(ConditionException))]
+		public void AddTransitionExceptionTest() 
+		{
+			fsmState.AddTransition(Transition.None, FSMStateID.None);
+		}
+
+		[Test]
+		[Category ("DeleteTransition Exception Test")]
+		[ExpectedException(typeof(ConditionException))]
+		public void DeleteTransitionExceptionTest() 
+		{
+			fsmState.DeleteTransition(Transition.None);
+		}
+
 	}
 }
 

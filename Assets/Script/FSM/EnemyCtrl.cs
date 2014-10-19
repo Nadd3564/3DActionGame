@@ -44,8 +44,14 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 				setPlayerTransform (objPlayer.transform);
 				Log ();
 	
+			try{
 				//FSMを構築
 				eController.BuildFSM ();
+			}catch(UnityException e){
+				Debug.Log("SaveExceptionLog : " + e);
+				TextReadWriteManager write = new TextReadWriteManager();
+				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+			}
 		}
 
 		protected override void StateUpdate ()
@@ -102,7 +108,13 @@ public class EnemyCtrl : AdvancedFSM, IEnemyController
 
 		public void SetTransition(Transition t)
 		{
+			try{
 			RunTransition (t);
+			}catch(UnityException e){
+				Debug.Log("SaveExceptionLog : " + e);
+				TextReadWriteManager write = new TextReadWriteManager();
+				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+			}
 		}
 
 		public void Walking(Vector3 destPos){

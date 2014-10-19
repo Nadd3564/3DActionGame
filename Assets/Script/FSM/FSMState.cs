@@ -85,6 +85,7 @@ namespace Cradle.FM{
 			if(CheckTransOrID(transition, id))
 			{
 				Debug.LogWarning("FSMState: Null transition not allowed");
+				throw new ConditionException();
 				//return;
 			}
 			
@@ -108,6 +109,7 @@ namespace Cradle.FM{
 			if(EmptyTrans(trans))
 			{
 				Debug.LogError("FSMState ERROR: NullTransition is not allowed");
+				throw new ConditionException();
 				//return;
 			}
 			
@@ -155,14 +157,21 @@ namespace Cradle.FM{
 			return false;
 		}
 
-		public bool EmptyTrans (Transition t)
-		{
+		public bool EmptyTrans (Transition t){
+			if (t == null) {
+					throw new ConditionException ();
+		}
+
 			if(t == Transition.None)
 				return true;
 			return false;
 		}
 
 		public bool EmptyID(FSMStateID f){
+			if (f == null) {
+				throw new ConditionException ();
+		}
+
 			if(f == FSMStateID.None)
 				return true;
 			return false;
