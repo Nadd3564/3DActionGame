@@ -12,7 +12,8 @@ namespace Cradle{
 		public void OnEnable() {
 			inputController.SetInputController (this);
 		}
-		
+
+
 		void Update () {
 			//スライド開始地点
 			inputController.SlideStart ();				

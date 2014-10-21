@@ -15,6 +15,14 @@ public class FollowCamera : MonoBehaviour, ICameraController {
 			controller.SetCameraController (this);
 		}
 
+		//GUIName破棄
+		void OnGUI()
+		{
+			string controlName = gameObject.GetHashCode ().ToString ();
+			GUI.SetNextControlName ("file");
+			Rect bounds = new Rect (0, 0, 0, 0);
+			GUI.TextField (bounds, "", 0);
+		}
 
 		void Start () {
 			FindInputComponent ();
