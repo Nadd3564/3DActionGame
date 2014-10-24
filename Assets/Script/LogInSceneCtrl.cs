@@ -5,11 +5,12 @@ using Cradle.DesignPattern;
 
 
 namespace Cradle{
-public class TitleScenenCtrl : MonoBehaviour {
+public class LogInSceneCtrl : MonoBehaviour {
 	    // タイトル画面テクスチャ
 	    public Texture2D bgTexture;
 		public string ID = "";
 		public string passwordToEdit = "";
+		private GUIStyle color;
 		private  LogIn.SpaceBook logIn;
 
 
@@ -17,7 +18,9 @@ public class TitleScenenCtrl : MonoBehaviour {
 	    {
 			// スタイルを準備.
 			GUIStyle buttonStyle = new GUIStyle(GUI.skin.button);
-
+			color = new GUIStyle ();
+			color.padding.top = 5;
+			color.normal.textColor = Color.black;
 			// 解像度対応
 	        GUI.matrix = Matrix4x4.TRS(
 	            Vector3.zero,
@@ -27,22 +30,25 @@ public class TitleScenenCtrl : MonoBehaviour {
 	        // タイトル画面テクスチャ表示
 	        GUI.DrawTexture(new Rect(0.0f, 0.0f, 854.0f, 480.0f), bgTexture);
 
+
 			//入力ユーザ情報が一致する場合、次のシーンへ
-			if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return && CheckID (ID) || GUI.Button (new Rect (327, 330, 100, 20), "LogIn", buttonStyle)) {
+			if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return && CheckID (ID) || GUI.Button (new Rect (327, 360, 100, 20), "LogIn", buttonStyle)) {
 					if (GUI.GetNameOfFocusedControl () == "MyPassField" && CheckPass (passwordToEdit)) {
 						Application.LoadLevel ("PlayScene");
 					}
 				}
 
 			//ゲーム終了(Exitボタンを押す、または、Escapeを押す)
-			if (GUI.Button (new Rect (427, 330, 100, 20), "Exit", buttonStyle) || Input.GetKeyDown(KeyCode.Escape))
+			if (GUI.Button (new Rect (427, 360, 100, 20), "Exit", buttonStyle) || Input.GetKeyDown(KeyCode.Escape))
 				Application.Quit();
 
 			//ユーザIDとパスワード入力フィールド表示
+			GUI.Label (new Rect(327,270,200,10), "ID", color);
 			GUI.SetNextControlName("MyIdField");
 			ID = GUI.TextField(new Rect(327,290,200,20),ID);
+			GUI.Label (new Rect(327,310,200,10), "Password", color);
 			GUI.SetNextControlName ("MyPassField");
-			passwordToEdit = GUI.PasswordField(new Rect(327, 310, 200, 20), passwordToEdit, "*"[0], 25);
+			passwordToEdit = GUI.PasswordField(new Rect(327, 330, 200, 20), passwordToEdit, "*"[0], 25);
 
 			//Enterを押すとID項目へフォーカス
 			if (Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.Return)

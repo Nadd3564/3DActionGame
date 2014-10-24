@@ -15,11 +15,11 @@ public class FollowCamera : MonoBehaviour, ICameraController {
 			controller.SetCameraController (this);
 		}
 
-		//GUI破棄
+		//前SceneのGuiを破棄
 		void OnGUI()
 		{
 			string controlName = gameObject.GetHashCode ().ToString ();
-			GUI.SetNextControlName ("GETID");
+			GUI.SetNextControlName ("MyPassField");
 			Rect bounds = new Rect (0, 0, 0, 0);
 			GUI.TextField (bounds, "", 0);
 		}
