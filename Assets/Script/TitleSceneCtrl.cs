@@ -8,11 +8,7 @@ namespace Cradle{
 	public class TitleSceneCtrl : MonoBehaviour {
 		// タイトル画面テクスチャ
 		public Texture2D bgTexture;
-		public string ID = "";
-		public string passwordToEdit = "";
-		public GUIStyle color;
-		private  LogIn.SpaceBook logIn;
-		
+
 		
 		void OnGUI()
 		{
