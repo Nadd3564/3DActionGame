@@ -46,7 +46,7 @@ namespace Cradle.DesignPattern{
 		}
 		
 		// プロキシに該当
-		public class MySpaceBook {
+		public class MyUserBook {
 			UserBook myUserBook;
 			string password;
 			string name;

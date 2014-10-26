@@ -12,12 +12,12 @@ public class LogInSceneCtrl : AccountManager {
 	    public Texture2D bgTexture;
 		public string ID = "";
 		public string passwordToEdit = "";
-		MySpaceBook me;
+		MyUserBook me;
 		private GUIStyle color;
 
 
 		void Main(){
-			me = new MySpaceBook ();
+			me = new MyUserBook ();
 		}
 
 
