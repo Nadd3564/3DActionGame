@@ -67,8 +67,7 @@ public class LogInSceneCtrl : AccountManager {
 			if (Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.Return && ID != "") {
 					GUI.FocusControl ("MyPassField");
 						
-					me.Add("こんにちは");
-					me.Add("今日は１５時間プログラミングを教えました");
+					me.Add("Hello");
 					Debug.Log ("Success : " + me);
 			}
 
