@@ -11,6 +11,7 @@ public class ContinueBGM : MonoBehaviour {
 		}
 
 		void Awake() {
+
 			if (instance != null && instance != this) {
 				Destroy(this.gameObject);
 				return;
@@ -19,6 +20,8 @@ public class ContinueBGM : MonoBehaviour {
 			}
 			DontDestroyOnLoad(this.gameObject);
 		}
+
 	
 	}
 }
+ 

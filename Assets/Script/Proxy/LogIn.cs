@@ -2,103 +2,29 @@
 using System;
 using System.Collections.Generic;
 using Cradle;
+using Cradle.DesignPattern;
 
 namespace Cradle.DesignPattern{
-public class LogIn {
-	
-	// Subjectに該当
-	//private class SpaceBook {
-		public class SpaceBook {
-		static SortedList <string,SpaceBook> community = new SortedList <string,SpaceBook> (100);
-		string pages;
-		string name;
-		string gap = "\n\t\t\t\t";
-		
-		//static public bool IsUnique (string name) {
-		static public bool IsUnique (string name) {
-			return community.ContainsKey(name);
+public class LogIn : AccountManager {
+
+	// Use this for initialization
+	void StartUp () {
+
 		}
-		
-		//internal SpaceBook (string n) {
-			public SpaceBook(string n){
-			name = n;
-			community [n] = this;
-		}
-		
-		internal void Add(string s) {
-			pages += gap+s;
-			Console.Write(gap+"======== "+name+"'s SpaceBook =========");
-			Console.Write(pages);
-			Console.WriteLine(gap+"===================================");
-		}
-		
-		internal void Add(string friend, string message) {
-			community[friend].Add(message);
-		}
-		
-		internal void Comment(string who, string friend) {
-			community[who].pages += gap + friend + "さんが、あなたのSpaceBookにコメントします。";
-		}
-	}
-	
-	// プロキシに該当
-	public class MySpaceBook {
-		
-		SpaceBook mySpaceBook;
-		LogIn.SpaceBook Space = new LogIn.SpaceBook("a");
-		string password;
-		string name;
-		bool loggedIn = false;
-		
-		void Register ( ) {
-			Console.WriteLine("SpaceBookに登録してください");
-			do {
-				Console.WriteLine("SpaceBook名は固有となります");
-				Console.Write("ユーザー名を入力ください: ");
-				name = Console.ReadLine( );
-			} while (SpaceBook.IsUnique(name));
-			Console.Write("パスワードを入力してください: ");
-			// パスワードの入力
-			password = Console.ReadLine( );
-			Console.WriteLine("SpaceBookに登録頂きありがとうございます");
-		}
-		
-		bool Authenticate ( ) {
-			Console.Write("こんにちは、 "+name+"さん。パスワードを入力してください: ");
-			string supplied = Console.ReadLine( );
-			if (supplied==password) {
-				loggedIn = true;
-				Console.WriteLine("SpaceBookにログインしました");
-				if (mySpaceBook == null) mySpaceBook = new SpaceBook(name);
-				return true;
-			}
-			Console.WriteLine("Incorrect password");
-			return false;
-		}
-		
-		public void Add(string message) {
+
+	// Update is called once per frame
+	void Main () {
+			MySpaceBook me = new MySpaceBook ();
+			me.Add("こんにちは");
+			me.Add("今日は１５時間プログラミングを教えました");
+			Debug.Log ("Success : " + me);
 			
-			Check( );
-			if (loggedIn) mySpaceBook.Add(message);
-		}
-		
-		public void Add(string friend, string message) {
-			Check( );
-			if (loggedIn) mySpaceBook.Add(friend, name + "のコメント: "+message);
-		}
-		
-		public void Comment(string who) {
-			Check( );
-			if (loggedIn) mySpaceBook.Comment(who,name);
-		}
-		
-		void Check( ) {
-			if (!loggedIn) {
-				if (password==null)
-					Register( );
-				if (mySpaceBook == null) Authenticate( );
-			}
-		}
+			MySpaceBook jiro = new MySpaceBook ();
+			jiro.Comment("taro");
+			jiro.Add("taro","自分は１９時間♪");
+			jiro.Add("じゃあ、今から花火見に行ってくる");
+			Debug.Log ("Success : " + jiro);
 	}
+
 }
 }

@@ -14,6 +14,19 @@ public class GameRuleSettings : MonoBehaviour, IRuleController {
 				controller.SetRuleController (this);
 			}
 
+			void Awake(){
+				Destroy (GameObject.Find("BGM"));	
+			}
+
+			//前SceneのGuiを破棄
+			void OnGUI()
+			{
+				string controlName = gameObject.GetHashCode ().ToString ();
+				GUI.SetNextControlName ("MyPassField");
+				Rect bounds = new Rect (0, 0, 0, 0);
+				GUI.TextField (bounds, "", 0);
+			}
+
 			void Start(){
 					//ゲームスピード初期化
 					controller.InitializeGameSpeed ();

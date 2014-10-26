@@ -1,17 +1,24 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using Cradle;
 using Cradle.DesignPattern;
 
 
 namespace Cradle{
-public class LogInSceneCtrl : MonoBehaviour {
+public class LogInSceneCtrl : AccountManager {
+		bool flg = false;
 	    // タイトル画面テクスチャ
 	    public Texture2D bgTexture;
 		public string ID = "";
 		public string passwordToEdit = "";
+		MySpaceBook me;
 		private GUIStyle color;
-		private  LogIn.SpaceBook logIn;
+
+
+		void Main(){
+			me = new MySpaceBook ();
+		}
 
 
 		void OnGUI()
@@ -33,8 +40,8 @@ public class LogInSceneCtrl : MonoBehaviour {
 
 			//入力ユーザ情報が一致する場合、次のシーンへ
 			if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return && CheckID (ID) || GUI.Button (new Rect (327, 360, 100, 20), "LogIn", buttonStyle)) {
-					if (GUI.GetNameOfFocusedControl () == "MyPassField" && CheckPass (passwordToEdit)) {
-						Application.LoadLevel ("PlayScene");
+				if (GUI.GetNameOfFocusedControl () == "MyPassField" && CheckPass (passwordToEdit) && flg) {
+					Application.LoadLevel ("PlayScene");
 					}
 				}
 
@@ -50,26 +57,50 @@ public class LogInSceneCtrl : MonoBehaviour {
 			GUI.SetNextControlName ("MyPassField");
 			passwordToEdit = GUI.PasswordField(new Rect(327, 330, 200, 20), passwordToEdit, "*"[0], 25);
 
+			//me = new MySpaceBook ();
 			//Enterを押すとID項目へフォーカス
-			if (Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.Return)
-				GUI.FocusControl ("MyIdField");
+			if (Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.Return) {
+					GUI.FocusControl ("MyIdField");
+			}
 
 			//Enterを押すとPassword項目へフォーカス(ID項目に文字が存在する場合)
-			if(Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.Return && ID != "")
-				GUI.FocusControl ("MyPassField");
+			if (Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.Return && ID != "") {
+					GUI.FocusControl ("MyPassField");
+						
+					me.Add("こんにちは");
+					me.Add("今日は１５時間プログラミングを教えました");
+					Debug.Log ("Success : " + me);
+			}
+
+			//Enterを押すと入力パスワードを登録
+			if (Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.Return && ID != "" && passwordToEdit != "") {
+					me.PassRegister(ID);
+					Debug.Log("Passregi");
+					this.flg = true;
+			}
+			
+			
+			
+		}
 
 
+		public string GetID(){
+			return this.ID;	
+		}
+
+		public string GetPass(){
+			return this.passwordToEdit;	
 		}
 
 
 		//ユーザ認証
 		private bool CheckID(string ID){
-			if (ID != "user") {
+			if (ID != this.ID) {
 				Debug.Log("ID : Failed");
 				return false;
 			}
 			
-			if (ID == "user") {
+			if (ID == this.ID) {
 				Debug.Log("ID : Success");		
 			}
 			return true;
@@ -77,12 +108,12 @@ public class LogInSceneCtrl : MonoBehaviour {
 		}
 	
 		private bool CheckPass(string Password){
-			if (Password != "user") {
+			if (Password != passwordToEdit) {
 				Debug.Log("Password : Failed");
 					return false;
 			}
 			
-			if (Password == "user") {
+			if (Password == passwordToEdit) {
 				Debug.Log("Password : Success");		
 				}
 			return true;

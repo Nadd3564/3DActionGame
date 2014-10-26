@@ -11,12 +11,12 @@ namespace Cradle.Test
 	[Category ("LogIn Test")]
 	public class LogInTest
 	{
-		private LogIn.SpaceBook logIn;
-		private SortedList <string,LogIn.SpaceBook> community = new SortedList <string,LogIn.SpaceBook> (100);
+		//private LogIn.SpaceBook logIn;
+		//private SortedList <string,LogIn.SpaceBook> community = new SortedList <string,LogIn.SpaceBook> (100);
 
 		[SetUp] public void Init()
 		{
-			logIn = new LogIn.SpaceBook("hi");
+			//logIn = new LogIn.SpaceBook("hi");
 		}
 		
 		[TearDown] public void Cleanup()
