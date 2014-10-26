@@ -5,78 +5,78 @@ using Cradle;
 using Cradle.Resource;
 
 namespace Cradle{
-public class FollowCamera : MonoBehaviour, ICameraController {
-		public Transform lookTarget;
-		InputManager inputManager;
+	public class FollowCamera : MonoBehaviour, ICameraController {
+			public Transform lookTarget;
+			InputManager inputManager;
 
-		public FollowCameraController controller;
+			public FollowCameraController controller;
 
-		public void OnEnable() {
-			controller.SetCameraController (this);
-		}
-
-
-		void Start () {
-			FindInputComponent ();
-		}
-
-		void LateUpdate()
-		{		
-			try{
-				//ドラッグ入力でカメラのアングルを更新
-				controller.MoveAngle ();
-			}catch(ArgumentOutOfRangeException e){
-				Debug.Log("SaveErrorLog : " + e);
-				TextReadWriteManager write = new TextReadWriteManager();
-				write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+			public void OnEnable() {
+				controller.SetCameraController (this);
 			}
 
-			//カメラの位置と回転を更新
-			controller.CameraPosUpdate ();
-		}
 
-		public void FindInputComponent(){
-			this.inputManager = FindObjectOfType<InputManager> ();
-		}
+			void Start () {
+				FindInputComponent ();
+			}
 
-		public bool Moved(){
-			return this.inputManager.Moved ();	
-		}
+			void LateUpdate()
+			{		
+				try{
+					//ドラッグ入力でカメラのアングルを更新
+					controller.MoveAngle ();
+				}catch(ArgumentOutOfRangeException e){
+					Debug.Log("SaveErrorLog : " + e);
+					TextReadWriteManager write = new TextReadWriteManager();
+					write.WriteTextFile(Application.dataPath + "/" + "ErrorLog_Cradle.txt", e.ToString());
+				}
 
-		public bool NotNullLookTarget(){
-			if (lookTarget != null)
-								return true;
-			return false;
-		}
+				//カメラの位置と回転を更新
+				controller.CameraPosUpdate ();
+			}
 
-		public void LookAtTrans(){
-			this.transform.LookAt(controller.GetLookPosition());
-		}
+			public void FindInputComponent(){
+				this.inputManager = FindObjectOfType<InputManager> ();
+			}
 
-		//スライド時のカーソル移動量
-		public void Delta(){
-			controller.delta = inputManager.GetDeltaPosition();
-		}
+			public bool Moved(){
+				return this.inputManager.Moved ();	
+			}
 
-		public void Look(){
-			controller.lookPosition = lookTarget.position + controller.GetOffSet();
-		}
+			public bool NotNullLookTarget(){
+				if (lookTarget != null)
+									return true;
+				return false;
+			}
 
-		//注視対象の位置にオフセットを加算した位置へ移動させる
-		public void SetPosition(){
-			this.transform.position = controller.GetLookPosition() + controller.GetRelativePos();
-		}
+			public void LookAtTrans(){
+				this.transform.LookAt(controller.GetLookPosition());
+			}
 
-		public void SetHitInfo(Vector3 hitInfo){
-			this.transform.position = hitInfo;	
-		}
+			//スライド時のカーソル移動量
+			public void Delta(){
+				controller.delta = inputManager.GetDeltaPosition();
+			}
 
-		//障害物を避ける
-		public void AvoidObstacle(){
-			RaycastHit hitInfo;
-			if (Physics.Linecast (controller.GetLookPosition(), transform.position, out hitInfo, 1 << LayerMask.NameToLayer ("Ground")))
-				SetHitInfo (hitInfo.point);
-		}
+			public void Look(){
+				controller.lookPosition = lookTarget.position + controller.GetOffSet();
+			}
 
-	}
+			//注視対象の位置にオフセットを加算した位置へ移動させる
+			public void SetPosition(){
+				this.transform.position = controller.GetLookPosition() + controller.GetRelativePos();
+			}
+
+			public void SetHitInfo(Vector3 hitInfo){
+				this.transform.position = hitInfo;	
+			}
+
+			//障害物を避ける
+			public void AvoidObstacle(){
+				RaycastHit hitInfo;
+				if (Physics.Linecast (controller.GetLookPosition(), transform.position, out hitInfo, 1 << LayerMask.NameToLayer ("Ground")))
+					SetHitInfo (hitInfo.point);
+			}
+
+		}
 }

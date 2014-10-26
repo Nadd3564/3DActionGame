@@ -2,26 +2,25 @@
 using System.Collections;
 
 namespace Cradle{
-public class ContinueBGM : MonoBehaviour {
+	public class ContinueBGM : MonoBehaviour {
 
-		private static ContinueBGM instance = null;
+			private static ContinueBGM instance = null;
 
-		public static ContinueBGM Instance {
-			get { return instance; }
-		}
-
-		void Awake() {
-
-			if (instance != null && instance != this) {
-				Destroy(this.gameObject);
-				return;
-			} else {
-				instance = this;
+			public static ContinueBGM Instance {
+				get { return instance; }
 			}
-			DontDestroyOnLoad(this.gameObject);
-		}
 
-	
-	}
+			void Awake() {
+
+				if (instance != null && instance != this) {
+					Destroy(this.gameObject);
+					return;
+				} else {
+					instance = this;
+				}
+				DontDestroyOnLoad(this.gameObject);
+			}
+
+		}
 }
  

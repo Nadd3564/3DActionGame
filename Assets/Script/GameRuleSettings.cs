@@ -2,25 +2,28 @@
 using System.Collections;
 using Cradle;
 using Cradle.FM;
+using Cradle.DesignPattern;
 
 namespace Cradle{
-public class GameRuleSettings : MonoBehaviour, IRuleController {
+	public class GameRuleSettings : MonoBehaviour, IRuleController {
 			public AudioClip clearSeClip;
 			AudioSource clearSeAudio;
 			public GameRuleSettingsController controller;
-			
+			private SceneManager manager;
 			
 			public void OnEnable() {
 				controller.SetRuleController (this);
 			}
 
+			//BGMゲームオブジェクト破棄
 			void Awake(){
 				Destroy (GameObject.Find("BGM"));	
 			}
 
-			//前SceneのGuiを破棄
+
 			void OnGUI()
 			{
+				//前SceneのGuiを破棄
 				string controlName = gameObject.GetHashCode ().ToString ();
 				GUI.SetNextControlName ("MyPassField");
 				Rect bounds = new Rect (0, 0, 0, 0);
@@ -42,6 +45,7 @@ public class GameRuleSettings : MonoBehaviour, IRuleController {
 				controller.ReturnTitle ();
 			}
 
+
 			public void GameOver(){
 				controller.SetGameOver (true);
 				Debug.Log ("GameOver");
@@ -55,6 +59,11 @@ public class GameRuleSettings : MonoBehaviour, IRuleController {
 
 			public void FindAudioComponent(){
 				this.clearSeAudio = gameObject.AddComponent<AudioSource>();
+			}
+
+			public void FindSceneComponent(){
+				this.manager = FindObjectOfType <SceneManager> ();
+				manager.SwitchState (new TitleState(manager));
 			}
 
 			public void DisableLoopSE(){

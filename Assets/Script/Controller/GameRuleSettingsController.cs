@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Cradle.DesignPattern;
 
 namespace Cradle
 {
@@ -12,6 +13,8 @@ namespace Cradle
 		public float sceneChangeTime = 10.0f;
 		public bool gameOver = false;
 		public bool gameClear = false;
+
+		private SceneManager manager;
 
 		private IRuleController ruleController;		
 		
@@ -78,8 +81,10 @@ namespace Cradle
 			if(GameFlgs()){
 				//シーン切り替えまでのカウント開始
 				SetCountSceneChangeTime(Time.deltaTime);
+				TimeRemaining();
 				if(TimeRemaining()){
 					SwitchScene();
+					ruleController.FindSceneComponent();
 				}
 			}
 			return true;
