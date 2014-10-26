@@ -2,22 +2,21 @@
 using System;
 using System.Collections;
 using Cradle;
-using Cradle.DesignPattern;
+//using Cradle.DesignPattern;
 
 
 namespace Cradle{
-public class LogInSceneCtrl : AccountManager {
+public class LogInSceneCtrl /*: AccountManager */{
 		bool flg = false;
 	    // タイトル画面テクスチャ
 	    public Texture2D bgTexture;
 		public string ID = "";
 		public string passwordToEdit = "";
-		MyUserBook me;
 		private GUIStyle color;
 
 
 		void Main(){
-			me = new MyUserBook ();
+
 		}
 
 
@@ -67,13 +66,13 @@ public class LogInSceneCtrl : AccountManager {
 			if (Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.Return && ID != "") {
 					GUI.FocusControl ("MyPassField");
 						
-					me.Add("Hello");
-					Debug.Log ("Success : " + me);
+	
+					Debug.Log ("Success : ");
 			}
 
 			//Enterを押すと入力パスワードを登録
 			if (Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.Return && ID != "" && passwordToEdit != "") {
-					me.PassRegister(ID);
+
 					Debug.Log("Passregi");
 					this.flg = true;
 			}

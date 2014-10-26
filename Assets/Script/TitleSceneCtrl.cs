@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Cradle;
-using Cradle.DesignPattern;
+//using Cradle.DesignPattern;
 
 
 namespace Cradle{

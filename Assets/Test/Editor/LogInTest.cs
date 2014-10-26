@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using NSubstitute;
-using Cradle.DesignPattern;
+
 
 namespace Cradle.Test
 {
