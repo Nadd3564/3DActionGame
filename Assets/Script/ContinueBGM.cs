@@ -12,14 +12,36 @@ namespace Cradle{
 
 			void Awake() {
 
-				if (instance != null && instance != this) {
+			if (DestroyBGM()) {
 					Destroy(this.gameObject);
 					return;
 				} else {
-					instance = this;
+					SetBGM();
 				}
 				DontDestroyOnLoad(this.gameObject);
 			}
+
+		void SetBGM(){
+			instance = this;	
+		}
+
+		public bool DestroyBGM(){
+			if(IsNotNullBGM() && IsNotBGM())	
+				return true;
+			return false;
+		}
+
+		public bool IsNotNullBGM(){
+			if(instance != null)
+				return true;
+			return false;
+		}
+
+		public bool IsNotBGM(){
+			if(instance != this)
+				return true;
+			return false;
+		}
 
 		}
 }
