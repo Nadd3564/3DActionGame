@@ -143,11 +143,11 @@ namespace Cradle.DesignPattern {
 
 		//ゲーム終了(Exitボタンを押す、または、Escapeを押す)
 		public void GameQuit(){
-			if (IsButtonOrReturn())
+			if (IsButtonOrEscape())
 				Application.Quit();
 		}
 
-		public bool IsButtonOrReturn(){
+		public bool IsButtonOrEscape(){
 			if (GUI.Button (new Rect (427, 360, 100, 20), "Exit", buttonStyle) || Input.GetKeyDown(KeyCode.Escape))
 				return true;
 			return false;
