@@ -33,7 +33,11 @@ namespace Cradle.DesignPattern{
 
 		void OnGUI()
 		{
+			//描画状態更新
 			activeState.Render();
+
+			//タイトル画面gui破棄
+			DestroyTitleGui ();
 		}
 		
 		void Start()
@@ -48,6 +52,9 @@ namespace Cradle.DesignPattern{
 
 			//認証ゲームオブジェクト破棄
 			DestroyAuthentication ();
+
+			//BGMゲームオブジェクト破棄
+			DestroyBGM ();
 		}
 
 
@@ -91,12 +98,29 @@ namespace Cradle.DesignPattern{
 				activeState.StateUpdate();
 		}
 
+		//タイトル画面gui破棄
+		public void DestroyTitleGui(){
+			if(Application.loadedLevelName != "LogInScene"){
+				string controlName = gameObject.GetHashCode ().ToString ();
+				GUI.SetNextControlName ("MyPassField");
+				Rect bounds = new Rect (0, 0, 0, 0);
+				GUI.TextField (bounds, "", 0);
+			}
+		}
+
 		//認証ゲームオブジェクト破棄
 		public void DestroyAuthentication(){
 		if (Application.loadedLevelName != "LogInScene")
 			Destroy (GameObject.Find("New Game Object"));	
 		}
-		
+
+		//BGMゲームオブジェクト破棄
+		public void DestroyBGM(){
+			if(Application.loadedLevelName == "PlayScene")
+				Destroy(GameObject.Find("BGM"));
+		}
+
+
 		public bool NullInstance(){
 			if(instance == null)
 				return true;

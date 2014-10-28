@@ -32,8 +32,10 @@ namespace Cradle.DesignPattern{
 
 			public string Authenticate (string suppliedId, string suppliedPass) {
 				this.id = suppliedId;
+				//テスト中のため、ログを表示
 				Debug.Log ("ID : " + id);
 				this.password = suppliedPass;
+				//テスト中のため、ログを表示
 				Debug.Log ("Pass : " + password);
 				if (this.id != id)
 					return "AuthenticateProxy: can not access";
