@@ -12,7 +12,8 @@ namespace Cradle.DesignPattern {
 			Time.timeScale = 0;
 			Debug.Log("change");
 		}
-		
+
+
 		public void StateUpdate() {
 			if(Input.GetKeyUp(KeyCode.Return)) { 
 				Application.LoadLevel("LogInScene");

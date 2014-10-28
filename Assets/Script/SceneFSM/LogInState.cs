@@ -1,26 +1,36 @@
 ﻿using UnityEngine;
+using System;
 using Cradle.DesignPattern;
+using Cradle.Server;
 
 namespace Cradle.DesignPattern {
-	public class LogInState : ISceneState { 
+	public class LogInState : MatterAccessor, ISceneState{ 
 
-		private	bool flg = false;
+		//現在不要のため、入力情報登録機能を停止
+		//private	bool flg = false;
 		private string id = "";
 		private string passwordToEdit = "";
+		private string success = "AuthenticateProxy: Success Authenticated";
 		private GUIStyle color;
 		private GUIStyle buttonStyle;
-		
+
+		private Authentication aut;
+
 		private SceneManager manager;
-		
+
 		public LogInState(SceneManager stateManager) { 
 			//初期化
 			manager = stateManager;
+
 		}
-		
+
+
 		public void StateUpdate() { 
+			//認証ゲームオブジェクト生成
+			AuthenticateObject ();
 		}
 		
-		public void Render() { 
+		public void Render() {
 			// スタイルを準備.
 			SetButtonStyle ();
 			SetTextStyle ();
@@ -48,8 +58,9 @@ namespace Cradle.DesignPattern {
 			FocusPass ();
 			
 			//Enterを押すと入力パスワードを登録
-			IsLogIn ();
+			//IsLogIn ();
 		}
+
 
 
 		public string GetID(){
@@ -60,13 +71,24 @@ namespace Cradle.DesignPattern {
 			return this.passwordToEdit;	
 		}
 
-		public bool IsFlg(){
+		public string GetSuccess(){
+			return this.success;	
+		}
+
+		//認証ゲームオブジェクト生成
+		public void AuthenticateObject(){
+		if(aut == null)
+			aut = (new GameObject()).AddComponent<Authentication>();
+		}
+		
+		//現在不要のため、入力情報登録機能を停止
+		/*public bool IsFlg(){
 			return this.flg;	
 		}
 		
 		public void SetFlg(){
 			this.flg = true;
-		}
+		}*/
 
 		// スタイルを準備.
 		void SetButtonStyle(){
@@ -87,16 +109,45 @@ namespace Cradle.DesignPattern {
 				new Vector3(Screen.width / 854.0f, Screen.height / 480.0f, 1.0f));
 		}
 
+
 		//入力ユーザ情報が一致する場合、次のシーンへ
 		public void LogInAndNextScene(string id){
+			//EnterかLogInボタンを押した際にidをチェック
 			if (IsCheckInputId(id)) {
+				//フォーカスがパスワード項目か、と、id、パスワードチェック
 				if (IsCheckFocusWithPass()) {
+					//認証プロキシとサーバーのレスポンスをチェック
+					if(IsProxyWithResponse()){
 					Application.LoadLevel ("PlayScene");
 					manager.SwitchState(new PlayState(manager));
+					}
 				}
 			}
 		}
 
+
+		//認証プロキシとサーバーのレスポンスをチェック
+		public bool IsProxyWithResponse(){
+			if(AuthenticateProxy() && aut.IsProxyFlg())
+				return true;
+			return false;
+		}
+
+		//認証プロクシ実行
+		public bool AuthenticateProxy(){
+			AuthenticateProxy aProxy = new AuthenticateProxy( );
+			Debug.Log (aProxy.Request ());
+
+			if(GetSuccess() != (aProxy as AuthenticateProxy).Authenticate(id, passwordToEdit))
+				return false;
+
+			Debug.Log (aProxy.Request());
+			aut.SetId (id);
+			aut.SetPass(passwordToEdit);
+			return true;
+		}
+
+	
 		public bool IsCheckFocusWithPass(){
 			if(IsCheckFocus() && IsCheckPassWithFlg())	
 				return true;
@@ -104,7 +155,9 @@ namespace Cradle.DesignPattern {
 		}
 
 		public bool IsCheckPassWithFlg(){
-			if(CheckPass (passwordToEdit) && IsFlg())
+			//現在不要のため、入力情報登録機能を停止
+			//if(CheckPass (passwordToEdit) && IsFlg())
+			if(CheckPass (passwordToEdit))
 				return true;
 			return false;
 		}
@@ -116,10 +169,11 @@ namespace Cradle.DesignPattern {
 		}
 
 		public bool IsCheckInputId(string id){
-			if(IsKeyDownWithReturn() && CheckID(id) || IsLogInButton())	
+			if(IsKeyDownWithReturn() && CheckID(id) || IsLogInButton())
 				return true;
 			return false;
 		}
+
 
 		//LogInボタン表示
 		public bool IsLogInButton(){
@@ -189,14 +243,14 @@ namespace Cradle.DesignPattern {
 			}
 		}
 
-		//Enterを押すと入力パスワードを登録
-		public void IsLogIn(){
+		//Enterを押すと入力パスワードを登録*現在不要のため、入力情報登録機能を停止
+		/*public void IsLogIn(){
 			if (IsCheckInput()) {
 				//テストログ
 				Debug.Log("Register");
 				SetFlg();
 			}
-		}
+		}*/
 
 		public bool IsCheckInput(){
 			if(IsKeyUpReturn() && IsNotEmptyIdPass())
@@ -242,7 +296,7 @@ namespace Cradle.DesignPattern {
 			return false;
 		}
 		
-		//ユーザ認証
+		//ID認証
 		private bool CheckID(string ID){
 			if (ID != this.id) {
 				//テストログ
@@ -257,7 +311,8 @@ namespace Cradle.DesignPattern {
 			return true;
 			
 		}
-		
+
+		//パスワード認証
 		private bool CheckPass(string Password){
 			if (Password != passwordToEdit) {
 				//テストログ

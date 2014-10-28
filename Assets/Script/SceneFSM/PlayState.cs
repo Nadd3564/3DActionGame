@@ -11,7 +11,8 @@ namespace Cradle.DesignPattern {
 			//初期化
 			manager = stateManager;
 		}
-		
+
+
 		public void StateUpdate() {
 			}
 		
