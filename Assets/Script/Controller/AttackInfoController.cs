@@ -1,27 +1,28 @@
 ﻿using System;
 using UnityEngine;
+using Cradle;
 
 namespace Cradle
 {
 	[Serializable]
 	public class AttackInfoController
 	{
-		public int attackPower;
+		public float attackPower;
 		
 		private IInfoController iInfoController;
 		
 		public AttackInfoController (){
 		}
 
-		public int getAttackPower(){
+		public float getAttackPower(){
 			return this.attackPower;
 		}
 		
-		public int setAttackPower(int atk){
+		public float setAttackPower(float atk){
 			return this.attackPower = atk ;
 		}
 		
-		public int setAttackBoostPower(int atk){
+		public float setAttackBoostPower(float atk){
 			return this.attackPower += atk ;
 		}
 

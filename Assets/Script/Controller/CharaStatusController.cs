@@ -1,14 +1,18 @@
 ﻿using System;
 using UnityEngine;
+using Cradle;
 
 namespace Cradle
 {
 	[Serializable]
 	public class CharaStatusController
 	{
-		public int HP = 100;
+		/*public int HP = 100;
 		public int MaxHP = 100;
-		public int Power = 10;
+		public int Power = 10;*/
+		public float HP = 100.0f;
+		public float MaxHP = 100.0f;
+		public float Power = 10.0f;
 		public bool attacking = false;
 		public bool died = false;
 		public bool powerBoost = false;
@@ -21,15 +25,15 @@ namespace Cradle
 		}
 
 
-		public int GetHP(){
+		public float GetHP(){
 			return this.HP;	
 		}
 
-		public int GetMaxHP(){
+		public float GetMaxHP(){
 			return this.MaxHP;
 		}
 
-		public int GetPower(){
+		public float GetPower(){
 			return this.Power;	
 		}
 
@@ -53,15 +57,15 @@ namespace Cradle
 			return this.powerBoostTime;	
 		}
 
-		public int SetHP(int hp){
+		public float SetHP(float hp){
 			return this.HP = hp;	
 		}
 
-		public int HealHP(int hp){
+		public float HealHP(float hp){
 			return this.HP += hp;	
 		}
 
-		public int DamageHP(int hp){
+		public float DamageHP(float hp){
 			return this.HP -= hp;	
 		}
 		

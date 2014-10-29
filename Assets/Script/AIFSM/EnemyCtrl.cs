@@ -183,7 +183,7 @@ namespace Cradle.FM{
 				}
 			}
 
-			public int GetHP(){
+			public float GetHP(){
 				return status.GetHP ();
 			}
 

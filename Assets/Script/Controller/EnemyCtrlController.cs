@@ -118,7 +118,7 @@ namespace Cradle.FM
 			return false;
 		}
 
-		public bool LessThanHP(int i){
+		public bool LessThanHP(float i){
 		if (i <= 0)
 				return true;
 			return false;

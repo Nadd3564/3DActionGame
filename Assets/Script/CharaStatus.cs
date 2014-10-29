@@ -5,7 +5,6 @@ using Cradle;
 using Cradle.Resource;
 
 namespace Cradle {
-	
 	public class CharaStatus : MonoBehaviour, IEffectController {
 		public GameObject lastAttackTarget = null;
 		private ParticleSystem powerUpEffect;
@@ -56,23 +55,23 @@ namespace Cradle {
 			this.powerUpEffect.Stop();
 		}
 		
-		public int GetPower() {
+		public float GetPower() {
 			return controller.GetPower ();
 		}
 
-		public int GetHP(){
+		public float GetHP(){
 			return controller.GetHP ();	
 		}
 
-		public int SetHP(int hp){
+		public float SetHP(float hp){
 			return controller.SetHP (hp);	
 		}
 
-		public int HealHP(int hp){
+		public float HealHP(float hp){
 			return controller.HealHP (hp);
 		}
 
-		public int DamageHP(int hp){
+		public float DamageHP(float hp){
 			return controller.DamageHP (hp);
 		}
 

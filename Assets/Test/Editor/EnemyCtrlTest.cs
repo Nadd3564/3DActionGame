@@ -213,9 +213,9 @@ namespace Cradle.Test
 
 		[Test]
 		[Category ("LessThanHP Test")]
-		public void LessThanHPTest([Values(0)]int i) 
+		public void LessThanHPTest([Values(0.0f)]float f) 
 		{
-			Assert.True (eController.LessThanHP(0));		
+			Assert.True (eController.LessThanHP(0.0f));		
 		}
 
 		[Test]
@@ -308,9 +308,9 @@ namespace Cradle.Test
 
 		[Test]
 		[Category ("IsNotLessThanHP Test")]
-		public void IsNotLessThanHPTest([Values(1, 10, 100)]int i) 
+		public void IsNotLessThanHPTest([Values(1.0f, 10.0f, 100.0f)]float f) 
 		{
-			Assert.False (eController.LessThanHP(i));		
+			Assert.False (eController.LessThanHP(f));		
 		}
 
 		[Test]
