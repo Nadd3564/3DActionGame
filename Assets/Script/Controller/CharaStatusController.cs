@@ -7,9 +7,6 @@ namespace Cradle
 	[Serializable]
 	public class CharaStatusController
 	{
-		/*public int HP = 100;
-		public int MaxHP = 100;
-		public int Power = 10;*/
 		public float HP = 100.0f;
 		public float MaxHP = 100.0f;
 		public float Power = 10.0f;
