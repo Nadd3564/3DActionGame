@@ -133,7 +133,7 @@ namespace Cradle.DesignPattern {
 			return false;
 		}
 
-		//認証プロクシ実行
+		//認証プロキシ実行
 		public bool AuthenticateProxy(){
 			AuthenticateProxy aProxy = new AuthenticateProxy( );
 			Debug.Log (aProxy.Request ());
