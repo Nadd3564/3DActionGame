@@ -15529,7 +15529,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 798975752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -.626070023, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 74555760}
@@ -22169,12 +22169,12 @@ GameObject:
   - 4: {fileID: 1027920805}
   - 114: {fileID: 1027920806}
   m_Layer: 0
-  m_Name: Test_PlayerInspector(PublicField)
+  m_Name: Test_PlayerInspector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1027920805
 Transform:
   m_ObjectHideFlags: 2
