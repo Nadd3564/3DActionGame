@@ -263,5 +263,12 @@ namespace Cradle.FM{
 				return false;
 			}
 
+			//For Tests
+			public bool IsTestScene(){
+			if(Application.loadedLevelName != "TestScene")
+				return true;
+			return false;
+			}
+
 		}
 }
