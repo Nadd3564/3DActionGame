@@ -14,6 +14,9 @@ namespace Cradle{
 		public GameObject hitEffect;
 		TargetCursor targetCursor;
 
+		//For Tests
+		public bool testMove = false;
+
 
 		//状態
 		enum State{
@@ -40,6 +43,13 @@ namespace Cradle{
 			deathSeAudio = gameObject.AddComponent<AudioSource>();
 			deathSeAudio.loop = false;
 			deathSeAudio.clip = deathSeClip;
+		}
+
+
+		//For Tests
+		void OnTriggerEnter(Collider other){
+			if(other.name == "CubeTriggerSuccess")
+			IntegrationTest.Pass(this.gameObject);
 		}
 
 		void Update () {
@@ -80,6 +90,10 @@ namespace Cradle{
 		}
 		void Walking()
 		{
+			//For Tests
+			if(testMove)
+				SendMessage("SetDestination", new Vector3(0, 0, 0));
+
 			if (inputManager.Clicked()) {
 				//RayCastで対象物を調べる(地面かエネミーか）
 				Ray ray = Camera.main.ScreenPointToRay(inputManager.GetCursorPosition());

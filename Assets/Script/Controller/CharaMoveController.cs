@@ -21,7 +21,7 @@ namespace Cradle
 		private Vector3 currentVelocity;
 		private Vector3 snapGround;
 		private Quaternion characterTargetRotation;
-		
+
 		private IMoveController iMoveController;
 		
 		public CharaMoveController (){
