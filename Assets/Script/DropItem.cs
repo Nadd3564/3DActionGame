@@ -56,8 +56,11 @@ public class DropItem : MonoBehaviour, IDropItemController {
 		}
 
 		public void PopItem(){
+			//For Tests
+			if(Application.loadedLevelName != "TestScene"){
 			this.velocity = Random.insideUnitSphere * 2.0f + Vector3.up * 8.0f;
 			this.rigidbody.velocity = velocity;
+			}
 		}
 
 	}
