@@ -14,8 +14,12 @@ namespace Cradle
 		};
 
 		public ItemKind kind;
+		//For Tests
+		public bool GroundedItem = false;
+
 		private IDropItemController iDropItemController;
-		
+
+
 		public DropItemController (){
 		}
 
@@ -30,6 +34,11 @@ namespace Cradle
 		public ItemKind itemKind(){
 			return ItemKind.Heal; 
 				return ItemKind.Attack;	
+		}
+
+		//For Tests
+		public bool IsGroundedItem(){
+			return this.GroundedItem;	
 		}
 
 		public bool IsPlayer(string tag) {

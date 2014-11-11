@@ -27,7 +27,9 @@ public class DropItem : MonoBehaviour, IDropItemController {
 				//取得したらアイテムを消す
 				Destroy (gameObject);
 				PlaySE();
-			} 
+			} else if(other.name == "CubeTriggerSuccess") //For Tests
+				IntegrationTest.Pass(this.gameObject);
+
 			//地面か判定
 			controller.CheckTerrain (other.tag, false);
 		}
@@ -57,7 +59,7 @@ public class DropItem : MonoBehaviour, IDropItemController {
 
 		public void PopItem(){
 			//For Tests
-			if(Application.loadedLevelName != "TestScene"){
+			if(!controller.IsGroundedItem()){
 			this.velocity = Random.insideUnitSphere * 2.0f + Vector3.up * 8.0f;
 			this.rigidbody.velocity = velocity;
 			}
