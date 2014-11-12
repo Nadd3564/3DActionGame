@@ -57,6 +57,8 @@ namespace Cradle.FM{
 			protected override void StateUpdate ()
 			{
 				setUpElapsedTime (Time.deltaTime);
+				//For Tests
+				eController.IsCheckCreateEffect ();
 			}
 			
 			protected override void StateFixedUpdate()
@@ -273,6 +275,13 @@ namespace Cradle.FM{
 			{
 				status.SetAttacking (false);
 				status.setDied(false);
+			}
+
+			//For IntegrationTests
+			public bool IsNotNullEffect(){
+				if(this.effect != null)
+				return true;
+				return false;
 			}
 
 	}

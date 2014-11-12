@@ -202,6 +202,20 @@ namespace Cradle.FM
 		public void SetEnemyController(IEnemyController enemyController) {
 			this.enemyController = enemyController;
 		}
-		
+
+
+		//For Tests
+		public void IsCheckCreateEffect(){
+			if(IsCheckScene() && enemyController.IsNotNullEffect())
+				IntegrationTest.Pass();
+		}
+
+		//For Tests
+		public bool IsCheckScene(){
+			if(Application.loadedLevelName == "TestScene")
+				return true;
+			return false;
+		}
+
 	}
 }
