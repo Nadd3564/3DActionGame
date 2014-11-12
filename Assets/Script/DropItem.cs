@@ -39,8 +39,7 @@ public class DropItem : MonoBehaviour, IDropItemController {
 			FindTerrainColliderComponent ();
 
 			//For Tests
-			if(Application.loadedLevelName == "TestScene" && this != null && !controller.PopItem)
-				IntegrationTest.Pass(this.gameObject);
+			CheckInsitantiateItem ();
 		}
 
 		public void FindTerrainColliderComponent(){
@@ -67,6 +66,12 @@ public class DropItem : MonoBehaviour, IDropItemController {
 			this.velocity = Random.insideUnitSphere * 2.0f + Vector3.up * 8.0f;
 			this.rigidbody.velocity = velocity;
 			}
+		}
+
+		//For Tests
+		void CheckInsitantiateItem(){
+			if(Application.loadedLevelName == "TestScene" && this != null && !controller.PopItem)
+				IntegrationTest.Pass(this.gameObject);
 		}
 
 	}

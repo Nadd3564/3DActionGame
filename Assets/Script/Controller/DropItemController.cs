@@ -69,6 +69,8 @@ namespace Cradle
 				return true;
 			}
 
+
+
 		public void SetDropItemController(IDropItemController iDropItemController) {
 			this.iDropItemController = iDropItemController;
 		}
