@@ -70,6 +70,26 @@ namespace Cradle
 			}
 
 
+		//For Tests
+		public bool CheckInsitantiateItem(){
+			if(IsNotNullWithSceneName() && !IsPopItem())
+				return true;
+			return false;
+		}
+
+		//For Tests
+		public bool IsNotNullWithSceneName(){
+			if(IsTestScene() && iDropItemController.IsNotNull())
+				return true;
+			return false;
+		}
+
+		//For Tests
+		public bool IsTestScene(){
+			if(Application.loadedLevelName == "TestScene")
+				return true;
+			return false;
+		}
 
 		public void SetDropItemController(IDropItemController iDropItemController) {
 			this.iDropItemController = iDropItemController;

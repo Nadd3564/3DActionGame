@@ -27,9 +27,7 @@ public class DropItem : MonoBehaviour, IDropItemController {
 				//取得したらアイテムを消す
 				Destroy (gameObject);
 				PlaySE();
-			} else if(other.name == "CubeTriggerSuccess") //For Tests
-				IntegrationTest.Pass(this.gameObject);
-
+			} 
 			//地面か判定
 			controller.CheckTerrain (other.tag, false);
 		}
@@ -39,7 +37,8 @@ public class DropItem : MonoBehaviour, IDropItemController {
 			FindTerrainColliderComponent ();
 
 			//For Tests
-			CheckInsitantiateItem ();
+			if (controller.CheckInsitantiateItem ())
+				IntegrationTest.Pass(this.gameObject);
 		}
 
 		public void FindTerrainColliderComponent(){
@@ -69,9 +68,10 @@ public class DropItem : MonoBehaviour, IDropItemController {
 		}
 
 		//For Tests
-		void CheckInsitantiateItem(){
-			if(Application.loadedLevelName == "TestScene" && this != null && !controller.PopItem)
-				IntegrationTest.Pass(this.gameObject);
+		public bool IsNotNull(){
+			if(this != null)
+				return true;
+			return false;
 		}
 
 	}
