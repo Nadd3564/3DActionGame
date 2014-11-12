@@ -16,6 +16,7 @@ namespace Cradle
 		public ItemKind kind;
 		//For Tests
 		public bool GroundedItem = false;
+		public bool PopItem = false;
 
 		private IDropItemController iDropItemController;
 
@@ -39,6 +40,10 @@ namespace Cradle
 		//For Tests
 		public bool IsGroundedItem(){
 			return this.GroundedItem;	
+		}
+
+		public bool IsPopItem(){
+			return this.PopItem;	
 		}
 
 		public bool IsPlayer(string tag) {

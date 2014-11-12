@@ -37,6 +37,10 @@ public class DropItem : MonoBehaviour, IDropItemController {
 		void Start () {
 			PopItem ();
 			FindTerrainColliderComponent ();
+
+			//For Tests
+			if(Application.loadedLevelName == "TestScene" && this != null && !controller.PopItem)
+				IntegrationTest.Pass(this.gameObject);
 		}
 
 		public void FindTerrainColliderComponent(){
