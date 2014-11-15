@@ -58,7 +58,8 @@ namespace Cradle.FM{
 			{
 				setUpElapsedTime (Time.deltaTime);
 				//For Tests
-				eController.IsCheckCreateEffect ();
+				eController.InstantiateTest (eController.IsdamageEffectTest(), IsNotNullEffect());
+				eController.InstantiateTest (eController.IsDeathSeTest(), IsNotNullDeathSeClip());
 			}
 			
 			protected override void StateFixedUpdate()
@@ -277,10 +278,17 @@ namespace Cradle.FM{
 				status.setDied(false);
 			}
 
-			//For IntegrationTests
+			//For Tests
 			public bool IsNotNullEffect(){
 				if(this.effect != null)
 				return true;
+				return false;
+			}
+
+			//For Tests
+			public bool IsNotNullDeathSeClip(){
+				if(this.deathSeClip != null)
+					return true;
 				return false;
 			}
 

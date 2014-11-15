@@ -15,6 +15,9 @@ namespace Cradle.FM
 		public float walkRange = 5.0f; //移動範囲
 		public float DestroyTime = 5.0f;	//死体消滅時間
 		private Vector3 destinationPosition;
+		//For Tests
+		public bool DamageEffectTest = false;
+		public bool DeathSeTest = false;
 
 		private IEnemyController enemyController;
 		
@@ -205,14 +208,25 @@ namespace Cradle.FM
 
 
 		//For Tests
-		public void IsCheckCreateEffect(){
-			if(IsCheckScene() && enemyController.IsNotNullEffect())
-				IntegrationTest.Pass();
+		public bool IsdamageEffectTest(){
+			return this.DamageEffectTest;	
 		}
 
 		//For Tests
-		public bool IsCheckScene(){
-			if(Application.loadedLevelName == "TestScene")
+		public bool IsDeathSeTest(){
+			return this.DeathSeTest;	
+		}
+
+
+		//For Tests
+		public void InstantiateTest(bool flg, bool instantiate){
+			if(IsCheckScene(flg) && instantiate)
+				IntegrationTest.Pass();
+		}
+		
+		//For Tests
+		public bool IsCheckScene(bool flg){
+			if(flg && Application.loadedLevelName == "TestScene")
 				return true;
 			return false;
 		}

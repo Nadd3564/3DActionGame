@@ -31,6 +31,5 @@ namespace Cradle.FM
 		void DeadLog();
 		void SetHP();
 		float GetHP();
-		bool IsNotNullEffect();
 	}
 }
