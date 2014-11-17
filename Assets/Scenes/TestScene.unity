@@ -5358,7 +5358,7 @@ GameObject:
   - 114: {fileID: 247095413}
   - 114: {fileID: 247095412}
   m_Layer: 0
-  m_Name: Test_WolfNotNullDeathSE
+  m_Name: Test_WolfDownWithDeathSE
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14121,7 +14121,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100084, guid: bbc80d7109588944a8569f79a96e9967, type: 2}
       propertyPath: m_Name
-      value: Test_WolfNotNullDeathSE
+      value: Test_WolfDownWithDeathSE
       objectReference: {fileID: 0}
     - target: {fileID: 400086, guid: bbc80d7109588944a8569f79a96e9967, type: 2}
       propertyPath: m_RootOrder
@@ -22280,7 +22280,7 @@ Transform:
   m_LocalScale: {x: .125, y: .125, z: .125}
   m_Children: []
   m_Father: {fileID: 1146088779}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!135 &735834450
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -33513,7 +33513,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1146088779}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!137 &1055757614
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -37145,8 +37145,8 @@ Transform:
   m_Children:
   - {fileID: 2131919426}
   - {fileID: 81300409}
-  - {fileID: 735834449}
   - {fileID: 1055757613}
+  - {fileID: 735834449}
   m_Father: {fileID: 0}
   m_RootOrder: 9
 --- !u!114 &1146088780

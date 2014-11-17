@@ -59,7 +59,6 @@ namespace Cradle.FM{
 				setUpElapsedTime (Time.deltaTime);
 				//For Tests
 				eController.InstantiateTest (eController.IsdamageEffectTest(), IsNotNullEffect());
-				eController.InstantiateTest (eController.IsDeathSeTest(), IsNotNullDeathSeClip());
 			}
 			
 			protected override void StateFixedUpdate()
@@ -263,6 +262,7 @@ namespace Cradle.FM{
 
 			public void PlayDeathSE(){
 				AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
+				eController.InstantiateTest (eController.IsDeathSeTest(), IsNotNullDeathSeClip());
 			}
 
 			public string SetTag(){
