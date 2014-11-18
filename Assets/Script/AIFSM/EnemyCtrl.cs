@@ -262,6 +262,7 @@ namespace Cradle.FM{
 
 			public void PlayDeathSE(){
 				AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
+				//For Tests
 				eController.InstantiateTest (eController.IsDeathSeTest(), IsNotNullDeathSeClip());
 			}
 
