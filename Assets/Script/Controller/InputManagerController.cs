@@ -10,7 +10,7 @@ namespace Cradle
 		private Vector2 prevPosition;
 		private Vector2 delta = Vector2.zero;
 		private bool moved = false;
-		
+
 		private IInputController inputController;
 		
 		public InputManagerController (){

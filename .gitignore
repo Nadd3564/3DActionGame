@@ -28,4 +28,5 @@ OtherImports/
 UniRx/
 UnUsedSoundAssets/
 Assets/ErrorLog_Cradle.txt
-ErrorLog_Cradle.txt
+/ErrorLog_Cradle.txt
+Test/UnityTestTools/Examples/IntegrationTestsFrameworkExamples/AngryBotsTests/

@@ -57,6 +57,8 @@ namespace Cradle.FM{
 			protected override void StateUpdate ()
 			{
 				setUpElapsedTime (Time.deltaTime);
+				//For Tests
+				eController.InstantiateTest (eController.IsdamageEffectTest(), IsNotNullEffect());
 			}
 			
 			protected override void StateFixedUpdate()
@@ -183,7 +185,7 @@ namespace Cradle.FM{
 				}
 			}
 
-			public int GetHP(){
+			public float GetHP(){
 				return status.GetHP ();
 			}
 
@@ -260,6 +262,8 @@ namespace Cradle.FM{
 
 			public void PlayDeathSE(){
 				AudioSource.PlayClipAtPoint (deathSeClip, transform.position);
+				//For Tests
+				eController.InstantiateTest (eController.IsDeathSeTest(), IsNotNullDeathSeClip());
 			}
 
 			public string SetTag(){
@@ -273,6 +277,20 @@ namespace Cradle.FM{
 			{
 				status.SetAttacking (false);
 				status.setDied(false);
+			}
+
+			//For Tests
+			public bool IsNotNullEffect(){
+				if(this.effect != null)
+				return true;
+				return false;
+			}
+
+			//For Tests
+			public bool IsNotNullDeathSeClip(){
+				if(this.deathSeClip != null)
+					return true;
+				return false;
 			}
 
 	}

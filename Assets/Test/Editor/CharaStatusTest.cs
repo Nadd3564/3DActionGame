@@ -37,21 +37,21 @@ namespace Cradle.Test
 		[Category ("HP Type Test")]
 		public void HPTypeTest() 
 		{
-			Assert.That (status.GetHP(), Is.TypeOf(typeof(int)));		
+			Assert.That (status.GetHP(), Is.TypeOf(typeof(float)));		
 		}
 
 		[Test]
 		[Category ("MaxHP Type Test")]
 		public void MaxHPTypeTest() 
 		{
-			Assert.That (status.GetMaxHP(), Is.TypeOf(typeof(int)));		
+			Assert.That (status.GetMaxHP(), Is.TypeOf(typeof(float)));		
 		}
 
 		[Test]
 		[Category ("Power Type Test")]
 		public void PowerTypeTest() 
 		{
-			Assert.That (status.GetPower(), Is.TypeOf(typeof(int)));		
+			Assert.That (status.GetPower(), Is.TypeOf(typeof(float)));		
 		}
 
 		[Test]
@@ -161,24 +161,24 @@ namespace Cradle.Test
 		[Category ("HP Test")]
 		public void HPTest() 
 		{
-			int i = 100;
-			Assert.That (status.GetHP(), Is.EqualTo(i));		
+			float f = 100.0f;
+			Assert.That (status.GetHP(), Is.EqualTo(f));		
 		}
 
 		[Test]
 		[Category ("MaxHP Test")]
 		public void MaxHPTest() 
 		{
-			int i = 100;
-			Assert.That (status.GetMaxHP(), Is.EqualTo(i));		
+			float f = 100.0f;
+			Assert.That (status.GetMaxHP(), Is.EqualTo(f));		
 		}
 
 		[Test]
 		[Category ("Power Test")]
 		public void PowerTest() 
 		{
-			int i = 10;
-			Assert.That (status.GetPower(), Is.EqualTo(i));		
+			float f = 10.0f;
+			Assert.That (status.GetPower(), Is.EqualTo(f));		
 		}
 
 		[Test]
@@ -224,27 +224,27 @@ namespace Cradle.Test
 		[Category ("SetHP Test")]
 		public void SetHPTest() 
 		{
-			int i = 0;
-			status.SetHP (0);
-			Assert.That (status.GetHP(), Is.EqualTo(i));		
+			float f = 0.0f;
+			status.SetHP (0.0f);
+			Assert.That (status.GetHP(), Is.EqualTo(f));		
 		}
 
 		[Test]
 		[Category ("HealHP Test")]
 		public void HealHPTest() 
 		{
-			int i = 150;
-			status.HealHP (50);
-			Assert.That (status.GetHP(), Is.EqualTo(i));		
+			float f = 150.0f;
+			status.HealHP (50.0f);
+			Assert.That (status.GetHP(), Is.EqualTo(f));		
 		}
 
 		[Test]
 		[Category ("DamageHP Test")]
 		public void DamageHPTest() 
 		{
-			int i = 50;
-			status.DamageHP (50);
-			Assert.That (status.GetHP(), Is.EqualTo(i));		
+			float f = 50.0f;
+			status.DamageHP (50.0f);
+			Assert.That (status.GetHP(), Is.EqualTo(f));		
 		}
 
 		[Test]
@@ -309,7 +309,7 @@ namespace Cradle.Test
 		public void CalcHPTest () 
 		{
 			status.CalcHP ();
-			Assert.That (status.GetHP(), Is.EqualTo(100));		
+			Assert.That (status.GetHP(), Is.EqualTo(100.0f));		
 		}
 
 		[Test]
@@ -358,9 +358,9 @@ namespace Cradle.Test
 		[Category ("GetItem Case_Heal Test")]
 		public void GetItemCase_HealTest () 
 		{
-			int i = 100;
+			float f = 100.0f;
 			status.GetItem (DropItemController.ItemKind.Heal);
-			Assert.That (status.GetHP(), Is.EqualTo(i));		
+			Assert.That (status.GetHP(), Is.EqualTo(f));		
 		}
 
 
@@ -370,7 +370,7 @@ namespace Cradle.Test
 		[ExpectedException(typeof(ArgumentException))]
 		public void GetItemExceptionTest() 
 		{
-			status.SetHP (500);
+			status.SetHP (500.0f);
 			status.GetItem (DropItemController.ItemKind.Heal);
 		}
 

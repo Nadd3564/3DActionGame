@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964f5f0db2c95bb41aa3dc3beba1f06b, type: 3}
   m_Name: PlatformRunnerSettings
   m_EditorClassIdentifier: 
-  resultsPath: 
-  sendResultsOverNetwork: 1
+  resultsPath: C:\
+  sendResultsOverNetwork: 0
   port: 0

@@ -30,6 +30,6 @@ namespace Cradle.FM
 		void CanNotAttack();
 		void DeadLog();
 		void SetHP();
-		int GetHP();
+		float GetHP();
 	}
 }

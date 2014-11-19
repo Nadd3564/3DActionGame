@@ -49,6 +49,12 @@ namespace Cradle
 		public void SetGeneratorController(IGeneratorController gController) {
 			this.gController = gController;
 		}
+
+		//For Tests
+		public void GenerateTest(){
+			if(Application.loadedLevelName == "TestScene")
+				IntegrationTest.Pass();
+		}
 		
 	}
 }

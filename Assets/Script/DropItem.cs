@@ -35,6 +35,10 @@ public class DropItem : MonoBehaviour, IDropItemController {
 		void Start () {
 			PopItem ();
 			FindTerrainColliderComponent ();
+
+			//For Tests
+			if (controller.CheckInsitantiateItem ())
+				IntegrationTest.Pass(this.gameObject);
 		}
 
 		public void FindTerrainColliderComponent(){
@@ -56,8 +60,18 @@ public class DropItem : MonoBehaviour, IDropItemController {
 		}
 
 		public void PopItem(){
+			//For Tests
+			if(!controller.IsGroundedItem()){
 			this.velocity = Random.insideUnitSphere * 2.0f + Vector3.up * 8.0f;
 			this.rigidbody.velocity = velocity;
+			}
+		}
+
+		//For Tests
+		public bool IsNotNull(){
+			if(this != null)
+				return true;
+			return false;
 		}
 
 	}

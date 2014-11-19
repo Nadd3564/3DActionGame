@@ -14,8 +14,13 @@ namespace Cradle
 		};
 
 		public ItemKind kind;
+		//For Tests
+		public bool GroundedItem = false;
+		public bool PopItem = false;
+
 		private IDropItemController iDropItemController;
-		
+
+
 		public DropItemController (){
 		}
 
@@ -30,6 +35,15 @@ namespace Cradle
 		public ItemKind itemKind(){
 			return ItemKind.Heal; 
 				return ItemKind.Attack;	
+		}
+
+		//For Tests
+		public bool IsGroundedItem(){
+			return this.GroundedItem;	
+		}
+
+		public bool IsPopItem(){
+			return this.PopItem;	
 		}
 
 		public bool IsPlayer(string tag) {
@@ -54,6 +68,28 @@ namespace Cradle
 			}
 				return true;
 			}
+
+
+		//For Tests
+		public bool CheckInsitantiateItem(){
+			if(IsNotNullWithSceneName() && !IsPopItem())
+				return true;
+			return false;
+		}
+
+		//For Tests
+		public bool IsNotNullWithSceneName(){
+			if(IsTestScene() && iDropItemController.IsNotNull())
+				return true;
+			return false;
+		}
+
+		//For Tests
+		public bool IsTestScene(){
+			if(Application.loadedLevelName == "TestScene")
+				return true;
+			return false;
+		}
 
 		public void SetDropItemController(IDropItemController iDropItemController) {
 			this.iDropItemController = iDropItemController;

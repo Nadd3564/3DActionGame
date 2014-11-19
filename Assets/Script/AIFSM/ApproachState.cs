@@ -17,7 +17,7 @@ namespace Cradle.FM{
 		{
 			SetDest (player);
 			SetDist (Vector3.Distance (npc.position, destPos));
-
+		
 			if(LessThanCheckReach(dist, 2.0f))
 			{
 				Debug.Log("Switch to Attack state");
@@ -39,6 +39,7 @@ namespace Cradle.FM{
 			SetDest (player);
 
 			//ターゲット地点に回転
+			if(IsTestScene())
 			SetRot (npc, npc.position);
 
 			//目的地をプレイヤーに変更

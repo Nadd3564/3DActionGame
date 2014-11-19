@@ -28,7 +28,7 @@ namespace Cradle.Test
 		[Category ("attackPower Type Test")]
 		public void attackPowerTypeTest() 
 		{
-			Assert.That (aIController.getAttackPower(), Is.TypeOf(typeof(int)));		
+			Assert.That (aIController.getAttackPower(), Is.TypeOf(typeof(float)));		
 		}
 
 		//Null値テスト（オブジェクト）
@@ -44,16 +44,16 @@ namespace Cradle.Test
 		[Category ("getAttackPower Test")]
 		public void GetAttackPowerTest () 
 		{
-			int i = 0;
-			Assert.That (aIController.getAttackPower (), Is.EqualTo(i));		
+			float f = 0.0f;
+			Assert.That (aIController.getAttackPower (), Is.EqualTo(f));		
 		}
 
 		//異常値テスト(オブジェクト)
 		[Test]
 		[Category ("NotGetAttackPower Test")]
-		public void NotGetAttackPowerTest ([Range(-10, -1, 1)]int i) 
+		public void NotGetAttackPowerTest ([Range(-10.0f, -1.0f, 1.0f)]float f) 
 		{
-			Assert.That (aIController.getAttackPower (), Is.Not.EqualTo(i));		
+			Assert.That (aIController.getAttackPower (), Is.Not.EqualTo(f));		
 		}
 
 
@@ -62,13 +62,13 @@ namespace Cradle.Test
 		[Category ("SetAttackPower Test")]
 		public void SetAttackPowerTest () 
 		{
-			int x = aIController.setAttackPower(10);
+			float x = aIController.setAttackPower(10.0f);
 			Assert.That (aIController.getAttackPower(), Is.EqualTo(x));		
 		}
 
 		[Test]
 		[Category ("SetAttackPower Range Test")]
-		public void SetAttackPowerRangeTest ([Range(-4, 4, 1)]int x) 
+		public void SetAttackPowerRangeTest ([Range(-4.0f, 4.0f, 1.0f)]float x) 
 		{
 			aIController.setAttackPower(x);
 			Assert.That (aIController.getAttackPower(), Is.EqualTo(x));		
@@ -79,18 +79,18 @@ namespace Cradle.Test
 		[Category ("SetAttackBoostPower Test")]
 		public void SetAttackBoostPowerTest () 
 		{
-			int x = aIController.setAttackPower (10);
-			aIController.setAttackBoostPower(10);
-			Assert.That (aIController.getAttackPower(), Is.EqualTo(20));		
+			float x = aIController.setAttackPower (10.0f);
+			aIController.setAttackBoostPower(10.0f);
+			Assert.That (aIController.getAttackPower(), Is.EqualTo(20.0f));		
 		}
 
 		[Test]
 		[Category ("SetAttackBoostPower Range Test")]
-		public void SetAttackBoostPowerRangeTest ([Range(-4, 4, 1)]int x) 
+		public void SetAttackBoostPowerRangeTest ([Range(-4.0f, 4.0f, 1.0f)]float x) 
 		{
-			int i = aIController.setAttackPower (10);
+			float i = aIController.setAttackPower (10.0f);
 			i += aIController.setAttackBoostPower(x);
-			Assert.That (aIController.getAttackPower(), Is.EqualTo(10 + x));		
+			Assert.That (aIController.getAttackPower(), Is.EqualTo(10.0f + x));		
 		}
 
 

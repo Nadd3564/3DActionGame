@@ -142,8 +142,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dbc8fe7a320f554f9c4a8f52dce3257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kind: 0
   itemSeClip: {fileID: 8300000, guid: e901614280f34f94d9006ba783a1abbe, type: 3}
+  status: {fileID: 0}
+  controller:
+    kind: 0
+    GroundedItem: 0
+    PopItem: 0
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
