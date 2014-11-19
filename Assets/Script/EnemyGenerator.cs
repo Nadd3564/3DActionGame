@@ -35,7 +35,7 @@ namespace Cradle{
 			}
 
 			public void NewExitEnemys(){
-					this.existEnemys = new GameObject[controller.GetMaxActive()];
+				this.existEnemys = new GameObject[controller.GetMaxActive()];
 			}
 
 			public bool Instantiate(int enemyCount){
@@ -48,6 +48,9 @@ namespace Cradle{
 			public bool SameNullEnemys(int enemyCount){
 				if (existEnemys [enemyCount] == null)
 					return true;
+				else
+				//For Tests
+				controller.GenerateTest ();
 				return false;
 			}
 
