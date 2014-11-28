@@ -29,7 +29,7 @@ namespace Cradle.Test
 		[Category ("id Type Test")]
 		public void idTypeTest() 
 		{
-			matter.Authenticate ("a", "b");
+			matter.SetId("id");
 			Assert.That (matter.GetId(), Is.TypeOf(typeof(string)));		
 		}
 
@@ -37,7 +37,7 @@ namespace Cradle.Test
 		[Category ("password Type Test")]
 		public void passwordTypeTest() 
 		{
-			matter.Authenticate ("b", "a");
+			matter.SetPass("Pass");
 			Assert.That (matter.GetPass(), Is.TypeOf(typeof(string)));		
 		}
 
@@ -47,7 +47,7 @@ namespace Cradle.Test
 		[Category ("id IsEmpty Test")]
 		public void IsEmptyidTest() 
 		{
-			matter.Authenticate ("", "");
+			matter.SetId ("");
 			Assert.IsEmpty (matter.GetId());		
 		}
 
@@ -55,7 +55,7 @@ namespace Cradle.Test
 		[Category ("password IsEmpty Test")]
 		public void IsEmptyPasswordTest() 
 		{
-			matter.Authenticate ("", "");
+			matter.SetPass ("");
 			Assert.IsEmpty (matter.GetPass());		
 		}
 
@@ -78,13 +78,58 @@ namespace Cradle.Test
 	
 		//正常値テスト（メソッド）
 		[Test]
+		[Category ("SetId Test")]
+		public void SetIdTest () 
+		{
+			string s = "id";
+			matter.SetId ("id");
+			
+			StringAssert.Contains (s, matter.GetId());		
+		}
+
+		[Test]
+		[Category ("SetPass Test")]
+		public void SetPassTest () 
+		{
+			string s = "Pass";
+			matter.SetPass ("Pass");
+			
+			StringAssert.Contains (s, matter.GetPass());		
+		}
+
+		[Test]
+		[Category ("IsNullIdWithPass Test")]
+		public void IsNullIdWithPassTest () 
+		{
+			string s = matter.GetId ();
+			Assert.True (matter.IsNullIdWithPass(s));		
+		}
+
+		[Test]
+		[Category ("IsNullMatter Test")]
+		public void IsNullMatterTest () 
+		{
+			Assert.True (matter.IsNullMatter());		
+		}
+
+		[Test]
+		[Category ("MatterRequest Test")]
+		public void MatterRequestTest () 
+		{
+			string s = "AuthenticateProxy: Success Authenticated";
+			matter.Authenticate ("id", "pass");
+
+			StringAssert.Contains(s, matter.MatterRequest());		
+		}
+
+		[Test]
 		[Category ("AuthenticateWithId Test")]
 		public void AuthenticateWithIdTest () 
 		{
 			string s = "id";
 			matter.Authenticate ("id", "pass");
 
-			StringAssert.Contains (s, matter.GetId());		
+			StringAssert.Contains(s, matter.GetId());		
 		}
 
 		[Test]
@@ -115,13 +160,5 @@ namespace Cradle.Test
 			StringAssert.Contains (s, matter.Request());		
 		}
 
-		//例外検出テスト
-		[Test]
-		[Category ("AddTransition Exception Test")]
-		[ExpectedException(typeof(ConditionException))]
-		public void AddTransitionExceptionTest() 
-		{
-			//fsmState.AddTransition(Transition.None, FSMStateID.None);
-		}
 	}
 }
