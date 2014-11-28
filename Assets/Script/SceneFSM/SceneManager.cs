@@ -35,7 +35,7 @@ namespace Cradle.DesignPattern{
 		{
 			//描画状態更新
 			activeState.Render();
-
+			
 			//タイトル画面gui破棄
 			DestroyTitleGui ();
 		}

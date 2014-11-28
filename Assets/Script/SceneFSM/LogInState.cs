@@ -3,6 +3,7 @@ using System;
 using Cradle.DesignPattern;
 using Cradle.Server;
 
+
 namespace Cradle.DesignPattern {
 	public class LogInState : MatterAccessor, ISceneState{ 
 
@@ -43,7 +44,7 @@ namespace Cradle.DesignPattern {
 
 			//入力ユーザ情報が一致する場合、次のシーンへ
 			LogInAndNextScene (id);
-			
+
 			//ゲーム終了(Exitボタンを押す、または、Escapeを押す)
 			GameQuit ();
 			
