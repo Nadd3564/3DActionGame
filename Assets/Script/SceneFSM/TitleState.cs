@@ -45,7 +45,7 @@ namespace Cradle.DesignPattern {
 		}
 
 		public void StateFixedUpdate(){
-			
+
 		}
 
 	}

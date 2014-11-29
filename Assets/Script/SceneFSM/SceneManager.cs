@@ -10,9 +10,6 @@ namespace Cradle.DesignPattern{
 	{
 		// タイトル画面テクスチャ
 		public Texture2D bg;
-		private string id;
-		private string password;
-		private bool ProxyFlg = false;
 		// 現在のゲームの状態を保持
 		private ISceneState activeState;
 
@@ -61,30 +58,6 @@ namespace Cradle.DesignPattern{
 
 		public Texture2D GetBgTexture(){
 			return this.bg;
-		}
-		
-		public string GetId(){
-			return this.id;
-		}
-		
-		public string GetPass(){
-			return this.password;
-		}
-
-		public void SetId(string id){
-			this.id = id;
-		}
-		
-		public void SetPass(string password){
-			this.password = password;
-		}
-		
-		public bool IsProxyFlg(){
-			return this.ProxyFlg;	
-		}
-		
-		public void SetProxyFlg(){
-			this.ProxyFlg = true;
 		}
 		
 		void SetInstance(){
