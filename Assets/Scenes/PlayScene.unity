@@ -852,6 +852,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: ee8b7082e60050c4dba9558f57639656, type: 2}
+      propertyPath: InitialModule.startColor.maxColor.rgba
+      value: 4294956599
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ee8b7082e60050c4dba9558f57639656, type: 2}
   m_RootGameObject: {fileID: 475155722}
@@ -1330,7 +1334,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4281860095
+        rgba: 4294956599
       minMaxState: 0
     startSize:
       scalar: .5
