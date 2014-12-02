@@ -43,7 +43,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 400004}
   - 95: {fileID: 9500000}
-  m_Layer: 0
+  - 54: {fileID: 5400000}
+  - 65: {fileID: 6500000}
+  - 135: {fileID: 13500000}
+  - 114: {fileID: 11400000}
+  m_Layer: 13
   m_Name: ItemID07_YellowFlower
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -81,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 114.4646, y: .0778952166, z: 182.440674}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -142,6 +146,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_Mesh: {fileID: 4300000, guid: a07d1aa7e785c5c42b299ac0cddcca95, type: 3}
+--- !u!54 &5400000
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &6500000
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .200000003, y: .300000012, z: .400000006}
+  m_Center: {x: 0, y: .150000006, z: 0}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -157,6 +188,35 @@ Animator:
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbc8fe7a320f554f9c4a8f52dce3257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSeClip: {fileID: 8300000, guid: af8fbe9b5ce7a024fb1bf9a14ca0d181, type: 3}
+  status: {fileID: 0}
+  controller:
+    kind: 1
+    GroundedItem: 0
+    PopItem: 0
+--- !u!135 &13500000
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: .400000006
+  m_Center: {x: 0, y: .300000012, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -1333,7 +1333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e65e90e566f97d42a5acc4686f7039e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSeClip: {fileID: 8300000, guid: 2e16dc82a66650b49af2f0a8a7215982, type: 3}
+  attackSeClip: {fileID: 8300000, guid: 7b73192af296ce44fba1c7bd3849249d, type: 3}
   AAAcontroller: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
@@ -1404,7 +1404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9486c7baaf0bc34185b838c883a67ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitSeClip: {fileID: 8300000, guid: 5831e4427ecfaef4c8b3261ede72f5e3, type: 3}
+  hitSeClip: {fileID: 8300000, guid: 5f83393888cd69e438a235dd98cc1631, type: 3}
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1419,14 +1419,16 @@ MonoBehaviour:
   basePosition: {x: 0, y: 0, z: 0}
   hitEffect: {fileID: 100000, guid: 5277b4077b5df634aa70c4bf149df554, type: 2}
   dropItemPrefab:
-  - {fileID: 100000, guid: 7fc73f4893030814989ca6772e29a0a9, type: 2}
-  - {fileID: 100002, guid: c9e08aa43f5b9fa4f97137e036231644, type: 2}
-  deathSeClip: {fileID: 8300000, guid: 4482e81215e545446b247a68ba0ae6ad, type: 3}
+  - {fileID: 100004, guid: d125328b8a3f82c4998ab64c1c4d2827, type: 2}
+  - {fileID: 100004, guid: 4c411b4c2641a454ca4e48d4440b1741, type: 2}
+  deathSeClip: {fileID: 8300000, guid: 4776e587269efc040be56c0fb6e77bf6, type: 3}
   eController:
     waitBaseTime: 2
     waitTime: 0
     walkRange: 5
     DestroyTime: 5
+    DamageEffectTest: 0
+    DeathSeTest: 0
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -1654,7 +1654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e65e90e566f97d42a5acc4686f7039e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSeClip: {fileID: 8300000, guid: b910f06cfef6a10448d4cfa7f0ea51d2, type: 3}
+  attackSeClip: {fileID: 8300000, guid: 67d15cd6c2c8bb340b06566eb6224ff4, type: 3}
   AAAcontroller: {fileID: 0}
 --- !u!114 &11400010
 MonoBehaviour:
@@ -1693,7 +1693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9486c7baaf0bc34185b838c883a67ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitSeClip: {fileID: 8300000, guid: 988ad850f99996c4a8bfb7b7bb6b60b6, type: 3}
+  hitSeClip: {fileID: 8300000, guid: 1d226b0fb1cb8904abdc6c8d2451902c, type: 3}
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
