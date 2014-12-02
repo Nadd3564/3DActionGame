@@ -854,7 +854,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: ee8b7082e60050c4dba9558f57639656, type: 2}
       propertyPath: InitialModule.startColor.maxColor.rgba
-      value: 4294956599
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ee8b7082e60050c4dba9558f57639656, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: ee8b7082e60050c4dba9558f57639656, type: 2}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: ee8b7082e60050c4dba9558f57639656, type: 2}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ee8b7082e60050c4dba9558f57639656, type: 2}
@@ -1334,7 +1346,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294956599
+        rgba: 4294967295
       minMaxState: 0
     startSize:
       scalar: .5
