@@ -25,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 112.505371, y: .919599652, z: 184.470047}
+  m_LocalPosition: {x: 112.510002, y: -.698490024, z: 184.470001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -41,9 +41,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d87a09103f56eb4296b456ac19828d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
-  angularVelocity: 480
-  destination: {x: 0, y: .5, z: 0}
+  controller:
+    destination: {x: 0, y: .5, z: 0}
+    radius: 1
+    angularVelocity: 480
+    angle: 0
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -218,7 +220,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4281860095
+        rgba: 4294967295
       minMaxState: 0
     startSize:
       scalar: .5
@@ -1108,7 +1110,7 @@ ParticleSystemRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2fbac1fb84fe14c79944e97176473868, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
