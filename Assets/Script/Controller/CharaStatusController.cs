@@ -107,7 +107,7 @@ namespace Cradle
 		public bool IsPlayer(string tag) {
 			if (tag == charactername)
 				return true;
-				return false;					
+			return false;					
 		}
 
 		public bool IsNPC(string tag){

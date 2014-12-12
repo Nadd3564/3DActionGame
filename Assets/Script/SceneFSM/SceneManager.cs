@@ -19,7 +19,7 @@ namespace Cradle.DesignPattern{
 		void Awake()
 		{
 			//Singleton
-			if(NullInstance()) {
+			if(IsNullInstance()) {
 				SetInstance();
 				DontDestroyOnLoad(gameObject);
 			} else {
@@ -39,7 +39,8 @@ namespace Cradle.DesignPattern{
 		
 		void Start()
 		{
-			activeState = new TitleState(this);
+			//状態の初期化
+			InitState ();
 		}
 		
 		void Update()
@@ -64,16 +65,19 @@ namespace Cradle.DesignPattern{
 			instance = this;
 		}
 
+		void InitState(){
+			activeState = new TitleState(this);
+		}
 
 		//状態の更新
 		public void ActiveState(){
-			if(NotNullState())
+			if(IsNotNullState())
 				activeState.StateUpdate();
 		}
 
 		//タイトル画面gui破棄
 		public void DestroyTitleGui(){
-			if(Application.loadedLevelName != "LogInScene"){
+			if(IsNotLogInScene()){
 				string controlName = gameObject.GetHashCode ().ToString ();
 				GUI.SetNextControlName ("MyPassField");
 				Rect bounds = new Rect (0, 0, 0, 0);
@@ -83,25 +87,37 @@ namespace Cradle.DesignPattern{
 
 		//認証ゲームオブジェクト破棄
 		public void DestroyAuthentication(){
-		if (Application.loadedLevelName != "LogInScene")
+			if(IsNotLogInScene())
 			Destroy (GameObject.Find("New Game Object"));	
 		}
 
 		//BGMゲームオブジェクト破棄
 		public void DestroyBGM(){
-			if(Application.loadedLevelName == "PlayScene")
+			if(IsPlayScene())
 				Destroy(GameObject.Find("BGM"));
 		}
 
 
-		public bool NullInstance(){
+		public bool IsNotLogInScene(){
+			if(Application.loadedLevelName != "LogInScene")		
+				return true;
+			return false;
+		}
+
+		public bool IsPlayScene(){
+			if(Application.loadedLevelName == "PlayScene")
+				return true;
+			return false;
+		}
+
+		public bool IsNullInstance(){
 			if(instance == null)
 				return true;
 			return false;
 		}
 
 
-		public bool NotNullState(){
+		public bool IsNotNullState(){
 			if(activeState != null)
 				return true;
 			return false;
