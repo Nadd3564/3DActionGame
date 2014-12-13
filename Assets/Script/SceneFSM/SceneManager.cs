@@ -2,7 +2,6 @@
 using System.Collections;
 using Cradle;
 using Cradle.DesignPattern;
-using LitJson;
 
 
 namespace Cradle.DesignPattern{
@@ -56,6 +55,9 @@ namespace Cradle.DesignPattern{
 		}
 
 
+		public ISceneState GetActiveState(){
+			return this.activeState;		
+		}
 
 		public Texture2D GetBgTexture(){
 			return this.bg;
@@ -65,7 +67,7 @@ namespace Cradle.DesignPattern{
 			instance = this;
 		}
 
-		void InitState(){
+		public void InitState(){
 			activeState = new TitleState(this);
 		}
 
