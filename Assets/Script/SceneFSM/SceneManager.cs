@@ -5,7 +5,7 @@ using Cradle.DesignPattern;
 
 
 namespace Cradle.DesignPattern{
-	public class SceneManager : MonoBehaviour
+	public class SceneManager : MonoBehaviour, IManagerController
 	{
 		// タイトル画面テクスチャ
 		public Texture2D bg;
@@ -14,6 +14,11 @@ namespace Cradle.DesignPattern{
 
 		public static SceneManager instance;
 	
+		public SceneManagerController managerCtrl;
+		
+		public void OnEnable() {
+			managerCtrl.SetManagerController (this);
+		}
 
 		void Awake()
 		{
@@ -31,6 +36,7 @@ namespace Cradle.DesignPattern{
 		{
 			//描画状態更新
 			activeState.Render();
+			//managerCtrl.GetActiveState ().Render ();
 			
 			//タイトル画面gui破棄
 			DestroyTitleGui ();
@@ -40,12 +46,14 @@ namespace Cradle.DesignPattern{
 		{
 			//状態の初期化
 			InitState ();
+			//managerCtrl.InitState (this);
 		}
 		
 		void Update()
 		{
 			//状態の更新
 			ActiveState ();
+			//managerCtrl.GetActiveState ();
 
 			//認証ゲームオブジェクト破棄
 			DestroyAuthentication ();
@@ -75,6 +83,7 @@ namespace Cradle.DesignPattern{
 		public void ActiveState(){
 			if(IsNotNullState())
 				activeState.StateUpdate();
+				//managerCtrl.GetActiveState().StateUpdate();
 		}
 
 		//タイトル画面gui破棄
@@ -121,6 +130,7 @@ namespace Cradle.DesignPattern{
 
 		public bool IsNotNullState(){
 			if(activeState != null)
+			//if(managerCtrl.GetActiveState() != null)
 				return true;
 			return false;
 		}
@@ -128,6 +138,7 @@ namespace Cradle.DesignPattern{
 		public void SwitchState(ISceneState newState) 
 		{
 			activeState = newState;
+			//managerCtrl.SwitchState (newState);
 		}
 
 	}
