@@ -4,5 +4,6 @@ namespace Cradle
 {
 	public interface IManagerController
 	{
+
 	}
 }

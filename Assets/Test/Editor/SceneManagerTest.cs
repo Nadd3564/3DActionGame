@@ -12,12 +12,14 @@ namespace Cradle.Test
 	{
 		private IManagerController iManager;
 		private SceneManagerController managerCtrl;
+		private SceneManager manager;
 		
 		
 		[SetUp] public void Init()
 		{
 			iManager = GetManagerMock ();
 			managerCtrl = GetControllerMock (iManager);
+			manager = Substitute.For<SceneManager>();
 		}
 		
 		[TearDown] public void Cleanup()
@@ -31,7 +33,7 @@ namespace Cradle.Test
 		[Category ("activeState Type Test")]
 		public void activeStateTypeTest() 
 		{
-			//managerCtrl.InitState (SceneManager);
+			managerCtrl.InitState (manager);
 			Assert.That (managerCtrl.GetActiveState(), Is.TypeOf(typeof(TitleState)));		
 		}
 
