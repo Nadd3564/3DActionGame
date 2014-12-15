@@ -33,7 +33,8 @@ namespace Cradle.Test
 		[Category ("activeState Null Test")]
 		public void ActiveStateNullTest() 
 		{
-			Assert.Null (managerCtrl.GetActiveState());		
+			managerCtrl.SetInstance (manager);
+			Assert.Null (managerCtrl.GetActiveState());
 		}
 
 
@@ -60,7 +61,8 @@ namespace Cradle.Test
 		[Category ("GetInstance Test")]
 		public void GetInstanceTest ()
 		{
-			Assert.Null (managerCtrl.GetInstance());
+			string s = "null";
+			StringAssert.Contains (s, managerCtrl.GetInstance().ToString());
 		}
 
 		[Test]
