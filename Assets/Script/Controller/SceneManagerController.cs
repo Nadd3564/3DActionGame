@@ -9,6 +9,7 @@ namespace Cradle.DesignPattern
 	{
 		// 現在のゲームの状態を保持
 		private ISceneState activeState;
+
 		private IManagerController manager;
 
 
@@ -23,6 +24,10 @@ namespace Cradle.DesignPattern
 		//状態の初期化
 		public void InitState(SceneManager manager){
 			this.activeState = new TitleState(manager);
+		}
+
+		public SceneManager GetInstance(){
+			return SceneManager.instance;		
 		}
 
 		public void SetInstance(SceneManager manager){

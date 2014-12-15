@@ -27,15 +27,87 @@ namespace Cradle.Test
 			
 		}
 		
-		
-		//データ型テスト（オブジェクト）
+
+		//Null値テスト（オブジェクト）
 		[Test]
-		[Category ("activeState Type Test")]
-		public void activeStateTypeTest() 
+		[Category ("activeState Null Test")]
+		public void ActiveStateNullTest() 
+		{
+			Assert.Null (managerCtrl.GetActiveState());		
+		}
+
+
+		//正常値テスト(オブジェクト)
+		[Test]
+		[Category ("activeState Test")]
+		public void activeState ()
 		{
 			managerCtrl.InitState (manager);
-			Assert.That (managerCtrl.GetActiveState(), Is.TypeOf(typeof(TitleState)));		
+			Assert.That (managerCtrl.GetActiveState(), Is.EqualTo(manager));
 		}
+
+
+		//正常値テスト(メソッド)
+		[Test]
+		[Category ("InitState Test")]
+		public void InitStateTest ()
+		{
+			managerCtrl.InitState (manager);
+			Assert.That (managerCtrl.GetActiveState(), Is.TypeOf(typeof(TitleState)));
+		}
+
+		[Test]
+		[Category ("GetInstance Test")]
+		public void GetInstanceTest ()
+		{
+			Assert.Null (managerCtrl.GetInstance());
+		}
+
+		[Test]
+		[Category ("SetInstance Test")]
+		public void SetInstanceTest ()
+		{
+			managerCtrl.SetInstance (manager);
+			Assert.That (managerCtrl.GetInstance(), Is.EqualTo(manager));
+		}
+
+		[Test]
+		[Category ("IsNotNullState Test")]
+		public void IsNotNullStateTest ()
+		{
+			managerCtrl.InitState (manager);
+			Assert.True (managerCtrl.IsNotNullState());
+		}
+
+		[Test]
+		[Category ("SwitchState Test")]
+		public void SwitchStateTest ()
+		{
+			managerCtrl.SwitchState (new LogInState(manager));
+			Assert.That (managerCtrl.GetActiveState(), Is.TypeOf(typeof(LogInState)));
+		}
+
+		[Test]
+		[Category ("IsNullInstance Test")]
+		public void IsNullInstanceTest ()
+		{
+			Assert.True (managerCtrl.IsNullInstance());
+		}
+
+		[Test]
+		[Category ("IsNotLogInScene Test")]
+		public void IsNotLogInSceneTest ()
+		{
+			Assert.True (managerCtrl.IsNotLogInScene());
+		}
+
+		[Test]
+		[Category ("IsPlayScene Test")]
+		public void IsPlaySceneTest ()
+		{
+			Assert.False (managerCtrl.IsPlayScene());
+		}
+
 
 
 		private IManagerController GetManagerMock () {
