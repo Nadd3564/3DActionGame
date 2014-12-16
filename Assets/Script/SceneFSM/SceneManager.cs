@@ -38,7 +38,7 @@ namespace Cradle.DesignPattern{
 			managerCtrl.GetActiveState ().Render ();
 			
 			//タイトル画面gui破棄
-			DestroyTitleGui ();
+			OverrideTitleGui ();
 		}
 		
 		void Start()
@@ -64,8 +64,8 @@ namespace Cradle.DesignPattern{
 			return this.bg;
 		}
 
-		//タイトル画面gui破棄
-		public void DestroyTitleGui(){
+		//タイトル画面gui上書き
+		public void OverrideTitleGui(){
 			if(managerCtrl.IsNotLogInScene()){
 				string controlName = gameObject.GetHashCode ().ToString ();
 				GUI.SetNextControlName ("MyPassField");
