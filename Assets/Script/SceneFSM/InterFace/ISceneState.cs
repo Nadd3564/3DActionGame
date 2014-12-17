@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Cradle.DesignPattern;
 
 namespace Cradle.DesignPattern
 {
