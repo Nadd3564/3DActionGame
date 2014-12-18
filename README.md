@@ -5,8 +5,10 @@ ACTIONGAME
 開発中の画面
 ![image](title.jpg)
 ![image](3DACTIONGAME.jpg)
+状態遷移の資料
 ![image](資料/状態遷移図_タイトル画面~プレイ画面まで.jpg)
 ![image](資料/敵NPC状態遷移図.jpg)
+クラス図（一部）
 ![image](資料/クラス図（Proxyパターン）.png)
 <br>
 開発環境　Unity ver 4.6.0f3
