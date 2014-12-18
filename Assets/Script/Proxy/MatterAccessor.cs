@@ -17,7 +17,7 @@ namespace Cradle.DesignPattern{
 
 		public class AuthenticateProxy : IMatter {
 			// 認証プロキシ
-			Matter matter;
+			private Matter matter;
 			private string id;
 			private string password;
 
