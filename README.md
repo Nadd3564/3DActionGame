@@ -9,7 +9,12 @@ ACTIONGAME
 <br>
 ###状態遷移の資料
 <br>
+*シーン遷移
+<br>
 ![image](資料/状態遷移図_タイトル画面~プレイ画面まで.jpg)
+<br>
+NPCAI
+<br>
 ![image](資料/敵NPC状態遷移図.jpg)
 <br>
 <br>
