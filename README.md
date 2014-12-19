@@ -22,9 +22,9 @@ ACTIONGAME
 <br>
 ![image](資料/クラス図（Proxyパターン）.png)
 <br>
-開発環境　Unity ver 4.6.0f3
+_開発環境　Unity ver 4.6.0f3_
 
-使用アセット（フリー）
+_使用アセット（フリー）_
 ----- 下記アセットはインポート不要です。 -----
 <br>・Tiny Fantasy Actor Pack #1
 <br>・Two-Swords Warrior
@@ -39,7 +39,7 @@ ACTIONGAME
 <br>・LitJson
 <br>・JSONObject
 
-*音楽
+*音楽*
 <br>魔王魂
 
 _チュートリアル_
