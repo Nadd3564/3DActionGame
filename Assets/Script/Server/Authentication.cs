@@ -30,7 +30,8 @@ namespace Cradle.DesignPattern{
 
 			//入力をBase64へシリアライズ
 			headers["Authorization"] = 
-				"Basic " + System.Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(GetId() + ":" + GetPass()));
+				"Basic " + System.Convert.ToBase64String(
+					System.Text.Encoding.ASCII.GetBytes(GetId() + ":" + GetPass()));
 			
 			//テスト中のため、ログを表示
 			Debug.Log (GetId() + ":" + GetPass());
