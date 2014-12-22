@@ -4,10 +4,12 @@ using Cradle.DesignPattern;
 
 namespace Cradle.DesignPattern{
 	public class MatterAccessor{
+		//インターフェース
 		public interface IMatter {
 			string Request ( );
 		}
-		
+
+		//Request()実装(認証成功時の実装)
 		private class Matter {
 			public string Request( ) {
 				return "matter Request " + "Application start\n";
@@ -49,6 +51,7 @@ namespace Cradle.DesignPattern{
 				return false;
 			}
 
+			//idとpasswordが存在する場合、認証成功。（matterを生成）
 			public string MatterRequest(){
 				if (IsNullIdWithPass(this.id))
 					return "AuthenticateProxy: can not access";
@@ -59,6 +62,7 @@ namespace Cradle.DesignPattern{
 				return "AuthenticateProxy: Success Authenticated";	
 			}
 
+			//idとパスワードを受け取り、認証開始
 			public string Authenticate (string suppliedId, string suppliedPass) {
 				SetId (suppliedId);
 				//テスト中のため、ログを表示
@@ -70,7 +74,8 @@ namespace Cradle.DesignPattern{
 
 				return MatterRequest ();
 			}
-			
+
+			//Request()実装(認証時の実装)
 			public string Request( ) {
 				if (IsNullMatter())
 					return "AuthenticateProxy: The Method Must Authentication";
