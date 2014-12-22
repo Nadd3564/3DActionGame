@@ -10,7 +10,7 @@ namespace Cradle.DesignPattern{
 		}
 
 		//Request()実装(認証成功時の実装)
-		private class Matter {
+		private class Matter : IMatter {
 			public string Request( ) {
 				return "matter Request " + "Application start\n";
 			}
@@ -19,7 +19,7 @@ namespace Cradle.DesignPattern{
 
 		public class AuthenticateProxy : IMatter {
 			// 認証プロキシ
-			private Matter matter;
+			private IMatter matter;
 			private string id;
 			private string password;
 
@@ -58,6 +58,7 @@ namespace Cradle.DesignPattern{
 				else if(IsNullIdWithPass(this.password))
 					return "AuthenticateProxy: can not access";
 				else
+					//MatterのRequest()を呼ぶために生成
 					matter = new Matter( );
 				return "AuthenticateProxy: Success Authenticated";	
 			}
