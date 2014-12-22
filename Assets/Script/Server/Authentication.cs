@@ -10,10 +10,6 @@ namespace Cradle.DesignPattern{
 		private string password;
 		private bool ProxyFlg = false;
 
-
-		void Start(){
-
-		}
 		
 		void Update(){
 			StartCoroutine(BasicAuthenticate());
@@ -66,6 +62,7 @@ namespace Cradle.DesignPattern{
 			}
 		}
 
+
 		public string GetId(){
 			return this.id;
 		}
@@ -95,7 +92,7 @@ namespace Cradle.DesignPattern{
 		}
 
 	}
-
+	//サーバーからのレスポンスを格納
 	class GetResponse {
 		public int itemId;
 		public string itemName;
