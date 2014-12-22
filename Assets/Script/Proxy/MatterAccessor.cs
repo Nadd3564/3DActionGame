@@ -76,7 +76,7 @@ namespace Cradle.DesignPattern{
 				return MatterRequest ();
 			}
 
-			//Request()実装(認証時の実装)
+			//Request()実装(認証時の実装)。matterが生成されたか確認
 			public string Request( ) {
 				if (IsNullMatter())
 					return "AuthenticateProxy: The Method Must Authentication";

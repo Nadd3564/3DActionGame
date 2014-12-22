@@ -139,6 +139,7 @@ namespace Cradle.DesignPattern {
 			AuthenticateProxy aProxy = new AuthenticateProxy( );
 			Debug.Log (aProxy.Request ());
 
+			//id、パスワード認証と、Authenticateの戻り値を確認
 			if(GetSuccess() != (aProxy as AuthenticateProxy).Authenticate(id, passwordToEdit))
 				return false;
 

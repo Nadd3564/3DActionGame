@@ -27,7 +27,8 @@ namespace Cradle.DesignPattern{
 			var headers = form.headers;
 			var rawData = form.data;
 			var url = "http://localhost:8080/Cradle/";
-			
+
+			//入力をBase64へシリアライズ
 			headers["Authorization"] = 
 				"Basic " + System.Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(GetId() + ":" + GetPass()));
 			
@@ -42,7 +43,8 @@ namespace Cradle.DesignPattern{
 			if (www.error == null) {
 				Debug.Log("Get Success");
 				SetProxyFlg();
-				
+
+				//サーバーからJson形式のファイルを受け取る
 				var json = www.text; 
 				// GetResponseクラスにレスポンスを格納する
 				GetResponse response = JsonMapper.ToObject<GetResponse> (json);
@@ -73,11 +75,13 @@ namespace Cradle.DesignPattern{
 
 		public void SetId(string id){
 			this.id = id;
+			//テスト中のため、ログを表示
 			Debug.Log (GetId());
 		}
 		
 		public void SetPass(string password){
 			this.password = password;
+			//テスト中のため、ログを表示
 			Debug.Log (GetPass());
 		}
 		
@@ -100,6 +104,5 @@ namespace Cradle.DesignPattern{
 		public int defence;
 		public string description;
 		public long updateTime;
-		//public List<string> friend_names;
 	}
 }
