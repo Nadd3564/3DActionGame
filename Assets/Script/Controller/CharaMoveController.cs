@@ -201,6 +201,7 @@ namespace Cradle
 				SetArrived(true);	
 		}
 
+		//移動速度が0.2以上かつ目的地に到着していないか確認
 		public virtual bool WalkRotateCondition(){
 			if (velocity.magnitude > 0.1f && !IsArrived ())
 				return true;
