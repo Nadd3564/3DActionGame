@@ -5,6 +5,7 @@ namespace Cradle.DesignPattern {
 	public class TitleState : ISceneState { 
 		private SceneManager manager;
 
+		public TitleState(){}
 
 		public TitleState(SceneManager stateManager) {
 			//初期化
@@ -31,11 +32,11 @@ namespace Cradle.DesignPattern {
 		}
 
 
-		public bool GetKeyUpRet(){
+		public virtual bool GetKeyUpRet(){
 			return Input.GetKeyUp (KeyCode.Return);
 		}
 
-		public bool StartButton(){
+		public virtual bool StartButton(){
 			return GUI.Button(new Rect(327, 290, 200, 54), "Start", ButtonStyle());
 		}
 

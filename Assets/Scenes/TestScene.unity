@@ -54768,6 +54768,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1218020864}
   m_RootOrder: 0
+--- !u!114 &1049066654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 902961c69f102f4409c29b9e54258701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  go: {fileID: 1856218359}
+  thisPropertyPath: Transform.parent
+  compareToType: 0
+  other: {fileID: 228645905}
+  otherPropertyPath: Transform.parent
+  compareType: 1
 --- !u!114 &1049723003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106567,6 +106584,74 @@ Transform:
   - {fileID: 1526789059}
   m_Father: {fileID: 98720294}
   m_RootOrder: 0
+--- !u!1 &1856218359
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1856218362}
+  - 114: {fileID: 1856218361}
+  - 114: {fileID: 1856218360}
+  m_Layer: 0
+  m_Name: GameRule
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1856218360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1856218359}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bafa54482a87ac4cbd7ff1bfd1ac93a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkAfterTime: 1
+  repeatCheckTime: 1
+  repeatEveryTime: 1
+  checkAfterFrames: 1
+  repeatCheckFrame: 1
+  repeatEveryFrame: 1
+  hasFailed: 0
+  checkMethods: 2
+  m_ActionBase: {fileID: 1049066654}
+  checksPerformed: 0
+--- !u!114 &1856218361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1856218359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf104f3e04a42e47a8f66cba6296d18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clearSeClip: {fileID: 8300000, guid: a45a65a9b681cab42844b252bde79553, type: 3}
+  controller:
+    gameSpeed: 1
+    timeRemaining: 65
+    sceneChangeTime: 10
+    gameOver: 0
+    gameClear: 0
+--- !u!4 &1856218362
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1856218359}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 113.947807, y: 1.615556, z: 185.249313}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 33
 --- !u!1 &1858148440
 GameObject:
   m_ObjectHideFlags: 0
