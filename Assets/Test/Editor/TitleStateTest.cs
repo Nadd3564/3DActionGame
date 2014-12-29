@@ -1,8 +1,5 @@
 ﻿using NUnit.Framework;
-using System;
-using System.IO;
 using Cradle.DesignPattern;
-using System.Collections.Generic;
 using NSubstitute;
 
 
@@ -34,7 +31,13 @@ namespace Cradle.Test
 			Assert.True (titleState.GetKeyUpRet ());
 		}
 
-		
+		[Test]
+		[Category ("StartButton Test")]
+		public void StartButtonTest () 
+		{
+			titleState.StartButton ().Returns (true);
+			Assert.True (titleState.StartButton ());
+		}
 		
 	}
 }
