@@ -7,18 +7,21 @@ namespace Cradle.DesignPattern {
 		private SceneManager manager;
 
 
+		public PlayState() {}
+
 		public PlayState(SceneManager stateManager) { 
 			//初期化
 			manager = stateManager;
 		}
 
 
-		public void StateUpdate() {
-			}
+		public void StateUpdate() {}
 		
-		public void Render() { 
+		public void Render() {}
 
+
+		public SceneManager GetManager(){
+			return this.manager;
 		}
-
 	}
 }
