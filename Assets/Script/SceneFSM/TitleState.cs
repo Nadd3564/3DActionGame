@@ -31,6 +31,9 @@ namespace Cradle.DesignPattern {
 			InputWithSwitchState(StartButton());
 		}
 
+		public SceneManager GetManager(){
+			return this.manager;		
+		}
 
 		public virtual bool GetKeyUpRet(){
 			return Input.GetKeyUp (KeyCode.Return);
