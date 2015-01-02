@@ -6,7 +6,7 @@ using NSubstitute;
 namespace Cradle.Test
 {
 	[TestFixture]
-	[Category ("AuthenticationTest Test")]
+	[Category ("Authentication Test")]
 	public class AuthenticationTest
 	{
 		private Authentication aut;
