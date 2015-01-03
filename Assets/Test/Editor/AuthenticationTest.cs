@@ -10,7 +10,6 @@ namespace Cradle.Test
 	public class AuthenticationTest
 	{
 		private Authentication aut;
-		private SceneManagerController manager;
 		
 		[SetUp] public void Init()
 		{
@@ -26,9 +25,16 @@ namespace Cradle.Test
 		//正常値テスト（オブジェクト）
 		[Test]
 		[Category ("id Test")]
-		public void idTest () 
+		public void IdTest () 
 		{
 			Assert.Null (aut.GetId());
+		}
+
+		[Test]
+		[Category ("password Test")]
+		public void PasswordTest () 
+		{
+			Assert.Null (aut.GetPass());
 		}
 
 
@@ -40,6 +46,15 @@ namespace Cradle.Test
 			string s = "user";
 			aut.SetId ("user");
 			StringAssert.Contains (s, aut.GetId());
+		}
+
+		[Test]
+		[Category ("SetPass Test")]
+		public void SetPassTest () 
+		{
+			string s = "0123";
+			aut.SetPass ("0123");
+			StringAssert.Contains (s, aut.GetPass());
 		}
 
 	}
