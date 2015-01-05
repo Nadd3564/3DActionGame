@@ -28,7 +28,7 @@ namespace Cradle.FM{
 	
 	public class AdvancedFSM : FSM {
 		private List<FSMState> fsmStates;
-		
+
 		//fsmStates
 		private FSMStateID currentStateID;
 		public FSMStateID CurrentStateID{ get { return currentStateID; }}
@@ -40,14 +40,14 @@ namespace Cradle.FM{
 		public AdvancedFSM(){
 			fsmStates = new List<FSMState> ();
 		}
-		
+
 		//新たに状態を追加
 		public void AddFSMState(FSMState fsmState){
 			//引数の確認
 			if(fsmState == null){
 				Debug.LogError("FSM ERROR: Null reference is not allowed");
 			}
-			
+
 			//状態が存在しないときの条件式
 			if(fsmStates.Count == 0)
 			{

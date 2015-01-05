@@ -37,6 +37,14 @@ namespace Cradle.Test
 			Assert.Null (aut.GetPass());
 		}
 
+		[Test]
+		[Category ("ProxyFlg Test")]
+		public void ProxyFlgTest () 
+		{
+			Assert.False (aut.IsProxyFlg());
+		}
+
+
 
 		//正常値テスト（メソッド）
 		[Test]
@@ -56,6 +64,15 @@ namespace Cradle.Test
 			aut.SetPass ("0123");
 			StringAssert.Contains (s, aut.GetPass());
 		}
+
+		[Test]
+		[Category ("SetProxyFlg Test")]
+		public void SetProxyFlgTest () 
+		{
+			aut.SetProxyFlg ();
+			Assert.True (aut.IsProxyFlg());
+		}
+
 
 	}
 }
