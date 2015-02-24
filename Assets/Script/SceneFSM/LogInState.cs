@@ -19,6 +19,8 @@ namespace Cradle.DesignPattern {
 
 		private SceneManager manager;
 
+		public LogInState(){}
+
 		public LogInState(SceneManager stateManager) { 
 			//初期化
 			manager = stateManager;
@@ -76,6 +78,15 @@ namespace Cradle.DesignPattern {
 			return this.success;	
 		}
 
+		public string GetColor(){
+			string s = this.color.ToString ();
+			return s;	
+		}
+
+		/*public string GetSuccess(){
+			return this.success;	
+		}*/
+
 		//認証ゲームオブジェクト生成
 		public void AuthenticateObject(){
 		if(aut == null)
@@ -96,7 +107,7 @@ namespace Cradle.DesignPattern {
 			this.buttonStyle = new GUIStyle(GUI.skin.button);
 		}
 
-		void SetTextStyle(){
+		public void SetTextStyle(){
 			this.color = new GUIStyle ();
 			color.padding.top = 5;
 			color.normal.textColor = Color.black;
