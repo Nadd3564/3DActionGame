@@ -22,7 +22,7 @@ ACTIONGAME
 <br>
 ![image](資料/クラス図（Proxyパターン）.png)
 <br>
-_開発環境　Unity ver 4.6.1f1_
+_開発環境　Unity ver 4.6.3f1_
 
 _使用アセット（フリー）_
 ----- 下記アセットはインポート不要です。 -----
