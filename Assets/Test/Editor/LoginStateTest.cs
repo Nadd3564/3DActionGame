@@ -76,6 +76,15 @@ namespace Cradle.Test
 			StringAssert.Contains (s ,logInState.GetColor());
 		}
 
+		[Test]
+		[Category ("buttonStyle Test")]
+		public void buttonStyleTest () 
+		{
+			string s = "GUIStyle 'button'";
+			logInState.SetButtonStyle ();
+			StringAssert.Contains (s ,logInState.GetButtonStyle());
+		}
+
 	}
 }
 

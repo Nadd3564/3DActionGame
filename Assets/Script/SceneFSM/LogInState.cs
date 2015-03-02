@@ -83,6 +83,12 @@ namespace Cradle.DesignPattern {
 			return s;	
 		}
 
+		public string GetButtonStyle(){
+			string s = this.buttonStyle.ToString ();
+			return s;	
+		}
+
+
 		/*public string GetSuccess(){
 			return this.success;	
 		}*/
@@ -92,7 +98,7 @@ namespace Cradle.DesignPattern {
 		if(aut == null)
 			aut = (new GameObject()).AddComponent<Authentication>();
 		}
-		
+
 		//現在不要のため、入力情報登録機能を停止
 		/*public bool IsFlg(){
 			return this.flg;	
@@ -103,7 +109,7 @@ namespace Cradle.DesignPattern {
 		}*/
 
 		// スタイルを準備.
-		void SetButtonStyle(){
+		public void SetButtonStyle(){
 			this.buttonStyle = new GUIStyle(GUI.skin.button);
 		}
 
