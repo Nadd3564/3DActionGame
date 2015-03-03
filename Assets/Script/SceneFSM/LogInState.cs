@@ -88,6 +88,9 @@ namespace Cradle.DesignPattern {
 			return s;	
 		}
 
+		public Authentication GetAut(){
+			return this.aut;
+		}
 
 		/*public string GetSuccess(){
 			return this.success;	

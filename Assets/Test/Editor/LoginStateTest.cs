@@ -85,6 +85,14 @@ namespace Cradle.Test
 			StringAssert.Contains (s ,logInState.GetButtonStyle());
 		}
 
+		[Test]
+		[Category ("aut Test")]
+		public void autTest () 
+		{
+			logInState.AuthenticateObject ();
+			Assert.IsNotNull (logInState.GetAut());
+		}
+
 	}
 }
 
