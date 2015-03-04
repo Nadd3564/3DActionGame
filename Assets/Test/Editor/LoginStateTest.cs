@@ -91,8 +91,18 @@ namespace Cradle.Test
 		{
 			logInState.AuthenticateObject ();
 			Assert.IsNotNull (logInState.GetAut());
+			Assert.That (logInState.GetAut(), Is.TypeOf(typeof(Authentication)));
 		}
 
+
+		//正常値テスト（メソッド）
+		[Test]
+		[Category ("StateUpdate Test")]
+		public void StateUpdateTest () 
+		{
+			logInState.StateUpdate ();
+			Assert.IsNotNull (logInState.GetAut());
+		}
 	}
 }
 
