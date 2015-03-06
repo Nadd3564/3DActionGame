@@ -92,10 +92,6 @@ namespace Cradle.DesignPattern {
 			return this.aut;
 		}
 
-		/*public string GetSuccess(){
-			return this.success;	
-		}*/
-
 		//認証ゲームオブジェクト生成
 		public void AuthenticateObject(){
 		if(aut == null)

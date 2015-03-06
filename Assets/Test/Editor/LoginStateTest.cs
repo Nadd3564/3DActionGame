@@ -103,6 +103,13 @@ namespace Cradle.Test
 			logInState.StateUpdate ();
 			Assert.IsNotNull (logInState.GetAut());
 		}
+
+		[Test]
+		[Category ("IsNotEmptyPass Test")]
+		public void IsNotEmptyPassTest () 
+		{
+			Assert.False (logInState.IsNotEmptyPass());
+		}
 	}
 }
 
