@@ -105,6 +105,13 @@ namespace Cradle.Test
 		}
 
 		[Test]
+		[Category ("IsNotEmptyId Test")]
+		public void IsNotEmptyIdTest () 
+		{
+			Assert.False (logInState.IsNotEmptyId());
+		}
+
+		[Test]
 		[Category ("IsNotEmptyPass Test")]
 		public void IsNotEmptyPassTest () 
 		{
