@@ -302,13 +302,13 @@ namespace Cradle.DesignPattern {
 			return false;
 		}
 
-		public bool IsNotEmptyId(){
+		public virtual bool IsNotEmptyId(){
 			if(id != "")
 				return true;
 			return false;
 		}
 
-		public bool IsNotEmptyPass(){
+		public virtual bool IsNotEmptyPass(){
 			if(passwordToEdit != "")
 				return true;
 			return false;

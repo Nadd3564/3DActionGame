@@ -117,6 +117,17 @@ namespace Cradle.Test
 		{
 			Assert.False (logInState.IsNotEmptyPass());
 		}
+
+		[Test]
+		[Category ("IsNotEmptyIdPass Test")]
+		public void IsNotEmptyIdPassTest () 
+		{
+			//Arrange
+			logInState.IsNotEmptyId ().Returns (true);
+			logInState.IsNotEmptyPass ().Returns (true);
+
+			Assert.True (logInState.IsNotEmptyIdPass());
+		}
 	}
 }
 
