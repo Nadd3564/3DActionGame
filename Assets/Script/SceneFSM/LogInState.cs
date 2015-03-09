@@ -290,7 +290,7 @@ namespace Cradle.DesignPattern {
 			return false;
 		}
 
-		public bool IsReturn(){
+		public virtual bool IsReturn(){
 			if(Event.current.keyCode == KeyCode.Return)
 				return true;
 			return false;

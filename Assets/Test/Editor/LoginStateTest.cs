@@ -128,6 +128,15 @@ namespace Cradle.Test
 
 			Assert.True (logInState.IsNotEmptyIdPass());
 		}
+
+		[Test]
+		[Category ("IsReturn Test")]
+		public void IsReturnTest () 
+		{
+			//Arrange
+			logInState.IsReturn ().Returns (true);
+			Assert.True (logInState.IsReturn());
+		}
 	}
 }
 
