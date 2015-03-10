@@ -284,7 +284,7 @@ namespace Cradle.DesignPattern {
 		}
 
 
-		public bool IsKeyUp(){
+		public virtual bool IsKeyUp(){
 			if(Event.current.type == EventType.KeyUp)
 				return true;
 			return false;

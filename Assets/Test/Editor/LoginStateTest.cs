@@ -135,7 +135,18 @@ namespace Cradle.Test
 		{
 			//Arrange
 			logInState.IsReturn ().Returns (true);
+
 			Assert.True (logInState.IsReturn());
+		}
+
+		[Test]
+		[Category ("IsKeyUp Test")]
+		public void IsKeyUptest () 
+		{
+			//Arrange
+			logInState.IsKeyUp ().Returns (true);
+
+			Assert.True (logInState.IsKeyUp());
 		}
 	}
 }
