@@ -15,6 +15,9 @@ namespace Cradle.Test
 		[SetUp] public void Init()
 		{
 			logInState = Substitute.For<LogInState>();
+			//Arrange
+			logInState.IsKeyUp().Returns(true);
+			logInState.IsReturn().Returns(true);
 		}
 		
 		[TearDown] public void Cleanup()
@@ -133,9 +136,6 @@ namespace Cradle.Test
 		[Category ("IsReturn Test")]
 		public void IsReturnTest () 
 		{
-			//Arrange
-			logInState.IsReturn ().Returns (true);
-
 			Assert.True (logInState.IsReturn());
 		}
 
@@ -143,10 +143,14 @@ namespace Cradle.Test
 		[Category ("IsKeyUp Test")]
 		public void IsKeyUptest () 
 		{
-			//Arrange
-			logInState.IsKeyUp ().Returns (true);
-
 			Assert.True (logInState.IsKeyUp());
+		}
+
+		[Test]
+		[Category ("IsKeyUpReturn Test")]
+		public void IsKeyUpReturnTest () 
+		{
+			Assert.True (logInState.IsKeyUpReturn());
 		}
 	}
 }
