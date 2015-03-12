@@ -15,9 +15,7 @@ namespace Cradle.Test
 		[SetUp] public void Init()
 		{
 			logInState = Substitute.For<LogInState>();
-			//Arrange
-			logInState.IsKeyUp().Returns(true);
-			logInState.IsReturn().Returns(true);
+			setMock (logInState);
 		}
 		
 		[TearDown] public void Cleanup()
@@ -111,24 +109,20 @@ namespace Cradle.Test
 		[Category ("IsNotEmptyId Test")]
 		public void IsNotEmptyIdTest () 
 		{
-			Assert.False (logInState.IsNotEmptyId());
+			Assert.True (logInState.IsNotEmptyId());
 		}
 
 		[Test]
 		[Category ("IsNotEmptyPass Test")]
 		public void IsNotEmptyPassTest () 
 		{
-			Assert.False (logInState.IsNotEmptyPass());
+			Assert.True (logInState.IsNotEmptyPass());
 		}
 
 		[Test]
 		[Category ("IsNotEmptyIdPass Test")]
 		public void IsNotEmptyIdPassTest () 
 		{
-			//Arrange
-			logInState.IsNotEmptyId ().Returns (true);
-			logInState.IsNotEmptyPass ().Returns (true);
-
 			Assert.True (logInState.IsNotEmptyIdPass());
 		}
 
@@ -151,6 +145,22 @@ namespace Cradle.Test
 		public void IsKeyUpReturnTest () 
 		{
 			Assert.True (logInState.IsKeyUpReturn());
+		}
+
+		[Test]
+		[Category ("IsCheckInput Test")]
+		public void IsCheckInputTest () 
+		{
+			Assert.True (logInState.IsCheckInput());
+		}
+
+
+		private void setMock(LogInState loginState)
+		{
+			loginState.IsNotEmptyId ().Returns (true);
+			loginState.IsNotEmptyPass ().Returns (true);
+			loginState.IsKeyUp().Returns(true);
+			loginState.IsReturn().Returns(true);
 		}
 	}
 }
