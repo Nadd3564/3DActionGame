@@ -154,6 +154,12 @@ namespace Cradle.Test
 			Assert.True (logInState.IsCheckInput());
 		}
 
+		[Test]
+		[Category ("IsKeyUpRetWithNotEmpId Test")]
+		public void IsKeyUpRetWithNotEmpIdTest () 
+		{
+			Assert.True (logInState.IsKeyUpRetWithNotEmpId());
+		}
 
 		private void setMock(LogInState loginState)
 		{

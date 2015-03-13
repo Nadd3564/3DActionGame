@@ -242,7 +242,7 @@ namespace Cradle.DesignPattern {
 		public bool IsKeyUpRetWithNotEmpId(){
 			if (IsKeyUpReturn() && IsNotEmptyId())
 				return true;
-				return false;
+			return false;
 		}
 
 		//Enterを押すとID項目へフォーカス
