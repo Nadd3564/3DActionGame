@@ -161,12 +161,20 @@ namespace Cradle.Test
 			Assert.True (logInState.IsKeyUpRetWithNotEmpId());
 		}
 
+		[Test]
+		[Category ("IsButtonOrEscape Test")]
+		public void IsButtonOrEscapeTest () 
+		{
+			Assert.True (logInState.IsButtonOrEscape());
+		}
+
 		private void setMock(LogInState loginState)
 		{
 			loginState.IsNotEmptyId ().Returns (true);
 			loginState.IsNotEmptyPass ().Returns (true);
 			loginState.IsKeyUp().Returns(true);
 			loginState.IsReturn().Returns(true);
+			loginState.IsButtonOrEscape ().Returns (true);
 		}
 	}
 }

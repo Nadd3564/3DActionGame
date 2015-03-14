@@ -219,7 +219,7 @@ namespace Cradle.DesignPattern {
 				Application.Quit();
 		}
 
-		public bool IsButtonOrEscape(){
+		public virtual bool IsButtonOrEscape(){
 			if (GUI.Button (new Rect (427, 360, 100, 20), "Exit", buttonStyle) || Input.GetKeyDown(KeyCode.Escape))
 				return true;
 			return false;
