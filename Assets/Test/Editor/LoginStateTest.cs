@@ -15,7 +15,7 @@ namespace Cradle.Test
 		[SetUp] public void Init()
 		{
 			logInState = Substitute.For<LogInState>();
-			setMock (logInState);
+			setMock ();
 		}
 		
 		[TearDown] public void Cleanup()
@@ -168,13 +168,13 @@ namespace Cradle.Test
 			Assert.True (logInState.IsButtonOrEscape());
 		}
 
-		private void setMock(LogInState loginState)
+		private void setMock()
 		{
-			loginState.IsNotEmptyId ().Returns (true);
-			loginState.IsNotEmptyPass ().Returns (true);
-			loginState.IsKeyUp().Returns(true);
-			loginState.IsReturn().Returns(true);
-			loginState.IsButtonOrEscape ().Returns (true);
+			logInState.IsNotEmptyId ().Returns (true);
+			logInState.IsNotEmptyPass ().Returns (true);
+			logInState.IsKeyUp().Returns(true);
+			logInState.IsReturn().Returns(true);
+			logInState.IsButtonOrEscape ().Returns (true);
 		}
 	}
 }
