@@ -168,6 +168,14 @@ namespace Cradle.Test
 			Assert.True (logInState.IsButtonOrEscape());
 		}
 
+		[Test]
+		[Category ("IsKeyDown Test")]
+		public void IsKeyDownTest () 
+		{
+			Assert.True (logInState.IsKeyDown());
+		}
+
+
 		private void setMock()
 		{
 			logInState.IsNotEmptyId ().Returns (true);
@@ -175,6 +183,7 @@ namespace Cradle.Test
 			logInState.IsKeyUp().Returns(true);
 			logInState.IsReturn().Returns(true);
 			logInState.IsButtonOrEscape ().Returns (true);
+			logInState.IsKeyDown ().Returns (true);
 		}
 	}
 }

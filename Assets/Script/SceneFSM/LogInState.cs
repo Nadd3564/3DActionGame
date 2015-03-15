@@ -206,7 +206,7 @@ namespace Cradle.DesignPattern {
 			return false;
 		}
 
-		public bool IsKeyDown(){
+		public virtual bool IsKeyDown(){
 			if(Event.current.type == EventType.KeyDown)	
 				return true;
 			return false;
