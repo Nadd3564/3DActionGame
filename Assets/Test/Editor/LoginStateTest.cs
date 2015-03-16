@@ -175,6 +175,13 @@ namespace Cradle.Test
 			Assert.True (logInState.IsKeyDown());
 		}
 
+		[Test]
+		[Category ("IsKeyDownWithReturn Test")]
+		public void IsKeyDownWithReturnTest () 
+		{
+			Assert.True (logInState.IsKeyDownWithReturn());
+		}
+
 
 		private void setMock()
 		{
