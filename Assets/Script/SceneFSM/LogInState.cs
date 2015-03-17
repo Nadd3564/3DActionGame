@@ -194,9 +194,9 @@ namespace Cradle.DesignPattern {
 
 
 		//LogInボタン表示
-		public bool IsLogInButton(){
+		public virtual bool IsLogInButton(){
 			if (GUI.Button (new Rect (327, 360, 100, 20), "LogIn", buttonStyle))
-			return true;
+				return true;
 			return false;
 		}
 
