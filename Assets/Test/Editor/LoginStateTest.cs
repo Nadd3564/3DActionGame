@@ -189,6 +189,14 @@ namespace Cradle.Test
 			Assert.True (logInState.IsLogInButton());
 		}
 
+		[Test]
+		[Category ("IsCheckInputId Test")]
+		public void IsCheckInputIdTest () 
+		{
+			string s = "";
+			Assert.True (logInState.IsCheckInputId(s));
+		}
+
 		private void setMock()
 		{
 			logInState.IsNotEmptyId ().Returns (true);

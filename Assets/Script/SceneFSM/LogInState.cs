@@ -321,13 +321,9 @@ namespace Cradle.DesignPattern {
 				Debug.Log("ID : Failed");
 				return false;
 			}
-			
-			if (ID == this.id) {
-				//テストログ
-				Debug.Log("ID : Success");		
-			}
+			//テストログ
+			Debug.Log("ID : Success");		
 			return true;
-			
 		}
 
 		//パスワード認証
@@ -337,13 +333,9 @@ namespace Cradle.DesignPattern {
 				Debug.Log("Password : Failed");
 				return false;
 			}
-			
-			if (Password == passwordToEdit) {
-				//テストログ
-				Debug.Log("Password : Success");		
-			}
+			//テストログ
+			Debug.Log("Password : Success");		
 			return true;
-			
 		}
 
 	}
