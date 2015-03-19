@@ -197,6 +197,13 @@ namespace Cradle.Test
 			Assert.True (logInState.IsCheckInputId(s));
 		}
 
+		[Test]
+		[Category ("IsCheckFocus Test")]
+		public void IsCheckFocusTest () 
+		{
+			Assert.True (logInState.IsCheckFocus());
+		}
+
 		private void setMock()
 		{
 			logInState.IsNotEmptyId ().Returns (true);
@@ -206,6 +213,7 @@ namespace Cradle.Test
 			logInState.IsButtonOrEscape ().Returns (true);
 			logInState.IsKeyDown ().Returns (true);
 			logInState.IsLogInButton ().Returns (true);
+			logInState.IsCheckFocus ().Returns (true);
 		}
 	}
 }

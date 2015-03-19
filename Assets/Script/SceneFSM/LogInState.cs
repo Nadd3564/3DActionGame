@@ -180,7 +180,7 @@ namespace Cradle.DesignPattern {
 			return false;
 		}
 
-		public bool IsCheckFocus(){
+		public virtual bool IsCheckFocus(){
 			if(GUI.GetNameOfFocusedControl () == "MyPassField")	
 				return true;
 			return false;
