@@ -204,6 +204,14 @@ namespace Cradle.Test
 			Assert.True (logInState.IsCheckFocus());
 		}
 
+		[Test]
+		[Category ("IsCheckPassWithFlg Test")]
+		public void IsCheckPassWithFlgTest () 
+		{
+			Assert.True (logInState.IsCheckPassWithFlg());
+		}
+
+
 		private void setMock()
 		{
 			logInState.IsNotEmptyId ().Returns (true);
