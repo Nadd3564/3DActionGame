@@ -218,6 +218,14 @@ namespace Cradle.Test
 			Assert.True (logInState.IsCheckFocusWithPass());
 		}
 		
+		[Test]
+		[Category ("AuthenticateProxy Test")]
+		public void AuthenticateProxyTest () 
+		{
+			logInState.AuthenticateObject ();
+			Assert.True (logInState.AuthenticateProxy());
+		}
+
 
 		private void setMock()
 		{
