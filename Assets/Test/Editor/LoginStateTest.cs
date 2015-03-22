@@ -226,6 +226,14 @@ namespace Cradle.Test
 			Assert.True (logInState.AuthenticateProxy());
 		}
 
+		[Test]
+		[Category ("IsProxyWithResponse Test")]
+		public void IsProxyWithResponseTest () 
+		{
+			logInState.AuthenticateObject ();
+			Assert.False (logInState.IsProxyWithResponse());
+		}
+
 
 		private void setMock()
 		{
