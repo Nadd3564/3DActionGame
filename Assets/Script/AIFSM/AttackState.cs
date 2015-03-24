@@ -20,7 +20,7 @@ namespace Cradle.FM{
 			if(this.CheckDist(dist, 0.0f, 5.0f ))
 			{
 				//ターゲット地点に回転
-				if(thisIsTestScene())
+				if(this.IsTestScene())
 				SetRot (npc, npc.position);
 				
 				Debug.Log("Switch to Approach State");
