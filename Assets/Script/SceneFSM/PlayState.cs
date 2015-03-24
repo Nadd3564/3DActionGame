@@ -6,7 +6,6 @@ namespace Cradle.DesignPattern {
 	public class PlayState : ISceneState { 
 		private SceneManager manager;
 
-
 		public PlayState() {}
 
 		public PlayState(SceneManager stateManager) { 
@@ -18,7 +17,6 @@ namespace Cradle.DesignPattern {
 		public void StateUpdate() {}
 		
 		public void Render() {}
-
 
 		public SceneManager GetManager(){
 			return this.manager;

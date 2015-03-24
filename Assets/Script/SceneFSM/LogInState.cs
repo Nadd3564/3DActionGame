@@ -65,7 +65,6 @@ namespace Cradle.DesignPattern {
 		}
 
 
-
 		public string GetID(){
 			return this.id;	
 		}

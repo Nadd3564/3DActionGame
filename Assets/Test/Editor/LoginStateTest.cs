@@ -234,7 +234,7 @@ namespace Cradle.Test
 			Assert.False (logInState.IsProxyWithResponse());
 		}
 
-
+	
 		private void setMock()
 		{
 			logInState.IsNotEmptyId ().Returns (true);

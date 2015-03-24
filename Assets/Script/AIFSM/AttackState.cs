@@ -7,20 +7,20 @@ namespace Cradle.FM{
 
 		public AttackState(Transform[] wp)
 		{
-			SetWayPoints (wp);
-			SetStateID (FSMStateID.Attacking);
-			SetRotSpeed (360.0f);
-			FindNextPoint ();
+			this.SetWayPoints (wp);
+			this.SetStateID (FSMStateID.Attacking);
+			this.SetRotSpeed (360.0f);
+			this.FindNextPoint ();
 		}
 
 
 		public override void Reason(Transform player, Transform npc){
 			//プレイヤーとの距離を確認
-			SetDist (Vector3.Distance (npc.position, player.position));
-			if(CheckDist(dist, 0.0f, 5.0f ))
+			this.SetDist (Vector3.Distance (npc.position, player.position));
+			if(this.CheckDist(dist, 0.0f, 5.0f ))
 			{
 				//ターゲット地点に回転
-				if(IsTestScene())
+				if(thisIsTestScene())
 				SetRot (npc, npc.position);
 				
 				Debug.Log("Switch to Approach State");
@@ -28,7 +28,7 @@ namespace Cradle.FM{
 			}
 			
 			//距離が遠すぎる場合
-			else if(GreaterThanCheckReach(dist, 10.0f))
+			else if(this.GreaterThanCheckReach(dist, 10.0f))
 			{
 				Debug.Log("Switch to Search State");
 				npc.GetComponent<EnemyCtrl>().SetTransition(Transition.LostPlayer);
@@ -37,7 +37,7 @@ namespace Cradle.FM{
 		
 		public override void Act(Transform player, Transform npc){
 			//ターゲット地点をプレーヤーポジションに設定
-			SetDest (player);
+			this.SetDest (player);
 			
 			//攻撃
 			npc.GetComponent<EnemyCtrl> ().AttackStart ();
