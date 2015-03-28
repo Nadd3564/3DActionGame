@@ -7,7 +7,7 @@ namespace Cradle.FM{
 
 		public DeadState()
 		{
-			SetStateID (FSMStateID.Dead);
+			this.SetStateID (FSMStateID.Dead);
 		}
 		
 		public override void Reason(Transform player, Transform npc)
