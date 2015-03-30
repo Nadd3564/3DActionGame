@@ -34,14 +34,14 @@ namespace Cradle.FM{
 
 			protected override void StartUp ()
 			{
-					setElapsedTime (3.0f);
-					setAttackRate (4.0f);
+					this.setElapsedTime (3.0f);
+					this.setAttackRate (4.0f);
 				      
 					//コンポーネント取得
 					GetComponents ();
 					eController.SetWaitTime (eController.GetWaitBaseTime ());
 					SetBasePosition ();
-					setPlayerTransform (objPlayer.transform);
+					this.setPlayerTransform (objPlayer.transform);
 					Log ();
 		
 				try{
@@ -56,7 +56,7 @@ namespace Cradle.FM{
 
 			protected override void StateUpdate ()
 			{
-				setUpElapsedTime (Time.deltaTime);
+				this.setUpElapsedTime (Time.deltaTime);
 				//For Tests
 				eController.InstantiateTest (eController.IsdamageEffectTest(), IsNotNullEffect());
 			}
@@ -111,7 +111,7 @@ namespace Cradle.FM{
 			public void SetTransition(Transition t)
 			{
 				try{
-				RunTransition (t);
+				this.RunTransition (t);
 				}catch(UnityException e){
 					Debug.Log("SaveExceptionLog : " + e);
 					TextReadWriteManager write = new TextReadWriteManager();
