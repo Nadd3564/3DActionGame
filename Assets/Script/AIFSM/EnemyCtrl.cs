@@ -78,32 +78,32 @@ namespace Cradle.FM{
 			}
 
 			public void Log(){
-				if (!getPlayerTrans())
+				if (!this.getPlayerTrans())
 					print ("プレーヤーが存在しません。タグ'Player'を追加してください。");
 			}
 
 			public void FindPlayer(){
-				this.objPlayer = GameObject.FindGameObjectWithTag ("Player");	
+				objPlayer = GameObject.FindGameObjectWithTag ("Player");	
 			}
 
 			public void FindStatusComponent(){
-				this.status = GetComponent<CharaStatus>();		
+				status = GetComponent<CharaStatus>();		
 			}
 
 			public void FindAnimationComponent(){
-				this.charaAnimation = GetComponent<CharaAnimation>();		
+				charaAnimation = GetComponent<CharaAnimation>();		
 			}
 
 			public void FindMoveComponent(){
-				this.characterMove = GetComponent<CharaMove>();		
+				characterMove = GetComponent<CharaMove>();		
 			}
 
 			public void FindGameRuleComponent(){
-				this.gameRuleSettings = FindObjectOfType<GameRuleSettings>();		
+				gameRuleSettings = FindObjectOfType<GameRuleSettings>();		
 			}
 
 			public void SetBasePosition(){
-				this.basePosition = transform.position;	
+				basePosition = transform.position;	
 			}
 
 
