@@ -210,11 +210,11 @@ namespace Cradle.FM{
 			}
 
 			public void CreateHitEffect(){
-				this.effect = Instantiate (hitEffect, transform.position, Quaternion.identity) as GameObject;
+				effect = Instantiate (hitEffect, transform.position, Quaternion.identity) as GameObject;
 			}
 
 			public void EffectPos(){
-				this.effect.transform.localPosition = transform.position + new Vector3 (0.0f, 0.5f, 0.0f);
+				effect.transform.localPosition = transform.position + new Vector3 (0.0f, 0.5f, 0.0f);
 			}
 
 
@@ -229,13 +229,13 @@ namespace Cradle.FM{
 
 			//ランダムでドロップするアイテムを選出
 			public void InitItem(){
-				this.dropItem = dropItemPrefab[Random.Range(0, dropItemPrefab.Length)];
+				dropItem = dropItemPrefab[Random.Range(0, dropItemPrefab.Length)];
 			}
 
 			//アイテムがポップする
 			public void JumpItem(){
-				this.vec = dropItem.transform.up;
-				this.vec.y += 1.0f;
+				vec = dropItem.transform.up;
+				vec.y += 1.0f;
 			}
 
 			public void SetDied(){
@@ -256,7 +256,7 @@ namespace Cradle.FM{
 			}
 
 			public void GameClear(){
-				this.gameRuleSettings.GameClear();
+				gameRuleSettings.GameClear();
 			}
 
 
@@ -267,8 +267,8 @@ namespace Cradle.FM{
 			}
 
 			public string SetTag(){
-				this.gameObject.tag = "Dead";
-				string s = this.gameObject.tag;
+				gameObject.tag = "Dead";
+				string s = gameObject.tag;
 				return s;
 			}
 
@@ -281,14 +281,14 @@ namespace Cradle.FM{
 
 			//For Tests
 			public bool IsNotNullEffect(){
-				if(this.effect != null)
-				return true;
+				if(effect != null)
+					return true;
 				return false;
 			}
 
 			//For Tests
 			public bool IsNotNullDeathSeClip(){
-				if(this.deathSeClip != null)
+				if(deathSeClip != null)
 					return true;
 				return false;
 			}
