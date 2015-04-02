@@ -45,7 +45,7 @@ namespace Cradle{
 
 			public bool NotNullLookTarget(){
 				if (lookTarget != null)
-									return true;
+					return true;
 				return false;
 			}
 
