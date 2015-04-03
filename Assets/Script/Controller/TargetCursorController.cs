@@ -7,21 +7,21 @@ namespace Cradle
 	public class TargetCursorController
 	{
 		//目的地
-		public Vector3 destination = new Vector3( 0.0f, 0.5f, 0.0f );
+		private Vector3 destination = new Vector3( 0.0f, 0.5f, 0.0f );
 		//位置
-		Vector3 position = new Vector3( 0.0f, 0.5f, 0.0f );
+		private Vector3 position = new Vector3( 0.0f, 0.5f, 0.0f );
 		//オフセット位置
-		Vector3 offset;
+		private Vector3 offset;
 		// 半径
-		public float radius = 1.0f;
+		private float radius = 1.0f;
 		// 回転速度
-		public float angularVelocity = 480.0f;
+		private float angularVelocity = 480.0f;
 		// 角度
-		public float angle = 0.0f;
+		private float angle = 0.0f;
 
 		private ICursorController cursorController;
-		
-		
+
+
 		public TargetCursorController(){
 
 		}
@@ -33,6 +33,19 @@ namespace Cradle
 		public string getDestination(){
 			string s = GetDestination ().ToString ();
 			return s;
+		}
+
+		public string getDestinationY(){
+			string s = destination.y.ToString ();
+			return s;
+		}
+
+		public void SetDestination(Vector3 iPos){
+			destination = iPos;
+		}
+
+		public void SetDestinationY(float yPos){
+			destination.y = yPos;	
 		}
 
 		public Vector3 GetPosition(){
