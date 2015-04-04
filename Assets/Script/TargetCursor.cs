@@ -5,16 +5,15 @@ using Cradle;
 namespace Cradle{
 public class TargetCursor : MonoBehaviour, ICursorController {
 		// 目的地
-		public TargetCursorController controller;
+		private TargetCursorController controller;
 
 		public void OnEnable() {
 			controller.SetCursorController (this);
 		}
 
-	
 		void Start(){
 			//初期位置を目的地に設定
-			SetPosition (transform.position);
+			SetPosition (this.transform.position);
 			controller.SetDest ();
 		}
 		
@@ -28,12 +27,11 @@ public class TargetCursor : MonoBehaviour, ICursorController {
 			EffectPosition ();
 		}
 
-
-		//位置を設定する
 		public void SetPosition(Vector3 iPosition) {
-			controller.destination = iPosition;
+			//位置を設定する
+			controller.SetDestination (iPosition);
 			//高さを固定
-			controller.destination.y = 0.5F;
+			controller.SetDestinationY (0.5f);
 		}
 
 		public void EffectPosition(){
