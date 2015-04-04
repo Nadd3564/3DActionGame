@@ -35,9 +35,8 @@ namespace Cradle
 			return s;
 		}
 
-		public string getDestinationY(){
-			string s = destination.y.ToString ();
-			return s;
+		public float getDestinationY(){
+			return destination.y;
 		}
 
 		public void SetDestination(Vector3 iPos){
