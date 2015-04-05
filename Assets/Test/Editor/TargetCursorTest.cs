@@ -229,6 +229,14 @@ namespace Cradle.Test
 			Assert.That (tCController.GetAngularVelocity() * 1.0f, Is.EqualTo(f));		
 		}
 
+		[Test]
+		[Category ("SetDestinationY Test")]
+		public void SetDestinationYTest() 
+		{
+			float f = 0.5f;
+			tCController.SetDestinationY (f);
+			Assert.That (tCController.getDestinationY(), Is.EqualTo(f));
+		}
 
 		private ICursorController GetCursorMock () {
 			return Substitute.For<ICursorController> ();
