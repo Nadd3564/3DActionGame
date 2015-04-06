@@ -6,7 +6,7 @@ namespace Cradle
 		void PlaySE();
 		void PopItem();
 		void FindTerrainColliderComponent ();
-		bool SetTrigger(bool flg);
+		void SetTrigger(bool flg);
 		bool IsNotNull();
 	}	
 }
