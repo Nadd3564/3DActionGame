@@ -48,13 +48,13 @@ namespace Cradle
 
 		public bool IsPlayer(string tag) {
 			if (tag == "Player")
-					return true;
+				return true;
 			return false;
 		}
 
 		public bool IsTerrain(string tag) {
 			if (tag == "Terrain")
-			return true;
+				return true;
 			return false;	
 		}
 
@@ -63,10 +63,8 @@ namespace Cradle
 				return false;
 			}
 
-			if (IsTerrain (tag)) {
-				iDropItemController.SetTrigger (f);
-			}
-				return true;
+			iDropItemController.SetTrigger (f);
+			return true;
 			}
 
 
