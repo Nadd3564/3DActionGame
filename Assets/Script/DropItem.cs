@@ -7,8 +7,8 @@ public class DropItem : MonoBehaviour, IDropItemController {
 
 		public AudioClip itemSeClip;
 		public CharaStatus status;
-		Vector3 velocity;
-		TerrainCollider tCollider;
+		private Vector3 velocity;
+		private TerrainCollider tCollider;
 
 
 		public DropItemController controller;
@@ -53,10 +53,8 @@ public class DropItem : MonoBehaviour, IDropItemController {
 			AudioSource.PlayClipAtPoint(itemSeClip, transform.position);
 		}
 
-		public bool SetTrigger(bool flg){
+		public void SetTrigger(bool flg){
 			this.collider.isTrigger = flg;
-			return true;
-			return false;
 		}
 
 		public void PopItem(){
