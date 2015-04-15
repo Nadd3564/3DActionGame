@@ -9,7 +9,7 @@ namespace Cradle{
 	public class EnemyGenerator : MonoBehaviour, IGeneratorController {
 			//生成される敵
 			public GameObject enemyPrefab;
-			GameObject[] existEnemys;
+			private GameObject[] existEnemys;
 			public EnemyGeneratorController controller;
 
 			public void OnEnable() {
@@ -39,9 +39,9 @@ namespace Cradle{
 			}
 
 			public bool Instantiate(int enemyCount){
-				existEnemys[enemyCount] = Instantiate(enemyPrefab, transform.position, transform.rotation) as 
-					GameObject;
-				return true;
+				existEnemys[enemyCount] =
+				Instantiate(enemyPrefab, this.transform.position, this.transform.rotation) as GameObject;
+					return true;
 				return false;
 			} 
 
