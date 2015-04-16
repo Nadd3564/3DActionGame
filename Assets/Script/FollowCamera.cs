@@ -7,7 +7,7 @@ using Cradle.Resource;
 namespace Cradle{
 	public class FollowCamera : MonoBehaviour, ICameraController {
 			public Transform lookTarget;
-			InputManager inputManager;
+			private InputManager inputManager;
 
 			public FollowCameraController controller;
 
@@ -74,7 +74,7 @@ namespace Cradle{
 			//障害物を避ける
 			public void AvoidObstacle(){
 				RaycastHit hitInfo;
-				if (Physics.Linecast (controller.GetLookPosition(), transform.position, out hitInfo, 1 << LayerMask.NameToLayer ("Ground")))
+				if (Physics.Linecast (controller.GetLookPosition(), this.transform.position, out hitInfo, 1 << LayerMask.NameToLayer ("Ground")))
 					SetHitInfo (hitInfo.point);
 			}
 
