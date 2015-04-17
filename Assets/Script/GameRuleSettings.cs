@@ -6,8 +6,8 @@ using Cradle.DesignPattern;
 
 namespace Cradle{
 	public class GameRuleSettings : MonoBehaviour, IRuleController {
-			public AudioClip clearSeClip;
-			AudioSource clearSeAudio;
+			private AudioClip clearSeClip;
+			private	AudioSource clearSeAudio;
 			public GameRuleSettingsController controller;
 			private SceneManager manager;
 			
