@@ -5,7 +5,7 @@ using Cradle;
 namespace Cradle{
 public class TargetCursor : MonoBehaviour, ICursorController {
 		// 目的地
-		private TargetCursorController controller;
+		public TargetCursorController controller;
 
 		public void OnEnable() {
 			controller.SetCursorController (this);
